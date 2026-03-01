@@ -1612,6 +1612,223 @@
                 </p>
             </div>
 
+            <!-- 多层记忆系统运行原理图 -->
+            <h3 class="subsection-title">多层记忆系统：任务处理时如何调用不同存储</h3>
+            <p>下图展示当一个任务触发后，AI分身如何协调使用<strong>自动注入层</strong>、<strong>按需检索层</strong>、<strong>主动获取层</strong>三层记忆系统，确保输出准确且符合用户偏好。</p>
+            
+            <div style="background: linear-gradient(135deg, #FFF7ED 0%, #F0FDF4 50%, #EFF6FF 100%); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(236, 72, 153, 0.15); color: #EC4899; border-radius: var(--radius-full); font-size: 11px; font-weight: 600;">🧠 多层记忆系统</span>
+                <div style="padding-top: 32px; text-align: center; overflow-x: auto;">
+                    <svg viewBox="0 0 950 620" style="max-width: 950px; width: 100%; min-width: 700px;">
+                        <defs>
+                            <linearGradient id="layer1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#DC2626"/>
+                                <stop offset="100%" stop-color="#F87171"/>
+                            </linearGradient>
+                            <linearGradient id="layer2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#F59E0B"/>
+                                <stop offset="100%" stop-color="#FBBF24"/>
+                            </linearGradient>
+                            <linearGradient id="layer3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#10B981"/>
+                                <stop offset="100%" stop-color="#34D399"/>
+                            </linearGradient>
+                            <linearGradient id="taskInputGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#7C3AED"/>
+                                <stop offset="100%" stop-color="#A855F7"/>
+                            </linearGradient>
+                            <linearGradient id="processGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1A7F37"/>
+                                <stop offset="100%" stop-color="#2DA44E"/>
+                            </linearGradient>
+                            <filter id="memoryShadow2" x="-10%" y="-10%" width="120%" height="130%">
+                                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+                            </filter>
+                            <marker id="arrowPurple3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#7C3AED"/>
+                            </marker>
+                            <marker id="arrowRed3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626"/>
+                            </marker>
+                            <marker id="arrowYellow3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#F59E0B"/>
+                            </marker>
+                            <marker id="arrowGreen4" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#10B981"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- 顶部：任务输入 -->
+                        <g transform="translate(375, 10)">
+                            <rect width="200" height="50" rx="25" fill="url(#taskInputGrad2)" filter="url(#memoryShadow2)"/>
+                            <text x="100" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="white">👨‍💻 任务触发</text>
+                            <text x="100" y="38" text-anchor="middle" font-size="10" fill="white" opacity="0.9">"帮我部署到GitHub"</text>
+                        </g>
+                        
+                        <path d="M475 60 L475 85" stroke="#7C3AED" stroke-width="2" fill="none" marker-end="url(#arrowPurple3)"/>
+                        
+                        <!-- 中央：AgentCore处理引擎 -->
+                        <g transform="translate(300, 90)">
+                            <rect width="350" height="60" rx="12" fill="url(#processGrad3)" filter="url(#memoryShadow2)"/>
+                            <text x="175" y="25" text-anchor="middle" font-size="14" font-weight="800" fill="white">🧠 AgentCore 处理引擎</text>
+                            <text x="175" y="45" text-anchor="middle" font-size="10" fill="white" opacity="0.9">意图理解 → 记忆检索 → 规划 → 执行 → 沉淀</text>
+                        </g>
+                        
+                        <!-- 第一层：自动注入层（红色） -->
+                        <g transform="translate(40, 180)">
+                            <rect width="280" height="180" rx="14" fill="url(#layer1Grad)" filter="url(#memoryShadow2)"/>
+                            <text x="140" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="white">🔴 第一层：自动注入</text>
+                            <text x="140" y="42" text-anchor="middle" font-size="9" fill="white" opacity="0.9">每次对话必带，无需检索</text>
+                            
+                            <g transform="translate(15, 55)">
+                                <rect width="250" height="32" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#DC2626">📋 System Prompt · 用户记忆</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">16条核心记忆（身份/偏好/工作方式）</text>
+                            </g>
+                            <g transform="translate(15, 92)">
+                                <rect width="250" height="32" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#DC2626">⚠️ User Constraints · 约束规则</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">用户明确的禁止/必须遵守的规则</text>
+                            </g>
+                            <g transform="translate(15, 129)">
+                                <rect width="250" height="32" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#DC2626">💬 Current Context · 当前上下文</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">本次对话的所有历史消息</text>
+                            </g>
+                            
+                            <text x="140" y="172" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 自动加载，确保身份延续性</text>
+                        </g>
+                        
+                        <path d="M320 195 L300 150" stroke="#DC2626" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrowRed3)"/>
+                        <text x="295" y="178" font-size="8" fill="#DC2626" font-weight="600">必带</text>
+                        
+                        <!-- 第二层：按需检索层（黄色） -->
+                        <g transform="translate(335, 180)">
+                            <rect width="280" height="180" rx="14" fill="url(#layer2Grad)" filter="url(#memoryShadow2)"/>
+                            <text x="140" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="white">🟡 第二层：按需检索</text>
+                            <text x="140" y="42" text-anchor="middle" font-size="9" fill="white" opacity="0.9">任务需要时主动检索</text>
+                            
+                            <g transform="translate(15, 55)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#B45309">📜 Conversation Summaries</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">近期对话摘要（项目记忆）</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">复用历史工作成果</text>
+                            </g>
+                            <g transform="translate(15, 102)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#B45309">🔍 search_memory 深度检索</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">按类别+关键词检索历史记忆</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">跨会话的经验复用</text>
+                            </g>
+                            
+                            <text x="140" y="160" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 任务触发时检索，避免重复工作</text>
+                            <text x="140" y="172" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 决策时机：理解阶段+规划阶段</text>
+                        </g>
+                        
+                        <path d="M475 180 L475 150" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrowYellow3)"/>
+                        <text x="485" y="168" font-size="8" fill="#B45309" font-weight="600">按需</text>
+                        
+                        <!-- 第三层：主动获取层（绿色） -->
+                        <g transform="translate(630, 180)">
+                            <rect width="280" height="180" rx="14" fill="url(#layer3Grad)" filter="url(#memoryShadow2)"/>
+                            <text x="140" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="white">🟢 第三层：主动获取</text>
+                            <text x="140" y="42" text-anchor="middle" font-size="9" fill="white" opacity="0.9">专业任务时加载专业知识</text>
+                            
+                            <g transform="translate(15, 55)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#047857">📚 Knowledge Base · 知识库</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">150+ 领域文档（调研/方案/规范）</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">领域知识支撑</text>
+                            </g>
+                            <g transform="translate(15, 102)">
+                                <rect width="250" height="40" rx="6" fill="white" opacity="0.95"/>
+                                <text x="125" y="14" text-anchor="middle" font-size="9" font-weight="600" fill="#047857">⚡ Skills · 技能系统</text>
+                                <text x="125" y="26" text-anchor="middle" font-size="8" fill="#4B5563">38+ 可插拔技能（调研/部署/PPT...）</text>
+                                <text x="125" y="36" text-anchor="middle" font-size="7" fill="#656D76">「如何做」的专业指令</text>
+                            </g>
+                            
+                            <text x="140" y="160" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ 任务类型匹配时加载</text>
+                            <text x="140" y="172" text-anchor="middle" font-size="8" fill="white" opacity="0.8">✓ use_skill / read_file 触发</text>
+                        </g>
+                        
+                        <path d="M630 195 L650 150" stroke="#10B981" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrowGreen4)"/>
+                        <text x="655" y="178" font-size="8" fill="#047857" font-weight="600">专业</text>
+                        
+                        <!-- 决策优先级 -->
+                        <g transform="translate(150, 380)">
+                            <rect width="650" height="70" rx="12" fill="#F8FAFC" stroke="#E2E8F0" filter="url(#memoryShadow2)"/>
+                            <text x="325" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#1E293B">⚖️ 决策优先级（冲突时谁说了算）</text>
+                            
+                            <g transform="translate(30, 35)">
+                                <rect width="130" height="28" rx="6" fill="#FEE2E2"/>
+                                <text x="65" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#DC2626">① 用户记忆/约束</text>
+                            </g>
+                            <text x="175" y="53" font-size="14" fill="#94A3B8">></text>
+                            <g transform="translate(195, 35)">
+                                <rect width="130" height="28" rx="6" fill="#FEF3C7"/>
+                                <text x="65" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#B45309">② 当前上下文</text>
+                            </g>
+                            <text x="340" y="53" font-size="14" fill="#94A3B8">></text>
+                            <g transform="translate(360, 35)">
+                                <rect width="130" height="28" rx="6" fill="#D1FAE5"/>
+                                <text x="65" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#047857">③ 技能指令</text>
+                            </g>
+                            <text x="505" y="53" font-size="14" fill="#94A3B8">></text>
+                            <g transform="translate(525, 35)">
+                                <rect width="100" height="28" rx="6" fill="#F1F5F9"/>
+                                <text x="50" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#64748B">④ 默认行为</text>
+                            </g>
+                        </g>
+                        
+                        <!-- 执行示例 -->
+                        <g transform="translate(50, 465)">
+                            <rect width="850" height="140" rx="12" fill="#FFFBEB" stroke="#FCD34D" filter="url(#memoryShadow2)"/>
+                            <text x="425" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#92400E">💡 实际执行示例："帮我部署到GitHub"</text>
+                            
+                            <g transform="translate(20, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#DC2626"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">1</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">自动注入</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">加载身份、约束、上下文</text>
+                            </g>
+                            <g transform="translate(180, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#F59E0B"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">2</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">检索历史</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">查近期对话：已有仓库？</text>
+                            </g>
+                            <g transform="translate(340, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#10B981"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">3</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">加载技能</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">use_skill(github-deploy)</text>
+                            </g>
+                            <g transform="translate(510, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#0EA5E9"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">4</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">执行部署</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">按技能指令+上下文执行</text>
+                            </g>
+                            <g transform="translate(680, 38)">
+                                <circle cx="15" cy="15" r="15" fill="#8B5CF6"/>
+                                <text x="15" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="white">5</text>
+                                <text x="40" y="12" font-size="9" font-weight="600" fill="#1E293B">沉淀经验</text>
+                                <text x="40" y="25" font-size="8" fill="#4B5563">记录仓库名到Memory</text>
+                            </g>
+                            
+                            <g transform="translate(20, 80)">
+                                <rect width="810" height="48" rx="8" fill="white" opacity="0.9"/>
+                                <text x="405" y="18" text-anchor="middle" font-size="10" font-weight="600" fill="#1E293B">🎯 关键点：三层协作形成认知闭环</text>
+                                <text x="405" y="35" text-anchor="middle" font-size="9" fill="#4B5563">自动注入层确保身份延续 → 按需检索层复用历史经验 → 主动获取层调用专业知识 → 执行结果沉淀回记忆</text>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <p style="text-align: center; font-size: 12px; color: var(--color-text-muted); margin-top: var(--spacing-md); font-style: italic;">
+                    三层记忆系统协作：第一层保证"我是谁"，第二层保证"我做过什么"，第三层保证"我会做什么"
+                </p>
+            </div>
+
             <h3 class="subsection-title">能力建设详情</h3>
             <div class="table-wrap">
                 <table>
@@ -2277,7 +2494,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>AI产品终极形态思考 v4.5 | 批判性修正版 | 2026-03-01 | AI分身</p>
+            <p>AI产品终极形态思考 v4.6 | 新增多层记忆系统图 | 2026-03-01 | AI分身</p>
         </footer>
     </div>
 </body>

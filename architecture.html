@@ -276,6 +276,241 @@
             color: var(--c-text-3); font-size: 12px;
         }
 
+        /* ====== RUNTIME SPLIT VIEW ====== */
+        #runtime-view { display: none; }
+        #runtime-view.visible { display: block; }
+
+        .rt-tabs {
+            display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .rt-tab {
+            flex: 1; min-width: 200px;
+            padding: 12px 16px; background: var(--c-card);
+            border: 1.5px solid var(--c-border-light); border-radius: var(--r-md);
+            cursor: pointer; transition: all 200ms var(--ease);
+            position: relative; overflow: hidden;
+        }
+        .rt-tab::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+            border-radius: 0 3px 3px 0; transition: width 200ms var(--ease);
+        }
+        .rt-tab:hover { border-color: var(--c-border); box-shadow: var(--shadow-card); }
+        .rt-tab.active { box-shadow: var(--shadow-hover); }
+        .rt-tab.active::before { width: 4px; }
+        .rt-tab .rt-tab-q { font-size: 14px; font-weight: 700; color: var(--c-text); margin-bottom: 3px; }
+        .rt-tab .rt-tab-meta { font-size: 11px; color: var(--c-text-3); display: flex; align-items: center; gap: 6px; }
+        .rt-tab .rt-tab-badge {
+            display: inline-block; padding: 1px 7px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 700; color: #fff;
+        }
+        /* Per-type colors */
+        .rt-tab[data-type="native"]::before { background: var(--c-skill-native); }
+        .rt-tab[data-type="native"].active { border-color: var(--c-skill-native); }
+        .rt-tab[data-type="native"] .rt-tab-badge { background: var(--c-skill-native); }
+        .rt-tab[data-type="tool"]::before { background: var(--c-skill-tool); }
+        .rt-tab[data-type="tool"].active { border-color: var(--c-skill-tool); }
+        .rt-tab[data-type="tool"] .rt-tab-badge { background: var(--c-skill-tool); }
+        .rt-tab[data-type="task"]::before { background: var(--c-skill-task); }
+        .rt-tab[data-type="task"].active { border-color: var(--c-skill-task); }
+        .rt-tab[data-type="task"] .rt-tab-badge { background: var(--c-skill-task); }
+        .rt-tab[data-type="flow"]::before { background: var(--c-skill-flow); }
+        .rt-tab[data-type="flow"].active { border-color: var(--c-skill-flow); }
+        .rt-tab[data-type="flow"] .rt-tab-badge { background: var(--c-skill-flow); }
+
+        /* Split panel */
+        .rt-split {
+            display: grid; grid-template-columns: 1fr 44px 1fr; gap: 0;
+            align-items: stretch; min-height: 520px;
+        }
+        .rt-col {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .rt-col-label {
+            font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--c-text-3); text-align: center; margin-bottom: 4px;
+        }
+        .rt-divider {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; padding: 0 2px;
+        }
+        .rt-arrow {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 700; color: #fff;
+            transition: transform 300ms var(--ease);
+        }
+        .rt-arrow.forward { background: linear-gradient(135deg, #2DA44E, #4ADE80); }
+        .rt-arrow.back { background: linear-gradient(135deg, #EA580C, #FB923C); transform: scaleX(-1); }
+        .rt-divider-text {
+            writing-mode: vertical-rl; text-orientation: mixed;
+            font-size: 10px; font-weight: 700; color: var(--c-text-3);
+            letter-spacing: 2px; opacity: 0.6;
+        }
+
+        /* Layer cards (static side) */
+        .rt-layer {
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); padding: 14px 16px;
+            box-shadow: var(--shadow-card); transition: all 300ms var(--ease);
+            border-left: 3px solid var(--c-border);
+        }
+        .rt-layer.product { border-left-color: var(--c-product); }
+        .rt-layer.agent { border-left-color: var(--c-agent); }
+        .rt-layer.os { border-left-color: var(--c-os); }
+        .rt-layer.active { box-shadow: var(--shadow-hover); }
+        .rt-layer-title {
+            font-size: 11px; font-weight: 800; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .rt-layer-title .tag {
+            padding: 1px 6px; border-radius: var(--r-full);
+            font-size: 9px; font-weight: 700; color: #fff; opacity: 0.9;
+        }
+        .rt-layer .pills {
+            display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;
+        }
+        .rt-layer .pill {
+            padding: 3px 8px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 500; background: var(--c-bg);
+            color: var(--c-text-2); border: 1px solid var(--c-border-light);
+            transition: all 200ms var(--ease);
+        }
+        .rt-layer .pill.hl {
+            font-weight: 700; border-color: currentColor;
+        }
+
+        /* Dynamic side cards */
+        .rt-task-input {
+            background: var(--c-card); border: 1.5px solid var(--c-border-light);
+            border-radius: var(--r-lg); padding: 16px;
+            box-shadow: var(--shadow-card); position: relative;
+        }
+        .rt-task-input::before {
+            content: '📋'; position: absolute; top: -10px; left: 16px;
+            background: var(--c-card); padding: 0 4px; font-size: 14px;
+        }
+        .rt-task-q { font-size: 15px; font-weight: 700; color: var(--c-text); margin-bottom: 6px; }
+        .rt-task-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+        .rt-task-tag {
+            padding: 2px 8px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 600; background: var(--c-bg);
+            color: var(--c-text-2);
+        }
+
+        /* Instance cards */
+        .rt-instances { display: flex; flex-direction: column; gap: 10px; }
+        .rt-instance {
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); padding: 14px 16px;
+            box-shadow: var(--shadow-card); border-top: 3px solid var(--c-border);
+            animation: rtSlideIn 400ms var(--ease) both;
+        }
+        .rt-instance:nth-child(2) { animation-delay: 80ms; }
+        .rt-instance:nth-child(3) { animation-delay: 160ms; }
+        @keyframes rtSlideIn {
+            from { opacity: 0; transform: translateX(12px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .rt-inst-header {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+        }
+        .rt-inst-num {
+            width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0;
+        }
+        .rt-inst-name { font-size: 13px; font-weight: 700; color: var(--c-text); }
+        .rt-inst-sub { font-size: 11px; color: var(--c-text-3); }
+        .rt-inst-bindings {
+            display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0;
+        }
+        .rt-inst-binding {
+            padding: 3px 8px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 600;
+        }
+        .rt-inst-binding.skill { background: #E6F7ED; color: #1A7F37; }
+        .rt-inst-binding.tool { background: #F5F3FF; color: #7C3AED; }
+        .rt-inst-binding.memory { background: #FFF7ED; color: #9A6700; }
+        .rt-inst-desc {
+            font-size: 11px; color: var(--c-text-2); line-height: 1.5;
+            padding: 8px 0; border-top: 1px solid var(--c-border-light);
+            margin-top: 4px;
+        }
+        .rt-inst-status {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 600; margin-top: 4px;
+        }
+        .rt-inst-status .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            animation: rtPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes rtPulse {
+            0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+        }
+
+        /* Flow stages (s4 only) */
+        .rt-flow-timeline {
+            display: flex; flex-direction: column; gap: 0;
+        }
+        .rt-flow-stage {
+            display: grid; grid-template-columns: 28px 1fr; gap: 10px;
+            padding: 10px 0; position: relative;
+        }
+        .rt-flow-stage:not(:last-child)::after {
+            content: ''; position: absolute; left: 13px; top: 38px; bottom: -2px;
+            width: 2px; background: var(--c-border-light);
+        }
+        .rt-flow-num {
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0;
+            position: relative; z-index: 1;
+        }
+        .rt-flow-body {
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-md); padding: 10px 12px;
+            box-shadow: var(--shadow-sm);
+        }
+        .rt-flow-name { font-size: 12px; font-weight: 700; color: var(--c-text); }
+        .rt-flow-type { font-size: 10px; font-weight: 600; margin-left: 6px; }
+        .rt-flow-detail { font-size: 11px; color: var(--c-text-3); margin-top: 3px; }
+
+        /* OS status bar */
+        .rt-os-status {
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); padding: 12px 16px;
+            box-shadow: var(--shadow-card); border-left: 3px solid var(--c-os);
+        }
+        .rt-os-metrics {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px;
+        }
+        .rt-os-metric {
+            text-align: center; padding: 6px; border-radius: var(--r-sm);
+            background: var(--c-bg);
+        }
+        .rt-os-metric .val { font-size: 16px; font-weight: 800; color: var(--c-text); }
+        .rt-os-metric .label { font-size: 9px; color: var(--c-text-3); font-weight: 600; }
+
+        /* Experience feedback */
+        .rt-feedback {
+            background: linear-gradient(135deg, #E6F7ED 0%, #EFF6FF 100%);
+            border: 1px solid rgba(45,164,78,0.2);
+            border-radius: var(--r-lg); padding: 12px 16px;
+            font-size: 12px; color: var(--c-text-2);
+        }
+        .rt-feedback strong { color: #1A7F37; }
+
+        @media (max-width: 900px) {
+            .rt-split { grid-template-columns: 1fr; }
+            .rt-divider {
+                flex-direction: row; padding: 8px 0;
+                writing-mode: horizontal-tb;
+            }
+            .rt-divider-text { writing-mode: horizontal-tb; }
+            .rt-tabs { flex-direction: column; }
+            .rt-tab { min-width: unset; }
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .main-layout {
@@ -1243,9 +1478,78 @@
         </div>
     </div>
 
+    <!-- ====== RUNTIME SPLIT VIEW ====== -->
+    <div id="runtime-view">
+        <div class="rt-tabs" id="rt-tabs"></div>
+        <div class="rt-split">
+            <!-- Left: Static Architecture -->
+            <div class="rt-col" id="rt-static">
+                <div class="rt-col-label">📐 静态架构（你是什么）</div>
+                <!-- Product Layer -->
+                <div class="rt-layer product" id="rt-product">
+                    <div class="rt-layer-title">
+                        <span class="tag" style="background:var(--c-product)">PRODUCT</span>
+                        产品层
+                    </div>
+                    <div style="font-size:11px;color:var(--c-text-3);margin-bottom:4px;">多产品共享同一Agent内核</div>
+                    <div class="pills" id="rt-product-pills">
+                        <span class="pill" data-prod="cf">CodeFlicker</span>
+                        <span class="pill" data-prod="kate">KATE-Studio</span>
+                        <span class="pill" data-prod="pa">AI个人助理</span>
+                        <span class="pill" data-prod="adapt">产品适配层</span>
+                    </div>
+                </div>
+                <!-- Agent Layer -->
+                <div class="rt-layer agent" id="rt-agent">
+                    <div class="rt-layer-title">
+                        <span class="tag" style="background:var(--c-agent)">AGENT</span>
+                        Agent层
+                    </div>
+                    <div style="font-size:11px;color:var(--c-text-3);margin-bottom:4px;">🧠 主Agent — 决策指挥中枢，永不下场执行</div>
+                    <div style="font-size:10px;color:var(--c-text-3);margin-bottom:6px;">理解意图 · 查记忆 · 选Skill · 派实例 · 收经验</div>
+                    <div style="font-size:10px;font-weight:700;color:var(--c-text-3);margin-bottom:4px;">四类Skill：</div>
+                    <div class="pills" id="rt-skill-pills">
+                        <span class="pill" data-skill="native" style="border-left:3px solid var(--c-skill-native)">Ⅰ 原生</span>
+                        <span class="pill" data-skill="tool" style="border-left:3px solid var(--c-skill-tool)">Ⅱ 工具</span>
+                        <span class="pill" data-skill="task" style="border-left:3px solid var(--c-skill-task)">Ⅲ 任务</span>
+                        <span class="pill" data-skill="flow" style="border-left:3px solid var(--c-skill-flow)">Ⅳ 流程</span>
+                    </div>
+                </div>
+                <!-- OS Layer -->
+                <div class="rt-layer os" id="rt-os">
+                    <div class="rt-layer-title">
+                        <span class="tag" style="background:var(--c-os)">AGENT OS</span>
+                        底层运行时
+                    </div>
+                    <div class="pills">
+                        <span class="pill">AgentCore 六能力</span>
+                        <span class="pill" id="rt-os-im">实例管理器</span>
+                        <span class="pill" id="rt-os-mcp">MCP网关</span>
+                        <span class="pill">运行时</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="rt-divider">
+                <div class="rt-arrow forward">→</div>
+                <div class="rt-divider-text" id="rt-divider-label">触发</div>
+                <div class="rt-arrow back">→</div>
+            </div>
+
+            <!-- Right: Dynamic Runtime -->
+            <div class="rt-col" id="rt-dynamic">
+                <div class="rt-col-label">⚡ 动态运行（正在做什么）</div>
+                <div id="rt-dynamic-content">
+                    <!-- JS dynamically fills this -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
-        架构全景 · AI产品终极形态 · v5.1 · 2026-03
+        架构全景 · AI产品终极形态 · v5.2 · 2026-03
     </footer>
 </div>
 
@@ -1253,6 +1557,251 @@
 // ============ STATE ============
 let currentView = 'structure';
 let currentScenario = null;
+
+// ============ RUNTIME SCENARIO DATA ============
+const rtScenarios = {
+    s1: {
+        title: '"帮我写个调研报告"',
+        type: 'native', typeName: 'Ⅰ 原生', time: '分钟级',
+        color: '#2DA44E',
+        product: 'cf', skill: 'native',
+        taskTags: ['意图=调研', '偏好: 清爽报告风格', 'Skill: industry-research'],
+        osMcp: false, osInstances: 1,
+        instances: [{
+            name: '调研实例',
+            sub: 'Research Instance',
+            bindings: [
+                { type: 'skill', label: '✨ industry-research' },
+            ],
+            desc: '自主检索行业数据、抓取公众号资讯、整理竞品信息、撰写分析章节',
+            status: '执行中', statusColor: '#2DA44E'
+        }],
+        osMetrics: { active: '1 / 8', api: '2 进行中', memory: '3 条待写入' },
+        feedback: '实例销毁 → 报告风格偏好、常用信息源沉淀到 Memory → 下次调研更精准'
+    },
+    s2: {
+        title: '"帮我生成一张配图"',
+        type: 'tool', typeName: 'Ⅱ 工具', time: '秒级',
+        color: '#7C3AED',
+        product: 'cf', skill: 'tool',
+        taskTags: ['意图=生图', '偏好: 简洁风格', 'Skill: image-gen'],
+        osMcp: true, osInstances: 1,
+        instances: [{
+            name: '生图实例',
+            sub: 'Image Instance',
+            bindings: [
+                { type: 'skill', label: '✨ image-gen' },
+                { type: 'tool', label: '🔌 image-api MCP' },
+            ],
+            desc: '解析用户需求 → 构造 prompt → 调用图片生成 API → 返回适配尺寸的配图',
+            status: '执行中', statusColor: '#7C3AED'
+        }],
+        osMetrics: { active: '1 / 8', api: '1 进行中', memory: '1 条待写入' },
+        feedback: '实例销毁 → 风格偏好、prompt 模板沉淀到 Memory → 下次生图更贴合'
+    },
+    s3: {
+        title: '"帮我Review这个PR"',
+        type: 'task', typeName: 'Ⅲ 任务', time: '分钟级',
+        color: '#EA580C',
+        product: 'cf', skill: 'task',
+        taskTags: ['意图=CR', '偏好: 严格模式', 'Skill: code-review Task'],
+        osMcp: false, osInstances: 3,
+        instances: [
+            {
+                name: '代码阅读实例',
+                sub: 'Code Reader',
+                bindings: [
+                    { type: 'skill', label: '✨ code-analyzer' },
+                ],
+                desc: '遍历文件变更、解析依赖关系、标注复杂度热点',
+                status: '执行中', statusColor: '#EA580C'
+            },
+            {
+                name: '审查检查实例',
+                sub: 'Review Checker',
+                bindings: [
+                    { type: 'skill', label: '✨ review-rules' },
+                    { type: 'memory', label: '🧠 团队代码规范' },
+                ],
+                desc: '按安全/性能/可维护性三维度逐项检查，对照团队规范',
+                status: '执行中', statusColor: '#EA580C'
+            },
+            {
+                name: '总结实例',
+                sub: 'Summary Writer',
+                bindings: [
+                    { type: 'skill', label: '✨ report-writer' },
+                ],
+                desc: '汇总所有审查结果，生成结构化 Review 报告',
+                status: '等待中', statusColor: '#9CA3AF'
+            }
+        ],
+        osMetrics: { active: '3 / 8', api: '0', memory: '5 条待写入' },
+        feedback: '全部实例销毁 → 代码规范模式、常见问题模式沉淀到 Memory → 团队 CR 越来越准'
+    },
+    s4: {
+        title: '"帮我把需求做到上线"',
+        type: 'flow', typeName: 'Ⅳ 流程', time: '小时级',
+        color: '#0969DA',
+        product: 'cf', skill: 'flow',
+        taskTags: ['意图=全链路', '项目上下文已加载', 'Skill: dev-pipeline Flow'],
+        osMcp: true, osInstances: 'N',
+        flowStages: [
+            { name: '需求分析', type: 'Task', typeColor: '#EA580C', detail: '多实例并行拆解需求、评估影响面' },
+            { name: '代码开发', type: 'Native', typeColor: '#2DA44E', detail: '1个实例编写代码、创建分支' },
+            { name: 'CR 审查', type: 'Task', typeColor: '#EA580C', detail: '3个并行实例（同s3场景）' },
+            { name: '测试生成', type: 'Tool', typeColor: '#7C3AED', detail: '调用测试生成 API + 执行测试' },
+            { name: 'CI/CD', type: 'Tool', typeColor: '#7C3AED', detail: '调用构建/部署 MCP 工具' },
+            { name: '发布上线', type: 'Tool', typeColor: '#7C3AED', detail: '灰度发布 + 监控验证' },
+        ],
+        osMetrics: { active: 'N / 8', api: '多轮调用', memory: '全程记录' },
+        feedback: '总控实例最后销毁 → 项目上下文、最佳实践沉淀到 Memory → 下个项目更高效'
+    }
+};
+
+// ============ RUNTIME VIEW RENDERING ============
+function initRuntimeTabs() {
+    const container = document.getElementById('rt-tabs');
+    let html = '';
+    for (const [id, s] of Object.entries(rtScenarios)) {
+        html += `<div class="rt-tab" data-type="${s.type}" data-id="${id}" onclick="switchRtScenario('${id}')">
+            <div class="rt-tab-q">${s.title}</div>
+            <div class="rt-tab-meta">
+                <span class="rt-tab-badge">${s.typeName}</span>
+                <span>⏱ ${s.time}</span>
+            </div>
+        </div>`;
+    }
+    container.innerHTML = html;
+}
+
+function switchRtScenario(id) {
+    currentScenario = id;
+    // Update tabs
+    document.querySelectorAll('.rt-tab').forEach(t => t.classList.remove('active'));
+    const tab = document.querySelector(`.rt-tab[data-id="${id}"]`);
+    if (tab) tab.classList.add('active');
+    // Also sync sidebar scenario cards (if visible)
+    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
+    const card = document.querySelector(`.scenario-card[data-id="${id}"]`);
+    if (card) card.classList.add('active');
+    // Render
+    renderRtDynamic(id);
+    highlightRtStatic(id);
+}
+
+function highlightRtStatic(id) {
+    const s = rtScenarios[id];
+    // Highlight product
+    document.querySelectorAll('#rt-product-pills .pill').forEach(p => {
+        p.classList.toggle('hl', p.dataset.prod === s.product || p.dataset.prod === 'adapt');
+        if (p.dataset.prod === s.product) p.style.color = 'var(--c-product)';
+        else if (p.dataset.prod === 'adapt') p.style.color = 'var(--c-product)';
+        else p.style.color = '';
+    });
+    // Highlight skill
+    document.querySelectorAll('#rt-skill-pills .pill').forEach(p => {
+        const isActive = p.dataset.skill === s.skill;
+        p.classList.toggle('hl', isActive);
+        if (isActive) {
+            const colorMap = { native: 'var(--c-skill-native)', tool: 'var(--c-skill-tool)', task: 'var(--c-skill-task)', flow: 'var(--c-skill-flow)' };
+            p.style.color = colorMap[s.skill] || '';
+            p.style.fontWeight = '800';
+            p.style.background = '#fff';
+        } else {
+            p.style.color = ''; p.style.fontWeight = ''; p.style.background = '';
+        }
+    });
+    // Highlight OS pills
+    const imPill = document.getElementById('rt-os-im');
+    const mcpPill = document.getElementById('rt-os-mcp');
+    if (imPill) {
+        imPill.classList.toggle('hl', true);
+        imPill.style.color = 'var(--c-skill-task)';
+    }
+    if (mcpPill) {
+        mcpPill.classList.toggle('hl', s.osMcp);
+        mcpPill.style.color = s.osMcp ? 'var(--c-skill-tool)' : '';
+    }
+    // Update divider text
+    const divLabel = document.getElementById('rt-divider-label');
+    if (divLabel) {
+        const labels = { native: '派实例', tool: '派实例', task: '派多实例', flow: '编排调度' };
+        divLabel.textContent = labels[s.type] || '触发';
+    }
+}
+
+function renderRtDynamic(id) {
+    const s = rtScenarios[id];
+    const container = document.getElementById('rt-dynamic-content');
+    let html = '';
+
+    // Task input card
+    html += `<div class="rt-task-input" style="border-color:${s.color}40">
+        <div class="rt-task-q">${s.title}</div>
+        <div class="rt-task-tags">
+            ${s.taskTags.map(t => `<span class="rt-task-tag">${t}</span>`).join('')}
+        </div>
+    </div>`;
+
+    // Instances or Flow stages
+    if (s.type === 'flow') {
+        // Flow: timeline
+        html += `<div class="rt-flow-timeline">`;
+        s.flowStages.forEach((stage, i) => {
+            html += `<div class="rt-flow-stage">
+                <div class="rt-flow-num" style="background:${stage.typeColor}">${i+1}</div>
+                <div class="rt-flow-body">
+                    <span class="rt-flow-name">${stage.name}</span>
+                    <span class="rt-flow-type" style="color:${stage.typeColor}">[${stage.type}]</span>
+                    <div class="rt-flow-detail">${stage.detail}</div>
+                </div>
+            </div>`;
+        });
+        html += `</div>`;
+    } else {
+        // Normal: instance cards
+        html += `<div class="rt-instances">`;
+        s.instances.forEach((inst, i) => {
+            const nums = ['①','②','③','④','⑤'];
+            html += `<div class="rt-instance" style="border-top-color:${s.color}">
+                <div class="rt-inst-header">
+                    <div class="rt-inst-num" style="background:${s.color}">${nums[i] || (i+1)}</div>
+                    <div>
+                        <div class="rt-inst-name">${inst.name}</div>
+                        <div class="rt-inst-sub">${inst.sub}</div>
+                    </div>
+                </div>
+                <div class="rt-inst-bindings">
+                    ${inst.bindings.map(b => `<span class="rt-inst-binding ${b.type}">${b.label}</span>`).join('')}
+                </div>
+                <div class="rt-inst-desc">${inst.desc}</div>
+                <div class="rt-inst-status">
+                    <span class="dot" style="background:${inst.statusColor}"></span>
+                    <span style="color:${inst.statusColor}">${inst.status}</span>
+                </div>
+            </div>`;
+        });
+        html += `</div>`;
+    }
+
+    // OS status
+    html += `<div class="rt-os-status">
+        <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:2px;">⚙️ Agent OS 运行状态</div>
+        <div class="rt-os-metrics">
+            <div class="rt-os-metric"><div class="val">${s.osMetrics.active}</div><div class="label">活跃实例</div></div>
+            <div class="rt-os-metric"><div class="val">${s.osMetrics.api}</div><div class="label">API 调用</div></div>
+            <div class="rt-os-metric"><div class="val">${s.osMetrics.memory}</div><div class="label">Memory 队列</div></div>
+        </div>
+    </div>`;
+
+    // Feedback loop
+    html += `<div class="rt-feedback">
+        <strong>🔄 经验回流：</strong>${s.feedback}
+    </div>`;
+
+    container.innerHTML = html;
+}
 
 // ============ SCENARIO DATA ============
 const scenarios = {
@@ -1329,6 +1878,7 @@ function switchView(view) {
     document.querySelector(`.view-tab[data-view="${view}"]`).classList.add('active');
 
     const flowPaths = document.getElementById('flow-paths');
+    const runtimeView = document.getElementById('runtime-view');
 
     if (view === 'structure') {
         flowPaths.setAttribute('opacity', '0');
@@ -1336,13 +1886,18 @@ function switchView(view) {
         document.getElementById('skill-overview').style.display = 'block';
         document.querySelector('.main-layout').style.display = 'grid';
         document.getElementById('analogy-view').classList.remove('visible');
+        runtimeView.classList.remove('visible');
     } else if (view === 'runtime') {
-        flowPaths.setAttribute('opacity', '1');
+        flowPaths.setAttribute('opacity', '0');
         document.getElementById('skill-overview').style.display = 'none';
-        document.querySelector('.main-layout').style.display = 'grid';
+        document.querySelector('.main-layout').style.display = 'none';
+        document.getElementById('detail-panel').classList.add('hidden');
         document.getElementById('analogy-view').classList.remove('visible');
+        runtimeView.classList.add('visible');
         if (!currentScenario) {
-            activateScenario('s1');
+            switchRtScenario('s1');
+        } else {
+            switchRtScenario(currentScenario);
         }
     } else if (view === 'analogy') {
         flowPaths.setAttribute('opacity', '0');
@@ -1351,37 +1906,17 @@ function switchView(view) {
         document.querySelector('.main-layout').style.display = 'none';
         document.getElementById('detail-panel').classList.add('hidden');
         document.getElementById('analogy-view').classList.add('visible');
+        runtimeView.classList.remove('visible');
     }
 }
 
 // ============ SCENARIO ACTIVATION ============
 function activateScenario(id) {
-    if (currentView === 'structure') {
-        currentView = 'runtime';
-        document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-        document.querySelector('.view-tab[data-view="runtime"]').classList.add('active');
-        document.getElementById('flow-paths').setAttribute('opacity', '1');
-        document.getElementById('skill-overview').style.display = 'none';
+    // If in structure view, switch to runtime view
+    if (currentView !== 'runtime') {
+        switchView('runtime');
     }
-
-    currentScenario = id;
-    const data = scenarios[id];
-
-    // Update scenario cards
-    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-    document.querySelector(`.scenario-card[data-id="${id}"]`).classList.add('active');
-
-    // Show/hide flow paths
-    ['s1','s2','s3','s4'].forEach(s => {
-        const el = document.getElementById('flow-' + s);
-        if (el) el.setAttribute('opacity', s === id ? '1' : '0');
-    });
-
-    // Highlight components
-    highlightComponents(data.highlight);
-
-    // Show detail panel
-    showFlowDetail(id);
+    switchRtScenario(id);
 }
 
 function resetScenario() {
@@ -1750,6 +2285,9 @@ function bindTooltip(targetEl) {
 
 // ============ CLICK HANDLERS FOR SVG COMPONENTS + TOOLTIP BINDING ============
 document.addEventListener('DOMContentLoaded', () => {
+    // Init runtime view tabs
+    initRuntimeTabs();
+
     // Make SVG nodes hoverable
     const hoverIds = Object.keys(TOOLTIPS);
     hoverIds.forEach(id => {

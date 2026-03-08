@@ -337,6 +337,69 @@
             .tab-btn span:not(.tab-btn-num) { display: none; }
             .flow-steps { flex-wrap: wrap; justify-content: center; }
         }
+
+        /* === TOOLTIP (Hover Bubble) === */
+        .tip-target { cursor: help; }
+        .tip-target.tip-clickable { cursor: pointer; }
+
+        #cf-tooltip {
+            position: fixed;
+            z-index: 9999;
+            max-width: min(380px, calc(100vw - 24px));
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(208,215,222,0.9);
+            border-radius: 10px;
+            box-shadow: 0 12px 28px rgba(31,35,40,0.14);
+            color: var(--c-text-2);
+            font-size: 12px;
+            line-height: 1.5;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 120ms var(--ease), transform 120ms var(--ease);
+        }
+        #cf-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #cf-tooltip .tt-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            color: var(--c-text);
+            margin-bottom: 6px;
+        }
+        #cf-tooltip .tt-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--c-border);
+            flex: none;
+        }
+        #cf-tooltip .tt-body {
+            color: var(--c-text-2);
+        }
+        #cf-tooltip .tt-row {
+            display: flex;
+            gap: 8px;
+            margin: 4px 0;
+        }
+        #cf-tooltip .tt-k {
+            flex: none;
+            width: 66px;
+            color: var(--c-text-3);
+            font-weight: 700;
+        }
+        #cf-tooltip .tt-v {
+            flex: 1;
+            color: var(--c-text-2);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #cf-tooltip { transition: none; }
+        }
     </style>
 </head>
 <body>
@@ -561,25 +624,25 @@
                     <g id="cross-cutting">
                         <rect x="130" y="286" width="588" height="36" rx="8" fill="#F3F5F7" stroke="#D0D7DE" stroke-width="0.8"/>
                         <text x="145" y="308" font-size="9" font-weight="600" fill="#656D76">横切能力</text>
-                        <g transform="translate(210, 296)">
+                        <g id="pill-eval" class="tip-target" transform="translate(210, 296)">
                             <rect x="0" y="0" width="56" height="18" rx="9" fill="#E6F7ED" stroke="#2DA44E" stroke-width="0.6"/>
                             <text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">🔍 Eval</text>
                         </g>
-                        <g transform="translate(278, 296)">
+                        <g id="pill-security" class="tip-target" transform="translate(278, 296)">
                             <rect x="0" y="0" width="56" height="18" rx="9" fill="#FEF2F2" stroke="#CF222E" stroke-width="0.6"/>
                             <text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#CF222E">🛡 安全</text>
                         </g>
-                        <g transform="translate(346, 296)">
+                        <g id="pill-observability" class="tip-target" transform="translate(346, 296)">
                             <rect x="0" y="0" width="68" height="18" rx="9" fill="#FFF7ED" stroke="#BF8700" stroke-width="0.6"/>
                             <text x="34" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#9A6700">📊 可观测</text>
                         </g>
-                        <g transform="translate(426, 296)">
+                        <g id="pill-memory" class="tip-target" transform="translate(426, 296)">
                             <rect x="0" y="0" width="80" height="18" rx="9" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.6"/>
                             <text x="40" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#0969DA">🧠 Memory服务</text>
                         </g>
 
                         <!-- Skill Registry (moved inside cross-cutting area, right side) -->
-                        <g transform="translate(520, 296)">
+                        <g id="pill-skill-registry" class="tip-target" transform="translate(520, 296)">
                             <rect x="0" y="0" width="86" height="18" rx="9" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.6"/>
                             <text x="43" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#7C3AED">📋 Skill注册中心</text>
                         </g>
@@ -611,27 +674,27 @@
                     <g id="agentcore" filter="url(#dropShadow)">
                         <rect x="130" y="436" width="468" height="52" rx="10" fill="white" stroke="#24292F" stroke-width="1"/>
                         <text x="145" y="455" font-size="10" font-weight="700" fill="#24292F">AgentCore 六大能力</text>
-                        <g transform="translate(145, 462)">
+                        <g id="ac-memory" class="tip-target" transform="translate(145, 462)">
                             <rect x="0" y="0" width="60" height="18" rx="4" fill="#F3F5F7"/>
                             <text x="30" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Memory</text>
                         </g>
-                        <g transform="translate(215, 462)">
+                        <g id="ac-reasoning" class="tip-target" transform="translate(215, 462)">
                             <rect x="0" y="0" width="68" height="18" rx="4" fill="#F3F5F7"/>
                             <text x="34" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Reasoning</text>
                         </g>
-                        <g transform="translate(293, 462)">
+                        <g id="ac-planning" class="tip-target" transform="translate(293, 462)">
                             <rect x="0" y="0" width="62" height="18" rx="4" fill="#F3F5F7"/>
                             <text x="31" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Planning</text>
                         </g>
-                        <g transform="translate(365, 462)">
+                        <g id="ac-orchestration" class="tip-target" transform="translate(365, 462)">
                             <rect x="0" y="0" width="86" height="18" rx="4" fill="#F3F5F7"/>
                             <text x="43" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Orchestration</text>
                         </g>
-                        <g transform="translate(461, 462)">
+                        <g id="ac-reflection" class="tip-target" transform="translate(461, 462)">
                             <rect x="0" y="0" width="66" height="18" rx="4" fill="#F3F5F7"/>
                             <text x="33" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Reflection</text>
                         </g>
-                        <g transform="translate(537, 462)">
+                        <g id="ac-integration" class="tip-target" transform="translate(537, 462)">
                             <rect x="0" y="0" width="52" height="18" rx="4" fill="#F3F5F7"/>
                             <text x="26" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Integration</text>
                         </g>
@@ -828,13 +891,13 @@
 
     <!-- Default: Skill Types Overview (shown when no scenario is selected) -->
     <div id="skill-overview" style="margin-top:20px;">
-        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#656D76; margin-bottom:12px;">⚡ 四类技能体系详解</div>
+        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#656D76; margin-bottom:12px;">⚡ 四类技能体系详解（hover 看细节）</div>
         <div class="skill-detail-grid">
             <div class="skill-detail-box native">
                 <h4>Ⅰ 原生 Skill (Native)</h4>
-                <p><strong>本质：</strong>纯指令型知识包，主Agent读取SKILL.md后直接执行</p>
-                <p><strong>执行方式：</strong>主Agent独立完成，无外部依赖</p>
-                <p><strong>响应时间：</strong>分钟级</p>
+                <p><strong>判定标准：</strong>主要靠文本/结构化推理即可完成；不依赖外部API；无需并行拆分</p>
+                <p><strong>执行方式：</strong>主Agent读取SKILL.md后直接执行（可被自然语言“教会”）</p>
+                <p><strong>失败模式：</strong>信息源不足 / 指令不够具体 / 需要外部动作却没工具</p>
                 <div class="examples">
                     <span class="example-tag">📊 行业调研</span>
                     <span class="example-tag">📝 文档撰写</span>
@@ -844,9 +907,9 @@
             </div>
             <div class="skill-detail-box tool">
                 <h4>Ⅱ 工具 Skill (Tool/MCP)</h4>
-                <p><strong>本质：</strong>MCP工具封装，包装现有API服务为统一调用</p>
-                <p><strong>执行方式：</strong>主Agent通过MCP网关调用外部服务</p>
-                <p><strong>响应时间：</strong>秒级</p>
+                <p><strong>判定标准：</strong>需要调用外部服务一次或少量次即可完成（生成/查询/执行）</p>
+                <p><strong>执行方式：</strong>主Agent→MCP网关→外部API；网关统一鉴权/限流/路由</p>
+                <p><strong>失败模式：</strong>鉴权失败 / 限流超时 / 外部服务波动</p>
                 <div class="examples">
                     <span class="example-tag">🖼️ 图片生成</span>
                     <span class="example-tag">🎬 视频生成</span>
@@ -856,9 +919,9 @@
             </div>
             <div class="skill-detail-box task">
                 <h4>Ⅲ 任务 Skill (Task)</h4>
-                <p><strong>本质：</strong>分身协作型，AgentCore分身引擎派生多个执行实例并行工作</p>
-                <p><strong>执行方式：</strong>多分身共享Memory、独立上下文、结果汇总+经验回流</p>
-                <p><strong>响应时间：</strong>分钟级，有进度反馈</p>
+                <p><strong>判定标准：</strong>可拆成多个相互独立的子任务并行（多视角/多维度/多分片）</p>
+                <p><strong>执行方式：</strong>分身引擎派生N个实例；共享Memory快照、独立上下文；结果汇总+经验回流</p>
+                <p><strong>失败模式：</strong>拆分不合理 / 汇总冲突 / 并发资源不足</p>
                 <div class="examples">
                     <span class="example-tag">🔎 CR代码审查</span>
                     <span class="example-tag">♻️ 重构评审</span>
@@ -867,9 +930,9 @@
             </div>
             <div class="skill-detail-box flow">
                 <h4>Ⅳ 流程 Skill (Flow)</h4>
-                <p><strong>本质：</strong>多Task编排型，主Agent通过Planning引擎分阶段执行</p>
-                <p><strong>执行方式：</strong>两层编排 — Flow层(阶段编排) + Task层(单阶段执行)</p>
-                <p><strong>响应时间：</strong>小时级，阶段进度反馈，可中断/调整</p>
+                <p><strong>判定标准：</strong>存在多阶段依赖链（Stage DAG），且需要过程可见、可中断、可重试</p>
+                <p><strong>执行方式：</strong>两层编排：Flow层(阶段) + Task层(阶段内执行任意Skill)</p>
+                <p><strong>失败模式：</strong>阶段依赖不清 / 数据传递缺失 / 断点恢复不完整</p>
                 <div class="examples">
                     <span class="example-tag">🚀 需求→发布全链路</span>
                     <span class="example-tag">🏗️ 项目初始化</span>
@@ -877,11 +940,77 @@
                 </div>
             </div>
         </div>
+
+        <!-- 补齐：P0/P1/P2 关键信息（不挤主图，用下方卡片承载） -->
+        <div style="margin-top:16px; display:grid; grid-template-columns: 1.05fr 0.95fr; gap:16px;">
+            <div style="background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
+                <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧭 Skill 类型决策指南（P1）</div>
+                <div style="font-size:12px;color:var(--c-text-2);">
+                    <div style="padding:10px 12px;border:1px solid var(--c-border-light);border-radius:10px;background:#F6F8FA;">
+                        <div style="font-weight:800;color:var(--c-text);margin-bottom:6px;">快速判断</div>
+                        <div style="display:grid;grid-template-columns: 88px 1fr;gap:6px 10px;">
+                            <div style="color:var(--c-text-3);font-weight:700;">只要写/想？</div><div>→ 先用 <strong>Native</strong></div>
+                            <div style="color:var(--c-text-3);font-weight:700;">要调API？</div><div>→ 用 <strong>Tool</strong>（走MCP网关）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">可并行拆？</div><div>→ 用 <strong>Task</strong>（分身并行）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">有阶段依赖？</div><div>→ 用 <strong>Flow</strong>（阶段编排+断点）</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px; color:var(--c-text-3);font-size:11px;">建议产品侧在PRD里写清：触发词、输入约束、输出形态、失败兜底；技术侧写清：依赖、权限、SLA、回滚。</div>
+                </div>
+            </div>
+
+            <div style="background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
+                <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧬 Skill 生命周期与治理（P1/P2）</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+                    <span style="padding:6px 10px;border-radius:999px;background:#F3F5F7;border:1px solid var(--c-border-light);font-size:11px;">开发</span>
+                    <span style="color:var(--c-border);">→</span>
+                    <span style="padding:6px 10px;border-radius:999px;background:#F5F3FF;border:1px solid rgba(124,58,237,.25);font-size:11px;">注册(元数据/版本)</span>
+                    <span style="color:var(--c-border);">→</span>
+                    <span style="padding:6px 10px;border-radius:999px;background:#FFF7ED;border:1px solid rgba(234,88,12,.25);font-size:11px;">灰度/AB</span>
+                    <span style="color:var(--c-border);">→</span>
+                    <span style="padding:6px 10px;border-radius:999px;background:#E6F7ED;border:1px solid rgba(45,164,78,.25);font-size:11px;">评估(Eval)</span>
+                    <span style="color:var(--c-border);">→</span>
+                    <span style="padding:6px 10px;border-radius:999px;background:#EFF6FF;border:1px solid rgba(9,105,218,.25);font-size:11px;">发布</span>
+                    <span style="color:var(--c-border);">→</span>
+                    <span style="padding:6px 10px;border-radius:999px;background:#FEF2F2;border:1px solid rgba(207,34,46,.25);font-size:11px;">回滚/下线</span>
+                </div>
+                <div style="margin-top:10px; font-size:11px; color:var(--c-text-3);">
+                    关键治理项：Schema校验、权限审计、成本预算(Token/调用)、SLA、观测面板、风险开关。
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:16px; background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
+            <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧠 Memory 分层与隔离策略（P0）</div>
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;">
+                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
+                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L1 工作记忆</div>
+                    <div style="font-size:11px;color:var(--c-text-3);">会话上下文/临时变量</div>
+                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：低延迟；自动过期；不做长期沉淀</div>
+                </div>
+                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
+                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L2 情景记忆</div>
+                    <div style="font-size:11px;color:var(--c-text-3);">偏好/历史/任务记录</div>
+                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：可审计；可删除；支持时间衰减</div>
+                </div>
+                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
+                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L3 语义记忆</div>
+                    <div style="font-size:11px;color:var(--c-text-3);">知识/文档/经验索引</div>
+                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：语义检索；去重聚合；引用溯源</div>
+                </div>
+            </div>
+            <div style="margin-top:10px;font-size:11px;color:var(--c-text-3);">
+                隔离：<strong>租户</strong>（企业/个人）→ <strong>产品</strong>（IDE/Web/助手）→ <strong>用户</strong>；共享仅限“通用偏好/匿名经验”，敏感信息必须可删除、可审计。
+            </div>
+        </div>
     </div>
+
+    <!-- Tooltip Container (hover bubbles) -->
+    <div id="cf-tooltip" aria-hidden="true"></div>
 
     <!-- Footer -->
     <footer class="footer">
-        统一AI产品架构全景图 · v1.0 · 2026-03
+        统一AI产品架构全景图 · v1.1 · 2026-03
     </footer>
 </div>
 
@@ -1171,10 +1300,306 @@ function showMappingDetail() {
     `;
 }
 
-// ============ CLICK HANDLERS FOR SVG COMPONENTS ============
+// ============ TOOLTIP SYSTEM ============
+const TOOLTIPS = {
+    // Product layer
+    'prod-cf': {
+        color: '#0969DA',
+        title: 'CodeFlicker（研发向）',
+        rows: [
+            ['定位', 'IDE 内的 AI × Coding 助手（低延迟 + 工程上下文）'],
+            ['典型用户', '研发工程师'],
+            ['核心差异', '代码上下文/工程工具链/本地优先'],
+            ['能力边界', '以编码相关为主；非编码能力可通过 Tool/Flow 按需开启'],
+        ],
+    },
+    'prod-kate': {
+        color: '#0969DA',
+        title: 'KATE-Studio（企业数字员工）',
+        rows: [
+            ['定位', '面向企业场景的数字员工/工作流承载'],
+            ['典型用户', '运营/产品/分析/HR 等'],
+            ['核心差异', 'Web 场景 + 批量任务 + 权限/审计'],
+            ['能力边界', '默认只开放经过治理的 Skill 集（稳定/可控）'],
+        ],
+    },
+    'prod-pa': {
+        color: '#0969DA',
+        title: 'AI个人助理（通用）',
+        rows: [
+            ['定位', '对话 + 多模态的通用 Agent（能力覆盖最全）'],
+            ['典型用户', '所有人'],
+            ['核心差异', '个性化最强：偏好/记忆/长期陪伴'],
+            ['能力边界', '强调隐私与可控：敏感记忆可审计/可删除'],
+        ],
+    },
+    'adapt-layer': {
+        color: '#0969DA',
+        title: '产品适配层（差异化关键）',
+        rows: [
+            ['UI适配', '同一能力在 IDE / Web / 移动端呈现不同组件'],
+            ['Skill筛选', '按产品定位过滤可用 Skill（防“全量能力暴露”）'],
+            ['权限模型', '租户/产品/用户三级隔离；企业可控开关'],
+            ['治理接口', '对接 Skill Registry / 安全策略 / 灰度发布'],
+        ],
+    },
+
+    // Agent layer
+    'main-agent': {
+        color: '#1A7F37',
+        title: '主 Agent（统一入口）',
+        rows: [
+            ['主链路', '理解 → 查记忆 → 匹配Skill → 调度执行 → 组装输出'],
+            ['一致性', '跨产品人格一致；同一用户多端共享“可共享”的记忆'],
+            ['边界', '不直接硬编码业务逻辑；能力主要来自 Skills'],
+        ],
+    },
+    'skill-native': {
+        color: '#2DA44E',
+        title: 'Ⅰ 原生 Skill',
+        rows: [
+            ['适用', '纯推理/文本输出/结构化总结'],
+            ['载体', 'SKILL.md（触发词/步骤/输出规范）'],
+            ['优势', '迭代快、成本低、无需外部依赖'],
+        ],
+    },
+    'skill-tool': {
+        color: '#7C3AED',
+        title: 'Ⅱ 工具 Skill（MCP）',
+        rows: [
+            ['适用', '需要外部API（生成/查询/执行）'],
+            ['路径', 'Agent → MCP网关 → Tool → 结果回填'],
+            ['治理', '鉴权/限流/可观测由网关统一处理'],
+        ],
+    },
+    'skill-task': {
+        color: '#EA580C',
+        title: 'Ⅲ 任务 Skill（分身并行）',
+        rows: [
+            ['适用', '可并行拆分：多视角/多维度/多分片'],
+            ['并发', '默认上限 8（可配置）；资源不足时自动降级'],
+            ['回流', '结果汇总 + 经验提炼写回 Memory（可审计）'],
+        ],
+    },
+    'skill-flow': {
+        color: '#0969DA',
+        title: 'Ⅳ 流程 Skill（阶段编排）',
+        rows: [
+            ['适用', '有阶段依赖链：需求→开发→测试→发布'],
+            ['能力', '跳过/重试/断点续跑/人工确认门禁'],
+            ['实现', 'Flow层编排 + Stage内调用任意Skill'],
+        ],
+    },
+
+    // Cross-cutting
+    'pill-eval': {
+        color: '#2DA44E',
+        title: 'Eval（质量评估）',
+        rows: [
+            ['评估维度', '任务完成度/响应质量/用户满意度'],
+            ['用途', 'A/B、灰度门禁、回归测试'],
+            ['产出', '分数+原因+改进建议，回流到Reflection/Memory'],
+        ],
+    },
+    'pill-security': {
+        color: '#CF222E',
+        title: '安全（多层防护）',
+        rows: [
+            ['输入', '注入检测/越权意图拦截'],
+            ['输出', '脱敏/合规过滤/幻觉风险提示'],
+            ['执行', '工具沙箱/权限最小化/审计日志'],
+        ],
+    },
+    'pill-observability': {
+        color: '#BF8700',
+        title: '可观测（工程化必备）',
+        rows: [
+            ['链路', '请求→计划→工具→结果 全链路追踪'],
+            ['指标', '延迟/成功率/Token成本/并发'],
+            ['告警', '错误率、超时、成本异常、权限拒绝'],
+        ],
+    },
+    'pill-memory': {
+        color: '#0969DA',
+        title: 'Memory 服务（护城河）',
+        rows: [
+            ['分层', 'L1工作记忆 / L2情景记忆 / L3语义记忆'],
+            ['检索', '关键词+语义+时间衰减 混合召回'],
+            ['隔离', '租户→产品→用户；敏感可删除可审计'],
+        ],
+    },
+    'pill-skill-registry': {
+        color: '#7C3AED',
+        title: 'Skill 注册中心（治理）',
+        rows: [
+            ['管理', '元数据/版本/依赖/权限/SLA'],
+            ['发布', '灰度/AB/回滚/下线'],
+            ['发现', '触发词精确匹配 + 语义匹配 + 上下文加权'],
+        ],
+    },
+
+    // AgentCore
+    'ac-memory': {
+        color: '#24292F',
+        title: 'AgentCore: Memory',
+        rows: [
+            ['职责', '读写记忆；去重/提炼；可审计可删除'],
+            ['输入', '对话/任务日志/用户显式指令'],
+            ['输出', '检索结果 + 结构化画像（供Reasoning/Planning使用）'],
+        ],
+    },
+    'ac-reasoning': {
+        color: '#24292F',
+        title: 'AgentCore: Reasoning',
+        rows: [
+            ['职责', '意图识别/消歧/隐含需求推断'],
+            ['输入', '用户输入 + Memory上下文'],
+            ['输出', '结构化意图（Intent）与约束（Constraints）'],
+        ],
+    },
+    'ac-planning': {
+        color: '#24292F',
+        title: 'AgentCore: Planning',
+        rows: [
+            ['职责', '把Intent分解为可执行的Stage DAG'],
+            ['输入', 'Intent + 工具/Skill能力清单'],
+            ['输出', '计划（步骤/依赖/校验点/回滚点）'],
+        ],
+    },
+    'ac-orchestration': {
+        color: '#24292F',
+        title: 'AgentCore: Orchestration',
+        rows: [
+            ['职责', '调度执行（并发/超时/重试/资源控制）'],
+            ['输入', 'Planning产出的DAG + Runtime约束'],
+            ['输出', '执行轨迹与中间态（供观测/回放）'],
+        ],
+    },
+    'ac-reflection': {
+        color: '#24292F',
+        title: 'AgentCore: Reflection',
+        rows: [
+            ['职责', '自评/复盘；把经验写回Memory（可控）'],
+            ['输入', '结果 + Eval分数/错误原因'],
+            ['输出', '改进建议/经验条目/策略调整'],
+        ],
+    },
+    'ac-integration': {
+        color: '#24292F',
+        title: 'AgentCore: Integration',
+        rows: [
+            ['职责', '外部服务接入与路由（LLM/搜索/CI/CD）'],
+            ['输入', '调用请求 + 鉴权/配额'],
+            ['输出', '统一结果/错误码/重试语义'],
+        ],
+    },
+
+    // Infra & runtime
+    'clone-engine': {
+        color: '#EA580C',
+        title: 'Clone Engine（分身引擎）',
+        rows: [
+            ['继承', 'Memory快照 + 任务上下文；默认不共享实时上下文'],
+            ['并发', '默认 8；可按租户/任务类型限额'],
+            ['合并', '结构化汇总 + 冲突检测；经验回流可审计'],
+        ],
+    },
+    'mcp-gateway': {
+        color: '#7C3AED',
+        title: 'MCP 网关（工具统一调用层）',
+        rows: [
+            ['注册', 'Tool schema/权限/版本 注册与发现'],
+            ['治理', '鉴权/限流/熔断/重试/成本控制'],
+            ['兼容', '同步/异步工具统一封装为一致调用语义'],
+        ],
+    },
+    'rt-local': {
+        color: '#24292F',
+        title: '本地模式（IDE嵌入）',
+        rows: [
+            ['优势', '低延迟；直接访问代码与文件系统'],
+            ['限制', '并发受本机资源限制；长任务可能降级到云端'],
+            ['记忆', '本地缓存 + 可选云端同步（冲突策略）'],
+        ],
+    },
+    'rt-cloud': {
+        color: '#0969DA',
+        title: '云端模式（AgentOS as a Service）',
+        rows: [
+            ['优势', '弹性扩缩；适合长任务/批量Flow/多分身'],
+            ['限制', '需要更强权限与审计；网络依赖'],
+            ['记忆', '云端统一存储；支持跨设备一致体验'],
+        ],
+    },
+};
+
+function renderTooltipContent(tip) {
+    const dot = `<span class="tt-dot" style="background:${tip.color || '#D0D7DE'}"></span>`;
+    const rows = (tip.rows || []).map(([k, v]) => (
+        `<div class="tt-row"><div class="tt-k">${k}</div><div class="tt-v">${v}</div></div>`
+    )).join('');
+    return `<div class="tt-title">${dot}<span>${tip.title || ''}</span></div><div class="tt-body">${rows}</div>`;
+}
+
+function bindTooltip(targetEl) {
+    const id = targetEl.id;
+    if (!id) return;
+    const tip = TOOLTIPS[id];
+    if (!tip) return;
+
+    const tooltip = document.getElementById('cf-tooltip');
+    if (!tooltip) return;
+
+    const show = (evt) => {
+        tooltip.innerHTML = renderTooltipContent(tip);
+        tooltip.classList.add('visible');
+        tooltip.setAttribute('aria-hidden', 'false');
+        move(evt);
+    };
+
+    const hide = () => {
+        tooltip.classList.remove('visible');
+        tooltip.setAttribute('aria-hidden', 'true');
+    };
+
+    const move = (evt) => {
+        const pad = 12;
+        const offset = 14;
+        const x = (evt.clientX ?? 0) + offset;
+        const y = (evt.clientY ?? 0) + offset;
+
+        tooltip.style.left = '0px';
+        tooltip.style.top = '0px';
+        const rect = tooltip.getBoundingClientRect();
+
+        let left = x;
+        let top = y;
+        if (left + rect.width + pad > window.innerWidth) left = Math.max(pad, window.innerWidth - rect.width - pad);
+        if (top + rect.height + pad > window.innerHeight) top = Math.max(pad, (evt.clientY ?? 0) - rect.height - offset);
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+    };
+
+    targetEl.addEventListener('mouseenter', show);
+    targetEl.addEventListener('mousemove', move);
+    targetEl.addEventListener('mouseleave', hide);
+}
+
+// ============ CLICK HANDLERS FOR SVG COMPONENTS + TOOLTIP BINDING ============
 document.addEventListener('DOMContentLoaded', () => {
+    // Make SVG nodes hoverable
+    const hoverIds = Object.keys(TOOLTIPS);
+    hoverIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add('tip-target');
+        bindTooltip(el);
+    });
+
     // Skill nodes click
     document.querySelectorAll('.skill-node').forEach(node => {
+        node.classList.add('tip-target', 'tip-clickable');
         node.addEventListener('click', () => {
             const skill = node.getAttribute('data-skill');
             const map = { native: 's1', tool: 's2', task: 's3', flow: 's4' };

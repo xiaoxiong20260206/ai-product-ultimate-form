@@ -1049,6 +1049,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = document.getElementById(id);
         if (el) { el.style.cursor = 'help'; bindTip(el); }
     });
+    // URL param: ?s=s1 to auto-activate
+    const p = new URLSearchParams(location.search);
+    const s = p.get('s');
+    if (s && DATA[s]) setTimeout(() => activate(s), 200);
 });
 </script>
 </body>

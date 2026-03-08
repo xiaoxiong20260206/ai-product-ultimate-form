@@ -400,6 +400,85 @@
         @media (prefers-reduced-motion: reduce) {
             #cf-tooltip { transition: none; }
         }
+
+        /* === ANALOGY VIEW === */
+        #analogy-view { display: none; }
+        #analogy-view.visible { display: block; }
+        .analogy-intro {
+            text-align: center; margin-bottom: 24px; padding: 16px 20px;
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+        }
+        .analogy-intro h2 { font-size: 18px; font-weight: 800; color: var(--c-text); margin-bottom: 4px; }
+        .analogy-intro p { font-size: 13px; color: var(--c-text-3); }
+        .analogy-row {
+            display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0;
+            align-items: stretch; margin-bottom: 16px;
+        }
+        .analogy-card {
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-card);
+        }
+        .analogy-card h3 {
+            font-size: 13px; font-weight: 800; margin-bottom: 8px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .analogy-card .tag {
+            display: inline-block; padding: 2px 8px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 700; color: #fff;
+        }
+        .analogy-card p, .analogy-card li {
+            font-size: 12px; color: var(--c-text-2); margin: 3px 0; line-height: 1.5;
+        }
+        .analogy-card ul { padding-left: 16px; margin: 4px 0; }
+        .analogy-card .sub-items {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px;
+        }
+        .analogy-card .sub-item {
+            padding: 8px; border-radius: var(--r-sm);
+            border: 1px solid var(--c-border-light); font-size: 11px;
+        }
+        .analogy-card .sub-item strong { display: block; font-size: 12px; margin-bottom: 2px; }
+        .analogy-card.game {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-color: rgba(255,215,0,0.2);
+        }
+        .analogy-card.game h3 { color: #FFD700; }
+        .analogy-card.game p, .analogy-card.game li { color: rgba(255,255,255,0.75); }
+        .analogy-card.game .sub-item {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,215,0,0.15); color: rgba(255,255,255,0.7);
+        }
+        .analogy-card.game .sub-item strong { color: #FFD700; }
+        .analogy-arrow {
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: var(--c-border); font-weight: 300;
+        }
+        .analogy-session {
+            margin-top: 20px; background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); padding: 20px; box-shadow: var(--shadow-card);
+        }
+        .analogy-session h3 { font-size: 14px; font-weight: 800; color: var(--c-text); margin-bottom: 12px; }
+        .session-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .session-card {
+            border: 1px solid var(--c-border-light); border-radius: var(--r-md);
+            padding: 12px; border-top: 3px solid var(--c-border);
+        }
+        .session-card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+        .session-card p { font-size: 11px; color: var(--c-text-2); margin: 2px 0; }
+        .session-card .lifecycle {
+            margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--c-border-light);
+            font-size: 10px; color: var(--c-text-3); font-family: monospace;
+        }
+        @media (max-width: 900px) {
+            .analogy-row { grid-template-columns: 1fr; }
+            .analogy-arrow { transform: rotate(90deg); padding: 4px 0; }
+            .analogy-card .sub-items { grid-template-columns: 1fr; }
+            .session-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .session-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -417,7 +496,7 @@
     <header class="header">
         <div class="header-badge">🗺️ Architecture Panorama</div>
         <h1>统一AI产品架构全景图</h1>
-        <p>一张图看清：三层架构 · 四类技能 · 运行流程 · 产品映射</p>
+        <p>一张图看清：三层架构 · 四类技能 · 会话模型 · 产品映射 · 游戏类比</p>
     </header>
 
     <!-- View Tabs -->
@@ -425,6 +504,7 @@
         <button class="view-tab active" data-view="structure" onclick="switchView('structure')">结构视图</button>
         <button class="view-tab" data-view="runtime" onclick="switchView('runtime')">运行视图</button>
         <button class="view-tab" data-view="mapping" onclick="switchView('mapping')">映射视图</button>
+        <button class="view-tab" data-view="analogy" onclick="switchView('analogy')">🎮 游戏类比</button>
     </div>
 
     <!-- Main Layout -->
@@ -571,8 +651,8 @@
                         <rect x="200" y="134" width="440" height="52" rx="10" fill="url(#gAgent)" opacity="0.08"/>
                         <text x="215" y="155" font-size="14">🧠</text>
                         <text x="236" y="157" font-size="13" font-weight="700" fill="#1A7F37">主 Agent</text>
-                        <text x="310" y="157" font-size="10" fill="#4D5561">— 所有产品共享的统一智能内核</text>
-                        <text x="236" y="175" font-size="9" fill="#656D76">语义理解 · 意图识别 · 主动推理 · 人格统一</text>
+                        <text x="310" y="157" font-size="10" fill="#4D5561">— 决策指挥中枢，永不下场执行</text>
+                        <text x="236" y="175" font-size="9" fill="#656D76">理解意图 · 查记忆 · 选Skill · 派会话 · 收经验</text>
                     </g>
 
                     <!-- Main Agent -> Skills connector -->
@@ -586,8 +666,8 @@
                             <rect x="130" y="206" width="138" height="18" rx="8" fill="url(#gNative)"/>
                             <rect x="130" y="216" width="138" height="8" fill="url(#gNative)"/>
                             <text x="199" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅰ 原生 Skill</text>
-                            <text x="199" y="242" text-anchor="middle" font-size="9" fill="#4D5561">主Agent读SKILL.md</text>
-                            <text x="199" y="256" text-anchor="middle" font-size="9" fill="#4D5561">直接执行</text>
+                            <text x="199" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立会话</text>
+                            <text x="199" y="256" text-anchor="middle" font-size="9" fill="#4D5561">带Skill独立完成</text>
                             <text x="199" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">调研·文档·PPT·分析</text>
                         </g>
                         <!-- Skill II: Tool -->
@@ -596,8 +676,8 @@
                             <rect x="280" y="206" width="138" height="18" rx="8" fill="url(#gTool)"/>
                             <rect x="280" y="216" width="138" height="8" fill="url(#gTool)"/>
                             <text x="349" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅱ 工具 Skill</text>
-                            <text x="349" y="242" text-anchor="middle" font-size="9" fill="#4D5561">MCP网关调用</text>
-                            <text x="349" y="256" text-anchor="middle" font-size="9" fill="#4D5561">外部API服务</text>
+                            <text x="349" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立会话</text>
+                            <text x="349" y="256" text-anchor="middle" font-size="9" fill="#4D5561">调MCP外部能力</text>
                             <text x="349" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">图片·视频·CI/CD·数据</text>
                         </g>
                         <!-- Skill III: Task -->
@@ -606,8 +686,8 @@
                             <rect x="430" y="206" width="138" height="18" rx="8" fill="url(#gTask)"/>
                             <rect x="430" y="216" width="138" height="8" fill="url(#gTask)"/>
                             <text x="499" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅲ 任务 Skill</text>
-                            <text x="499" y="242" text-anchor="middle" font-size="9" fill="#4D5561">分身引擎派生</text>
-                            <text x="499" y="256" text-anchor="middle" font-size="9" fill="#4D5561">多实例协作</text>
+                            <text x="499" y="242" text-anchor="middle" font-size="9" fill="#4D5561">N个并行会话</text>
+                            <text x="499" y="256" text-anchor="middle" font-size="9" fill="#4D5561">各带不同Skill协作</text>
                             <text x="499" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">CR审查·重构评审·多维分析</text>
                         </g>
                         <!-- Skill IV: Flow -->
@@ -616,8 +696,8 @@
                             <rect x="580" y="206" width="138" height="18" rx="8" fill="url(#gFlow)"/>
                             <rect x="580" y="216" width="138" height="8" fill="url(#gFlow)"/>
                             <text x="649" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅳ 流程 Skill</text>
-                            <text x="649" y="242" text-anchor="middle" font-size="9" fill="#4D5561">Planning编排</text>
-                            <text x="649" y="256" text-anchor="middle" font-size="9" fill="#4D5561">多Task组合执行</text>
+                            <text x="649" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1总控 + N执行会话</text>
+                            <text x="649" y="256" text-anchor="middle" font-size="9" fill="#4D5561">阶段编排·终极连招</text>
                             <text x="649" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">需求→发布·项目初始化</text>
                         </g>
                     </g>
@@ -707,9 +787,9 @@
                         <!-- Clone Engine -->
                         <g id="clone-engine" filter="url(#dropShadow)">
                             <rect x="612" y="436" width="126" height="52" rx="10" fill="white" stroke="#EA580C" stroke-width="1"/>
-                            <text x="675" y="456" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">⚡ 分身引擎</text>
-                            <text x="675" y="470" text-anchor="middle" font-size="8" fill="#656D76">Clone Engine</text>
-                            <text x="675" y="482" text-anchor="middle" font-size="7" fill="#9CA3AF">派生·执行·回收</text>
+                            <text x="675" y="456" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">⚡ 会话管理器</text>
+                            <text x="675" y="470" text-anchor="middle" font-size="8" fill="#656D76">Session Manager</text>
+                            <text x="675" y="482" text-anchor="middle" font-size="7" fill="#9CA3AF">创建·监控·回收·汇总</text>
                         </g>
 
                         <!-- MCP Gateway -->
@@ -962,9 +1042,9 @@
         <div class="skill-detail-grid">
             <div class="skill-detail-box native">
                 <h4>Ⅰ 原生 Skill (Native)</h4>
-                <p><strong>判定标准：</strong>主要靠文本/结构化推理即可完成；不依赖外部API；无需并行拆分</p>
-                <p><strong>执行方式：</strong>主Agent读取SKILL.md后直接执行（可被自然语言“教会”）</p>
-                <p><strong>失败模式：</strong>信息源不足 / 指令不够具体 / 需要外部动作却没工具</p>
+                <p><strong>会话模式：</strong>派 1 个独立会话，带 Skill 指令独立完成；不依赖外部 API</p>
+                <p><strong>游戏类比：</strong>🎮 派一个角色去做单人支线任务，做完回来交经验</p>
+                <p><strong>生命周期：</strong>创建 → 注入Skill → 独立执行 → 经验回流 → 会话销毁</p>
                 <div class="examples">
                     <span class="example-tag">📊 行业调研</span>
                     <span class="example-tag">📝 文档撰写</span>
@@ -974,9 +1054,9 @@
             </div>
             <div class="skill-detail-box tool">
                 <h4>Ⅱ 工具 Skill (Tool/MCP)</h4>
-                <p><strong>判定标准：</strong>需要调用外部服务一次或少量次即可完成（生成/查询/执行）</p>
-                <p><strong>执行方式：</strong>主Agent→MCP网关→外部API；网关统一鉴权/限流/路由</p>
-                <p><strong>失败模式：</strong>鉴权失败 / 限流超时 / 外部服务波动</p>
+                <p><strong>会话模式：</strong>派 1 个独立会话，通过 MCP 网关调用外部 API；网关统一鉴权/限流</p>
+                <p><strong>游戏类比：</strong>🎮 派一个角色去 NPC 商店买装备/找铁匠打造</p>
+                <p><strong>生命周期：</strong>创建 → 注入Skill → 调API → 经验回流 → 会话销毁</p>
                 <div class="examples">
                     <span class="example-tag">🖼️ 图片生成</span>
                     <span class="example-tag">🎬 视频生成</span>
@@ -986,9 +1066,9 @@
             </div>
             <div class="skill-detail-box task">
                 <h4>Ⅲ 任务 Skill (Task)</h4>
-                <p><strong>判定标准：</strong>可拆成多个相互独立的子任务并行（多视角/多维度/多分片）</p>
-                <p><strong>执行方式：</strong>分身引擎派生N个实例；共享Memory快照、独立上下文；结果汇总+经验回流</p>
-                <p><strong>失败模式：</strong>拆分不合理 / 汇总冲突 / 并发资源不足</p>
+                <p><strong>会话模式：</strong>派 N 个并行会话，各带不同 Skill；各自独立上下文，结果汇总后经验回流</p>
+                <p><strong>游戏类比：</strong>🎮 组队打副本：多角色同时出战，各有分工</p>
+                <p><strong>生命周期：</strong>创廾N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁</p>
                 <div class="examples">
                     <span class="example-tag">🔎 CR代码审查</span>
                     <span class="example-tag">♻️ 重构评审</span>
@@ -997,9 +1077,9 @@
             </div>
             <div class="skill-detail-box flow">
                 <h4>Ⅳ 流程 Skill (Flow)</h4>
-                <p><strong>判定标准：</strong>存在多阶段依赖链（Stage DAG），且需要过程可见、可中断、可重试</p>
-                <p><strong>执行方式：</strong>两层编排：Flow层(阶段) + Task层(阶段内执行任意Skill)</p>
-                <p><strong>失败模式：</strong>阶段依赖不清 / 数据传递缺失 / 断点恢复不完整</p>
+                <p><strong>会话模式：</strong>1 个总控会话编排多阶段，每阶段派执行会话（可是Native/Tool/Task任意组合）</p>
+                <p><strong>游戏类比：</strong>🎮 多阶段 Raid Boss 战：指挥官喜户多小队，各司其职</p>
+                <p><strong>能力：</strong>跳过/重试/断点续跑/人工确认门禁；总控会话最后销毁</p>
                 <div class="examples">
                     <span class="example-tag">🚀 需求→发布全链路</span>
                     <span class="example-tag">🏗️ 项目初始化</span>
@@ -1014,12 +1094,12 @@
                 <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧭 Skill 类型决策指南（P1）</div>
                 <div style="font-size:12px;color:var(--c-text-2);">
                     <div style="padding:10px 12px;border:1px solid var(--c-border-light);border-radius:10px;background:#F6F8FA;">
-                        <div style="font-weight:800;color:var(--c-text);margin-bottom:6px;">快速判断</div>
-                        <div style="display:grid;grid-template-columns: 88px 1fr;gap:6px 10px;">
-                            <div style="color:var(--c-text-3);font-weight:700;">只要写/想？</div><div>→ 先用 <strong>Native</strong></div>
-                            <div style="color:var(--c-text-3);font-weight:700;">要调API？</div><div>→ 用 <strong>Tool</strong>（走MCP网关）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">可并行拆？</div><div>→ 用 <strong>Task</strong>（分身并行）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">有阶段依赖？</div><div>→ 用 <strong>Flow</strong>（阶段编排+断点）</div>
+                        <div style="font-weight:800;color:var(--c-text);margin-bottom:6px;">快速判断（按会话复杂度）</div>
+                        <div style="display:grid;grid-template-columns: 100px 1fr;gap:6px 10px;">
+                            <div style="color:var(--c-text-3);font-weight:700;">1个会话够？</div><div>→ 用 <strong>Native</strong>（不调外部）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">要调外部API？</div><div>→ 用 <strong>Tool</strong>（1个会话+MCP网关）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">可并行拆？</div><div>→ 用 <strong>Task</strong>（N个并行会话协作）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">有阶段依赖？</div><div>→ 用 <strong>Flow</strong>（1总控+N会话编排）</div>
                         </div>
                     </div>
                     <div style="margin-top:10px; color:var(--c-text-3);font-size:11px;">建议产品侧在PRD里写清：触发词、输入约束、输出形态、失败兜底；技术侧写清：依赖、权限、SLA、回滚。</div>
@@ -1075,6 +1155,170 @@
     <!-- Tooltip Container (hover bubbles) -->
     <div id="cf-tooltip" aria-hidden="true"></div>
 
+    <!-- ======== ANALOGY VIEW (hidden by default) ======== -->
+    <div id="analogy-view">
+        <div class="analogy-intro">
+            <h2>🎮 如果 Agent 架构是一个游戏世界</h2>
+            <p>左侧是产品 &amp; 技术架构，右侧是网络游戏类比 — 逐层映射，秒懂每一个抽象概念</p>
+        </div>
+
+        <!-- Row 1: Product Layer ↔ Game Types -->
+        <div class="analogy-row">
+            <div class="analogy-card">
+                <h3 style="color:var(--c-product)">📦 产品层 — 不同产品形态</h3>
+                <p>同一套 Agent 内核，通过<strong>产品适配层</strong>（UI · Skill集 · 权限）打造出完全不同的产品：</p>
+                <div class="sub-items">
+                    <div class="sub-item" style="border-top:2px solid #0969DA">
+                        <strong>CodeFlicker</strong>
+                        本地IDE插件，需下载安装<br>联网调用LLM，低延迟优先
+                    </div>
+                    <div class="sub-item" style="border-top:2px solid #2DA44E">
+                        <strong>KATE-Studio</strong>
+                        纯Web应用，零安装<br>企业统一管控，批量任务
+                    </div>
+                    <div class="sub-item" style="border-top:2px solid #7C3AED">
+                        <strong>AI个人助理</strong>
+                        多端：本地+Web+移动<br>云端为主，全量能力开放
+                    </div>
+                </div>
+            </div>
+            <div class="analogy-arrow">⟺</div>
+            <div class="analogy-card game">
+                <h3>🎮 不同游戏 — 同一引擎开发</h3>
+                <p>同一套游戏引擎，开发出<strong>完全不同类型的游戏</strong>（不是同一游戏的不同职业）：</p>
+                <div class="sub-items">
+                    <div class="sub-item">
+                        <strong>🖥️ 本地客户端游戏</strong>
+                        需要下载安装客户端<br>联网但本地运算优先
+                    </div>
+                    <div class="sub-item">
+                        <strong>🌐 网页游戏</strong>
+                        打开浏览器即玩<br>轻量、即开即用
+                    </div>
+                    <div class="sub-item">
+                        <strong>🌍 大型MMO网游</strong>
+                        客户端+网页+手机多端<br>云端服务器为核心
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: Agent Layer ↔ Player/Mechanics -->
+        <div class="analogy-row">
+            <div class="analogy-card">
+                <h3 style="color:var(--c-agent)">🧠 Agent层 — 决策 + 会话派遣</h3>
+                <p><strong>主 Agent 永不下场执行</strong>。它理解意图、查记忆、选Skill，然后<strong>派出独立会话（分身）</strong>去执行。</p>
+                <p style="margin-top:6px">会话 = 独立上下文，执行完毕后经验回流、会话销毁。</p>
+                <div class="sub-items" style="grid-template-columns:1fr 1fr">
+                    <div class="sub-item" style="border-top:2px solid #2DA44E">
+                        <strong>Ⅰ Native / Ⅱ Tool</strong>
+                        1个独立会话，带Skill完成<br>Tool多一步调外部API
+                    </div>
+                    <div class="sub-item" style="border-top:2px solid #EA580C">
+                        <strong>Ⅲ Task / Ⅳ Flow</strong>
+                        Task: N个并行会话协作<br>Flow: 1总控 + N执行会话
+                    </div>
+                </div>
+            </div>
+            <div class="analogy-arrow">⟺</div>
+            <div class="analogy-card game">
+                <h3>🎯 玩家 + 技能系统</h3>
+                <p><strong>玩家自己不进入游戏世界</strong>，通过召唤角色/分身去执行任务。任务完成后角色消失，经验归属玩家。</p>
+                <p style="margin-top:6px">每次召唤 = 一个独立游戏实例。</p>
+                <div class="sub-items" style="grid-template-columns:1fr 1fr">
+                    <div class="sub-item">
+                        <strong>🗡️ 单人任务 / NPC交互</strong>
+                        派一个角色独立完成<br>NPC交互=调用外部服务
+                    </div>
+                    <div class="sub-item">
+                        <strong>⚔️ 组队副本 / Raid</strong>
+                        多角色同时出战协作<br>Raid=指挥官+多小队编排
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: Agent OS ↔ Game Engine -->
+        <div class="analogy-row">
+            <div class="analogy-card">
+                <h3 style="color:var(--c-os)">⚙️ Agent OS — 底层运行时</h3>
+                <p>提供所有会话共用的基础能力，<strong>与Agent层在同一进程内</strong>（函数调用，非远程通信）。</p>
+                <ul>
+                    <li><strong>AgentCore 六能力：</strong>Memory · Reasoning · Planning · Orchestration · Reflection · Integration</li>
+                    <li><strong>Session Manager：</strong>创建/监控/回收/汇总独立会话</li>
+                    <li><strong>MCP网关：</strong>统一外部API调用入口</li>
+                </ul>
+            </div>
+            <div class="analogy-arrow">⟺</div>
+            <div class="analogy-card game">
+                <h3>🏗️ 游戏引擎</h3>
+                <p>所有游戏共用的底层引擎（如Unreal/Unity），<strong>与游戏逻辑在同一进程内</strong>运行。</p>
+                <ul>
+                    <li><strong>引擎核心：</strong>存档系统 · AI行为树 · 任务系统 · 调度器 · 回放/复盘 · 网络层</li>
+                    <li><strong>副本系统：</strong>创建/管理/回收独立游戏实例</li>
+                    <li><strong>插件API：</strong>统一外部Mod和服务接入</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Row 4: Growth Loop ↔ XP System -->
+        <div class="analogy-row">
+            <div class="analogy-card">
+                <h3 style="color:#059669">🔄 成长闭环 — 越用越强</h3>
+                <p>执行任务 → Reflection自评 → 经验写入Memory → 下次执行起点更高。</p>
+                <p style="margin-top:6px"><strong>会话用完即毁，Memory持久存活。</strong>这是Agent区别于传统软件的本质。</p>
+                <div class="sub-items">
+                    <div class="sub-item" style="border-top:2px solid #1A7F37"><strong>L1 行为适应</strong>记住偏好和习惯</div>
+                    <div class="sub-item" style="border-top:2px solid #0969DA"><strong>L2 技能进化</strong>从执行中提炼方法论</div>
+                    <div class="sub-item" style="border-top:2px solid #7C3AED"><strong>L3 认知进化</strong>跨领域知识图谱</div>
+                </div>
+            </div>
+            <div class="analogy-arrow">⟺</div>
+            <div class="analogy-card game">
+                <h3>⭐ 经验值 + 升级系统</h3>
+                <p>打怪获得经验 → 升级解锁新技能 → 更强角色打更难副本。</p>
+                <p style="margin-top:6px"><strong>角色消失但经验永存。</strong>这是游戏让人上瘾的核心机制。</p>
+                <div class="sub-items">
+                    <div class="sub-item"><strong>L1 熟练度</strong>操作越来越熟练</div>
+                    <div class="sub-item"><strong>L2 天赋树</strong>解锁新技能和流派</div>
+                    <div class="sub-item"><strong>L3 跨服成就</strong>跨游戏的通用认知</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Model Detail -->
+        <div class="analogy-session">
+            <h3>💡 核心洞察：分身 = 独立会话（Session）</h3>
+            <p style="font-size:13px;color:var(--c-text-2);margin-bottom:12px">主Agent派出的每个"分身"本质上是一个<strong>独立的会话实例</strong>。会话有自己的上下文、按Skill指令执行、完成后将经验反馈回主Agent然后销毁。<br>任务的复杂度差异，本质只是<strong>需要多少个会话、如何协调</strong>的区别。</p>
+            <div class="session-grid">
+                <div class="session-card" style="border-top-color:#2DA44E">
+                    <h4 style="color:#2DA44E">Ⅰ Native Skill</h4>
+                    <p>1个会话 · 带Skill独立完成</p>
+                    <p>🎮 = 单人支线任务</p>
+                    <div class="lifecycle">创建→注入Skill→执行→回流→销毁</div>
+                </div>
+                <div class="session-card" style="border-top-color:#7C3AED">
+                    <h4 style="color:#7C3AED">Ⅱ Tool Skill</h4>
+                    <p>1个会话 · 调MCP外部API</p>
+                    <p>🎮 = 去NPC商店买装备</p>
+                    <div class="lifecycle">创建→注入Skill→调API→回流→销毁</div>
+                </div>
+                <div class="session-card" style="border-top-color:#EA580C">
+                    <h4 style="color:#EA580C">Ⅲ Task Skill</h4>
+                    <p>N个并行会话 · 各带不同Skill</p>
+                    <p>🎮 = 组队打副本</p>
+                    <div class="lifecycle">创建N个→并行执行→汇总→回流→全部销毁</div>
+                </div>
+                <div class="session-card" style="border-top-color:#0969DA">
+                    <h4 style="color:#0969DA">Ⅳ Flow Skill</h4>
+                    <p>1总控 + N执行会话 · 分阶段</p>
+                    <p>🎮 = 多阶段Raid Boss战</p>
+                    <div class="lifecycle">总控创建→逐阶段派遣→验证→下阶段→全部销毁</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         架构全景 · AI产品终极形态 · v5.1 · 2026-03
@@ -1090,7 +1334,7 @@ let currentScenario = null;
 const scenarios = {
     s1: {
         title: '"帮我写个调研报告"',
-        subtitle: '原生Skill · 主Agent独立执行',
+        subtitle: '原生Skill · 派1个独立会话执行',
         color: '#2DA44E',
         skillType: 'native',
         steps: [
@@ -1106,7 +1350,7 @@ const scenarios = {
     },
     s2: {
         title: '"帮我生成一张配图"',
-        subtitle: '工具Skill · MCP网关调用外部API',
+        subtitle: '工具Skill · 派1个会话调MCP外部API',
         color: '#7C3AED',
         skillType: 'tool',
         steps: [
@@ -1121,7 +1365,7 @@ const scenarios = {
     },
     s3: {
         title: '"帮我Review这个PR"',
-        subtitle: '任务Skill · 分身引擎派生3个实例协作',
+        subtitle: '任务Skill · 派3个并行会话协作',
         color: '#EA580C',
         skillType: 'task',
         steps: [
@@ -1137,7 +1381,7 @@ const scenarios = {
     },
     s4: {
         title: '"帮我把需求做到上线"',
-        subtitle: '流程Skill · Planning引擎编排6阶段',
+        subtitle: '流程Skill · 1总控会话编排6阶段',
         color: '#0969DA',
         skillType: 'flow',
         steps: [
@@ -1168,10 +1412,14 @@ function switchView(view) {
         mappingOverlay.setAttribute('opacity', '0');
         resetScenario();
         document.getElementById('skill-overview').style.display = 'block';
+        document.querySelector('.main-layout').style.display = 'grid';
+        document.getElementById('analogy-view').classList.remove('visible');
     } else if (view === 'runtime') {
         mappingOverlay.setAttribute('opacity', '0');
         flowPaths.setAttribute('opacity', '1');
         document.getElementById('skill-overview').style.display = 'none';
+        document.querySelector('.main-layout').style.display = 'grid';
+        document.getElementById('analogy-view').classList.remove('visible');
         if (!currentScenario) {
             activateScenario('s1');
         }
@@ -1180,7 +1428,17 @@ function switchView(view) {
         mappingOverlay.setAttribute('opacity', '1');
         resetScenario();
         document.getElementById('skill-overview').style.display = 'none';
+        document.querySelector('.main-layout').style.display = 'grid';
+        document.getElementById('analogy-view').classList.remove('visible');
         showMappingDetail();
+    } else if (view === 'analogy') {
+        flowPaths.setAttribute('opacity', '0');
+        mappingOverlay.setAttribute('opacity', '0');
+        resetScenario();
+        document.getElementById('skill-overview').style.display = 'none';
+        document.querySelector('.main-layout').style.display = 'none';
+        document.getElementById('detail-panel').classList.add('hidden');
+        document.getElementById('analogy-view').classList.add('visible');
     }
 }
 
@@ -1414,47 +1672,47 @@ const TOOLTIPS = {
     // Agent layer
     'main-agent': {
         color: '#1A7F37',
-        title: '主 Agent（统一入口）',
+        title: '主 Agent（决策指挥中枢）',
         rows: [
-            ['主链路', '理解 → 查记忆 → 匹配Skill → 调度执行 → 组装输出'],
-            ['一致性', '跨产品人格一致；同一用户多端共享“可共享”的记忆'],
-            ['边界', '不直接硬编码业务逻辑；能力主要来自 Skills'],
+            ['核心原则', '永不下场执行，只做决策和指挥'],
+            ['主链路', '理解 → 查记忆 → 选Skill → 派会话执行 → 收经验'],
+            ['类比', '游戏中的玩家，不进入游戏世界，通过召唤角色执行任务'],
         ],
     },
     'skill-native': {
         color: '#2DA44E',
-        title: 'Ⅰ 原生 Skill',
+        title: 'Ⅰ 原生 Skill（1个会话）',
         rows: [
-            ['适用', '纯推理/文本输出/结构化总结'],
-            ['载体', 'SKILL.md（触发词/步骤/输出规范）'],
-            ['优势', '迭代快、成本低、无需外部依赖'],
+            ['模式', '派1个独立会话，带Skill指令独立完成'],
+            ['类比', '🎮 单人支线任务：派一个角色去做'],
+            ['生命周期', '创建 → 注入Skill → 执行 → 经验回流 → 销毁'],
         ],
     },
     'skill-tool': {
         color: '#7C3AED',
-        title: 'Ⅱ 工具 Skill（MCP）',
+        title: 'Ⅱ 工具 Skill（1个会话+MCP）',
         rows: [
-            ['适用', '需要外部API（生成/查询/执行）'],
-            ['路径', 'Agent → MCP网关 → Tool → 结果回填'],
-            ['治理', '鉴权/限流/可观测由网关统一处理'],
+            ['模式', '派1个独立会话，通过MCP网关调用外部API'],
+            ['类比', '🎮 去 NPC商店买装备/找铁匠打造'],
+            ['生命周期', '创建 → 注入Skill → 调API → 经验回流 → 销毁'],
         ],
     },
     'skill-task': {
         color: '#EA580C',
-        title: 'Ⅲ 任务 Skill（分身并行）',
+        title: 'Ⅲ 任务 Skill（N个并行会话）',
         rows: [
-            ['适用', '可并行拆分：多视角/多维度/多分片'],
-            ['并发', '默认上限 8（可配置）；资源不足时自动降级'],
-            ['回流', '结果汇总 + 经验提炼写回 Memory（可审计）'],
+            ['模式', '派N个并行会话，各带不同Skill协作'],
+            ['类比', '🎮 组队打副本：多角色同时出战'],
+            ['生命周期', '创廾N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁'],
         ],
     },
     'skill-flow': {
         color: '#0969DA',
-        title: 'Ⅳ 流程 Skill（阶段编排）',
+        title: 'Ⅳ 流程 Skill（1总控+N会话）',
         rows: [
-            ['适用', '有阶段依赖链：需求→开发→测试→发布'],
+            ['模式', '1个总控会话编排多阶段，每阶段派执行会话'],
+            ['类比', '🎮 多阶段 Raid Boss战：指挥官+多小队'],
             ['能力', '跳过/重试/断点续跑/人工确认门禁'],
-            ['实现', 'Flow层编排 + Stage内调用任意Skill'],
         ],
     },
 
@@ -1564,11 +1822,12 @@ const TOOLTIPS = {
     // Infra & runtime
     'clone-engine': {
         color: '#EA580C',
-        title: 'Clone Engine（分身引擎）',
+        title: 'Session Manager（会话管理器）',
         rows: [
-            ['继承', 'Memory快照 + 任务上下文；默认不共享实时上下文'],
+            ['本质', '每个“分身”= 一个独立会话（独立上下文）'],
+            ['生命周期', '创建 → 监控 → 回收 → 经验汇总'],
             ['并发', '默认 8；可按租户/任务类型限额'],
-            ['合并', '结构化汇总 + 冲突检测；经验回流可审计'],
+            ['类比', '🎮 游戏副本系统：创建/管理/回收独立实例'],
         ],
     },
     'mcp-gateway': {

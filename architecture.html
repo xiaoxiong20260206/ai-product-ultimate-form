@@ -464,7 +464,7 @@
 
         <!-- Right: Architecture Diagram -->
         <div class="arch-container">
-            <svg class="arch-svg" viewBox="0 0 760 740" xmlns="http://www.w3.org/2000/svg">
+            <svg class="arch-svg" viewBox="0 0 760 760" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="gProduct" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#0969DA"/>
@@ -548,10 +548,14 @@
                     </g>
                 </g>
 
-                <!-- Product -> Agent connector -->
+                <!-- Product -> Agent connectors (多对一) -->
                 <g id="connector-prod-agent">
-                    <line x1="370" y1="80" x2="370" y2="100" stroke="#D0D7DE" stroke-width="1.5"/>
-                    <polygon points="365,98 370,106 375,98" fill="#D0D7DE"/>
+                    <line x1="190" y1="72" x2="190" y2="88" stroke="#D0D7DE" stroke-width="1" opacity="0.5"/>
+                    <line x1="325" y1="72" x2="325" y2="88" stroke="#D0D7DE" stroke-width="1" opacity="0.5"/>
+                    <line x1="460" y1="72" x2="460" y2="88" stroke="#D0D7DE" stroke-width="1" opacity="0.5"/>
+                    <path d="M190 88 Q190 96 370 100 Q460 96 460 88" stroke="#D0D7DE" stroke-width="1" fill="none" opacity="0.4"/>
+                    <line x1="370" y1="96" x2="370" y2="106" stroke="#D0D7DE" stroke-width="1.5"/>
+                    <polygon points="365,104 370,112 375,104" fill="#D0D7DE"/>
                 </g>
 
                 <!-- ======== LAYER 2: AGENT ======== -->
@@ -567,7 +571,7 @@
                         <rect x="200" y="134" width="440" height="52" rx="10" fill="url(#gAgent)" opacity="0.08"/>
                         <text x="215" y="155" font-size="14">🧠</text>
                         <text x="236" y="157" font-size="13" font-weight="700" fill="#1A7F37">主 Agent</text>
-                        <text x="310" y="157" font-size="10" fill="#4D5561">— 统一入口，从 Code Agent 进化</text>
+                        <text x="310" y="157" font-size="10" fill="#4D5561">— 所有产品共享的统一智能内核</text>
                         <text x="236" y="175" font-size="9" fill="#656D76">语义理解 · 意图识别 · 主动推理 · 人格统一</text>
                     </g>
 
@@ -836,52 +840,59 @@
                     </g>
                 </g>
 
+                <!-- OS -> Growth Loop connector -->
+                <g id="connector-os-loop">
+                    <line x1="420" y1="588" x2="420" y2="610" stroke="#059669" stroke-width="1.5" opacity="0.5"/>
+                    <polygon points="416,608 420,616 424,608" fill="#059669" opacity="0.5"/>
+                    <text x="432" y="604" font-size="7" fill="#059669" opacity="0.5">经验回流</text>
+                </g>
+
                 <!-- ======== GROWTH LOOP (always visible) ======== -->
                 <g id="growth-loop" class="tip-target">
                     <!-- Section label -->
-                    <text x="125" y="610" font-size="10" font-weight="700" fill="#059669" opacity="0.6">GROWTH LOOP — 成长闭环</text>
+                    <text x="125" y="628" font-size="10" font-weight="700" fill="#059669" opacity="0.6">GROWTH LOOP — 成长闭环</text>
 
                     <!-- Background -->
-                    <rect x="110" y="618" width="540" height="110" rx="12" fill="#059669" opacity="0.04"/>
-                    <rect x="110" y="618" width="540" height="110" rx="12" fill="none" stroke="#059669" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+                    <rect x="110" y="636" width="540" height="110" rx="12" fill="#059669" opacity="0.04"/>
+                    <rect x="110" y="636" width="540" height="110" rx="12" fill="none" stroke="#059669" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
 
                     <!-- 4-step cycle -->
                     <g filter="url(#dropShadow)">
-                        <rect x="130" y="638" width="100" height="44" rx="8" fill="white" stroke="#059669" stroke-width="1.2"/>
-                        <text x="180" y="656" text-anchor="middle" font-size="9" font-weight="700" fill="#059669">① 执行任务</text>
-                        <text x="180" y="670" text-anchor="middle" font-size="7" fill="#656D76">Skill调度+完成</text>
+                        <rect x="130" y="656" width="100" height="44" rx="8" fill="white" stroke="#059669" stroke-width="1.2"/>
+                        <text x="180" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#059669">① 执行任务</text>
+                        <text x="180" y="688" text-anchor="middle" font-size="7" fill="#656D76">Skill调度+完成</text>
                     </g>
-                    <g opacity="0.6"><line x1="230" y1="660" x2="250" y2="660" stroke="#059669" stroke-width="1.5"/><polygon points="248,656 256,660 248,664" fill="#059669"/></g>
+                    <g opacity="0.6"><line x1="230" y1="678" x2="250" y2="678" stroke="#059669" stroke-width="1.5"/><polygon points="248,674 256,678 248,682" fill="#059669"/></g>
 
                     <g filter="url(#dropShadow)">
-                        <rect x="258" y="638" width="100" height="44" rx="8" fill="white" stroke="#EA580C" stroke-width="1.2"/>
-                        <text x="308" y="656" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">② Reflection</text>
-                        <text x="308" y="670" text-anchor="middle" font-size="7" fill="#656D76">自评+复盘</text>
+                        <rect x="258" y="656" width="100" height="44" rx="8" fill="white" stroke="#EA580C" stroke-width="1.2"/>
+                        <text x="308" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">② Reflection</text>
+                        <text x="308" y="688" text-anchor="middle" font-size="7" fill="#656D76">自评+复盘</text>
                     </g>
-                    <g opacity="0.6"><line x1="358" y1="660" x2="378" y2="660" stroke="#EA580C" stroke-width="1.5"/><polygon points="376,656 384,660 376,664" fill="#EA580C"/></g>
+                    <g opacity="0.6"><line x1="358" y1="678" x2="378" y2="678" stroke="#EA580C" stroke-width="1.5"/><polygon points="376,674 384,678 376,682" fill="#EA580C"/></g>
 
                     <g filter="url(#dropShadow)">
-                        <rect x="386" y="638" width="110" height="44" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="441" y="656" text-anchor="middle" font-size="9" font-weight="700" fill="#0969DA">③ 经验→Memory</text>
-                        <text x="441" y="670" text-anchor="middle" font-size="7" fill="#656D76">沉淀+去重+索引</text>
+                        <rect x="386" y="656" width="110" height="44" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
+                        <text x="441" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#0969DA">③ 经验→Memory</text>
+                        <text x="441" y="688" text-anchor="middle" font-size="7" fill="#656D76">沉淀+去重+索引</text>
                     </g>
-                    <g opacity="0.6"><line x1="496" y1="660" x2="516" y2="660" stroke="#0969DA" stroke-width="1.5"/><polygon points="514,656 522,660 514,664" fill="#0969DA"/></g>
+                    <g opacity="0.6"><line x1="496" y1="678" x2="516" y2="678" stroke="#0969DA" stroke-width="1.5"/><polygon points="514,674 522,678 514,682" fill="#0969DA"/></g>
 
                     <g filter="url(#dropShadow)">
-                        <rect x="524" y="638" width="110" height="44" rx="8" fill="white" stroke="#1A7F37" stroke-width="1.2"/>
-                        <text x="579" y="656" text-anchor="middle" font-size="9" font-weight="700" fill="#1A7F37">④ 下次更好</text>
-                        <text x="579" y="670" text-anchor="middle" font-size="7" fill="#656D76">经验驱动决策</text>
+                        <rect x="524" y="656" width="110" height="44" rx="8" fill="white" stroke="#1A7F37" stroke-width="1.2"/>
+                        <text x="579" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#1A7F37">④ 下次更好</text>
+                        <text x="579" y="688" text-anchor="middle" font-size="7" fill="#656D76">经验驱动决策</text>
                     </g>
 
                     <!-- Loop-back arrow -->
-                    <path d="M579 682 L579 698 Q579 706 571 706 L188 706 Q180 706 180 698 L180 682" stroke="#059669" stroke-width="1.5" fill="none" stroke-dasharray="6,3" opacity="0.5">
+                    <path d="M579 700 L579 716 Q579 724 571 724 L188 724 Q180 724 180 716 L180 700" stroke="#059669" stroke-width="1.5" fill="none" stroke-dasharray="6,3" opacity="0.5">
                         <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2s" repeatCount="indefinite"/>
                     </path>
-                    <polygon points="176,684 180,676 184,684" fill="#059669" opacity="0.5"/>
-                    <text x="380" y="718" text-anchor="middle" font-size="8" fill="#059669" font-weight="600" opacity="0.6">持续正反馈循环</text>
+                    <polygon points="176,702 180,694 184,702" fill="#059669" opacity="0.5"/>
+                    <text x="380" y="736" text-anchor="middle" font-size="8" fill="#059669" font-weight="600" opacity="0.6">持续正反馈循环</text>
 
                     <!-- 3 evolution levels on the right -->
-                    <g transform="translate(660, 625)">
+                    <g transform="translate(660, 643)">
                         <rect x="0" y="0" width="86" height="100" rx="8" fill="white" stroke="#059669" stroke-width="0.8" filter="url(#dropShadow)"/>
                         <text x="43" y="16" text-anchor="middle" font-size="8" font-weight="700" fill="#059669">进化三级</text>
                         <line x1="8" y1="22" x2="78" y2="22" stroke="#E8ECF0" stroke-width="0.8"/>
@@ -919,7 +930,7 @@
                     <line x1="460" y1="74" x2="499" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
                     <line x1="460" y1="74" x2="649" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
                     <!-- Legend -->
-                    <g transform="translate(130, 590)">
+                    <g transform="translate(130, 740)">
                         <text x="0" y="12" font-size="8" font-weight="600" fill="#656D76">映射关系: </text>
                         <line x1="65" y1="8" x2="85" y2="8" stroke="#0969DA" stroke-width="2"/>
                         <text x="90" y="12" font-size="8" fill="#0969DA">CodeFlicker 核心能力</text>

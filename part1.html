@@ -789,6 +789,28 @@
                     </tbody>
                 </table>
             </div>
+
+            <h3 class="subsection-title">概念关系图：AgentCore · Skills · Tools · MCP</h3>
+            <p>为避免概念混淆，明确四个核心概念的边界和关系：</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>概念</th><th>定义</th><th>类比</th><th>关系</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>AgentCore</strong></td><td>统一认知内核，具备记忆/推理/规划/编排/反思/集成六大能力</td><td>人的大脑</td><td>所有能力的基座，调度Skills和Tools</td></tr>
+                        <tr><td><strong>Skills</strong></td><td>程序性知识包，封装特定领域的方法论和执行流程</td><td>人学会的技能（写代码/做调研）</td><td>被 AgentCore 加载和编排，可调用 Tools</td></tr>
+                        <tr><td><strong>Tools</strong></td><td>原子化的函数调用，单一功能的执行单元</td><td>人使用的工具（锤子/计算器）</td><td>被 Skills 或 AgentCore 直接调用</td></tr>
+                        <tr><td><strong>MCP</strong></td><td>模型上下文协议，统一的外部服务连接标准</td><td>人世界的USB接口</td><td>连接层，让 AgentCore 通过统一协议访问外部服务</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="insight-box green">
+                <div class="insight-label">一句话记住</div>
+                <p class="insight-text">
+                    AgentCore是<em>大脑</em>，Skills是<em>技能</em>，Tools是<em>工具</em>，MCP是<em>接口</em>。大脑调度技能，技能使用工具，工具通过接口连接外部世界。
+                </p>
+            </div>
         </section>
 
         <!-- Navigation Footer -->

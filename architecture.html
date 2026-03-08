@@ -3,401 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>统一AI产品架构全景图</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230969DA'/><path d='M6 8h20M6 16h16M6 24h12' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='26' cy='16' r='4' fill='%2322C55E'/></svg>">
+    <title>架构全景 · AI产品终极形态思考</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
-        :root {
-            --c-product: #0969DA;
-            --c-agent: #1A7F37;
-            --c-agent-light: #2DA44E;
-            --c-os: #24292F;
-            --c-os-light: #3D444D;
-            --c-skill-native: #2DA44E;
-            --c-skill-tool: #7C3AED;
-            --c-skill-task: #EA580C;
-            --c-skill-flow: #0969DA;
-            --c-text: #1F2328;
-            --c-text-2: #4D5561;
-            --c-text-3: #656D76;
-            --c-border: #D0D7DE;
-            --c-border-light: #E8ECF0;
-            --c-bg: #F6F8FA;
-            --c-card: #FFFFFF;
-            --c-table-head: #F3F5F7;
-            --shadow-sm: 0 1px 3px rgba(31,35,40,.06);
-            --shadow-card: 0 2px 8px rgba(31,35,40,.06), 0 1px 2px rgba(31,35,40,.04);
-            --shadow-hover: 0 8px 24px rgba(31,35,40,.12);
-            --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-full: 999px;
-            --font: -apple-system, "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
-            --ease: cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: var(--font);
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--c-text-2);
-            background: var(--c-bg);
-            -webkit-font-smoothing: antialiased;
-        }
-        .page { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
+/* === Architecture Page Specific Styles === */
+.site-nav { display:flex; gap:4px; justify-content:center; background:rgba(255,255,255,0.9); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.7); border-radius:var(--radius-lg); padding:5px; margin-bottom:var(--spacing-2xl); position:sticky; top:12px; z-index:100; box-shadow:var(--shadow-lg); max-width:var(--content-max-width); margin-left:auto; margin-right:auto; }
+.site-nav a { flex:1; text-align:center; padding:10px 12px; border-radius:var(--radius-md); font-size:13px; font-weight:500; color:var(--color-text-muted); text-decoration:none; transition:all var(--transition-fast); white-space:nowrap; }
+.site-nav a:hover { background:var(--color-bg-table-header); color:var(--color-text-secondary); }
+.site-nav a.active { background:var(--gradient-success); color:#fff; font-weight:600; box-shadow:var(--shadow-glow-success); }
 
-        /* === SITE NAV === */
-        .site-nav {
-            display: flex; gap: 4px; justify-content: center;
-            background: rgba(255,255,255,0.9); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.7);
-            border-radius: var(--r-lg); padding: 5px;
-            margin-bottom: 24px; box-shadow: var(--shadow-card);
-            position: sticky; top: 12px; z-index: 100;
-        }
-        .site-nav a {
-            flex: 1; text-align: center; padding: 10px 12px;
-            border-radius: var(--r-md); font-size: 13px; font-weight: 500;
-            color: var(--c-text-3); text-decoration: none;
-            transition: all 200ms var(--ease); white-space: nowrap;
-        }
-        .site-nav a:hover { background: var(--c-bg); color: var(--c-text-2); }
-        .site-nav a.active {
-            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
-            color: #fff; font-weight: 600;
-            box-shadow: 0 4px 14px rgba(5,150,105,0.15);
-        }
+.hero { text-align:center; padding:var(--spacing-3xl) 0 var(--spacing-2xl); }
+.hero-badge { display:inline-flex; align-items:center; padding:var(--spacing-xs) 14px; background:var(--gradient-badge); color:var(--color-info); border-radius:var(--radius-full); font-size:var(--caption); font-weight:500; margin-bottom:20px; border:1px solid rgba(37,99,235,0.12); }
+.hero h1 { font-size:30px; font-weight:800; line-height:1.3; margin-bottom:16px; letter-spacing:-0.02em; background:var(--gradient-hero); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-sub { font-size:var(--body-text); color:var(--color-text-secondary); max-width:640px; margin:0 auto; line-height:1.6; }
 
-        /* === HEADER === */
-        .header { text-align: center; margin-bottom: 32px; }
-        .header-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 4px 14px; border-radius: var(--r-full);
-            background: linear-gradient(135deg, #E6F7ED 0%, #E1F0F8 100%);
-            color: var(--c-product); font-size: 12px; font-weight: 600;
-            margin-bottom: 12px;
-        }
-        .header h1 {
-            font-size: 28px; font-weight: 800; color: var(--c-text);
-            letter-spacing: -0.5px; margin-bottom: 8px;
-        }
-        .header p { font-size: 14px; color: var(--c-text-3); max-width: 600px; margin: 0 auto; }
+/* Section headers */
+.arch-section { margin-bottom:var(--spacing-3xl); }
+.section-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--gradient-success); color:#fff; border-radius:50%; font-size:13px; font-weight:700; margin-right:10px; flex-shrink:0; }
+.section-header { display:flex; align-items:center; margin-bottom:var(--spacing-lg); }
+.section-header h2 { font-size:var(--heading-2); font-weight:700; color:var(--color-text-primary); }
+.section-intro { color:var(--color-text-secondary); line-height:1.7; margin-bottom:var(--spacing-lg); }
 
-        /* === VIEW TABS === */
-        .view-tabs {
-            display: flex; gap: 4px; justify-content: center; margin-bottom: 24px;
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-full); padding: 4px; width: fit-content; margin-left: auto; margin-right: auto;
-        }
-        .view-tab {
-            padding: 8px 20px; border: none; background: transparent;
-            border-radius: var(--r-full); cursor: pointer; font-family: inherit;
-            font-size: 13px; font-weight: 500; color: var(--c-text-3);
-            transition: all 200ms var(--ease);
-        }
-        .view-tab:hover { color: var(--c-text); background: var(--c-bg); }
-        .view-tab.active {
-            background: var(--c-text); color: #fff; font-weight: 600;
-        }
+/* Three-layer overview SVG */
+.overview-svg-wrap { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); box-shadow:var(--shadow-card); overflow:hidden; margin-bottom:var(--spacing-lg); }
+.overview-svg { width:100%; height:auto; display:block; }
 
-        /* === MAIN LAYOUT === */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 20px;
-            align-items: start;
-        }
+/* Product cards */
+.product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.product-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg); position:relative; overflow:hidden; transition:all var(--transition-normal); }
+.product-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+.product-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.product-card:nth-child(1)::before { background:var(--color-info); }
+.product-card:nth-child(2)::before { background:var(--color-success); }
+.product-card:nth-child(3)::before { background:var(--color-purple); }
+.product-card-icon { font-size:28px; margin-bottom:var(--spacing-sm); }
+.product-card-name { font-size:var(--heading-3); font-weight:700; color:var(--color-text-primary); margin-bottom:2px; }
+.product-card-tagline { font-size:var(--caption); color:var(--color-text-muted); margin-bottom:var(--spacing-md); }
+.product-detail { font-size:13px; color:var(--color-text-secondary); }
+.product-detail dt { font-weight:600; color:var(--color-text-primary); margin-top:var(--spacing-sm); }
+.product-detail dd { margin-left:0; margin-bottom:2px; }
 
-        /* === SCENARIO PANEL === */
-        .scenario-panel { display: flex; flex-direction: column; gap: 10px; }
-        .scenario-label {
-            font-size: 11px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 0.5px; color: var(--c-text-3); padding: 0 4px;
-            margin-bottom: 2px;
-        }
-        .scenario-card {
-            background: var(--c-card); border: 1.5px solid var(--c-border-light);
-            border-radius: var(--r-md); padding: 14px;
-            cursor: pointer; transition: all 250ms var(--ease);
-            position: relative; overflow: hidden;
-        }
-        .scenario-card::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-            width: 3px; border-radius: 0 3px 3px 0;
-            transition: all 250ms var(--ease);
-        }
-        .scenario-card[data-skill="native"]::before { background: var(--c-skill-native); }
-        .scenario-card[data-skill="tool"]::before { background: var(--c-skill-tool); }
-        .scenario-card[data-skill="task"]::before { background: var(--c-skill-task); }
-        .scenario-card[data-skill="flow"]::before { background: var(--c-skill-flow); }
-        .scenario-card:hover {
-            border-color: var(--c-border);
-            box-shadow: var(--shadow-card);
-            transform: translateX(2px);
-        }
-        .scenario-card.active {
-            box-shadow: var(--shadow-hover);
-            transform: translateX(4px);
-        }
-        .scenario-card.active[data-skill="native"] { border-color: var(--c-skill-native); }
-        .scenario-card.active[data-skill="tool"] { border-color: var(--c-skill-tool); }
-        .scenario-card.active[data-skill="task"] { border-color: var(--c-skill-task); }
-        .scenario-card.active[data-skill="flow"] { border-color: var(--c-skill-flow); }
-        .scenario-card.active::before { width: 4px; }
-        .scenario-quote {
-            font-size: 13px; font-weight: 600; color: var(--c-text);
-            margin-bottom: 6px; line-height: 1.4;
-        }
-        .scenario-meta {
-            display: flex; align-items: center; gap: 6px;
-        }
-        .scenario-type {
-            font-size: 10px; font-weight: 700; padding: 2px 7px;
-            border-radius: var(--r-full); color: #fff;
-        }
-        .scenario-type.native { background: var(--c-skill-native); }
-        .scenario-type.tool { background: var(--c-skill-tool); }
-        .scenario-type.task { background: var(--c-skill-task); }
-        .scenario-type.flow { background: var(--c-skill-flow); }
-        .scenario-time { font-size: 11px; color: var(--c-text-3); }
+/* Adapt layer */
+.adapt-box { background:linear-gradient(135deg,rgba(37,99,235,0.06),rgba(5,150,105,0.04)); border:1px solid rgba(37,99,235,0.2); border-radius:var(--radius-lg); padding:var(--spacing-lg); margin-bottom:var(--spacing-lg); }
+.adapt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin-top:var(--spacing-md); }
+.adapt-item { background:var(--color-bg-card); border-radius:var(--radius-md); padding:var(--spacing-md); border:1px solid var(--color-border-light); }
+.adapt-item h4 { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.adapt-item p { font-size:var(--caption); color:var(--color-text-secondary); }
 
-        /* === ARCHITECTURE SVG === */
-        .arch-container {
-            background: var(--c-card);
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg);
-            box-shadow: var(--shadow-card);
-            overflow: hidden;
-        }
-        .arch-svg { width: 100%; height: auto; display: block; }
+/* Main agent */
+.main-agent-box { background:linear-gradient(135deg,rgba(5,150,105,0.06),rgba(16,185,129,0.04)); border:1px solid rgba(5,150,105,0.3); border-radius:var(--radius-lg); padding:var(--spacing-xl); margin-bottom:var(--spacing-lg); }
+.agent-pipeline { display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; margin:var(--spacing-md) 0; }
+.agent-step { display:flex; flex-direction:column; align-items:center; text-align:center; min-width:90px; }
+.agent-step-icon { width:36px; height:36px; border-radius:50%; background:var(--color-success); color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; margin-bottom:4px; }
+.agent-step-label { font-size:12px; font-weight:600; color:var(--color-text-primary); }
+.agent-step-desc { font-size:11px; color:var(--color-text-muted); }
+.agent-arrow { color:var(--color-border); font-size:20px; margin:0 4px; padding-bottom:18px; }
 
-        /* SVG Animations */
-        @keyframes flowDash {
-            to { stroke-dashoffset: -20; }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* Skill cards */
+.skill-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.skill-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg); border-top:3px solid var(--color-border); }
+.skill-card.native { border-top-color:var(--c-skill-native); }
+.skill-card.tool { border-top-color:var(--c-skill-tool); }
+.skill-card.task { border-top-color:var(--c-skill-task); }
+.skill-card.flow { border-top-color:var(--c-skill-flow); }
+.skill-card-header { display:flex; align-items:center; gap:var(--spacing-sm); margin-bottom:var(--spacing-sm); }
+.skill-badge { padding:3px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; color:#fff; }
+.skill-badge.native { background:var(--c-skill-native); }
+.skill-badge.tool { background:var(--c-skill-tool); }
+.skill-badge.task { background:var(--c-skill-task); }
+.skill-badge.flow { background:var(--c-skill-flow); }
+.skill-card h4 { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); }
+.skill-card dl { font-size:13px; }
+.skill-card dt { font-weight:600; color:var(--color-text-primary); margin-top:var(--spacing-sm); }
+.skill-card dd { margin-left:0; color:var(--color-text-secondary); }
+.skill-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:var(--spacing-sm); padding-top:var(--spacing-sm); border-top:1px solid var(--color-border-light); }
+.skill-tag { display:inline-block; padding:2px 8px; border-radius:var(--radius-full); font-size:11px; background:var(--color-bg); color:var(--color-text-secondary); }
 
-        /* === DETAIL PANEL === */
-        .detail-panel {
-            margin-top: 20px;
-            background: var(--c-card);
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg);
-            box-shadow: var(--shadow-card);
-            overflow: hidden;
-            transition: all 300ms var(--ease);
-        }
-        .detail-panel.hidden { display: none; }
-        .detail-header {
-            display: flex; align-items: center; gap: 10px;
-            padding: 16px 20px; border-bottom: 1px solid var(--c-border-light);
-            background: var(--c-table-head);
-        }
-        .detail-header .icon {
-            width: 32px; height: 32px; border-radius: var(--r-sm);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px; color: #fff;
-        }
-        .detail-header h3 { font-size: 15px; font-weight: 700; color: var(--c-text); }
-        .detail-header .subtitle { font-size: 12px; color: var(--c-text-3); }
-        .detail-body { padding: 20px; }
+/* Decision guide */
+.decision-box { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg); margin-bottom:var(--spacing-lg); }
+.decision-grid { display:grid; grid-template-columns:100px 1fr; gap:6px 12px; font-size:13px; }
+.decision-q { color:var(--color-text-muted); font-weight:600; }
+.decision-a { color:var(--color-text-primary); }
+.decision-a strong { font-weight:700; }
 
-        /* Flow Steps */
-        .flow-steps {
-            display: flex; align-items: center; gap: 0;
-            overflow-x: auto; padding: 8px 0 16px;
-        }
-        .flow-step {
-            display: flex; flex-direction: column; align-items: center;
-            min-width: 100px; text-align: center; position: relative;
-        }
-        .flow-step-num {
-            width: 28px; height: 28px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 700; color: #fff;
-            margin-bottom: 6px;
-        }
-        .flow-step-label {
-            font-size: 12px; font-weight: 600; color: var(--c-text);
-        }
-        .flow-step-desc {
-            font-size: 10px; color: var(--c-text-3); margin-top: 2px;
-            max-width: 90px;
-        }
-        .flow-arrow {
-            color: var(--c-border); font-size: 18px; margin: 0 -4px;
-            padding-bottom: 20px;
-        }
+/* AgentCore structure */
+.core-svg-wrap { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); box-shadow:var(--shadow-card); overflow:hidden; margin-bottom:var(--spacing-lg); }
+.core-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.core-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); }
+.core-card h4 { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.core-card .role { font-size:var(--caption); color:var(--color-text-muted); margin-bottom:var(--spacing-sm); font-style:italic; }
+.core-card dl { font-size:12px; }
+.core-card dt { font-weight:600; color:var(--color-text-primary); margin-top:4px; }
+.core-card dd { margin-left:0; color:var(--color-text-secondary); }
 
-        /* Mapping Grid */
-        .mapping-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 1px; background: var(--c-border-light);
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-md); overflow: hidden;
-        }
-        .mapping-cell {
-            background: var(--c-card); padding: 10px 12px;
-            font-size: 12px; text-align: center;
-        }
-        .mapping-cell.head {
-            background: var(--c-table-head);
-            font-weight: 700; color: var(--c-text); font-size: 12px;
-        }
-        .mapping-cell .check { color: var(--c-agent-light); font-weight: 700; }
-        .mapping-cell .optional { color: var(--c-skill-tool); }
-        .mapping-cell .no { color: var(--c-border); }
+/* Scenario flows */
+.scenario-section { margin-bottom:var(--spacing-lg); }
+.scenario-title { display:flex; align-items:center; gap:var(--spacing-sm); margin-bottom:var(--spacing-md); }
+.scenario-title .badge { padding:3px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; color:#fff; }
+.scenario-title h4 { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); }
+.flow-steps { display:flex; align-items:flex-start; gap:0; overflow-x:auto; padding:8px 0 16px; }
+.flow-step { display:flex; flex-direction:column; align-items:center; min-width:88px; text-align:center; }
+.flow-step-num { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; margin-bottom:4px; }
+.flow-step-label { font-size:12px; font-weight:600; color:var(--color-text-primary); }
+.flow-step-desc { font-size:10px; color:var(--color-text-muted); max-width:80px; }
+.flow-arrow { color:var(--color-border); font-size:18px; margin:0 -4px; padding-bottom:20px; }
+.scenario-note { font-size:13px; color:var(--color-text-secondary); padding:var(--spacing-sm) var(--spacing-md); background:var(--color-bg); border-radius:var(--radius-md); border-left:3px solid var(--color-border); margin-top:var(--spacing-sm); }
 
-        /* Deploy Compare */
-        .deploy-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-        }
-        .deploy-card {
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-md); padding: 16px; text-align: center;
-        }
-        .deploy-card h4 {
-            font-size: 14px; font-weight: 700; color: var(--c-text);
-            margin-bottom: 8px;
-        }
-        .deploy-card .items { text-align: left; }
-        .deploy-card .item {
-            font-size: 12px; color: var(--c-text-2);
-            padding: 3px 0; border-bottom: 1px solid var(--c-border-light);
-        }
-        .deploy-card .item:last-child { border-bottom: none; }
+/* Mapping table */
+.mapping-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden; margin-bottom:var(--spacing-lg); }
+.mapping-table th { background:var(--color-bg-table-header); padding:10px 14px; font-size:13px; font-weight:700; color:var(--color-text-primary); text-align:left; border-bottom:1px solid var(--color-border); }
+.mapping-table td { padding:10px 14px; font-size:13px; color:var(--color-text-secondary); border-bottom:1px solid var(--color-border-light); }
+.mapping-table tr:last-child td { border-bottom:none; }
+.mapping-table .check { color:var(--color-success); font-weight:600; }
+.mapping-table .optional { color:var(--color-purple); }
 
-        /* Skill Detail Boxes */
-        .skill-detail-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-        }
-        .skill-detail-box {
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-md); padding: 14px;
-            border-top: 3px solid var(--c-border);
-        }
-        .skill-detail-box.native { border-top-color: var(--c-skill-native); }
-        .skill-detail-box.tool { border-top-color: var(--c-skill-tool); }
-        .skill-detail-box.task { border-top-color: var(--c-skill-task); }
-        .skill-detail-box.flow { border-top-color: var(--c-skill-flow); }
-        .skill-detail-box h4 {
-            font-size: 13px; font-weight: 700; color: var(--c-text);
-            margin-bottom: 6px;
-        }
-        .skill-detail-box p {
-            font-size: 12px; color: var(--c-text-2); margin: 4px 0;
-        }
-        .skill-detail-box .examples {
-            margin-top: 8px; padding-top: 8px;
-            border-top: 1px solid var(--c-border-light);
-        }
-        .skill-detail-box .example-tag {
-            display: inline-block; padding: 2px 8px; margin: 2px;
-            border-radius: var(--r-full); font-size: 11px;
-            background: var(--c-bg); color: var(--c-text-2);
-        }
+/* Deploy compare */
+.deploy-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.deploy-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg); border-top:3px solid var(--color-border); }
+.deploy-card:first-child { border-top-color:var(--color-text-primary); }
+.deploy-card:last-child { border-top-color:var(--color-info); }
+.deploy-card h4 { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:var(--spacing-sm); }
+.deploy-card dl { font-size:13px; }
+.deploy-card dt { font-weight:600; color:var(--color-text-primary); margin-top:var(--spacing-sm); }
+.deploy-card dd { margin-left:0; color:var(--color-text-secondary); }
 
-        /* Footer */
-        .footer {
-            text-align: center; padding: 20px 0; margin-top: 32px;
-            border-top: 1px solid var(--c-border-light);
-            color: var(--c-text-3); font-size: 12px;
-        }
+/* Evolution loop */
+.evolution-box { background:linear-gradient(135deg,rgba(5,150,105,0.06),rgba(124,58,237,0.04)); border:1px solid rgba(5,150,105,0.25); border-radius:var(--radius-lg); padding:var(--spacing-xl); text-align:center; }
+.evolution-loop { display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; margin:var(--spacing-lg) 0; }
+.evo-step { padding:10px 18px; border-radius:var(--radius-full); font-size:13px; font-weight:600; color:#fff; }
+.evo-arrow { font-size:20px; margin:0 6px; color:var(--color-text-muted); }
+.evo-levels { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin-top:var(--spacing-lg); text-align:center; }
+.evo-level { padding:var(--spacing-md); border-radius:var(--radius-md); }
+.evo-level h4 { font-size:var(--heading-4); font-weight:700; margin-bottom:4px; }
+.evo-level p { font-size:var(--caption); }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-            .scenario-panel {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .scenario-label {
-                grid-column: 1 / -1;
-            }
-            .skill-detail-grid { grid-template-columns: 1fr; }
-            .deploy-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 600px) {
-            .header h1 { font-size: 22px; }
-            .scenario-panel { grid-template-columns: 1fr; }
-            .mapping-grid { grid-template-columns: repeat(2, 1fr); }
-            .site-nav { flex-wrap: wrap; }
-            .site-nav a { font-size: 12px; padding: 8px; }
-            .flow-steps { flex-wrap: wrap; justify-content: center; }
-        }
+.footer { text-align:center; padding:var(--spacing-lg) 0; color:var(--color-text-muted); font-size:var(--caption); border-top:1px solid var(--color-border-light); }
 
-        /* === TOOLTIP (Hover Bubble) === */
-        .tip-target { cursor: help; }
-        .tip-target.tip-clickable { cursor: pointer; }
-
-        #cf-tooltip {
-            position: fixed;
-            z-index: 9999;
-            max-width: min(380px, calc(100vw - 24px));
-            padding: 10px 12px;
-            background: rgba(255,255,255,0.96);
-            border: 1px solid rgba(208,215,222,0.9);
-            border-radius: 10px;
-            box-shadow: 0 12px 28px rgba(31,35,40,0.14);
-            color: var(--c-text-2);
-            font-size: 12px;
-            line-height: 1.5;
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(6px);
-            transition: opacity 120ms var(--ease), transform 120ms var(--ease);
-        }
-        #cf-tooltip.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        #cf-tooltip .tt-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 800;
-            color: var(--c-text);
-            margin-bottom: 6px;
-        }
-        #cf-tooltip .tt-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--c-border);
-            flex: none;
-        }
-        #cf-tooltip .tt-body {
-            color: var(--c-text-2);
-        }
-        #cf-tooltip .tt-row {
-            display: flex;
-            gap: 8px;
-            margin: 4px 0;
-        }
-        #cf-tooltip .tt-k {
-            flex: none;
-            width: 66px;
-            color: var(--c-text-3);
-            font-weight: 700;
-        }
-        #cf-tooltip .tt-v {
-            flex: 1;
-            color: var(--c-text-2);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            #cf-tooltip { transition: none; }
-        }
+/* Responsive */
+@media (max-width:768px) {
+    .hero h1 { font-size:24px; }
+    .product-grid { grid-template-columns:1fr; }
+    .adapt-grid { grid-template-columns:1fr; }
+    .skill-grid { grid-template-columns:1fr; }
+    .core-grid { grid-template-columns:1fr; }
+    .deploy-grid { grid-template-columns:1fr; }
+    .evo-levels { grid-template-columns:1fr; }
+    .site-nav { flex-wrap:wrap; }
+    .site-nav a { font-size:12px; padding:8px; }
+    .agent-pipeline { justify-content:flex-start; overflow-x:auto; }
+}
     </style>
 </head>
 <body>
-<div class="page">
+<div class="container">
     <!-- Unified Navigation -->
     <nav class="site-nav">
         <a href="index.html">首页</a>
@@ -407,1198 +166,598 @@
         <a href="architecture.html" class="active">架构全景</a>
     </nav>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-badge">🗺️ Architecture Panorama</div>
+    <!-- ==================== HERO ==================== -->
+    <header class="hero">
+        <div class="hero-badge">v5.1 · Architecture Panorama</div>
         <h1>统一AI产品架构全景图</h1>
-        <p>一张图看清：三层架构 · 四类技能 · 运行流程 · 产品映射</p>
+        <p class="hero-sub">三层架构 · 四类技能 · 六大能力 · 成长闭环<br>一页讲清整个产品矩阵的技术根基</p>
     </header>
 
-    <!-- View Tabs -->
-    <div class="view-tabs">
-        <button class="view-tab active" data-view="structure" onclick="switchView('structure')">结构视图</button>
-        <button class="view-tab" data-view="runtime" onclick="switchView('runtime')">运行视图</button>
-        <button class="view-tab" data-view="mapping" onclick="switchView('mapping')">映射视图</button>
-    </div>
-
-    <!-- Main Layout -->
-    <div class="main-layout">
-        <!-- Left: Scenario Panel -->
-        <div class="scenario-panel">
-            <div class="scenario-label">💡 点击场景查看运行流程</div>
-            <div class="scenario-card" data-skill="native" data-id="s1" onclick="activateScenario('s1')">
-                <div class="scenario-quote">"帮我写个调研报告"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type native">Ⅰ 原生</span>
-                    <span class="scenario-time">⏱ 分钟级</span>
-                </div>
-            </div>
-            <div class="scenario-card" data-skill="tool" data-id="s2" onclick="activateScenario('s2')">
-                <div class="scenario-quote">"帮我生成一张配图"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type tool">Ⅱ 工具</span>
-                    <span class="scenario-time">⏱ 秒级</span>
-                </div>
-            </div>
-            <div class="scenario-card" data-skill="task" data-id="s3" onclick="activateScenario('s3')">
-                <div class="scenario-quote">"帮我Review这个PR"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type task">Ⅲ 任务</span>
-                    <span class="scenario-time">⏱ 分钟级</span>
-                </div>
-            </div>
-            <div class="scenario-card" data-skill="flow" data-id="s4" onclick="activateScenario('s4')">
-                <div class="scenario-quote">"帮我把需求做到上线"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type flow">Ⅳ 流程</span>
-                    <span class="scenario-time">⏱ 小时级</span>
-                </div>
-            </div>
+    <!-- ==================== 1. 三层架构总览 ==================== -->
+    <section class="arch-section">
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <h2>三层架构总览</h2>
         </div>
+        <p class="section-intro">
+            整个AI产品技术栈分为三层。<strong>产品层</strong>面向用户，决定"长什么样"；<strong>Agent层</strong>是智能中枢，决定"怎么做事"；<strong>AgentOS层</strong>是能力基座，决定"能做什么"。三层解耦，上层可独立换壳，下层统一复用。
+        </p>
 
-        <!-- Right: Architecture Diagram -->
-        <div class="arch-container">
-            <svg class="arch-svg" viewBox="0 0 740 620" xmlns="http://www.w3.org/2000/svg">
+        <div class="overview-svg-wrap">
+            <svg class="overview-svg" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="gProduct" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#0969DA"/>
-                        <stop offset="100%" stop-color="#54AEFF"/>
-                    </linearGradient>
-                    <linearGradient id="gAgent" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#1A7F37"/>
-                        <stop offset="100%" stop-color="#2DA44E"/>
-                    </linearGradient>
-                    <linearGradient id="gOS" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#24292F"/>
-                        <stop offset="100%" stop-color="#3D444D"/>
-                    </linearGradient>
-                    <linearGradient id="gNative" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#2DA44E"/><stop offset="100%" stop-color="#4ADE80"/>
-                    </linearGradient>
-                    <linearGradient id="gTool" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#A78BFA"/>
-                    </linearGradient>
-                    <linearGradient id="gTask" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#EA580C"/><stop offset="100%" stop-color="#FB923C"/>
-                    </linearGradient>
-                    <linearGradient id="gFlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#0969DA"/><stop offset="100%" stop-color="#60A5FA"/>
-                    </linearGradient>
-                    <filter id="dropShadow">
-                        <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/>
-                    </filter>
-                    <filter id="glowNative"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2DA44E" flood-opacity="0.4"/></filter>
-                    <filter id="glowTool"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#7C3AED" flood-opacity="0.4"/></filter>
-                    <filter id="glowTask"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#EA580C" flood-opacity="0.4"/></filter>
-                    <filter id="glowFlow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#0969DA" flood-opacity="0.4"/></filter>
-                    <marker id="arrowGray" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-                        <path d="M0 0 L10 3 L0 6 Z" fill="#D0D7DE"/>
-                    </marker>
+                    <linearGradient id="gProduct" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+                    <linearGradient id="gAgent" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+                    <linearGradient id="gOS" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1C1917"/><stop offset="100%" stop-color="#44403C"/></linearGradient>
+                    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/></filter>
                 </defs>
 
-                <!-- ======== LAYER: USER ======== -->
-                <g id="layer-user" transform="translate(20, 10)">
-                    <circle cx="22" cy="22" r="18" fill="#F3F4F6" stroke="#D0D7DE" stroke-width="1.5"/>
-                    <text x="22" y="19" text-anchor="middle" font-size="14">👤</text>
-                    <text x="22" y="31" text-anchor="middle" font-size="7" fill="#656D76" font-weight="600">用户</text>
+                <!-- Layer 1: Product -->
+                <g filter="url(#shadow)">
+                    <rect x="40" y="20" width="720" height="80" rx="14" fill="white" stroke="#2563EB" stroke-width="1.5"/>
+                    <rect x="40" y="20" width="720" height="80" rx="14" fill="url(#gProduct)" opacity="0.06"/>
+                    <rect x="40" y="20" width="6" height="80" rx="3" fill="url(#gProduct)"/>
+                    <text x="68" y="50" font-size="16" font-weight="800" fill="#2563EB" font-family="-apple-system,system-ui,sans-serif">PRODUCT LAYER</text>
+                    <text x="68" y="72" font-size="12" fill="#57534E" font-family="-apple-system,system-ui,sans-serif">产品层 — 面向用户的差异化入口：不同产品 = 不同的 UI + Skill集 + 权限模型</text>
+                    <!-- Product boxes -->
+                    <g>
+                        <rect x="430" y="32" width="96" height="28" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/>
+                        <text x="478" y="50" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB" font-family="-apple-system,system-ui,sans-serif">Code Agent</text>
+                    </g>
+                    <g>
+                        <rect x="536" y="32" width="96" height="28" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/>
+                        <text x="584" y="50" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB" font-family="-apple-system,system-ui,sans-serif">数字员工</text>
+                    </g>
+                    <g>
+                        <rect x="642" y="32" width="96" height="28" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/>
+                        <text x="690" y="50" text-anchor="middle" font-size="11" font-weight="600" fill="#2563EB" font-family="-apple-system,system-ui,sans-serif">AI个人助理</text>
+                    </g>
+                    <text x="430" y="82" font-size="10" fill="#78716C" font-family="-apple-system,system-ui,sans-serif">共享同一个 Agent 引擎和能力基座，通过「产品适配层」实现差异化</text>
                 </g>
 
-                <!-- User -> Product arrow -->
-                <path id="path-user-product" d="M60 30 L100 30" stroke="#D0D7DE" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowGray)"/>
-
-                <!-- ======== LAYER 1: PRODUCT ======== -->
-                <g id="layer-product">
-                    <!-- Layer background -->
-                    <rect x="110" y="6" width="620" height="74" rx="12" fill="url(#gProduct)" opacity="0.06"/>
-                    <rect x="110" y="6" width="620" height="74" rx="12" fill="none" stroke="#0969DA" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-                    <text x="125" y="24" font-size="10" font-weight="700" fill="#0969DA" opacity="0.6">PRODUCT LAYER</text>
-
-                    <!-- Products -->
-                    <g id="prod-cf" class="product-node" filter="url(#dropShadow)">
-                        <rect x="130" y="32" width="120" height="40" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="190" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#0969DA">CodeFlicker</text>
-                        <text x="190" y="61" text-anchor="middle" font-size="8" fill="#656D76">AI × Coding</text>
-                    </g>
-                    <g id="prod-kate" class="product-node" filter="url(#dropShadow)">
-                        <rect x="265" y="32" width="120" height="40" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="325" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#0969DA">KATE-Studio</text>
-                        <text x="325" y="61" text-anchor="middle" font-size="8" fill="#656D76">企业数字员工</text>
-                    </g>
-                    <g id="prod-pa" class="product-node" filter="url(#dropShadow)">
-                        <rect x="400" y="32" width="120" height="40" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="460" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#0969DA">AI个人助理</text>
-                        <text x="460" y="61" text-anchor="middle" font-size="8" fill="#656D76">通用AI助手</text>
-                    </g>
-                    <g id="prod-more" filter="url(#dropShadow)">
-                        <rect x="535" y="32" width="80" height="40" rx="8" fill="white" stroke="#D0D7DE" stroke-width="1" stroke-dasharray="4,3"/>
-                        <text x="575" y="56" text-anchor="middle" font-size="14" fill="#9CA3AF">···</text>
-                    </g>
-
-                    <!-- Adapt Layer -->
-                    <g id="adapt-layer">
-                        <rect x="625" y="32" width="95" height="40" rx="8" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.8" opacity="0.7"/>
-                        <text x="672" y="47" text-anchor="middle" font-size="8" font-weight="600" fill="#0969DA">产品适配层</text>
-                        <text x="672" y="58" text-anchor="middle" font-size="7" fill="#4D5561">UI·Skill集·权限</text>
-                    </g>
+                <!-- Arrow 1→2 -->
+                <g opacity="0.5">
+                    <line x1="400" y1="100" x2="400" y2="120" stroke="#E7E5E4" stroke-width="2"/>
+                    <polygon points="395,118 400,126 405,118" fill="#E7E5E4"/>
                 </g>
 
-                <!-- Product -> Agent connector -->
-                <g id="connector-prod-agent">
-                    <line x1="370" y1="80" x2="370" y2="100" stroke="#D0D7DE" stroke-width="1.5"/>
-                    <polygon points="365,98 370,106 375,98" fill="#D0D7DE"/>
+                <!-- Layer 2: Agent -->
+                <g filter="url(#shadow)">
+                    <rect x="40" y="128" width="720" height="80" rx="14" fill="white" stroke="#059669" stroke-width="1.5"/>
+                    <rect x="40" y="128" width="720" height="80" rx="14" fill="url(#gAgent)" opacity="0.06"/>
+                    <rect x="40" y="128" width="6" height="80" rx="3" fill="url(#gAgent)"/>
+                    <text x="68" y="158" font-size="16" font-weight="800" fill="#059669" font-family="-apple-system,system-ui,sans-serif">AGENT LAYER</text>
+                    <text x="68" y="180" font-size="12" fill="#57534E" font-family="-apple-system,system-ui,sans-serif">智能中枢 — 统一入口 + 四类 Skill 体系：主 Agent 理解 → 匹配 → 调度 → 执行 → 反思</text>
+                    <!-- Skill type pills -->
+                    <g>
+                        <rect x="430" y="142" width="74" height="24" rx="12" fill="#2DA44E"/>
+                        <text x="467" y="158" text-anchor="middle" font-size="10" font-weight="600" fill="white" font-family="-apple-system,system-ui,sans-serif">Ⅰ 原生</text>
+                    </g>
+                    <g>
+                        <rect x="512" y="142" width="74" height="24" rx="12" fill="#7C3AED"/>
+                        <text x="549" y="158" text-anchor="middle" font-size="10" font-weight="600" fill="white" font-family="-apple-system,system-ui,sans-serif">Ⅱ 工具</text>
+                    </g>
+                    <g>
+                        <rect x="594" y="142" width="74" height="24" rx="12" fill="#EA580C"/>
+                        <text x="631" y="158" text-anchor="middle" font-size="10" font-weight="600" fill="white" font-family="-apple-system,system-ui,sans-serif">Ⅲ 任务</text>
+                    </g>
+                    <g>
+                        <rect x="676" y="142" width="74" height="24" rx="12" fill="#0969DA"/>
+                        <text x="713" y="158" text-anchor="middle" font-size="10" font-weight="600" fill="white" font-family="-apple-system,system-ui,sans-serif">Ⅳ 流程</text>
+                    </g>
+                    <text x="430" y="193" font-size="10" fill="#78716C" font-family="-apple-system,system-ui,sans-serif">横切能力：Eval 质量评估 · 安全防护 · 可观测 · Memory 服务 · Skill 注册中心</text>
                 </g>
 
-                <!-- ======== LAYER 2: AGENT ======== -->
-                <g id="layer-agent">
-                    <!-- Layer background -->
-                    <rect x="110" y="108" width="620" height="280" rx="12" fill="url(#gAgent)" opacity="0.04"/>
-                    <rect x="110" y="108" width="620" height="280" rx="12" fill="none" stroke="#1A7F37" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-                    <text x="125" y="126" font-size="10" font-weight="700" fill="#1A7F37" opacity="0.6">AGENT LAYER</text>
-
-                    <!-- Main Agent -->
-                    <g id="main-agent" filter="url(#dropShadow)">
-                        <rect x="200" y="134" width="440" height="52" rx="10" fill="white" stroke="#1A7F37" stroke-width="1.5"/>
-                        <rect x="200" y="134" width="440" height="52" rx="10" fill="url(#gAgent)" opacity="0.08"/>
-                        <text x="215" y="155" font-size="14">🧠</text>
-                        <text x="236" y="157" font-size="13" font-weight="700" fill="#1A7F37">主 Agent</text>
-                        <text x="310" y="157" font-size="10" fill="#4D5561">— 统一入口，从 Code Agent 进化</text>
-                        <text x="236" y="175" font-size="9" fill="#656D76">语义理解 · 意图识别 · 主动推理 · 人格统一</text>
-                    </g>
-
-                    <!-- Main Agent -> Skills connector -->
-                    <line x1="420" y1="186" x2="420" y2="204" stroke="#D0D7DE" stroke-width="1"/>
-
-                    <!-- 4 Skill Types -->
-                    <g id="skill-group">
-                        <!-- Skill I: Native -->
-                        <g id="skill-native" class="skill-node" data-skill="native" style="cursor:pointer">
-                            <rect x="130" y="206" width="138" height="64" rx="8" fill="white" stroke="#2DA44E" stroke-width="1.2"/>
-                            <rect x="130" y="206" width="138" height="18" rx="8" fill="url(#gNative)"/>
-                            <rect x="130" y="216" width="138" height="8" fill="url(#gNative)"/>
-                            <text x="199" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅰ 原生 Skill</text>
-                            <text x="199" y="242" text-anchor="middle" font-size="9" fill="#4D5561">主Agent读SKILL.md</text>
-                            <text x="199" y="256" text-anchor="middle" font-size="9" fill="#4D5561">直接执行</text>
-                            <text x="199" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">调研·文档·PPT·分析</text>
-                        </g>
-                        <!-- Skill II: Tool -->
-                        <g id="skill-tool" class="skill-node" data-skill="tool" style="cursor:pointer">
-                            <rect x="280" y="206" width="138" height="64" rx="8" fill="white" stroke="#7C3AED" stroke-width="1.2"/>
-                            <rect x="280" y="206" width="138" height="18" rx="8" fill="url(#gTool)"/>
-                            <rect x="280" y="216" width="138" height="8" fill="url(#gTool)"/>
-                            <text x="349" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅱ 工具 Skill</text>
-                            <text x="349" y="242" text-anchor="middle" font-size="9" fill="#4D5561">MCP网关调用</text>
-                            <text x="349" y="256" text-anchor="middle" font-size="9" fill="#4D5561">外部API服务</text>
-                            <text x="349" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">图片·视频·CI/CD·数据</text>
-                        </g>
-                        <!-- Skill III: Task -->
-                        <g id="skill-task" class="skill-node" data-skill="task" style="cursor:pointer">
-                            <rect x="430" y="206" width="138" height="64" rx="8" fill="white" stroke="#EA580C" stroke-width="1.2"/>
-                            <rect x="430" y="206" width="138" height="18" rx="8" fill="url(#gTask)"/>
-                            <rect x="430" y="216" width="138" height="8" fill="url(#gTask)"/>
-                            <text x="499" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅲ 任务 Skill</text>
-                            <text x="499" y="242" text-anchor="middle" font-size="9" fill="#4D5561">分身引擎派生</text>
-                            <text x="499" y="256" text-anchor="middle" font-size="9" fill="#4D5561">多实例协作</text>
-                            <text x="499" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">CR审查·重构评审·多维分析</text>
-                        </g>
-                        <!-- Skill IV: Flow -->
-                        <g id="skill-flow" class="skill-node" data-skill="flow" style="cursor:pointer">
-                            <rect x="580" y="206" width="138" height="64" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                            <rect x="580" y="206" width="138" height="18" rx="8" fill="url(#gFlow)"/>
-                            <rect x="580" y="216" width="138" height="8" fill="url(#gFlow)"/>
-                            <text x="649" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅳ 流程 Skill</text>
-                            <text x="649" y="242" text-anchor="middle" font-size="9" fill="#4D5561">Planning编排</text>
-                            <text x="649" y="256" text-anchor="middle" font-size="9" fill="#4D5561">多Task组合执行</text>
-                            <text x="649" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">需求→发布·项目初始化</text>
-                        </g>
-                    </g>
-
-                    <!-- Cross-cutting -->
-                    <g id="cross-cutting">
-                        <rect x="130" y="286" width="588" height="36" rx="8" fill="#F3F5F7" stroke="#D0D7DE" stroke-width="0.8"/>
-                        <text x="145" y="308" font-size="9" font-weight="600" fill="#656D76">横切能力</text>
-                        <g id="pill-eval" class="tip-target" transform="translate(210, 296)">
-                            <rect x="0" y="0" width="56" height="18" rx="9" fill="#E6F7ED" stroke="#2DA44E" stroke-width="0.6"/>
-                            <text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">🔍 Eval</text>
-                        </g>
-                        <g id="pill-security" class="tip-target" transform="translate(278, 296)">
-                            <rect x="0" y="0" width="56" height="18" rx="9" fill="#FEF2F2" stroke="#CF222E" stroke-width="0.6"/>
-                            <text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#CF222E">🛡 安全</text>
-                        </g>
-                        <g id="pill-observability" class="tip-target" transform="translate(346, 296)">
-                            <rect x="0" y="0" width="68" height="18" rx="9" fill="#FFF7ED" stroke="#BF8700" stroke-width="0.6"/>
-                            <text x="34" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#9A6700">📊 可观测</text>
-                        </g>
-                        <g id="pill-memory" class="tip-target" transform="translate(426, 296)">
-                            <rect x="0" y="0" width="80" height="18" rx="9" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.6"/>
-                            <text x="40" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#0969DA">🧠 Memory服务</text>
-                        </g>
-
-                        <!-- Skill Registry (moved inside cross-cutting area, right side) -->
-                        <g id="pill-skill-registry" class="tip-target" transform="translate(520, 296)">
-                            <rect x="0" y="0" width="86" height="18" rx="9" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.6"/>
-                            <text x="43" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#7C3AED">📋 Skill注册中心</text>
-                        </g>
-                    </g>
+                <!-- Arrow 2→3 -->
+                <g opacity="0.5">
+                    <line x1="400" y1="208" x2="400" y2="228" stroke="#E7E5E4" stroke-width="2"/>
+                    <polygon points="395,226 400,234 405,226" fill="#E7E5E4"/>
                 </g>
 
-                <!-- Skills -> Cross-cutting connectors -->
-                <g opacity="0.3">
-                    <line x1="199" y1="270" x2="199" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                    <line x1="349" y1="270" x2="349" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                    <line x1="499" y1="270" x2="499" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                    <line x1="649" y1="270" x2="649" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                </g>
-
-                <!-- Agent -> OS connector -->
-                <g id="connector-agent-os">
-                    <line x1="370" y1="388" x2="370" y2="404" stroke="#D0D7DE" stroke-width="1.5"/>
-                    <polygon points="365,402 370,410 375,402" fill="#D0D7DE"/>
-                </g>
-
-                <!-- ======== LAYER 3: AGENT OS ======== -->
-                <g id="layer-os">
-                    <!-- Layer background -->
-                    <rect x="110" y="410" width="620" height="200" rx="12" fill="url(#gOS)" opacity="0.04"/>
-                    <rect x="110" y="410" width="620" height="200" rx="12" fill="none" stroke="#24292F" stroke-width="1" stroke-dasharray="4,3" opacity="0.2"/>
-                    <text x="125" y="428" font-size="10" font-weight="700" fill="#24292F" opacity="0.5">AGENT OS</text>
-
-                    <!-- AgentCore 6 modules -->
-                    <g id="agentcore" filter="url(#dropShadow)">
-                        <rect x="130" y="436" width="468" height="52" rx="10" fill="white" stroke="#24292F" stroke-width="1"/>
-                        <text x="145" y="455" font-size="10" font-weight="700" fill="#24292F">AgentCore 六大能力</text>
-                        <g id="ac-memory" class="tip-target" transform="translate(145, 462)">
-                            <rect x="0" y="0" width="60" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="30" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Memory</text>
-                        </g>
-                        <g id="ac-reasoning" class="tip-target" transform="translate(215, 462)">
-                            <rect x="0" y="0" width="68" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="34" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Reasoning</text>
-                        </g>
-                        <g id="ac-planning" class="tip-target" transform="translate(293, 462)">
-                            <rect x="0" y="0" width="62" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="31" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Planning</text>
-                        </g>
-                        <g id="ac-orchestration" class="tip-target" transform="translate(365, 462)">
-                            <rect x="0" y="0" width="86" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="43" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Orchestration</text>
-                        </g>
-                        <g id="ac-reflection" class="tip-target" transform="translate(461, 462)">
-                            <rect x="0" y="0" width="66" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="33" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Reflection</text>
-                        </g>
-                        <g id="ac-integration" class="tip-target" transform="translate(537, 462)">
-                            <rect x="0" y="0" width="52" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="26" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Integration</text>
-                        </g>
+                <!-- Layer 3: AgentOS -->
+                <g filter="url(#shadow)">
+                    <rect x="40" y="236" width="720" height="80" rx="14" fill="white" stroke="#1C1917" stroke-width="1.5"/>
+                    <rect x="40" y="236" width="720" height="80" rx="14" fill="url(#gOS)" opacity="0.04"/>
+                    <rect x="40" y="236" width="6" height="80" rx="3" fill="url(#gOS)"/>
+                    <text x="68" y="266" font-size="16" font-weight="800" fill="#1C1917" font-family="-apple-system,system-ui,sans-serif">AGENT OS</text>
+                    <text x="68" y="288" font-size="12" fill="#57534E" font-family="-apple-system,system-ui,sans-serif">能力基座 — AgentCore 六大能力 + 分身引擎 + MCP网关 + 运行时</text>
+                    <!-- Core module pills -->
+                    <g>
+                        <rect x="430" y="248" width="72" height="22" rx="6" fill="#F5F5F4" stroke="#E7E5E4" stroke-width="0.8"/>
+                        <text x="466" y="263" text-anchor="middle" font-size="10" font-weight="600" fill="#1C1917" font-family="-apple-system,system-ui,sans-serif">Memory</text>
                     </g>
-
-                    <!-- Infrastructure -->
-                    <g id="infra">
-                        <!-- Clone Engine -->
-                        <g id="clone-engine" filter="url(#dropShadow)">
-                            <rect x="612" y="436" width="126" height="52" rx="10" fill="white" stroke="#EA580C" stroke-width="1"/>
-                            <text x="675" y="456" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">⚡ 分身引擎</text>
-                            <text x="675" y="470" text-anchor="middle" font-size="8" fill="#656D76">Clone Engine</text>
-                            <text x="675" y="482" text-anchor="middle" font-size="7" fill="#9CA3AF">派生·执行·回收</text>
-                        </g>
-
-                        <!-- MCP Gateway -->
-                        <g id="mcp-gateway" filter="url(#dropShadow)">
-                            <rect x="130" y="500" width="180" height="42" rx="8" fill="white" stroke="#7C3AED" stroke-width="1"/>
-                            <text x="220" y="518" text-anchor="middle" font-size="9" font-weight="700" fill="#7C3AED">🔌 MCP 网关</text>
-                            <text x="220" y="532" text-anchor="middle" font-size="8" fill="#656D76">统一工具调用 · 外部服务集成</text>
-                        </g>
+                    <g>
+                        <rect x="510" y="248" width="78" height="22" rx="6" fill="#F5F5F4" stroke="#E7E5E4" stroke-width="0.8"/>
+                        <text x="549" y="263" text-anchor="middle" font-size="10" font-weight="600" fill="#1C1917" font-family="-apple-system,system-ui,sans-serif">Reasoning</text>
                     </g>
-
-                    <!-- Runtime: Local vs Cloud -->
-                    <g id="runtime">
-                        <rect x="324" y="500" width="414" height="42" rx="8" fill="white" stroke="#24292F" stroke-width="0.8"/>
-                        <text x="337" y="516" font-size="9" font-weight="700" fill="#24292F">运行时</text>
-
-                        <!-- Local -->
-                        <g id="rt-local">
-                            <rect x="394" y="506" width="150" height="30" rx="6" fill="#F3F5F7" stroke="#D0D7DE" stroke-width="0.6"/>
-                            <text x="400" y="521" font-size="12">🖥️</text>
-                            <text x="418" y="522" font-size="9" font-weight="600" fill="#24292F">本地模式</text>
-                            <text x="418" y="532" font-size="7" fill="#656D76">IDE嵌入 · 低延迟</text>
-                        </g>
-                        <!-- Cloud -->
-                        <g id="rt-cloud">
-                            <rect x="556" y="506" width="170" height="30" rx="6" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.6"/>
-                            <text x="562" y="521" font-size="12">☁️</text>
-                            <text x="580" y="522" font-size="9" font-weight="600" fill="#0969DA">云端模式</text>
-                            <text x="580" y="532" font-size="7" fill="#656D76">AgentOS as a Service</text>
-                        </g>
+                    <g>
+                        <rect x="596" y="248" width="72" height="22" rx="6" fill="#F5F5F4" stroke="#E7E5E4" stroke-width="0.8"/>
+                        <text x="632" y="263" text-anchor="middle" font-size="10" font-weight="600" fill="#1C1917" font-family="-apple-system,system-ui,sans-serif">Planning</text>
                     </g>
-
-                    <!-- External Service -->
-                    <g id="external" transform="translate(130, 555)">
-                        <rect x="0" y="0" width="608" height="32" rx="6" fill="none" stroke="#D0D7DE" stroke-width="0.8" stroke-dasharray="4,3"/>
-                        <text x="304" y="20" text-anchor="middle" font-size="9" fill="#9CA3AF">外部服务: LLM (Claude/GPT) · 图片生成 · 视频生成 · CI/CD · 搜索引擎 · 数据库 ···</text>
+                    <g>
+                        <rect x="676" y="248" width="72" height="22" rx="6" fill="#F5F5F4" stroke="#E7E5E4" stroke-width="0.8"/>
+                        <text x="712" y="263" text-anchor="middle" font-size="10" font-weight="600" fill="#1C1917" font-family="-apple-system,system-ui,sans-serif">Reflection</text>
                     </g>
-                </g>
-
-                <!-- ======== FLOW PATHS (initially hidden) ======== -->
-                <g id="flow-paths" opacity="0">
-                    <!-- Scenario 1: Native Skill flow -->
-                    <g id="flow-s1" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L190 56 L190 72 L190 80 L420 80 L420 106 L420 134" stroke="#2DA44E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L199 186 L199 206" stroke="#2DA44E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                    </g>
-                    <!-- Scenario 2: Tool Skill flow -->
-                    <g id="flow-s2" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L325 56 L325 72 L420 80 L420 106 L420 134" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L349 186 L349 206" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M349 270 L349 322 L220 322 L220 500" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                        <path d="M220 542 L220 555" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                    </g>
-                    <!-- Scenario 3: Task Skill flow -->
-                    <g id="flow-s3" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L190 56 L190 72 L420 80 L420 106 L420 134" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L499 186 L499 206" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M499 270 L499 322 L675 322 L675 436" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                        <!-- Clone instances visual -->
-                        <g transform="translate(640, 395)">
-                            <circle cx="0" cy="0" r="6" fill="#EA580C" opacity="0.3">
-                                <animate attributeName="r" values="4;8;4" dur="1.5s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="20" cy="0" r="6" fill="#EA580C" opacity="0.3">
-                                <animate attributeName="r" values="4;8;4" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="40" cy="0" r="6" fill="#EA580C" opacity="0.3">
-                                <animate attributeName="r" values="4;8;4" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
-                            </circle>
-                            <text x="20" y="18" text-anchor="middle" font-size="7" fill="#EA580C" font-weight="600">3个分身并行</text>
-                        </g>
-                    </g>
-                    <!-- Scenario 4: Flow Skill flow -->
-                    <g id="flow-s4" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L460 56 L460 72 L420 80 L420 106 L420 134" stroke="#0969DA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L649 186 L649 206" stroke="#0969DA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <!-- Flow stages -->
-                        <g transform="translate(130, 340)">
-                            <rect x="0" y="0" width="588" height="38" rx="6" fill="white" stroke="#0969DA" stroke-width="1" stroke-dasharray="4,3"/>
-                            <text x="10" y="15" font-size="8" font-weight="700" fill="#0969DA">Flow 编排:</text>
-                            <g>
-                                <rect x="80" y="6" width="64" height="24" rx="5" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.8"/>
-                                <text x="112" y="22" text-anchor="middle" font-size="7" fill="#0969DA" font-weight="600">需求分析</text>
-                                <text x="112" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Task]</text>
-                            </g>
-                            <text x="152" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="162" y="6" width="64" height="24" rx="5" fill="#E6F7ED" stroke="#2DA44E" stroke-width="0.8"/>
-                                <text x="194" y="22" text-anchor="middle" font-size="7" fill="#1A7F37" font-weight="600">代码开发</text>
-                                <text x="194" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Native]</text>
-                            </g>
-                            <text x="234" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="244" y="6" width="64" height="24" rx="5" fill="#FFF7ED" stroke="#EA580C" stroke-width="0.8"/>
-                                <text x="276" y="22" text-anchor="middle" font-size="7" fill="#EA580C" font-weight="600">CR审查</text>
-                                <text x="276" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Task]</text>
-                            </g>
-                            <text x="316" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="326" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/>
-                                <text x="358" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">测试生成</text>
-                                <text x="358" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Tool]</text>
-                            </g>
-                            <text x="398" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="408" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/>
-                                <text x="440" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">CI/CD</text>
-                                <text x="440" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Tool]</text>
-                            </g>
-                            <text x="480" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="490" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/>
-                                <text x="522" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">发布上线</text>
-                                <text x="522" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Tool]</text>
-                            </g>
-                        </g>
-                        <!-- Animated dash -->
-                        <path d="M649 270 L649 340" stroke="#0969DA" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                    </g>
-                </g>
-
-                <!-- ======== MAPPING OVERLAY (initially hidden) ======== -->
-                <g id="mapping-overlay" opacity="0">
-                    <!-- CodeFlicker highlight -->
-                    <rect x="128" y="30" width="124" height="44" rx="10" fill="none" stroke="#0969DA" stroke-width="2.5" stroke-dasharray="4,3">
-                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-                    <!-- Lines from CF to skills -->
-                    <line x1="190" y1="74" x2="199" y2="206" stroke="#0969DA" stroke-width="1" opacity="0.5"/>
-                    <line x1="190" y1="74" x2="499" y2="206" stroke="#EA580C" stroke-width="1" opacity="0.5"/>
-                    <line x1="190" y1="74" x2="649" y2="206" stroke="#0969DA" stroke-width="1" opacity="0.5"/>
-                    <!-- KATE highlight -->
-                    <rect x="263" y="30" width="124" height="44" rx="10" fill="none" stroke="#2DA44E" stroke-width="2.5" stroke-dasharray="4,3">
-                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-                    <line x1="325" y1="74" x2="199" y2="206" stroke="#2DA44E" stroke-width="1" opacity="0.5"/>
-                    <line x1="325" y1="74" x2="349" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.5"/>
-                    <!-- PA highlight -->
-                    <rect x="398" y="30" width="124" height="44" rx="10" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-dasharray="4,3">
-                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-                    <line x1="460" y1="74" x2="199" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <line x1="460" y1="74" x2="349" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <line x1="460" y1="74" x2="499" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <line x1="460" y1="74" x2="649" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <!-- Legend -->
-                    <g transform="translate(130, 590)">
-                        <text x="0" y="12" font-size="8" font-weight="600" fill="#656D76">映射关系: </text>
-                        <line x1="65" y1="8" x2="85" y2="8" stroke="#0969DA" stroke-width="2"/>
-                        <text x="90" y="12" font-size="8" fill="#0969DA">CodeFlicker 核心能力</text>
-                        <line x1="210" y1="8" x2="230" y2="8" stroke="#2DA44E" stroke-width="2"/>
-                        <text x="235" y="12" font-size="8" fill="#2DA44E">KATE-Studio 核心能力</text>
-                        <line x1="380" y1="8" x2="400" y2="8" stroke="#7C3AED" stroke-width="2"/>
-                        <text x="405" y="12" font-size="8" fill="#7C3AED">AI个人助理 全量能力</text>
-                    </g>
+                    <text x="430" y="299" font-size="10" fill="#78716C" font-family="-apple-system,system-ui,sans-serif">+ Orchestration · Integration · 分身引擎(Clone) · MCP网关 · 本地/云端运行时</text>
                 </g>
             </svg>
         </div>
-    </div>
+    </section>
 
-    <!-- Detail Panel -->
-    <div id="detail-panel" class="detail-panel hidden">
-        <div class="detail-header" id="detail-header">
-            <div class="icon" id="detail-icon" style="background:#1A7F37">🧠</div>
-            <div>
-                <h3 id="detail-title">详情</h3>
-                <div class="subtitle" id="detail-subtitle"></div>
-            </div>
+    <!-- ==================== 2. Product Layer 展开 ==================== -->
+    <section class="arch-section">
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <h2>产品层：三个产品共享一个引擎</h2>
         </div>
-        <div class="detail-body" id="detail-body"></div>
-    </div>
+        <p class="section-intro">
+            三个产品线面向不同用户群体，但底层共享同一个 Agent 引擎。差异化来自<strong>产品适配层</strong>——不同的 UI 壳、不同的 Skill 子集、不同的权限模型。这意味着新能力（Skill）只需开发一次，即可按需开放给多个产品。
+        </p>
 
-    <!-- Default: Skill Types Overview (shown when no scenario is selected) -->
-    <div id="skill-overview" style="margin-top:20px;">
-        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#656D76; margin-bottom:12px;">⚡ 四类技能体系详解（hover 看细节）</div>
-        <div class="skill-detail-grid">
-            <div class="skill-detail-box native">
-                <h4>Ⅰ 原生 Skill (Native)</h4>
-                <p><strong>判定标准：</strong>主要靠文本/结构化推理即可完成；不依赖外部API；无需并行拆分</p>
-                <p><strong>执行方式：</strong>主Agent读取SKILL.md后直接执行（可被自然语言“教会”）</p>
-                <p><strong>失败模式：</strong>信息源不足 / 指令不够具体 / 需要外部动作却没工具</p>
-                <div class="examples">
-                    <span class="example-tag">📊 行业调研</span>
-                    <span class="example-tag">📝 文档撰写</span>
-                    <span class="example-tag">📑 PPT制作</span>
-                    <span class="example-tag">🔍 深度分析</span>
-                </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-card-icon">💻</div>
+                <div class="product-card-name">Code Agent</div>
+                <div class="product-card-tagline">AI × Coding · IDE嵌入</div>
+                <dl class="product-detail">
+                    <dt>定位</dt><dd>IDE 内的 AI 编码助手，低延迟 + 工程上下文</dd>
+                    <dt>典型用户</dt><dd>研发工程师</dd>
+                    <dt>核心差异</dt><dd>代码上下文 / 工程工具链 / 本地优先</dd>
+                    <dt>交互形态</dt><dd>IDE 嵌入（Terminal + Editor + Chat）</dd>
+                    <dt>能力边界</dt><dd>以编码为主；非编码能力可按需开启</dd>
+                </dl>
             </div>
-            <div class="skill-detail-box tool">
-                <h4>Ⅱ 工具 Skill (Tool/MCP)</h4>
-                <p><strong>判定标准：</strong>需要调用外部服务一次或少量次即可完成（生成/查询/执行）</p>
-                <p><strong>执行方式：</strong>主Agent→MCP网关→外部API；网关统一鉴权/限流/路由</p>
-                <p><strong>失败模式：</strong>鉴权失败 / 限流超时 / 外部服务波动</p>
-                <div class="examples">
-                    <span class="example-tag">🖼️ 图片生成</span>
-                    <span class="example-tag">🎬 视频生成</span>
-                    <span class="example-tag">🔄 CI/CD</span>
-                    <span class="example-tag">📈 数据查询</span>
-                </div>
+            <div class="product-card">
+                <div class="product-card-icon">🏢</div>
+                <div class="product-card-name">企业数字员工</div>
+                <div class="product-card-tagline">KATE-Studio · 企业场景</div>
+                <dl class="product-detail">
+                    <dt>定位</dt><dd>面向企业的数字员工 / 工作流承载</dd>
+                    <dt>典型用户</dt><dd>运营 / 产品 / 分析 / HR</dd>
+                    <dt>核心差异</dt><dd>Web场景 + 批量任务 + 权限/审计</dd>
+                    <dt>交互形态</dt><dd>Web 应用（表单 + 画布 + 对话）</dd>
+                    <dt>能力边界</dt><dd>默认只开放经过治理的 Skill 集</dd>
+                </dl>
             </div>
-            <div class="skill-detail-box task">
-                <h4>Ⅲ 任务 Skill (Task)</h4>
-                <p><strong>判定标准：</strong>可拆成多个相互独立的子任务并行（多视角/多维度/多分片）</p>
-                <p><strong>执行方式：</strong>分身引擎派生N个实例；共享Memory快照、独立上下文；结果汇总+经验回流</p>
-                <p><strong>失败模式：</strong>拆分不合理 / 汇总冲突 / 并发资源不足</p>
-                <div class="examples">
-                    <span class="example-tag">🔎 CR代码审查</span>
-                    <span class="example-tag">♻️ 重构评审</span>
-                    <span class="example-tag">📐 多维需求分析</span>
-                </div>
-            </div>
-            <div class="skill-detail-box flow">
-                <h4>Ⅳ 流程 Skill (Flow)</h4>
-                <p><strong>判定标准：</strong>存在多阶段依赖链（Stage DAG），且需要过程可见、可中断、可重试</p>
-                <p><strong>执行方式：</strong>两层编排：Flow层(阶段) + Task层(阶段内执行任意Skill)</p>
-                <p><strong>失败模式：</strong>阶段依赖不清 / 数据传递缺失 / 断点恢复不完整</p>
-                <div class="examples">
-                    <span class="example-tag">🚀 需求→发布全链路</span>
-                    <span class="example-tag">🏗️ 项目初始化</span>
-                    <span class="example-tag">📦 批量迁移</span>
-                </div>
+            <div class="product-card">
+                <div class="product-card-icon">🤖</div>
+                <div class="product-card-name">AI 个人助理</div>
+                <div class="product-card-tagline">通用 Agent · 全能力覆盖</div>
+                <dl class="product-detail">
+                    <dt>定位</dt><dd>对话 + 多模态的通用 Agent（能力覆盖最全）</dd>
+                    <dt>典型用户</dt><dd>所有人</dd>
+                    <dt>核心差异</dt><dd>个性化最强：偏好 / 记忆 / 长期陪伴</dd>
+                    <dt>交互形态</dt><dd>对话 + 多模态（文 / 图 / 表 / 代码）</dd>
+                    <dt>能力边界</dt><dd>强调隐私可控：敏感记忆可审计可删除</dd>
+                </dl>
             </div>
         </div>
 
-        <!-- 补齐：P0/P1/P2 关键信息（不挤主图，用下方卡片承载） -->
-        <div style="margin-top:16px; display:grid; grid-template-columns: 1.05fr 0.95fr; gap:16px;">
-            <div style="background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
-                <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧭 Skill 类型决策指南（P1）</div>
-                <div style="font-size:12px;color:var(--c-text-2);">
-                    <div style="padding:10px 12px;border:1px solid var(--c-border-light);border-radius:10px;background:#F6F8FA;">
-                        <div style="font-weight:800;color:var(--c-text);margin-bottom:6px;">快速判断</div>
-                        <div style="display:grid;grid-template-columns: 88px 1fr;gap:6px 10px;">
-                            <div style="color:var(--c-text-3);font-weight:700;">只要写/想？</div><div>→ 先用 <strong>Native</strong></div>
-                            <div style="color:var(--c-text-3);font-weight:700;">要调API？</div><div>→ 用 <strong>Tool</strong>（走MCP网关）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">可并行拆？</div><div>→ 用 <strong>Task</strong>（分身并行）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">有阶段依赖？</div><div>→ 用 <strong>Flow</strong>（阶段编排+断点）</div>
-                        </div>
-                    </div>
-                    <div style="margin-top:10px; color:var(--c-text-3);font-size:11px;">建议产品侧在PRD里写清：触发词、输入约束、输出形态、失败兜底；技术侧写清：依赖、权限、SLA、回滚。</div>
+        <!-- Adapt Layer -->
+        <div class="adapt-box">
+            <h3 style="font-size:var(--heading-3); font-weight:700; color:var(--color-text-primary); margin-bottom:4px;">🔌 产品适配层（差异化关键）</h3>
+            <p style="font-size:var(--body-small); color:var(--color-text-secondary);">同一个 Agent 引擎通过适配层为不同产品"换壳"，实现"一次构建，N 次复用"</p>
+            <div class="adapt-grid">
+                <div class="adapt-item">
+                    <h4>UI 适配</h4>
+                    <p>同一能力在 IDE / Web / 移动端呈现不同组件和交互方式</p>
+                </div>
+                <div class="adapt-item">
+                    <h4>Skill 筛选</h4>
+                    <p>按产品定位过滤可用 Skill，防止"全量能力暴露"导致的体验混乱</p>
+                </div>
+                <div class="adapt-item">
+                    <h4>权限模型</h4>
+                    <p>租户 / 产品 / 用户三级隔离；企业场景需要更严格的审计和开关</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div style="background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
-                <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧬 Skill 生命周期与治理（P1/P2）</div>
-                <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
-                    <span style="padding:6px 10px;border-radius:999px;background:#F3F5F7;border:1px solid var(--c-border-light);font-size:11px;">开发</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#F5F3FF;border:1px solid rgba(124,58,237,.25);font-size:11px;">注册(元数据/版本)</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#FFF7ED;border:1px solid rgba(234,88,12,.25);font-size:11px;">灰度/AB</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#E6F7ED;border:1px solid rgba(45,164,78,.25);font-size:11px;">评估(Eval)</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#EFF6FF;border:1px solid rgba(9,105,218,.25);font-size:11px;">发布</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#FEF2F2;border:1px solid rgba(207,34,46,.25);font-size:11px;">回滚/下线</span>
+    <!-- ==================== 3. Agent Layer ==================== -->
+    <section class="arch-section">
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <h2>智能中枢：主 Agent + 四类 Skill 体系</h2>
+        </div>
+
+        <!-- Main Agent Pipeline -->
+        <div class="main-agent-box">
+            <h3 style="font-size:var(--heading-3); font-weight:700; color:var(--color-success); margin-bottom:4px;">🧠 主 Agent — 统一入口</h3>
+            <p style="font-size:var(--body-small); color:var(--color-text-secondary); margin-bottom:var(--spacing-sm);">所有用户请求统一进入主 Agent，走同一条处理链路。跨产品人格一致，能力来自 Skills 而非硬编码。</p>
+            <div class="agent-pipeline">
+                <div class="agent-step"><div class="agent-step-icon">👂</div><div class="agent-step-label">理解意图</div><div class="agent-step-desc">语义 + 消歧</div></div>
+                <span class="agent-arrow">→</span>
+                <div class="agent-step"><div class="agent-step-icon">🧠</div><div class="agent-step-label">查 Memory</div><div class="agent-step-desc">偏好 + 上下文</div></div>
+                <span class="agent-arrow">→</span>
+                <div class="agent-step"><div class="agent-step-icon">🎯</div><div class="agent-step-label">匹配 Skill</div><div class="agent-step-desc">触发词 + 语义</div></div>
+                <span class="agent-arrow">→</span>
+                <div class="agent-step"><div class="agent-step-icon">⚡</div><div class="agent-step-label">调度执行</div><div class="agent-step-desc">并发 + 编排</div></div>
+                <span class="agent-arrow">→</span>
+                <div class="agent-step"><div class="agent-step-icon">📦</div><div class="agent-step-label">组装输出</div><div class="agent-step-desc">多模态结果</div></div>
+                <span class="agent-arrow">→</span>
+                <div class="agent-step"><div class="agent-step-icon">🔄</div><div class="agent-step-label">反思沉淀</div><div class="agent-step-desc">经验→Memory</div></div>
+            </div>
+        </div>
+
+        <!-- Four Skill Types -->
+        <div class="skill-grid">
+            <div class="skill-card native">
+                <div class="skill-card-header"><span class="skill-badge native">Ⅰ 原生 Skill</span><h4>Native</h4></div>
+                <dl>
+                    <dt>判定标准</dt><dd>主要靠文本/结构化推理即可完成，不依赖外部 API，无需并行拆分</dd>
+                    <dt>执行方式</dt><dd>主 Agent 读取 SKILL.md 后直接执行（可被自然语言"教会"）</dd>
+                    <dt>失败模式</dt><dd>信息源不足 / 指令不够具体 / 需要外部动作却没工具</dd>
+                </dl>
+                <div class="skill-tags">
+                    <span class="skill-tag">📊 行业调研</span>
+                    <span class="skill-tag">📝 文档撰写</span>
+                    <span class="skill-tag">📑 PPT制作</span>
+                    <span class="skill-tag">🔍 深度分析</span>
                 </div>
-                <div style="margin-top:10px; font-size:11px; color:var(--c-text-3);">
-                    关键治理项：Schema校验、权限审计、成本预算(Token/调用)、SLA、观测面板、风险开关。
+            </div>
+            <div class="skill-card tool">
+                <div class="skill-card-header"><span class="skill-badge tool">Ⅱ 工具 Skill</span><h4>Tool / MCP</h4></div>
+                <dl>
+                    <dt>判定标准</dt><dd>需要调用外部服务一次或少量次即可完成（生成 / 查询 / 执行）</dd>
+                    <dt>执行方式</dt><dd>主 Agent → MCP 网关 → 外部 API；网关统一鉴权 / 限流 / 路由</dd>
+                    <dt>失败模式</dt><dd>鉴权失败 / 限流超时 / 外部服务波动</dd>
+                </dl>
+                <div class="skill-tags">
+                    <span class="skill-tag">🖼️ 图片生成</span>
+                    <span class="skill-tag">🎬 视频生成</span>
+                    <span class="skill-tag">🔄 CI/CD</span>
+                    <span class="skill-tag">📈 数据查询</span>
+                </div>
+            </div>
+            <div class="skill-card task">
+                <div class="skill-card-header"><span class="skill-badge task">Ⅲ 任务 Skill</span><h4>Task / 分身并行</h4></div>
+                <dl>
+                    <dt>判定标准</dt><dd>可拆成多个相互独立的子任务并行（多视角 / 多维度 / 多分片）</dd>
+                    <dt>执行方式</dt><dd>分身引擎派生 N 个实例；共享 Memory 快照、独立上下文；结果汇总 + 经验回流</dd>
+                    <dt>失败模式</dt><dd>拆分不合理 / 汇总冲突 / 并发资源不足</dd>
+                </dl>
+                <div class="skill-tags">
+                    <span class="skill-tag">🔎 CR代码审查</span>
+                    <span class="skill-tag">♻️ 重构评审</span>
+                    <span class="skill-tag">📐 多维需求分析</span>
+                </div>
+            </div>
+            <div class="skill-card flow">
+                <div class="skill-card-header"><span class="skill-badge flow">Ⅳ 流程 Skill</span><h4>Flow / 阶段编排</h4></div>
+                <dl>
+                    <dt>判定标准</dt><dd>存在多阶段依赖链（Stage DAG），且需要过程可见、可中断、可重试</dd>
+                    <dt>执行方式</dt><dd>两层编排：Flow 层（阶段）+ Task 层（阶段内执行任意 Skill）</dd>
+                    <dt>失败模式</dt><dd>阶段依赖不清 / 数据传递缺失 / 断点恢复不完整</dd>
+                </dl>
+                <div class="skill-tags">
+                    <span class="skill-tag">🚀 需求→发布全链路</span>
+                    <span class="skill-tag">🏗️ 项目初始化</span>
+                    <span class="skill-tag">📦 批量迁移</span>
                 </div>
             </div>
         </div>
 
-        <div style="margin-top:16px; background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
-            <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧠 Memory 分层与隔离策略（P0）</div>
-            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;">
-                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
-                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L1 工作记忆</div>
-                    <div style="font-size:11px;color:var(--c-text-3);">会话上下文/临时变量</div>
-                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：低延迟；自动过期；不做长期沉淀</div>
-                </div>
-                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
-                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L2 情景记忆</div>
-                    <div style="font-size:11px;color:var(--c-text-3);">偏好/历史/任务记录</div>
-                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：可审计；可删除；支持时间衰减</div>
-                </div>
-                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
-                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L3 语义记忆</div>
-                    <div style="font-size:11px;color:var(--c-text-3);">知识/文档/经验索引</div>
-                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：语义检索；去重聚合；引用溯源</div>
-                </div>
-            </div>
-            <div style="margin-top:10px;font-size:11px;color:var(--c-text-3);">
-                隔离：<strong>租户</strong>（企业/个人）→ <strong>产品</strong>（IDE/Web/助手）→ <strong>用户</strong>；共享仅限“通用偏好/匿名经验”，敏感信息必须可删除、可审计。
+        <!-- Skill Decision Guide -->
+        <div class="decision-box">
+            <h3 style="font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:var(--spacing-md);">🧭 Skill 类型快速判断</h3>
+            <div class="decision-grid">
+                <div class="decision-q">只要写/想？</div><div class="decision-a">→ 先用 <strong style="color:var(--c-skill-native)">Native</strong>（最轻量）</div>
+                <div class="decision-q">要调 API？</div><div class="decision-a">→ 用 <strong style="color:var(--c-skill-tool)">Tool</strong>（走 MCP 网关）</div>
+                <div class="decision-q">可并行拆？</div><div class="decision-a">→ 用 <strong style="color:var(--c-skill-task)">Task</strong>（分身并行）</div>
+                <div class="decision-q">有阶段依赖？</div><div class="decision-a">→ 用 <strong style="color:var(--c-skill-flow)">Flow</strong>（阶段编排 + 断点）</div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Tooltip Container (hover bubbles) -->
-    <div id="cf-tooltip" aria-hidden="true"></div>
+    <!-- ==================== 4. AgentCore 六大能力 ==================== -->
+    <section class="arch-section">
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <h2>AgentCore：六大能力的内部关系</h2>
+        </div>
+        <p class="section-intro">
+            AgentCore 是 Agent 的"大脑"，由六大能力模块组成。它们并非平等并列的关系——<strong>Memory</strong> 和 <strong>Integration</strong> 是底层基础设施，<strong>Reasoning → Planning → Orchestration</strong> 构成主处理链，<strong>Reflection</strong> 形成反馈闭环。
+        </p>
+
+        <!-- AgentCore Structure SVG -->
+        <div class="core-svg-wrap">
+            <svg class="overview-svg" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="coreShadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/></filter>
+                </defs>
+
+                <!-- Main Processing Chain -->
+                <text x="400" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#78716C" font-family="-apple-system,system-ui,sans-serif" letter-spacing="1">主处理链</text>
+
+                <!-- Reasoning -->
+                <g filter="url(#coreShadow)">
+                    <rect x="100" y="42" width="160" height="56" rx="10" fill="white" stroke="#059669" stroke-width="1.5"/>
+                    <text x="180" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#059669" font-family="-apple-system,system-ui,sans-serif">Reasoning 推理</text>
+                    <text x="180" y="82" text-anchor="middle" font-size="10" fill="#78716C" font-family="-apple-system,system-ui,sans-serif">意图识别 · 消歧 · 隐含推断</text>
+                </g>
+                <!-- Arrow -->
+                <g opacity="0.6"><line x1="260" y1="70" x2="310" y2="70" stroke="#059669" stroke-width="2"/><polygon points="308,65 318,70 308,75" fill="#059669"/></g>
+
+                <!-- Planning -->
+                <g filter="url(#coreShadow)">
+                    <rect x="320" y="42" width="160" height="56" rx="10" fill="white" stroke="#059669" stroke-width="1.5"/>
+                    <text x="400" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#059669" font-family="-apple-system,system-ui,sans-serif">Planning 规划</text>
+                    <text x="400" y="82" text-anchor="middle" font-size="10" fill="#78716C" font-family="-apple-system,system-ui,sans-serif">分解任务 · 依赖DAG · 校验点</text>
+                </g>
+                <!-- Arrow -->
+                <g opacity="0.6"><line x1="480" y1="70" x2="530" y2="70" stroke="#059669" stroke-width="2"/><polygon points="528,65 538,70 528,75" fill="#059669"/></g>
+
+                <!-- Orchestration -->
+                <g filter="url(#coreShadow)">
+                    <rect x="540" y="42" width="160" height="56" rx="10" fill="white" stroke="#059669" stroke-width="1.5"/>
+                    <text x="620" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#059669" font-family="-apple-system,system-ui,sans-serif">Orchestration 编排</text>
+                    <text x="620" y="82" text-anchor="middle" font-size="10" fill="#78716C" font-family="-apple-system,system-ui,sans-serif">并发调度 · 超时 · 重试 · 资源</text>
+                </g>
+
+                <!-- Reflection (Feedback Loop) -->
+                <g filter="url(#coreShadow)">
+                    <rect x="320" y="120" width="160" height="50" rx="10" fill="white" stroke="#EA580C" stroke-width="1.5"/>
+                    <text x="400" y="143" text-anchor="middle" font-size="13" font-weight="700" fill="#EA580C" font-family="-apple-system,system-ui,sans-serif">Reflection 反思</text>
+                    <text x="400" y="158" text-anchor="middle" font-size="10" fill="#78716C" font-family="-apple-system,system-ui,sans-serif">自评 · 复盘 · 经验写回Memory</text>
+                </g>
+                <!-- Loop arrow from Orchestration down to Reflection -->
+                <path d="M620 98 L620 145 L480 145" stroke="#EA580C" stroke-width="1.5" fill="none" stroke-dasharray="5,3" opacity="0.5"/>
+                <polygon points="482,140 474,145 482,150" fill="#EA580C" opacity="0.5"/>
+                <!-- Loop arrow from Reflection back up to Reasoning -->
+                <path d="M320 145 L180 145 L180 98" stroke="#EA580C" stroke-width="1.5" fill="none" stroke-dasharray="5,3" opacity="0.5"/>
+                <polygon points="175,100 180,92 185,100" fill="#EA580C" opacity="0.5"/>
+                <!-- Label -->
+                <text x="250" y="137" font-size="10" font-weight="600" fill="#EA580C" font-family="-apple-system,system-ui,sans-serif" opacity="0.7">反馈闭环</text>
+
+                <!-- Bottom: Infrastructure Layer -->
+                <text x="400" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="#78716C" font-family="-apple-system,system-ui,sans-serif" letter-spacing="1">基础设施</text>
+
+                <!-- Memory -->
+                <g filter="url(#coreShadow)">
+                    <rect x="140" y="212" width="220" height="36" rx="8" fill="#F5F5F4" stroke="#1C1917" stroke-width="1"/>
+                    <text x="250" y="235" text-anchor="middle" font-size="12" font-weight="700" fill="#1C1917" font-family="-apple-system,system-ui,sans-serif">🧠 Memory 记忆服务</text>
+                </g>
+                <!-- Integration -->
+                <g filter="url(#coreShadow)">
+                    <rect x="440" y="212" width="220" height="36" rx="8" fill="#F5F5F4" stroke="#1C1917" stroke-width="1"/>
+                    <text x="550" y="235" text-anchor="middle" font-size="12" font-weight="700" fill="#1C1917" font-family="-apple-system,system-ui,sans-serif">🔌 Integration 集成服务</text>
+                </g>
+                <!-- Dotted lines up -->
+                <line x1="250" y1="212" x2="250" y2="170" stroke="#E7E5E4" stroke-width="1" stroke-dasharray="3,3"/>
+                <line x1="550" y1="212" x2="550" y2="98" stroke="#E7E5E4" stroke-width="1" stroke-dasharray="3,3"/>
+            </svg>
+        </div>
+
+        <!-- Core Module Details -->
+        <div class="core-grid">
+            <div class="core-card">
+                <h4>🧠 Memory</h4>
+                <div class="role">长期记忆 · 护城河</div>
+                <dl>
+                    <dt>职责</dt><dd>读写记忆；去重/提炼；可审计可删除</dd>
+                    <dt>分层</dt><dd>L1工作记忆 / L2情景记忆 / L3语义记忆</dd>
+                    <dt>隔离</dt><dd>租户→产品→用户；敏感可删除</dd>
+                </dl>
+            </div>
+            <div class="core-card">
+                <h4>🔍 Reasoning</h4>
+                <div class="role">理解 · 推断</div>
+                <dl>
+                    <dt>职责</dt><dd>意图识别 / 消歧 / 隐含需求推断</dd>
+                    <dt>输入</dt><dd>用户输入 + Memory 上下文</dd>
+                    <dt>输出</dt><dd>结构化意图（Intent）与约束</dd>
+                </dl>
+            </div>
+            <div class="core-card">
+                <h4>📋 Planning</h4>
+                <div class="role">规划 · 分解</div>
+                <dl>
+                    <dt>职责</dt><dd>把 Intent 分解为可执行的 Stage DAG</dd>
+                    <dt>输入</dt><dd>Intent + 工具/Skill 能力清单</dd>
+                    <dt>输出</dt><dd>计划（步骤 / 依赖 / 校验点 / 回滚点）</dd>
+                </dl>
+            </div>
+            <div class="core-card">
+                <h4>⚙️ Orchestration</h4>
+                <div class="role">调度 · 执行</div>
+                <dl>
+                    <dt>职责</dt><dd>并发调度（超时/重试/资源控制）</dd>
+                    <dt>输入</dt><dd>Planning 产出的 DAG + Runtime 约束</dd>
+                    <dt>输出</dt><dd>执行轨迹与中间态（供观测/回放）</dd>
+                </dl>
+            </div>
+            <div class="core-card">
+                <h4>🔄 Reflection</h4>
+                <div class="role">反思 · 进化</div>
+                <dl>
+                    <dt>职责</dt><dd>自评/复盘；把经验写回 Memory</dd>
+                    <dt>输入</dt><dd>结果 + Eval 分数/错误原因</dd>
+                    <dt>输出</dt><dd>改进建议 / 经验条目 / 策略调整</dd>
+                </dl>
+            </div>
+            <div class="core-card">
+                <h4>🔌 Integration</h4>
+                <div class="role">外部接入 · 路由</div>
+                <dl>
+                    <dt>职责</dt><dd>外部服务接入与路由（LLM/搜索/CI）</dd>
+                    <dt>输入</dt><dd>调用请求 + 鉴权/配额</dd>
+                    <dt>输出</dt><dd>统一结果/错误码/重试语义</dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. 运行示例 ==================== -->
+    <section class="arch-section">
+        <div class="section-header">
+            <span class="section-num">5</span>
+            <h2>运行示例：四个典型场景</h2>
+        </div>
+        <p class="section-intro">
+            同一个 Agent 引擎，面对不同类型的请求，自动匹配不同类型的 Skill 来执行。从简单到复杂，覆盖了 AI 产品的绝大多数使用场景。
+        </p>
+
+        <!-- Scenario 1 -->
+        <div class="scenario-section">
+            <div class="scenario-title"><span class="badge" style="background:var(--c-skill-native)">Ⅰ 原生</span><h4>"帮我写个调研报告" → 分钟级</h4></div>
+            <div class="flow-steps">
+                <div class="flow-step"><div class="flow-step-num" style="background:#2DA44E">1</div><div class="flow-step-label">语义理解</div><div class="flow-step-desc">意图=调研</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#2DA44E">2</div><div class="flow-step-label">查Memory</div><div class="flow-step-desc">偏好:清爽报告</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#2DA44E">3</div><div class="flow-step-label">匹配Skill</div><div class="flow-step-desc">industry-research</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#2DA44E">4</div><div class="flow-step-label">加载执行</div><div class="flow-step-desc">读SKILL.md</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#2DA44E">5</div><div class="flow-step-label">搜索资料</div><div class="flow-step-desc">search_web</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#2DA44E">6</div><div class="flow-step-label">生成报告</div><div class="flow-step-desc">整理分析输出</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#2DA44E">7</div><div class="flow-step-label">经验沉淀</div><div class="flow-step-desc">Memory记录</div></div>
+            </div>
+            <div class="scenario-note" style="border-left-color:#2DA44E;">主 Agent 读取 SKILL.md 后独立执行全过程。无需外部服务或分身——最轻量、最灵活。用户可通过自然语言"教"Agent 新的原生 Skill。</div>
+        </div>
+
+        <!-- Scenario 2 -->
+        <div class="scenario-section">
+            <div class="scenario-title"><span class="badge" style="background:var(--c-skill-tool)">Ⅱ 工具</span><h4>"帮我生成一张配图" → 秒级</h4></div>
+            <div class="flow-steps">
+                <div class="flow-step"><div class="flow-step-num" style="background:#7C3AED">1</div><div class="flow-step-label">语义理解</div><div class="flow-step-desc">意图=生图</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#7C3AED">2</div><div class="flow-step-label">查Memory</div><div class="flow-step-desc">偏好:风格尺寸</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#7C3AED">3</div><div class="flow-step-label">匹配Skill</div><div class="flow-step-desc">image-gen Tool</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#7C3AED">4</div><div class="flow-step-label">MCP调用</div><div class="flow-step-desc">网关转发请求</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#7C3AED">5</div><div class="flow-step-label">外部API</div><div class="flow-step-desc">图片生成服务</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#7C3AED">6</div><div class="flow-step-label">返回结果</div><div class="flow-step-desc">展示生成图片</div></div>
+            </div>
+            <div class="scenario-note" style="border-left-color:#7C3AED;">通过 MCP 网关统一调用外部 API。现有的图片Agent、视频Agent可直接封装为工具 Skill，<strong>改动最小</strong>——从多Agent迁移的最低成本路径。</div>
+        </div>
+
+        <!-- Scenario 3 -->
+        <div class="scenario-section">
+            <div class="scenario-title"><span class="badge" style="background:var(--c-skill-task)">Ⅲ 任务</span><h4>"帮我Review这个PR" → 分钟级</h4></div>
+            <div class="flow-steps">
+                <div class="flow-step"><div class="flow-step-num" style="background:#EA580C">1</div><div class="flow-step-label">语义理解</div><div class="flow-step-desc">意图=CR</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#EA580C">2</div><div class="flow-step-label">查Memory</div><div class="flow-step-desc">代码规范偏好</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#EA580C">3</div><div class="flow-step-label">匹配Skill</div><div class="flow-step-desc">code-review</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#EA580C">4</div><div class="flow-step-label">派生分身</div><div class="flow-step-desc">3个独立实例</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#EA580C">5</div><div class="flow-step-label">并行执行</div><div class="flow-step-desc">读码/审查/总结</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#EA580C">6</div><div class="flow-step-label">汇总结果</div><div class="flow-step-desc">合并审查建议</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#EA580C">7</div><div class="flow-step-label">经验回流</div><div class="flow-step-desc">分身经验沉淀</div></div>
+            </div>
+            <div class="scenario-note" style="border-left-color:#EA580C;">分身引擎派生多个 AgentCore 实例并行工作，共享 Memory 但独立上下文。<strong>对外呈现为单一 Agent</strong>——用户不感知底层有多个分身在工作。</div>
+        </div>
+
+        <!-- Scenario 4 -->
+        <div class="scenario-section">
+            <div class="scenario-title"><span class="badge" style="background:var(--c-skill-flow)">Ⅳ 流程</span><h4>"帮我把需求做到上线" → 小时级</h4></div>
+            <div class="flow-steps">
+                <div class="flow-step"><div class="flow-step-num" style="background:#0969DA">1</div><div class="flow-step-label">语义理解</div><div class="flow-step-desc">全链路需求</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#0969DA">2</div><div class="flow-step-label">查Memory</div><div class="flow-step-desc">项目上下文</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#0969DA">3</div><div class="flow-step-label">匹配Skill</div><div class="flow-step-desc">dev-pipeline</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#0969DA">4</div><div class="flow-step-label">Planning</div><div class="flow-step-desc">分解6个阶段</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#0969DA">5</div><div class="flow-step-label">逐阶段执行</div><div class="flow-step-desc">Task/Tool/Native</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#0969DA">6</div><div class="flow-step-label">阶段验证</div><div class="flow-step-desc">检查点确认</div></div><span class="flow-arrow">→</span>
+                <div class="flow-step"><div class="flow-step-num" style="background:#0969DA">7</div><div class="flow-step-label">完成发布</div><div class="flow-step-desc">全链路完毕</div></div>
+            </div>
+            <div class="scenario-note" style="border-left-color:#0969DA;">两层编排架构——Flow 层负责阶段编排，每个 Stage 内部调用不同类型的 Skill（Native/Task/Tool）。支持<strong>跳过、重试、断点续跑</strong>。这是最复杂但也最强大的 Skill 类型。</div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. 映射矩阵 + 部署模式 ==================== -->
+    <section class="arch-section">
+        <div class="section-header">
+            <span class="section-num">6</span>
+            <h2>产品 × 能力映射 + 部署模式</h2>
+        </div>
+
+        <table class="mapping-table">
+            <thead>
+                <tr>
+                    <th>能力</th>
+                    <th style="color:var(--color-info)">Code Agent</th>
+                    <th style="color:var(--color-success)">企业数字员工</th>
+                    <th style="color:var(--color-purple)">AI 个人助理</th>
+                    <th>差异化原因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>主 Agent</strong></td><td class="check">✅ 核心</td><td class="check">✅ 核心</td><td class="check">✅ 核心</td><td>统一引擎，无差异</td></tr>
+                <tr><td><strong>Memory 服务</strong></td><td class="check">✅ 核心</td><td class="check">✅ 核心</td><td class="check">✅ 核心</td><td>统一引擎，隔离策略不同</td></tr>
+                <tr><td><strong>Ⅰ 原生 Skill</strong></td><td class="check">✅ 调研/文档</td><td class="check">✅ 报告/分析</td><td class="check">✅ 全量</td><td>按产品定位筛选 Skill 集</td></tr>
+                <tr><td><strong>Ⅱ 工具 Skill</strong></td><td class="optional">○ 可选</td><td class="check">✅ 图片/视频</td><td class="check">✅ 全量</td><td>Code Agent 以编码为主</td></tr>
+                <tr><td><strong>Ⅲ 任务 Skill</strong></td><td class="check">✅ CR/重构</td><td class="optional">○ 可选</td><td class="optional">○ 可选</td><td>分身并行主要服务研发场景</td></tr>
+                <tr><td><strong>Ⅳ 流程 Skill</strong></td><td class="check">✅ 需求→发布</td><td class="optional">○ 可选</td><td class="optional">○ 可选</td><td>长链路编排主要在 IDE</td></tr>
+                <tr><td><strong>交互形态</strong></td><td>IDE 嵌入</td><td>Web 应用</td><td>对话 + 多模态</td><td>产品适配层决定</td></tr>
+                <tr><td><strong>典型用户</strong></td><td>研发</td><td>运营/产品</td><td>所有人</td><td>—</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Deploy Modes -->
+        <h3 style="font-size:var(--heading-3); font-weight:700; color:var(--color-text-primary); margin-bottom:var(--spacing-md);">部署模式</h3>
+        <div class="deploy-grid">
+            <div class="deploy-card">
+                <h4>🖥️ 本地模式</h4>
+                <dl>
+                    <dt>载体</dt><dd>IDE 插件 / 桌面客户端</dd>
+                    <dt>场景</dt><dd>研发写代码、个人助理</dd>
+                    <dt>Memory</dt><dd>本地存储 + 可选云端同步</dd>
+                    <dt>优势</dt><dd>低延迟、数据安全、深度 IDE 集成</dd>
+                    <dt>限制</dt><dd>并发受本机资源限制；长任务可降级到云端</dd>
+                </dl>
+            </div>
+            <div class="deploy-card">
+                <h4>☁️ 云端模式</h4>
+                <dl>
+                    <dt>载体</dt><dd>AgentOS as a Service</dd>
+                    <dt>场景</dt><dd>企业数字员工、批量任务</dd>
+                    <dt>Memory</dt><dd>云端统一存储</dd>
+                    <dt>优势</dt><dd>随时随地、无限并行、弹性扩缩</dd>
+                    <dt>限制</dt><dd>需要更强权限与审计；网络依赖</dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 7. 成长闭环 ==================== -->
+    <section class="arch-section">
+        <div class="section-header">
+            <span class="section-num">7</span>
+            <h2>成长闭环：Agent 越用越强</h2>
+        </div>
+        <p class="section-intro">
+            与传统软件不同，基于这套架构的 Agent <strong>会成长</strong>。每次执行任务后，Reflection 模块自动评估质量、提炼经验、写入 Memory。下次面对类似任务时，Agent 会调用这些经验做得更好。这是一个持续的正反馈循环。
+        </p>
+
+        <div class="evolution-box">
+            <h3 style="font-size:var(--heading-3); font-weight:700; color:var(--color-success); margin-bottom:var(--spacing-sm);">执行 → 反思 → 记忆 → 进化</h3>
+
+            <div class="evolution-loop">
+                <div class="evo-step" style="background:var(--color-success)">执行任务</div>
+                <span class="evo-arrow">→</span>
+                <div class="evo-step" style="background:#EA580C">Reflection 自评</div>
+                <span class="evo-arrow">→</span>
+                <div class="evo-step" style="background:var(--color-info)">经验写入 Memory</div>
+                <span class="evo-arrow">→</span>
+                <div class="evo-step" style="background:var(--color-purple)">下次执行更好</div>
+                <span class="evo-arrow">↩</span>
+            </div>
+
+            <div class="evo-levels">
+                <div class="evo-level" style="background:rgba(5,150,105,0.08); border:1px solid rgba(5,150,105,0.2); border-radius:var(--radius-md);">
+                    <h4 style="color:var(--color-success);">L1 行为适应</h4>
+                    <p style="color:var(--color-text-secondary);">记住偏好、习惯、上下文<br>→ 减少重复沟通</p>
+                </div>
+                <div class="evo-level" style="background:rgba(37,99,235,0.08); border:1px solid rgba(37,99,235,0.2); border-radius:var(--radius-md);">
+                    <h4 style="color:var(--color-info);">L2 技能进化</h4>
+                    <p style="color:var(--color-text-secondary);">从执行中提炼方法论<br>→ Agent 写 Skill 给自己</p>
+                </div>
+                <div class="evo-level" style="background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.2); border-radius:var(--radius-md);">
+                    <h4 style="color:var(--color-purple);">L3 认知进化</h4>
+                    <p style="color:var(--color-text-secondary);">建立跨领域知识图谱<br>→ 举一反三、触类旁通</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         AI产品终极形态思考 v5.1 · 架构全景图 | 2026-03
     </footer>
 </div>
-
-<script>
-// ============ STATE ============
-let currentView = 'structure';
-let currentScenario = null;
-
-// ============ SCENARIO DATA ============
-const scenarios = {
-    s1: {
-        title: '"帮我写个调研报告"',
-        subtitle: '原生Skill · 主Agent独立执行',
-        color: '#2DA44E',
-        skillType: 'native',
-        steps: [
-            { label: '语义理解', desc: '识别意图=调研', color: '#2DA44E' },
-            { label: '查Memory', desc: '偏好:清爽报告', color: '#2DA44E' },
-            { label: '匹配Skill', desc: 'industry-research', color: '#2DA44E' },
-            { label: '加载执行', desc: '读SKILL.md指令', color: '#2DA44E' },
-            { label: '搜索资料', desc: 'search_web调用', color: '#2DA44E' },
-            { label: '生成报告', desc: '整理分析输出', color: '#2DA44E' },
-            { label: '经验沉淀', desc: 'Memory记录', color: '#2DA44E' }
-        ],
-        highlight: ['main-agent', 'skill-native', 'agentcore']
-    },
-    s2: {
-        title: '"帮我生成一张配图"',
-        subtitle: '工具Skill · MCP网关调用外部API',
-        color: '#7C3AED',
-        skillType: 'tool',
-        steps: [
-            { label: '语义理解', desc: '识别意图=生图', color: '#7C3AED' },
-            { label: '查Memory', desc: '偏好:风格/尺寸', color: '#7C3AED' },
-            { label: '匹配Skill', desc: 'image-gen Tool', color: '#7C3AED' },
-            { label: 'MCP调用', desc: '网关转发请求', color: '#7C3AED' },
-            { label: '外部API', desc: '图片生成服务', color: '#7C3AED' },
-            { label: '返回结果', desc: '展示生成图片', color: '#7C3AED' }
-        ],
-        highlight: ['main-agent', 'skill-tool', 'mcp-gateway']
-    },
-    s3: {
-        title: '"帮我Review这个PR"',
-        subtitle: '任务Skill · 分身引擎派生3个实例协作',
-        color: '#EA580C',
-        skillType: 'task',
-        steps: [
-            { label: '语义理解', desc: '识别意图=CR', color: '#EA580C' },
-            { label: '查Memory', desc: '代码规范偏好', color: '#EA580C' },
-            { label: '匹配Skill', desc: 'code-review Task', color: '#EA580C' },
-            { label: '派生分身', desc: '3个独立实例', color: '#EA580C' },
-            { label: '并行执行', desc: '读码/审查/总结', color: '#EA580C' },
-            { label: '汇总结果', desc: '合并审查建议', color: '#EA580C' },
-            { label: '经验回流', desc: '分身经验沉淀', color: '#EA580C' }
-        ],
-        highlight: ['main-agent', 'skill-task', 'clone-engine', 'agentcore']
-    },
-    s4: {
-        title: '"帮我把需求做到上线"',
-        subtitle: '流程Skill · Planning引擎编排6阶段',
-        color: '#0969DA',
-        skillType: 'flow',
-        steps: [
-            { label: '语义理解', desc: '识别=全链路', color: '#0969DA' },
-            { label: '查Memory', desc: '项目上下文', color: '#0969DA' },
-            { label: '匹配Skill', desc: 'dev-pipeline Flow', color: '#0969DA' },
-            { label: 'Planning', desc: '分解6个阶段', color: '#0969DA' },
-            { label: '逐阶段执行', desc: 'Task/Tool/Native', color: '#0969DA' },
-            { label: '阶段验证', desc: '检查点确认', color: '#0969DA' },
-            { label: '完成发布', desc: '全链路完毕', color: '#0969DA' }
-        ],
-        highlight: ['main-agent', 'skill-flow', 'agentcore', 'clone-engine', 'mcp-gateway']
-    }
-};
-
-// ============ VIEW SWITCHING ============
-function switchView(view) {
-    currentView = view;
-    // Update tabs
-    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-    document.querySelector(`.view-tab[data-view="${view}"]`).classList.add('active');
-
-    const flowPaths = document.getElementById('flow-paths');
-    const mappingOverlay = document.getElementById('mapping-overlay');
-
-    if (view === 'structure') {
-        flowPaths.setAttribute('opacity', '0');
-        mappingOverlay.setAttribute('opacity', '0');
-        resetScenario();
-        document.getElementById('skill-overview').style.display = 'block';
-    } else if (view === 'runtime') {
-        mappingOverlay.setAttribute('opacity', '0');
-        flowPaths.setAttribute('opacity', '1');
-        document.getElementById('skill-overview').style.display = 'none';
-        if (!currentScenario) {
-            activateScenario('s1');
-        }
-    } else if (view === 'mapping') {
-        flowPaths.setAttribute('opacity', '0');
-        mappingOverlay.setAttribute('opacity', '1');
-        resetScenario();
-        document.getElementById('skill-overview').style.display = 'none';
-        showMappingDetail();
-    }
-}
-
-// ============ SCENARIO ACTIVATION ============
-function activateScenario(id) {
-    if (currentView === 'mapping') switchView('runtime');
-    if (currentView === 'structure') {
-        currentView = 'runtime';
-        document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-        document.querySelector('.view-tab[data-view="runtime"]').classList.add('active');
-        document.getElementById('flow-paths').setAttribute('opacity', '1');
-        document.getElementById('mapping-overlay').setAttribute('opacity', '0');
-        document.getElementById('skill-overview').style.display = 'none';
-    }
-
-    currentScenario = id;
-    const data = scenarios[id];
-
-    // Update scenario cards
-    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-    document.querySelector(`.scenario-card[data-id="${id}"]`).classList.add('active');
-
-    // Show/hide flow paths
-    ['s1','s2','s3','s4'].forEach(s => {
-        const el = document.getElementById('flow-' + s);
-        if (el) el.setAttribute('opacity', s === id ? '1' : '0');
-    });
-
-    // Highlight components
-    highlightComponents(data.highlight);
-
-    // Show detail panel
-    showFlowDetail(id);
-}
-
-function resetScenario() {
-    currentScenario = null;
-    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-    ['s1','s2','s3','s4'].forEach(s => {
-        const el = document.getElementById('flow-' + s);
-        if (el) el.setAttribute('opacity', '0');
-    });
-    resetHighlight();
-    document.getElementById('detail-panel').classList.add('hidden');
-}
-
-function highlightComponents(ids) {
-    // Dim everything first
-    const allNodes = document.querySelectorAll('.skill-node, #main-agent, #agentcore, #clone-engine, #mcp-gateway');
-    allNodes.forEach(n => n.style.opacity = '0.35');
-    // Highlight active
-    ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.opacity = '1';
-    });
-}
-
-function resetHighlight() {
-    const allNodes = document.querySelectorAll('.skill-node, #main-agent, #agentcore, #clone-engine, #mcp-gateway');
-    allNodes.forEach(n => n.style.opacity = '1');
-}
-
-// ============ DETAIL PANELS ============
-function showFlowDetail(id) {
-    const data = scenarios[id];
-    const panel = document.getElementById('detail-panel');
-    const header = document.getElementById('detail-header');
-    const icon = document.getElementById('detail-icon');
-    const title = document.getElementById('detail-title');
-    const subtitle = document.getElementById('detail-subtitle');
-    const body = document.getElementById('detail-body');
-
-    panel.classList.remove('hidden');
-    icon.style.background = data.color;
-    icon.textContent = data.skillType === 'native' ? '📄' : data.skillType === 'tool' ? '🔧' : data.skillType === 'task' ? '⚡' : '🔄';
-    title.textContent = '运行时序: ' + data.title;
-    subtitle.textContent = data.subtitle;
-
-    // Build flow steps
-    let html = '<div class="flow-steps">';
-    data.steps.forEach((step, i) => {
-        if (i > 0) html += '<span class="flow-arrow">→</span>';
-        html += `<div class="flow-step">
-            <div class="flow-step-num" style="background:${step.color}">${i+1}</div>
-            <div class="flow-step-label">${step.label}</div>
-            <div class="flow-step-desc">${step.desc}</div>
-        </div>`;
-    });
-    html += '</div>';
-
-    // Add explanation
-    const explanations = {
-        s1: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #2DA44E"><strong>特点：</strong>主Agent读取 SKILL.md 后独立执行全过程。无需外部服务或分身——这是最轻量、最灵活的Skill类型。用户可以通过自然语言"教"Agent新的原生Skill。</p>',
-        s2: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #7C3AED"><strong>特点：</strong>通过 MCP 网关统一调用外部 API。现有的图片Agent、视频Agent等可以直接封装为工具Skill，<strong>改动最小</strong>——不需要分身引擎，只需要API包装。这是从多Agent迁移到统一架构的最低成本路径。</p>',
-        s3: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #EA580C"><strong>特点：</strong>分身引擎派生多个AgentCore实例并行工作，共享Memory但拥有独立执行上下文。<strong>对外呈现为单一Agent</strong>——用户不感知底层有多个分身在工作。执行完毕后，分身的经验回流到主Memory，让Agent越用越强。</p>',
-        s4: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #0969DA"><strong>特点：</strong>两层编排架构——Flow层负责阶段编排（6个Stage），每个Stage内部调用不同类型的Skill（Native/Task/Tool）。支持<strong>跳过、重试、断点续跑</strong>。这是最复杂但也最强大的Skill类型，可以组合其他所有Skill类型。</p>'
-    };
-    html += explanations[id] || '';
-    body.innerHTML = html;
-}
-
-function showMappingDetail() {
-    const panel = document.getElementById('detail-panel');
-    const icon = document.getElementById('detail-icon');
-    const title = document.getElementById('detail-title');
-    const subtitle = document.getElementById('detail-subtitle');
-    const body = document.getElementById('detail-body');
-
-    panel.classList.remove('hidden');
-    icon.style.background = '#0969DA';
-    icon.textContent = '🗺️';
-    title.textContent = '产品 × 能力 映射矩阵';
-    subtitle.textContent = '哪些能力是共享的，哪些是差异化的';
-
-    body.innerHTML = `
-        <div class="mapping-grid">
-            <div class="mapping-cell head">能力</div>
-            <div class="mapping-cell head" style="color:#0969DA">CodeFlicker</div>
-            <div class="mapping-cell head" style="color:#2DA44E">KATE-Studio</div>
-            <div class="mapping-cell head" style="color:#7C3AED">AI个人助理</div>
-
-            <div class="mapping-cell head">主Agent</div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-
-            <div class="mapping-cell head">Memory服务</div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-
-            <div class="mapping-cell head">Ⅰ 原生Skill</div>
-            <div class="mapping-cell"><span class="check">✅ 调研/文档</span></div>
-            <div class="mapping-cell"><span class="check">✅ 报告/分析</span></div>
-            <div class="mapping-cell"><span class="check">✅ 全量</span></div>
-
-            <div class="mapping-cell head">Ⅱ 工具Skill</div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-            <div class="mapping-cell"><span class="check">✅ 图片/视频</span></div>
-            <div class="mapping-cell"><span class="check">✅ 全量</span></div>
-
-            <div class="mapping-cell head">Ⅲ 任务Skill</div>
-            <div class="mapping-cell"><span class="check">✅ CR/重构</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-
-            <div class="mapping-cell head">Ⅳ 流程Skill</div>
-            <div class="mapping-cell"><span class="check">✅ 需求→发布</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-
-            <div class="mapping-cell head">交互形态</div>
-            <div class="mapping-cell">IDE嵌入</div>
-            <div class="mapping-cell">Web应用</div>
-            <div class="mapping-cell">对话+多模态</div>
-
-            <div class="mapping-cell head">典型用户</div>
-            <div class="mapping-cell">研发</div>
-            <div class="mapping-cell">运营/产品</div>
-            <div class="mapping-cell">所有人</div>
-        </div>
-        <div style="margin-top:16px;">
-            <div class="deploy-grid">
-                <div class="deploy-card" style="border-top:3px solid #24292F">
-                    <h4>🖥️ 本地模式</h4>
-                    <div class="items">
-                        <div class="item"><strong>载体：</strong>CodeFlicker IDE</div>
-                        <div class="item"><strong>场景：</strong>研发写代码、个人助理</div>
-                        <div class="item"><strong>Memory：</strong>本地存储 + 云端同步</div>
-                        <div class="item"><strong>优势：</strong>低延迟、数据安全、深度IDE集成</div>
-                    </div>
-                </div>
-                <div class="deploy-card" style="border-top:3px solid #0969DA">
-                    <h4>☁️ 云端模式</h4>
-                    <div class="items">
-                        <div class="item"><strong>载体：</strong>AgentOS as a Service</div>
-                        <div class="item"><strong>场景：</strong>KATE数字员工、批量任务</div>
-                        <div class="item"><strong>Memory：</strong>云端统一存储</div>
-                        <div class="item"><strong>优势：</strong>随时随地、无限并行、弹性扩缩</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// ============ TOOLTIP SYSTEM ============
-const TOOLTIPS = {
-    // Product layer
-    'prod-cf': {
-        color: '#0969DA',
-        title: 'CodeFlicker（研发向）',
-        rows: [
-            ['定位', 'IDE 内的 AI × Coding 助手（低延迟 + 工程上下文）'],
-            ['典型用户', '研发工程师'],
-            ['核心差异', '代码上下文/工程工具链/本地优先'],
-            ['能力边界', '以编码相关为主；非编码能力可通过 Tool/Flow 按需开启'],
-        ],
-    },
-    'prod-kate': {
-        color: '#0969DA',
-        title: 'KATE-Studio（企业数字员工）',
-        rows: [
-            ['定位', '面向企业场景的数字员工/工作流承载'],
-            ['典型用户', '运营/产品/分析/HR 等'],
-            ['核心差异', 'Web 场景 + 批量任务 + 权限/审计'],
-            ['能力边界', '默认只开放经过治理的 Skill 集（稳定/可控）'],
-        ],
-    },
-    'prod-pa': {
-        color: '#0969DA',
-        title: 'AI个人助理（通用）',
-        rows: [
-            ['定位', '对话 + 多模态的通用 Agent（能力覆盖最全）'],
-            ['典型用户', '所有人'],
-            ['核心差异', '个性化最强：偏好/记忆/长期陪伴'],
-            ['能力边界', '强调隐私与可控：敏感记忆可审计/可删除'],
-        ],
-    },
-    'adapt-layer': {
-        color: '#0969DA',
-        title: '产品适配层（差异化关键）',
-        rows: [
-            ['UI适配', '同一能力在 IDE / Web / 移动端呈现不同组件'],
-            ['Skill筛选', '按产品定位过滤可用 Skill（防“全量能力暴露”）'],
-            ['权限模型', '租户/产品/用户三级隔离；企业可控开关'],
-            ['治理接口', '对接 Skill Registry / 安全策略 / 灰度发布'],
-        ],
-    },
-
-    // Agent layer
-    'main-agent': {
-        color: '#1A7F37',
-        title: '主 Agent（统一入口）',
-        rows: [
-            ['主链路', '理解 → 查记忆 → 匹配Skill → 调度执行 → 组装输出'],
-            ['一致性', '跨产品人格一致；同一用户多端共享“可共享”的记忆'],
-            ['边界', '不直接硬编码业务逻辑；能力主要来自 Skills'],
-        ],
-    },
-    'skill-native': {
-        color: '#2DA44E',
-        title: 'Ⅰ 原生 Skill',
-        rows: [
-            ['适用', '纯推理/文本输出/结构化总结'],
-            ['载体', 'SKILL.md（触发词/步骤/输出规范）'],
-            ['优势', '迭代快、成本低、无需外部依赖'],
-        ],
-    },
-    'skill-tool': {
-        color: '#7C3AED',
-        title: 'Ⅱ 工具 Skill（MCP）',
-        rows: [
-            ['适用', '需要外部API（生成/查询/执行）'],
-            ['路径', 'Agent → MCP网关 → Tool → 结果回填'],
-            ['治理', '鉴权/限流/可观测由网关统一处理'],
-        ],
-    },
-    'skill-task': {
-        color: '#EA580C',
-        title: 'Ⅲ 任务 Skill（分身并行）',
-        rows: [
-            ['适用', '可并行拆分：多视角/多维度/多分片'],
-            ['并发', '默认上限 8（可配置）；资源不足时自动降级'],
-            ['回流', '结果汇总 + 经验提炼写回 Memory（可审计）'],
-        ],
-    },
-    'skill-flow': {
-        color: '#0969DA',
-        title: 'Ⅳ 流程 Skill（阶段编排）',
-        rows: [
-            ['适用', '有阶段依赖链：需求→开发→测试→发布'],
-            ['能力', '跳过/重试/断点续跑/人工确认门禁'],
-            ['实现', 'Flow层编排 + Stage内调用任意Skill'],
-        ],
-    },
-
-    // Cross-cutting
-    'pill-eval': {
-        color: '#2DA44E',
-        title: 'Eval（质量评估）',
-        rows: [
-            ['评估维度', '任务完成度/响应质量/用户满意度'],
-            ['用途', 'A/B、灰度门禁、回归测试'],
-            ['产出', '分数+原因+改进建议，回流到Reflection/Memory'],
-        ],
-    },
-    'pill-security': {
-        color: '#CF222E',
-        title: '安全（多层防护）',
-        rows: [
-            ['输入', '注入检测/越权意图拦截'],
-            ['输出', '脱敏/合规过滤/幻觉风险提示'],
-            ['执行', '工具沙箱/权限最小化/审计日志'],
-        ],
-    },
-    'pill-observability': {
-        color: '#BF8700',
-        title: '可观测（工程化必备）',
-        rows: [
-            ['链路', '请求→计划→工具→结果 全链路追踪'],
-            ['指标', '延迟/成功率/Token成本/并发'],
-            ['告警', '错误率、超时、成本异常、权限拒绝'],
-        ],
-    },
-    'pill-memory': {
-        color: '#0969DA',
-        title: 'Memory 服务（护城河）',
-        rows: [
-            ['分层', 'L1工作记忆 / L2情景记忆 / L3语义记忆'],
-            ['检索', '关键词+语义+时间衰减 混合召回'],
-            ['隔离', '租户→产品→用户；敏感可删除可审计'],
-        ],
-    },
-    'pill-skill-registry': {
-        color: '#7C3AED',
-        title: 'Skill 注册中心（治理）',
-        rows: [
-            ['管理', '元数据/版本/依赖/权限/SLA'],
-            ['发布', '灰度/AB/回滚/下线'],
-            ['发现', '触发词精确匹配 + 语义匹配 + 上下文加权'],
-        ],
-    },
-
-    // AgentCore
-    'ac-memory': {
-        color: '#24292F',
-        title: 'AgentCore: Memory',
-        rows: [
-            ['职责', '读写记忆；去重/提炼；可审计可删除'],
-            ['输入', '对话/任务日志/用户显式指令'],
-            ['输出', '检索结果 + 结构化画像（供Reasoning/Planning使用）'],
-        ],
-    },
-    'ac-reasoning': {
-        color: '#24292F',
-        title: 'AgentCore: Reasoning',
-        rows: [
-            ['职责', '意图识别/消歧/隐含需求推断'],
-            ['输入', '用户输入 + Memory上下文'],
-            ['输出', '结构化意图（Intent）与约束（Constraints）'],
-        ],
-    },
-    'ac-planning': {
-        color: '#24292F',
-        title: 'AgentCore: Planning',
-        rows: [
-            ['职责', '把Intent分解为可执行的Stage DAG'],
-            ['输入', 'Intent + 工具/Skill能力清单'],
-            ['输出', '计划（步骤/依赖/校验点/回滚点）'],
-        ],
-    },
-    'ac-orchestration': {
-        color: '#24292F',
-        title: 'AgentCore: Orchestration',
-        rows: [
-            ['职责', '调度执行（并发/超时/重试/资源控制）'],
-            ['输入', 'Planning产出的DAG + Runtime约束'],
-            ['输出', '执行轨迹与中间态（供观测/回放）'],
-        ],
-    },
-    'ac-reflection': {
-        color: '#24292F',
-        title: 'AgentCore: Reflection',
-        rows: [
-            ['职责', '自评/复盘；把经验写回Memory（可控）'],
-            ['输入', '结果 + Eval分数/错误原因'],
-            ['输出', '改进建议/经验条目/策略调整'],
-        ],
-    },
-    'ac-integration': {
-        color: '#24292F',
-        title: 'AgentCore: Integration',
-        rows: [
-            ['职责', '外部服务接入与路由（LLM/搜索/CI/CD）'],
-            ['输入', '调用请求 + 鉴权/配额'],
-            ['输出', '统一结果/错误码/重试语义'],
-        ],
-    },
-
-    // Infra & runtime
-    'clone-engine': {
-        color: '#EA580C',
-        title: 'Clone Engine（分身引擎）',
-        rows: [
-            ['继承', 'Memory快照 + 任务上下文；默认不共享实时上下文'],
-            ['并发', '默认 8；可按租户/任务类型限额'],
-            ['合并', '结构化汇总 + 冲突检测；经验回流可审计'],
-        ],
-    },
-    'mcp-gateway': {
-        color: '#7C3AED',
-        title: 'MCP 网关（工具统一调用层）',
-        rows: [
-            ['注册', 'Tool schema/权限/版本 注册与发现'],
-            ['治理', '鉴权/限流/熔断/重试/成本控制'],
-            ['兼容', '同步/异步工具统一封装为一致调用语义'],
-        ],
-    },
-    'rt-local': {
-        color: '#24292F',
-        title: '本地模式（IDE嵌入）',
-        rows: [
-            ['优势', '低延迟；直接访问代码与文件系统'],
-            ['限制', '并发受本机资源限制；长任务可能降级到云端'],
-            ['记忆', '本地缓存 + 可选云端同步（冲突策略）'],
-        ],
-    },
-    'rt-cloud': {
-        color: '#0969DA',
-        title: '云端模式（AgentOS as a Service）',
-        rows: [
-            ['优势', '弹性扩缩；适合长任务/批量Flow/多分身'],
-            ['限制', '需要更强权限与审计；网络依赖'],
-            ['记忆', '云端统一存储；支持跨设备一致体验'],
-        ],
-    },
-};
-
-function renderTooltipContent(tip) {
-    const dot = `<span class="tt-dot" style="background:${tip.color || '#D0D7DE'}"></span>`;
-    const rows = (tip.rows || []).map(([k, v]) => (
-        `<div class="tt-row"><div class="tt-k">${k}</div><div class="tt-v">${v}</div></div>`
-    )).join('');
-    return `<div class="tt-title">${dot}<span>${tip.title || ''}</span></div><div class="tt-body">${rows}</div>`;
-}
-
-function bindTooltip(targetEl) {
-    const id = targetEl.id;
-    if (!id) return;
-    const tip = TOOLTIPS[id];
-    if (!tip) return;
-
-    const tooltip = document.getElementById('cf-tooltip');
-    if (!tooltip) return;
-
-    const show = (evt) => {
-        tooltip.innerHTML = renderTooltipContent(tip);
-        tooltip.classList.add('visible');
-        tooltip.setAttribute('aria-hidden', 'false');
-        move(evt);
-    };
-
-    const hide = () => {
-        tooltip.classList.remove('visible');
-        tooltip.setAttribute('aria-hidden', 'true');
-    };
-
-    const move = (evt) => {
-        const pad = 12;
-        const offset = 14;
-        const x = (evt.clientX ?? 0) + offset;
-        const y = (evt.clientY ?? 0) + offset;
-
-        tooltip.style.left = '0px';
-        tooltip.style.top = '0px';
-        const rect = tooltip.getBoundingClientRect();
-
-        let left = x;
-        let top = y;
-        if (left + rect.width + pad > window.innerWidth) left = Math.max(pad, window.innerWidth - rect.width - pad);
-        if (top + rect.height + pad > window.innerHeight) top = Math.max(pad, (evt.clientY ?? 0) - rect.height - offset);
-
-        tooltip.style.left = left + 'px';
-        tooltip.style.top = top + 'px';
-    };
-
-    targetEl.addEventListener('mouseenter', show);
-    targetEl.addEventListener('mousemove', move);
-    targetEl.addEventListener('mouseleave', hide);
-}
-
-// ============ CLICK HANDLERS FOR SVG COMPONENTS + TOOLTIP BINDING ============
-document.addEventListener('DOMContentLoaded', () => {
-    // Make SVG nodes hoverable
-    const hoverIds = Object.keys(TOOLTIPS);
-    hoverIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.classList.add('tip-target');
-        bindTooltip(el);
-    });
-
-    // Skill nodes click
-    document.querySelectorAll('.skill-node').forEach(node => {
-        node.classList.add('tip-target', 'tip-clickable');
-        node.addEventListener('click', () => {
-            const skill = node.getAttribute('data-skill');
-            const map = { native: 's1', tool: 's2', task: 's3', flow: 's4' };
-            if (map[skill]) activateScenario(map[skill]);
-        });
-    });
-});
-</script>
 </body>
 </html>

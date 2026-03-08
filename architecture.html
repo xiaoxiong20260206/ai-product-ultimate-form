@@ -239,44 +239,6 @@
             padding-bottom: 20px;
         }
 
-        /* Mapping Grid */
-        .mapping-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 1px; background: var(--c-border-light);
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-md); overflow: hidden;
-        }
-        .mapping-cell {
-            background: var(--c-card); padding: 10px 12px;
-            font-size: 12px; text-align: center;
-        }
-        .mapping-cell.head {
-            background: var(--c-table-head);
-            font-weight: 700; color: var(--c-text); font-size: 12px;
-        }
-        .mapping-cell .check { color: var(--c-agent-light); font-weight: 700; }
-        .mapping-cell .optional { color: var(--c-skill-tool); }
-        .mapping-cell .no { color: var(--c-border); }
-
-        /* Deploy Compare */
-        .deploy-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-        }
-        .deploy-card {
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-md); padding: 16px; text-align: center;
-        }
-        .deploy-card h4 {
-            font-size: 14px; font-weight: 700; color: var(--c-text);
-            margin-bottom: 8px;
-        }
-        .deploy-card .items { text-align: left; }
-        .deploy-card .item {
-            font-size: 12px; color: var(--c-text-2);
-            padding: 3px 0; border-bottom: 1px solid var(--c-border-light);
-        }
-        .deploy-card .item:last-child { border-bottom: none; }
-
         /* Skill Detail Boxes */
         .skill-detail-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
@@ -328,12 +290,10 @@
                 grid-column: 1 / -1;
             }
             .skill-detail-grid { grid-template-columns: 1fr; }
-            .deploy-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 600px) {
             .header h1 { font-size: 22px; }
             .scenario-panel { grid-template-columns: 1fr; }
-            .mapping-grid { grid-template-columns: repeat(2, 1fr); }
             .tab-btn span:not(.tab-btn-num) { display: none; }
             .flow-steps { flex-wrap: wrap; justify-content: center; }
         }
@@ -496,14 +456,13 @@
     <header class="header">
         <div class="header-badge">🗺️ Architecture Panorama</div>
         <h1>统一AI产品架构全景图</h1>
-        <p>一张图看清：三层架构 · 四类技能 · 实例模型 · 产品映射 · 游戏类比</p>
+        <p>一张图看清：三层架构 · 四类技能 · 实例模型 · 游戏类比</p>
     </header>
 
     <!-- View Tabs -->
     <div class="view-tabs">
         <button class="view-tab active" data-view="structure" onclick="switchView('structure')">结构视图</button>
         <button class="view-tab" data-view="runtime" onclick="switchView('runtime')">运行视图</button>
-        <button class="view-tab" data-view="mapping" onclick="switchView('mapping')">映射视图</button>
         <button class="view-tab" data-view="analogy" onclick="switchView('analogy')">🎮 游戏类比</button>
     </div>
 
@@ -985,41 +944,6 @@
                     </g>
                 </g>
 
-                <!-- ======== MAPPING OVERLAY (initially hidden) ======== -->
-                <g id="mapping-overlay" opacity="0">
-                    <!-- CodeFlicker highlight -->
-                    <rect x="128" y="30" width="124" height="44" rx="10" fill="none" stroke="#0969DA" stroke-width="2.5" stroke-dasharray="4,3">
-                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-                    <!-- Lines from CF to skills -->
-                    <line x1="190" y1="74" x2="199" y2="206" stroke="#0969DA" stroke-width="1" opacity="0.5"/>
-                    <line x1="190" y1="74" x2="499" y2="206" stroke="#EA580C" stroke-width="1" opacity="0.5"/>
-                    <line x1="190" y1="74" x2="649" y2="206" stroke="#0969DA" stroke-width="1" opacity="0.5"/>
-                    <!-- KATE highlight -->
-                    <rect x="263" y="30" width="124" height="44" rx="10" fill="none" stroke="#2DA44E" stroke-width="2.5" stroke-dasharray="4,3">
-                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-                    <line x1="325" y1="74" x2="199" y2="206" stroke="#2DA44E" stroke-width="1" opacity="0.5"/>
-                    <line x1="325" y1="74" x2="349" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.5"/>
-                    <!-- PA highlight -->
-                    <rect x="398" y="30" width="124" height="44" rx="10" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-dasharray="4,3">
-                        <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-                    <line x1="460" y1="74" x2="199" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <line x1="460" y1="74" x2="349" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <line x1="460" y1="74" x2="499" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <line x1="460" y1="74" x2="649" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                    <!-- Legend -->
-                    <g transform="translate(130, 740)">
-                        <text x="0" y="12" font-size="8" font-weight="600" fill="#656D76">映射关系: </text>
-                        <line x1="65" y1="8" x2="85" y2="8" stroke="#0969DA" stroke-width="2"/>
-                        <text x="90" y="12" font-size="8" fill="#0969DA">CodeFlicker 核心能力</text>
-                        <line x1="210" y1="8" x2="230" y2="8" stroke="#2DA44E" stroke-width="2"/>
-                        <text x="235" y="12" font-size="8" fill="#2DA44E">KATE-Studio 核心能力</text>
-                        <line x1="380" y1="8" x2="400" y2="8" stroke="#7C3AED" stroke-width="2"/>
-                        <text x="405" y="12" font-size="8" fill="#7C3AED">AI个人助理 全量能力</text>
-                    </g>
-                </g>
             </svg>
         </div>
     </div>
@@ -1044,7 +968,7 @@
                 <h4>Ⅰ 原生 Skill (Native)</h4>
                 <p><strong>实例模式：</strong>派 1 个独立工作实例（会话），带 Skill 指令独立完成；不依赖外部 API</p>
                 <p><strong>游戏类比：</strong>🎮 派一个角色去做单人支线任务，做完回来交经验</p>
-                <p><strong>生命周期：</strong>创建 → 注入Skill → 独立执行 → 经验回流 → 会话销毁</p>
+                <p><strong>生命周期：</strong>创建 → 注入Skill → 独立执行 → 经验回流 → 实例销毁</p>
                 <div class="examples">
                     <span class="example-tag">📊 行业调研</span>
                     <span class="example-tag">📝 文档撰写</span>
@@ -1056,7 +980,7 @@
                 <h4>Ⅱ 工具 Skill (Tool/MCP)</h4>
                 <p><strong>实例模式：</strong>派 1 个独立工作实例（会话），通过 MCP 网关调用外部 API；网关统一鉴权/限流</p>
                 <p><strong>游戏类比：</strong>🎮 派一个角色去 NPC 商店买装备/找铁匠打造</p>
-                <p><strong>生命周期：</strong>创建 → 注入Skill → 调API → 经验回流 → 会话销毁</p>
+                <p><strong>生命周期：</strong>创建 → 注入Skill → 调API → 经验回流 → 实例销毁</p>
                 <div class="examples">
                     <span class="example-tag">🖼️ 图片生成</span>
                     <span class="example-tag">🎬 视频生成</span>
@@ -1068,7 +992,7 @@
                 <h4>Ⅲ 任务 Skill (Task)</h4>
                 <p><strong>实例模式：</strong>派 N 个并行工作实例（Task），各带不同 Skill；各自独立上下文，结果汇总后经验回流</p>
                 <p><strong>游戏类比：</strong>🎮 组队打副本：多角色同时出战，各有分工</p>
-                <p><strong>生命周期：</strong>创廾N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁</p>
+                <p><strong>生命周期：</strong>创建N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁</p>
                 <div class="examples">
                     <span class="example-tag">🔎 CR代码审查</span>
                     <span class="example-tag">♻️ 重构评审</span>
@@ -1078,8 +1002,8 @@
             <div class="skill-detail-box flow">
                 <h4>Ⅳ 流程 Skill (Flow)</h4>
                 <p><strong>实例模式：</strong>1 个总控实例（Flow）编排多阶段，每阶段派执行实例（可是Native/Tool/Task任意组合）</p>
-                <p><strong>游戏类比：</strong>🎮 多阶段 Raid Boss 战：指挥官喜户多小队，各司其职</p>
-                <p><strong>能力：</strong>跳过/重试/断点续跑/人工确认门禁；总控会话最后销毁</p>
+                <p><strong>游戏类比：</strong>🎮 多阶段 Raid Boss 战：指挥官调度多小队，各司其职</p>
+                <p><strong>能力：</strong>跳过/重试/断点续跑/人工确认门禁；总控实例最后销毁</p>
                 <div class="examples">
                     <span class="example-tag">🚀 需求→发布全链路</span>
                     <span class="example-tag">🏗️ 项目初始化</span>
@@ -1242,7 +1166,7 @@
         <div class="analogy-row">
             <div class="analogy-card">
                 <h3 style="color:var(--c-os)">⚙️ Agent OS — 底层运行时</h3>
-                <p>提供所有会话共用的基础能力，<strong>与Agent层在同一进程内</strong>（函数调用，非远程通信）。</p>
+                <p>提供所有实例共用的基础能力，<strong>与Agent层在同一进程内</strong>（函数调用，非远程通信）。</p>
                 <ul>
                     <li><strong>AgentCore 六能力：</strong>Memory · Reasoning · Planning · Orchestration · Reflection · Integration</li>
                     <li><strong>Instance Manager：</strong>创建/监控/回收/汇总独立工作实例</li>
@@ -1334,64 +1258,64 @@ let currentScenario = null;
 const scenarios = {
     s1: {
         title: '"帮我写个调研报告"',
-        subtitle: '原生Skill · 派1个独立实例执行',
+        subtitle: '原生Skill · 1个独立实例（会话）执行',
         color: '#2DA44E',
         skillType: 'native',
         steps: [
             { label: '语义理解', desc: '识别意图=调研', color: '#2DA44E' },
             { label: '查Memory', desc: '偏好:清爽报告', color: '#2DA44E' },
             { label: '匹配Skill', desc: 'industry-research', color: '#2DA44E' },
-            { label: '加载执行', desc: '读SKILL.md指令', color: '#2DA44E' },
+            { label: '派实例', desc: '创建1个独立工作实例', color: '#2DA44E' },
             { label: '搜索资料', desc: 'search_web调用', color: '#2DA44E' },
             { label: '生成报告', desc: '整理分析输出', color: '#2DA44E' },
-            { label: '经验沉淀', desc: 'Memory记录', color: '#2DA44E' }
+            { label: '经验回流', desc: '实例销毁、Memory记录', color: '#2DA44E' }
         ],
         highlight: ['main-agent', 'skill-native', 'agentcore']
     },
     s2: {
         title: '"帮我生成一张配图"',
-        subtitle: '工具Skill · 派1个实例调MCP外部API',
+        subtitle: '工具Skill · 1个实例（会话）+ MCP调外部API',
         color: '#7C3AED',
         skillType: 'tool',
         steps: [
             { label: '语义理解', desc: '识别意图=生图', color: '#7C3AED' },
             { label: '查Memory', desc: '偏好:风格/尺寸', color: '#7C3AED' },
             { label: '匹配Skill', desc: 'image-gen Tool', color: '#7C3AED' },
-            { label: 'MCP调用', desc: '网关转发请求', color: '#7C3AED' },
+            { label: '派实例', desc: '创建1个实例 + MCP调用', color: '#7C3AED' },
             { label: '外部API', desc: '图片生成服务', color: '#7C3AED' },
-            { label: '返回结果', desc: '展示生成图片', color: '#7C3AED' }
+            { label: '经验回流', desc: '实例销毁、结果返回', color: '#7C3AED' }
         ],
         highlight: ['main-agent', 'skill-tool', 'mcp-gateway']
     },
     s3: {
         title: '"帮我Review这个PR"',
-        subtitle: '任务Skill · 派3个并行实例协作',
+        subtitle: '任务Skill · 派N个并行实例（Task）协作',
         color: '#EA580C',
         skillType: 'task',
         steps: [
             { label: '语义理解', desc: '识别意图=CR', color: '#EA580C' },
             { label: '查Memory', desc: '代码规范偏好', color: '#EA580C' },
             { label: '匹配Skill', desc: 'code-review Task', color: '#EA580C' },
-            { label: '派生分身', desc: '3个独立实例', color: '#EA580C' },
+            { label: '派多实例', desc: '创建3个独立工作实例', color: '#EA580C' },
             { label: '并行执行', desc: '读码/审查/总结', color: '#EA580C' },
             { label: '汇总结果', desc: '合并审查建议', color: '#EA580C' },
-            { label: '经验回流', desc: '分身经验沉淀', color: '#EA580C' }
+            { label: '经验回流', desc: '实例全部销毁、经验写入Memory', color: '#EA580C' }
         ],
         highlight: ['main-agent', 'skill-task', 'clone-engine', 'agentcore']
     },
     s4: {
         title: '"帮我把需求做到上线"',
-        subtitle: '流程Skill · 1总控实例编排6阶段',
+        subtitle: '流程Skill · 1总控实例（Flow）编排6阶段',
         color: '#0969DA',
         skillType: 'flow',
         steps: [
             { label: '语义理解', desc: '识别=全链路', color: '#0969DA' },
             { label: '查Memory', desc: '项目上下文', color: '#0969DA' },
             { label: '匹配Skill', desc: 'dev-pipeline Flow', color: '#0969DA' },
-            { label: 'Planning', desc: '分解6个阶段', color: '#0969DA' },
-            { label: '逐阶段执行', desc: 'Task/Tool/Native', color: '#0969DA' },
+            { label: '总控编排', desc: '创建总控实例，分解6阶段', color: '#0969DA' },
+            { label: '逐阶段派遣', desc: '每阶段派执行实例', color: '#0969DA' },
             { label: '阶段验证', desc: '检查点确认', color: '#0969DA' },
-            { label: '完成发布', desc: '全链路完毕', color: '#0969DA' }
+            { label: '完成发布', desc: '全部实例销毁、经验回流', color: '#0969DA' }
         ],
         highlight: ['main-agent', 'skill-flow', 'agentcore', 'clone-engine', 'mcp-gateway']
     }
@@ -1405,17 +1329,14 @@ function switchView(view) {
     document.querySelector(`.view-tab[data-view="${view}"]`).classList.add('active');
 
     const flowPaths = document.getElementById('flow-paths');
-    const mappingOverlay = document.getElementById('mapping-overlay');
 
     if (view === 'structure') {
         flowPaths.setAttribute('opacity', '0');
-        mappingOverlay.setAttribute('opacity', '0');
         resetScenario();
         document.getElementById('skill-overview').style.display = 'block';
         document.querySelector('.main-layout').style.display = 'grid';
         document.getElementById('analogy-view').classList.remove('visible');
     } else if (view === 'runtime') {
-        mappingOverlay.setAttribute('opacity', '0');
         flowPaths.setAttribute('opacity', '1');
         document.getElementById('skill-overview').style.display = 'none';
         document.querySelector('.main-layout').style.display = 'grid';
@@ -1423,17 +1344,8 @@ function switchView(view) {
         if (!currentScenario) {
             activateScenario('s1');
         }
-    } else if (view === 'mapping') {
-        flowPaths.setAttribute('opacity', '0');
-        mappingOverlay.setAttribute('opacity', '1');
-        resetScenario();
-        document.getElementById('skill-overview').style.display = 'none';
-        document.querySelector('.main-layout').style.display = 'grid';
-        document.getElementById('analogy-view').classList.remove('visible');
-        showMappingDetail();
     } else if (view === 'analogy') {
         flowPaths.setAttribute('opacity', '0');
-        mappingOverlay.setAttribute('opacity', '0');
         resetScenario();
         document.getElementById('skill-overview').style.display = 'none';
         document.querySelector('.main-layout').style.display = 'none';
@@ -1444,13 +1356,11 @@ function switchView(view) {
 
 // ============ SCENARIO ACTIVATION ============
 function activateScenario(id) {
-    if (currentView === 'mapping') switchView('runtime');
     if (currentView === 'structure') {
         currentView = 'runtime';
         document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
         document.querySelector('.view-tab[data-view="runtime"]').classList.add('active');
         document.getElementById('flow-paths').setAttribute('opacity', '1');
-        document.getElementById('mapping-overlay').setAttribute('opacity', '0');
         document.getElementById('skill-overview').style.display = 'none';
     }
 
@@ -1531,98 +1441,13 @@ function showFlowDetail(id) {
 
     // Add explanation
     const explanations = {
-        s1: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #2DA44E"><strong>特点：</strong>主Agent读取 SKILL.md 后独立执行全过程。无需外部服务或分身——这是最轻量、最灵活的Skill类型。用户可以通过自然语言"教"Agent新的原生Skill。</p>',
-        s2: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #7C3AED"><strong>特点：</strong>通过 MCP 网关统一调用外部 API。现有的图片Agent、视频Agent等可以直接封装为工具Skill，<strong>改动最小</strong>——不需要分身引擎，只需要API包装。这是从多Agent迁移到统一架构的最低成本路径。</p>',
-        s3: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #EA580C"><strong>特点：</strong>分身引擎派生多个AgentCore实例并行工作，共享Memory但拥有独立执行上下文。<strong>对外呈现为单一Agent</strong>——用户不感知底层有多个分身在工作。执行完毕后，分身的经验回流到主Memory，让Agent越用越强。</p>',
-        s4: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #0969DA"><strong>特点：</strong>两层编排架构——Flow层负责阶段编排（6个Stage），每个Stage内部调用不同类型的Skill（Native/Task/Tool）。支持<strong>跳过、重试、断点续跑</strong>。这是最复杂但也最强大的Skill类型，可以组合其他所有Skill类型。</p>'
+        s1: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #2DA44E"><strong>特点：</strong>主Agent派出1个独立工作实例（会话形式），带Skill指令独立完成全过程。无需外部服务或并行——这是最轻量、最灵活的Skill类型。用户可以通过自然语言"教"Agent新的原生Skill。</p>',
+        s2: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #7C3AED"><strong>特点：</strong>1个工作实例（会话形式）通过MCP网关调用外部API。现有的图片Agent、视频Agent等可以直接封装为工具Skill——不需要并行实例，只需API包装。这是从多Agent迁移到统一架构的<strong>最低成本路径</strong>。</p>',
+        s3: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #EA580C"><strong>特点：</strong>实例管理器派生N个并行工作实例（Task形式），共享Memory但各自独立上下文。<strong>对外呈现为单一Agent</strong>——用户不感知底层有多个实例在工作。执行完毕后经验回流到主Memory，实例全部销毁。</p>',
+        s4: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #0969DA"><strong>特点：</strong>1个总控实例（Flow形式）编排多阶段，每个阶段可以派出不同类型的执行实例（Native/Task/Tool）。支持<strong>跳过、重试、断点续跑</strong>。这是最复杂但也最强大的Skill类型，可以组合其他所有Skill类型。</p>'
     };
     html += explanations[id] || '';
     body.innerHTML = html;
-}
-
-function showMappingDetail() {
-    const panel = document.getElementById('detail-panel');
-    const icon = document.getElementById('detail-icon');
-    const title = document.getElementById('detail-title');
-    const subtitle = document.getElementById('detail-subtitle');
-    const body = document.getElementById('detail-body');
-
-    panel.classList.remove('hidden');
-    icon.style.background = '#0969DA';
-    icon.textContent = '🗺️';
-    title.textContent = '产品 × 能力 映射矩阵';
-    subtitle.textContent = '哪些能力是共享的，哪些是差异化的';
-
-    body.innerHTML = `
-        <div class="mapping-grid">
-            <div class="mapping-cell head">能力</div>
-            <div class="mapping-cell head" style="color:#0969DA">CodeFlicker</div>
-            <div class="mapping-cell head" style="color:#2DA44E">KATE-Studio</div>
-            <div class="mapping-cell head" style="color:#7C3AED">AI个人助理</div>
-
-            <div class="mapping-cell head">主Agent</div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-
-            <div class="mapping-cell head">Memory服务</div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-            <div class="mapping-cell"><span class="check">✅ 核心</span></div>
-
-            <div class="mapping-cell head">Ⅰ 原生Skill</div>
-            <div class="mapping-cell"><span class="check">✅ 调研/文档</span></div>
-            <div class="mapping-cell"><span class="check">✅ 报告/分析</span></div>
-            <div class="mapping-cell"><span class="check">✅ 全量</span></div>
-
-            <div class="mapping-cell head">Ⅱ 工具Skill</div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-            <div class="mapping-cell"><span class="check">✅ 图片/视频</span></div>
-            <div class="mapping-cell"><span class="check">✅ 全量</span></div>
-
-            <div class="mapping-cell head">Ⅲ 任务Skill</div>
-            <div class="mapping-cell"><span class="check">✅ CR/重构</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-
-            <div class="mapping-cell head">Ⅳ 流程Skill</div>
-            <div class="mapping-cell"><span class="check">✅ 需求→发布</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-            <div class="mapping-cell"><span class="optional">○ 可选</span></div>
-
-            <div class="mapping-cell head">交互形态</div>
-            <div class="mapping-cell">IDE嵌入</div>
-            <div class="mapping-cell">Web应用</div>
-            <div class="mapping-cell">对话+多模态</div>
-
-            <div class="mapping-cell head">典型用户</div>
-            <div class="mapping-cell">研发</div>
-            <div class="mapping-cell">运营/产品</div>
-            <div class="mapping-cell">所有人</div>
-        </div>
-        <div style="margin-top:16px;">
-            <div class="deploy-grid">
-                <div class="deploy-card" style="border-top:3px solid #24292F">
-                    <h4>🖥️ 本地模式</h4>
-                    <div class="items">
-                        <div class="item"><strong>载体：</strong>CodeFlicker IDE</div>
-                        <div class="item"><strong>场景：</strong>研发写代码、个人助理</div>
-                        <div class="item"><strong>Memory：</strong>本地存储 + 云端同步</div>
-                        <div class="item"><strong>优势：</strong>低延迟、数据安全、深度IDE集成</div>
-                    </div>
-                </div>
-                <div class="deploy-card" style="border-top:3px solid #0969DA">
-                    <h4>☁️ 云端模式</h4>
-                    <div class="items">
-                        <div class="item"><strong>载体：</strong>AgentOS as a Service</div>
-                        <div class="item"><strong>场景：</strong>KATE数字员工、批量任务</div>
-                        <div class="item"><strong>Memory：</strong>云端统一存储</div>
-                        <div class="item"><strong>优势：</strong>随时随地、无限并行、弹性扩缩</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
 }
 
 // ============ TOOLTIP SYSTEM ============
@@ -1703,7 +1528,7 @@ const TOOLTIPS = {
         rows: [
             ['模式', '派N个并行工作实例（Task），各带不同Skill协作'],
             ['类比', '🎮 组队打副本：多角色同时出战'],
-            ['生命周期', '创廾N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁'],
+            ['生命周期', '创建N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁'],
         ],
     },
     'skill-flow': {

@@ -284,6 +284,15 @@
         .os-block .os-name { font-size: 11px; font-weight: 700; color: var(--c-text); }
         .os-block .os-sub { font-size: 10px; color: var(--c-text-3); }
         .os-block .os-game { font-size: 9px; color: var(--c-text-3); font-style: italic; margin-top: 3px; }
+        .os-caps-inline {
+            display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
+            padding-top: 7px; border-top: 1px dashed var(--c-border-light);
+        }
+        .os-caps-inline .os-cap {
+            padding: 2px 7px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 600; background: #F3F5F7;
+            color: var(--c-text-2);
+        }
         .os-caps {
             display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;
             padding-top: 8px; border-top: 1px solid var(--c-border-light);
@@ -677,6 +686,14 @@
                     <div class="os-name">AgentCore 六大能力</div>
                     <div class="os-sub">通用推理 / 规划 / 反思引擎</div>
                     <div class="os-game">🎮 = 物理引擎 + AI系统</div>
+                    <div class="os-caps-inline">
+                        <span class="os-cap">记忆</span>
+                        <span class="os-cap">推理</span>
+                        <span class="os-cap">规划</span>
+                        <span class="os-cap">编排</span>
+                        <span class="os-cap">反思</span>
+                        <span class="os-cap">集成</span>
+                    </div>
                 </div>
                 <div class="os-block" id="os-instance-mgr">
                     <div class="os-icon">⚡</div>
@@ -692,12 +709,6 @@
                 </div>
             </div>
             <div class="os-caps">
-                <span class="os-cap">Memory</span>
-                <span class="os-cap">Reasoning</span>
-                <span class="os-cap">Planning</span>
-                <span class="os-cap">Orchestration</span>
-                <span class="os-cap">Reflection</span>
-                <span class="os-cap">Integration</span>
                 <span class="os-cap" style="margin-left:auto;background:#E6F7ED;color:#1A7F37">🖥️ 本地 / ☁️ 云端</span>
             </div>
         </div>

@@ -12,10 +12,10 @@
             --c-agent-light: #2DA44E;
             --c-os: #24292F;
             --c-os-light: #3D444D;
-            --c-skill-native: #2DA44E;
-            --c-skill-tool: #7C3AED;
-            --c-skill-task: #EA580C;
-            --c-skill-flow: #0969DA;
+            --c-native: #2DA44E;
+            --c-tool: #7C3AED;
+            --c-task: #EA580C;
+            --c-flow: #0969DA;
             --c-text: #1F2328;
             --c-text-2: #4D5561;
             --c-text-3: #656D76;
@@ -23,7 +23,6 @@
             --c-border-light: #E8ECF0;
             --c-bg: #F6F8FA;
             --c-card: #FFFFFF;
-            --c-table-head: #F3F5F7;
             --shadow-sm: 0 1px 3px rgba(31,35,40,.06);
             --shadow-card: 0 2px 8px rgba(31,35,40,.06), 0 1px 2px rgba(31,35,40,.04);
             --shadow-hover: 0 8px 24px rgba(31,35,40,.12);
@@ -33,14 +32,11 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: var(--font);
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--c-text-2);
-            background: var(--c-bg);
+            font-family: var(--font); font-size: 15px; line-height: 1.6;
+            color: var(--c-text-2); background: var(--c-bg);
             -webkit-font-smoothing: antialiased;
         }
-        .page { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
+        .page { max-width: 1120px; margin: 0 auto; padding: 24px 20px 48px; }
 
         /* === TAB NAV === */
         .tab-nav {
@@ -55,8 +51,7 @@
             gap: 6px; padding: 11px 14px; background: transparent; border: none;
             border-radius: var(--r-md); cursor: pointer; font-family: inherit;
             font-size: 12px; font-weight: 500; color: var(--c-text-3);
-            text-decoration: none; white-space: nowrap;
-            transition: all 200ms var(--ease);
+            text-decoration: none; white-space: nowrap; transition: all 200ms var(--ease);
         }
         .tab-btn:hover { background: var(--c-bg); color: var(--c-text); }
         .tab-btn.active {
@@ -64,615 +59,419 @@
             color: #fff; font-weight: 600;
             box-shadow: 0 2px 8px rgba(9,105,218,.25);
         }
-        .tab-btn-num {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 20px; height: 20px; border-radius: var(--r-full);
-            font-size: 11px; font-weight: 700;
-        }
-        .tab-btn.active .tab-btn-num { background: rgba(255,255,255,.2); }
 
         /* === HEADER === */
-        .header { text-align: center; margin-bottom: 32px; }
+        .header { text-align: center; margin-bottom: 28px; }
         .header-badge {
             display: inline-flex; align-items: center; gap: 6px;
             padding: 4px 14px; border-radius: var(--r-full);
             background: linear-gradient(135deg, #E6F7ED 0%, #E1F0F8 100%);
             color: var(--c-product); font-size: 12px; font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .header h1 {
-            font-size: 28px; font-weight: 800; color: var(--c-text);
-            letter-spacing: -0.5px; margin-bottom: 8px;
+            font-size: 26px; font-weight: 800; color: var(--c-text);
+            letter-spacing: -0.5px; margin-bottom: 6px;
         }
-        .header p { font-size: 14px; color: var(--c-text-3); max-width: 600px; margin: 0 auto; }
+        .header p { font-size: 13px; color: var(--c-text-3); }
 
-        /* === VIEW TABS === */
-        .view-tabs {
-            display: flex; gap: 4px; justify-content: center; margin-bottom: 24px;
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-full); padding: 4px; width: fit-content; margin-left: auto; margin-right: auto;
+        /* === SCENARIO BAR === */
+        .scenario-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 8px; margin-bottom: 24px;
         }
-        .view-tab {
-            padding: 8px 20px; border: none; background: transparent;
-            border-radius: var(--r-full); cursor: pointer; font-family: inherit;
-            font-size: 13px; font-weight: 500; color: var(--c-text-3);
-            transition: all 200ms var(--ease);
-        }
-        .view-tab:hover { color: var(--c-text); background: var(--c-bg); }
-        .view-tab.active {
-            background: var(--c-text); color: #fff; font-weight: 600;
-        }
-
-        /* === MAIN LAYOUT === */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 20px;
-            align-items: start;
-        }
-
-        /* === SCENARIO PANEL === */
-        .scenario-panel { display: flex; flex-direction: column; gap: 10px; }
-        .scenario-label {
-            font-size: 11px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 0.5px; color: var(--c-text-3); padding: 0 4px;
-            margin-bottom: 2px;
-        }
-        .scenario-card {
+        .sc-btn {
             background: var(--c-card); border: 1.5px solid var(--c-border-light);
-            border-radius: var(--r-md); padding: 14px;
+            border-radius: var(--r-md); padding: 10px 12px;
             cursor: pointer; transition: all 250ms var(--ease);
-            position: relative; overflow: hidden;
+            text-align: left; position: relative; overflow: hidden;
         }
-        .scenario-card::before {
+        .sc-btn::before {
             content: ''; position: absolute; left: 0; top: 0; bottom: 0;
             width: 3px; border-radius: 0 3px 3px 0;
-            transition: all 250ms var(--ease);
         }
-        .scenario-card[data-skill="native"]::before { background: var(--c-skill-native); }
-        .scenario-card[data-skill="tool"]::before { background: var(--c-skill-tool); }
-        .scenario-card[data-skill="task"]::before { background: var(--c-skill-task); }
-        .scenario-card[data-skill="flow"]::before { background: var(--c-skill-flow); }
-        .scenario-card:hover {
-            border-color: var(--c-border);
-            box-shadow: var(--shadow-card);
-            transform: translateX(2px);
+        .sc-btn:hover { border-color: var(--c-border); box-shadow: var(--shadow-card); transform: translateY(-1px); }
+        .sc-btn.active { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+        .sc-btn.active::before { width: 4px; }
+        .sc-btn .sc-q { font-size: 13px; font-weight: 700; color: var(--c-text); line-height: 1.3; }
+        .sc-btn .sc-meta { font-size: 10px; color: var(--c-text-3); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+        .sc-btn .sc-badge {
+            display: inline-block; padding: 1px 6px; border-radius: var(--r-full);
+            font-size: 9px; font-weight: 700; color: #fff;
         }
-        .scenario-card.active {
-            box-shadow: var(--shadow-hover);
-            transform: translateX(4px);
-        }
-        .scenario-card.active[data-skill="native"] { border-color: var(--c-skill-native); }
-        .scenario-card.active[data-skill="tool"] { border-color: var(--c-skill-tool); }
-        .scenario-card.active[data-skill="task"] { border-color: var(--c-skill-task); }
-        .scenario-card.active[data-skill="flow"] { border-color: var(--c-skill-flow); }
-        .scenario-card.active::before { width: 4px; }
-        .scenario-quote {
-            font-size: 13px; font-weight: 600; color: var(--c-text);
-            margin-bottom: 6px; line-height: 1.4;
-        }
-        .scenario-meta {
-            display: flex; align-items: center; gap: 6px;
-        }
-        .scenario-type {
-            font-size: 10px; font-weight: 700; padding: 2px 7px;
-            border-radius: var(--r-full); color: #fff;
-        }
-        .scenario-type.native { background: var(--c-skill-native); }
-        .scenario-type.tool { background: var(--c-skill-tool); }
-        .scenario-type.task { background: var(--c-skill-task); }
-        .scenario-type.flow { background: var(--c-skill-flow); }
-        .scenario-time { font-size: 11px; color: var(--c-text-3); }
+        /* Per-type */
+        .sc-btn[data-type="native"]::before { background: var(--c-native); }
+        .sc-btn[data-type="native"].active { border-color: var(--c-native); }
+        .sc-btn[data-type="native"] .sc-badge { background: var(--c-native); }
+        .sc-btn[data-type="tool"]::before { background: var(--c-tool); }
+        .sc-btn[data-type="tool"].active { border-color: var(--c-tool); }
+        .sc-btn[data-type="tool"] .sc-badge { background: var(--c-tool); }
+        .sc-btn[data-type="task"]::before { background: var(--c-task); }
+        .sc-btn[data-type="task"].active { border-color: var(--c-task); }
+        .sc-btn[data-type="task"] .sc-badge { background: var(--c-task); }
+        .sc-btn[data-type="flow"]::before { background: var(--c-flow); }
+        .sc-btn[data-type="flow"].active { border-color: var(--c-flow); }
+        .sc-btn[data-type="flow"] .sc-badge { background: var(--c-flow); }
 
-        /* === ARCHITECTURE SVG === */
-        .arch-container {
-            background: var(--c-card);
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg);
-            box-shadow: var(--shadow-card);
-            overflow: hidden;
+        /* === LAYER CARDS === */
+        .layer {
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+            border-radius: var(--r-lg); margin-bottom: 12px;
+            box-shadow: var(--shadow-card); overflow: hidden;
+            transition: box-shadow 300ms var(--ease);
         }
-        .arch-svg { width: 100%; height: auto; display: block; }
+        .layer-header {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--c-border-light);
+        }
+        .layer-header .layer-tag {
+            padding: 3px 10px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 800; color: #fff; letter-spacing: 0.5px;
+        }
+        .layer-header h2 { font-size: 14px; font-weight: 800; color: var(--c-text); }
+        .layer-header .game-tag {
+            margin-left: auto; font-size: 11px; font-weight: 600;
+            padding: 2px 10px; border-radius: var(--r-full);
+            background: rgba(0,0,0,0.04);
+        }
+        .layer-body { padding: 16px 18px; }
 
-        /* SVG Animations */
-        @keyframes flowDash {
-            to { stroke-dashoffset: -20; }
+        /* Product layer */
+        .layer.product .layer-header { background: linear-gradient(135deg, rgba(9,105,218,0.04) 0%, rgba(84,174,255,0.04) 100%); }
+        .layer.product .layer-tag { background: linear-gradient(135deg, #0969DA, #54AEFF); }
+
+        .products-row {
+            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .product-chip {
+            padding: 6px 14px; border-radius: var(--r-md);
+            border: 1px solid rgba(9,105,218,0.2);
+            background: rgba(9,105,218,0.04);
+            font-size: 12px; font-weight: 600; color: var(--c-product);
+            transition: all 200ms var(--ease);
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+        .product-chip.dimmed { opacity: 0.35; }
+        .product-chip.active { background: rgba(9,105,218,0.12); border-color: var(--c-product); box-shadow: 0 0 0 2px rgba(9,105,218,0.1); }
+        .product-chip.more { border-style: dashed; color: var(--c-text-3); background: transparent; }
+        .adapt-chip {
+            margin-left: auto; padding: 5px 10px; border-radius: var(--r-sm);
+            background: rgba(9,105,218,0.04); border: 1px solid rgba(9,105,218,0.15);
+            font-size: 10px; font-weight: 600; color: var(--c-product);
         }
 
-        /* === DETAIL PANEL === */
+        /* Layer connector */
+        .layer-connector {
+            display: flex; align-items: center; justify-content: center;
+            padding: 4px 0; color: var(--c-border); font-size: 14px;
+            transition: color 300ms var(--ease);
+        }
+        .layer-connector.active { color: var(--c-native); }
+
+        /* Agent layer */
+        .layer.agent .layer-header { background: linear-gradient(135deg, rgba(26,127,55,0.04) 0%, rgba(45,164,78,0.04) 100%); }
+        .layer.agent .layer-tag { background: linear-gradient(135deg, #1A7F37, #2DA44E); }
+
+        .agent-core {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 14px; margin-bottom: 14px;
+            background: linear-gradient(135deg, rgba(26,127,55,0.06) 0%, rgba(45,164,78,0.03) 100%);
+            border: 1px solid rgba(45,164,78,0.15);
+            border-radius: var(--r-md);
+        }
+        .agent-core .emoji { font-size: 24px; }
+        .agent-core .info { flex: 1; }
+        .agent-core .name { font-size: 14px; font-weight: 800; color: var(--c-agent); }
+        .agent-core .desc { font-size: 11px; color: var(--c-text-3); }
+        .agent-core .game-note {
+            font-size: 10px; font-weight: 600; color: var(--c-text-3);
+            padding: 3px 10px; border-radius: var(--r-full);
+            background: rgba(45,164,78,0.08);
+        }
+
+        /* Skill cards */
+        .skill-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+            margin-bottom: 12px;
+        }
+        .skill-card {
+            border: 1.5px solid var(--c-border-light); border-radius: var(--r-md);
+            overflow: hidden; transition: all 300ms var(--ease);
+            cursor: pointer; position: relative;
+        }
+        .skill-card:hover { box-shadow: var(--shadow-card); transform: translateY(-1px); }
+        .skill-card.dimmed { opacity: 0.3; transform: scale(0.98); }
+        .skill-card.active { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+
+        .skill-card .sk-head {
+            padding: 10px 12px 8px; display: flex; align-items: center; gap: 6px;
+        }
+        .skill-card .sk-num {
+            width: 22px; height: 22px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 800; color: #fff;
+        }
+        .skill-card .sk-title { font-size: 12px; font-weight: 800; color: var(--c-text); }
+
+        .skill-card .sk-game {
+            padding: 0 12px; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 5px;
+            font-size: 11px; color: var(--c-text-3);
+        }
+        .skill-card .sk-game-icon { font-size: 14px; }
+
+        .skill-card .sk-instance {
+            padding: 6px 12px 10px;
+            border-top: 1px solid var(--c-border-light);
+            background: var(--c-bg);
+        }
+        .skill-card .sk-instance .inst-label {
+            font-size: 9px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--c-text-3); margin-bottom: 4px;
+        }
+
+        /* Instance visualizations per type */
+        .inst-visual { display: flex; align-items: center; gap: 4px; }
+        .inst-dot {
+            width: 10px; height: 10px; border-radius: 50%; border: 2px solid;
+        }
+        .inst-dot.solid { border: none; }
+        .inst-arrow { font-size: 10px; color: var(--c-text-3); }
+        .inst-label-text { font-size: 9px; color: var(--c-text-2); font-weight: 600; }
+
+        /* Native */
+        .skill-card[data-type="native"] { border-top: 3px solid var(--c-native); }
+        .skill-card[data-type="native"].active { border-color: var(--c-native); }
+        .skill-card[data-type="native"] .sk-num { background: var(--c-native); }
+        /* Tool */
+        .skill-card[data-type="tool"] { border-top: 3px solid var(--c-tool); }
+        .skill-card[data-type="tool"].active { border-color: var(--c-tool); }
+        .skill-card[data-type="tool"] .sk-num { background: var(--c-tool); }
+        /* Task */
+        .skill-card[data-type="task"] { border-top: 3px solid var(--c-task); }
+        .skill-card[data-type="task"].active { border-color: var(--c-task); }
+        .skill-card[data-type="task"] .sk-num { background: var(--c-task); }
+        /* Flow */
+        .skill-card[data-type="flow"] { border-top: 3px solid var(--c-flow); }
+        .skill-card[data-type="flow"].active { border-color: var(--c-flow); }
+        .skill-card[data-type="flow"] .sk-num { background: var(--c-flow); }
+
+        /* Cross-cutting concerns */
+        .crosscut {
+            display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 0 0;
+            border-top: 1px dashed var(--c-border-light);
+        }
+        .crosscut-pill {
+            padding: 3px 8px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 500; background: var(--c-bg);
+            color: var(--c-text-3); border: 1px solid var(--c-border-light);
+        }
+
+        /* OS layer */
+        .layer.os .layer-header { background: linear-gradient(135deg, rgba(36,41,47,0.04) 0%, rgba(61,68,77,0.04) 100%); }
+        .layer.os .layer-tag { background: linear-gradient(135deg, #24292F, #3D444D); }
+
+        .os-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+        }
+        .os-block {
+            padding: 10px 12px; border-radius: var(--r-sm);
+            border: 1px solid var(--c-border-light); background: var(--c-bg);
+            transition: all 200ms var(--ease);
+        }
+        .os-block.active { background: #fff; border-color: var(--c-border); box-shadow: var(--shadow-sm); }
+        .os-block .os-icon { font-size: 16px; margin-bottom: 4px; }
+        .os-block .os-name { font-size: 11px; font-weight: 700; color: var(--c-text); }
+        .os-block .os-sub { font-size: 10px; color: var(--c-text-3); }
+        .os-block .os-game { font-size: 9px; color: var(--c-text-3); font-style: italic; margin-top: 3px; }
+        .os-caps {
+            display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;
+            padding-top: 8px; border-top: 1px solid var(--c-border-light);
+        }
+        .os-cap {
+            padding: 2px 7px; border-radius: var(--r-full);
+            font-size: 9px; font-weight: 600; background: #F3F5F7;
+            color: var(--c-text-3);
+        }
+
+        /* Growth loop */
+        .growth {
+            background: linear-gradient(135deg, rgba(5,150,105,0.04) 0%, rgba(9,105,218,0.04) 100%);
+            border: 1px solid rgba(5,150,105,0.15);
+            border-radius: var(--r-lg); padding: 14px 18px; margin-top: 12px;
+        }
+        .growth-header {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+        }
+        .growth-header h3 { font-size: 13px; font-weight: 800; color: #059669; }
+        .growth-header .game-tag {
+            font-size: 10px; font-weight: 600; color: var(--c-text-3);
+            padding: 2px 8px; border-radius: var(--r-full);
+            background: rgba(5,150,105,0.08);
+        }
+        .growth-flow {
+            display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .growth-step {
+            padding: 4px 10px; border-radius: var(--r-full);
+            font-size: 11px; font-weight: 600; color: #059669;
+            background: rgba(5,150,105,0.08);
+        }
+        .growth-arrow { color: #059669; font-size: 12px; margin: 0 4px; }
+        .growth-levels {
+            display: flex; gap: 8px; flex-wrap: wrap;
+        }
+        .growth-level {
+            font-size: 10px; color: var(--c-text-2); padding: 3px 10px;
+            border-radius: var(--r-full); background: rgba(5,150,105,0.06);
+            border: 1px solid rgba(5,150,105,0.12);
+        }
+
+        /* === DETAIL PANEL (shows on scenario click) === */
         .detail-panel {
-            margin-top: 20px;
-            background: var(--c-card);
+            margin-top: 16px; background: var(--c-card);
             border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg);
-            box-shadow: var(--shadow-card);
-            overflow: hidden;
-            transition: all 300ms var(--ease);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+            overflow: hidden; transition: all 300ms var(--ease);
         }
         .detail-panel.hidden { display: none; }
-        .detail-header {
+        .detail-top {
             display: flex; align-items: center; gap: 10px;
-            padding: 16px 20px; border-bottom: 1px solid var(--c-border-light);
-            background: var(--c-table-head);
+            padding: 12px 18px; border-bottom: 1px solid var(--c-border-light);
         }
-        .detail-header .icon {
+        .detail-top .dt-icon {
             width: 32px; height: 32px; border-radius: var(--r-sm);
             display: flex; align-items: center; justify-content: center;
-            font-size: 16px; color: #fff;
+            font-size: 15px; color: #fff;
         }
-        .detail-header h3 { font-size: 15px; font-weight: 700; color: var(--c-text); }
-        .detail-header .subtitle { font-size: 12px; color: var(--c-text-3); }
-        .detail-body { padding: 20px; }
+        .detail-top h3 { font-size: 14px; font-weight: 700; color: var(--c-text); }
+        .detail-top .dt-sub { font-size: 11px; color: var(--c-text-3); }
+        .detail-body { padding: 16px 18px; }
 
-        /* Flow Steps */
-        .flow-steps {
-            display: flex; align-items: center; gap: 0;
-            overflow-x: auto; padding: 8px 0 16px;
+        /* Runtime flow steps */
+        .rt-flow {
+            display: flex; align-items: flex-start; gap: 0;
+            overflow-x: auto; padding: 4px 0 12px;
         }
-        .flow-step {
+        .rt-step {
             display: flex; flex-direction: column; align-items: center;
-            min-width: 100px; text-align: center; position: relative;
+            min-width: 90px; text-align: center;
         }
-        .flow-step-num {
-            width: 28px; height: 28px; border-radius: 50%;
+        .rt-step-num {
+            width: 26px; height: 26px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 700; color: #fff;
-            margin-bottom: 6px;
+            font-size: 11px; font-weight: 700; color: #fff;
+            margin-bottom: 5px;
         }
-        .flow-step-label {
-            font-size: 12px; font-weight: 600; color: var(--c-text);
-        }
-        .flow-step-desc {
-            font-size: 10px; color: var(--c-text-3); margin-top: 2px;
-            max-width: 90px;
-        }
-        .flow-arrow {
-            color: var(--c-border); font-size: 18px; margin: 0 -4px;
-            padding-bottom: 20px;
-        }
+        .rt-step-label { font-size: 11px; font-weight: 700; color: var(--c-text); }
+        .rt-step-desc { font-size: 9px; color: var(--c-text-3); max-width: 80px; margin-top: 2px; }
+        .rt-arrow { color: var(--c-border); font-size: 16px; margin: 4px -4px 0; }
 
-        /* Skill Detail Boxes */
-        .skill-detail-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+        /* Instance detail */
+        .inst-detail-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px; margin-top: 12px;
         }
-        .skill-detail-box {
-            border: 1px solid var(--c-border-light);
-            border-radius: var(--r-md); padding: 14px;
-            border-top: 3px solid var(--c-border);
+        .inst-detail-card {
+            border: 1px solid var(--c-border-light); border-radius: var(--r-md);
+            padding: 12px; border-left: 3px solid var(--c-border);
         }
-        .skill-detail-box.native { border-top-color: var(--c-skill-native); }
-        .skill-detail-box.tool { border-top-color: var(--c-skill-tool); }
-        .skill-detail-box.task { border-top-color: var(--c-skill-task); }
-        .skill-detail-box.flow { border-top-color: var(--c-skill-flow); }
-        .skill-detail-box h4 {
-            font-size: 13px; font-weight: 700; color: var(--c-text);
-            margin-bottom: 6px;
+        .inst-detail-card .idc-name { font-size: 12px; font-weight: 700; color: var(--c-text); }
+        .inst-detail-card .idc-sub { font-size: 10px; color: var(--c-text-3); }
+        .inst-detail-card .idc-binds {
+            display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px;
         }
-        .skill-detail-box p {
-            font-size: 12px; color: var(--c-text-2); margin: 4px 0;
+        .inst-detail-card .idc-bind {
+            padding: 2px 7px; border-radius: var(--r-full);
+            font-size: 9px; font-weight: 600;
         }
-        .skill-detail-box .examples {
-            margin-top: 8px; padding-top: 8px;
-            border-top: 1px solid var(--c-border-light);
+        .idc-bind.skill { background: #E6F7ED; color: #1A7F37; }
+        .idc-bind.tool { background: #F5F3FF; color: #7C3AED; }
+        .idc-bind.memory { background: #FFF7ED; color: #9A6700; }
+        .inst-detail-card .idc-status {
+            display: flex; align-items: center; gap: 4px;
+            margin-top: 6px; font-size: 10px; font-weight: 600;
         }
-        .skill-detail-box .example-tag {
-            display: inline-block; padding: 2px 8px; margin: 2px;
-            border-radius: var(--r-full); font-size: 11px;
-            background: var(--c-bg); color: var(--c-text-2);
+        .idc-status .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
         }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+        /* Flow stages (for s4) */
+        .flow-stages {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 12px;
+        }
+        .flow-stage {
+            text-align: center; padding: 8px 4px; border-radius: var(--r-sm);
+            border: 1px solid var(--c-border-light); background: var(--c-bg);
+            position: relative;
+        }
+        .flow-stage:not(:last-child)::after {
+            content: '→'; position: absolute; right: -10px; top: 50%;
+            transform: translateY(-50%); color: var(--c-border); font-size: 11px;
+            z-index: 1;
+        }
+        .flow-stage .fs-num {
+            width: 20px; height: 20px; border-radius: 50%; margin: 0 auto 4px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: 700; color: #fff;
+        }
+        .flow-stage .fs-name { font-size: 10px; font-weight: 700; color: var(--c-text); }
+        .flow-stage .fs-type { font-size: 9px; font-weight: 600; }
+
+        /* Insight callout */
+        .insight-box {
+            margin-top: 12px; padding: 10px 14px; border-radius: var(--r-md);
+            background: var(--c-bg); border-left: 3px solid;
+            font-size: 12px; color: var(--c-text-2); line-height: 1.5;
+        }
+        .insight-box strong { color: var(--c-text); }
 
         /* Footer */
         .footer {
-            text-align: center; padding: 20px 0; margin-top: 32px;
+            text-align: center; padding: 16px 0; margin-top: 24px;
             border-top: 1px solid var(--c-border-light);
-            color: var(--c-text-3); font-size: 12px;
+            color: var(--c-text-3); font-size: 11px;
         }
 
-        /* ====== RUNTIME SPLIT VIEW ====== */
-        #runtime-view { display: none; }
-        #runtime-view.visible { display: block; }
-
-        .rt-tabs {
-            display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap;
-        }
-        .rt-tab {
-            flex: 1; min-width: 200px;
-            padding: 12px 16px; background: var(--c-card);
-            border: 1.5px solid var(--c-border-light); border-radius: var(--r-md);
-            cursor: pointer; transition: all 200ms var(--ease);
-            position: relative; overflow: hidden;
-        }
-        .rt-tab::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-            border-radius: 0 3px 3px 0; transition: width 200ms var(--ease);
-        }
-        .rt-tab:hover { border-color: var(--c-border); box-shadow: var(--shadow-card); }
-        .rt-tab.active { box-shadow: var(--shadow-hover); }
-        .rt-tab.active::before { width: 4px; }
-        .rt-tab .rt-tab-q { font-size: 14px; font-weight: 700; color: var(--c-text); margin-bottom: 3px; }
-        .rt-tab .rt-tab-meta { font-size: 11px; color: var(--c-text-3); display: flex; align-items: center; gap: 6px; }
-        .rt-tab .rt-tab-badge {
-            display: inline-block; padding: 1px 7px; border-radius: var(--r-full);
-            font-size: 10px; font-weight: 700; color: #fff;
-        }
-        /* Per-type colors */
-        .rt-tab[data-type="native"]::before { background: var(--c-skill-native); }
-        .rt-tab[data-type="native"].active { border-color: var(--c-skill-native); }
-        .rt-tab[data-type="native"] .rt-tab-badge { background: var(--c-skill-native); }
-        .rt-tab[data-type="tool"]::before { background: var(--c-skill-tool); }
-        .rt-tab[data-type="tool"].active { border-color: var(--c-skill-tool); }
-        .rt-tab[data-type="tool"] .rt-tab-badge { background: var(--c-skill-tool); }
-        .rt-tab[data-type="task"]::before { background: var(--c-skill-task); }
-        .rt-tab[data-type="task"].active { border-color: var(--c-skill-task); }
-        .rt-tab[data-type="task"] .rt-tab-badge { background: var(--c-skill-task); }
-        .rt-tab[data-type="flow"]::before { background: var(--c-skill-flow); }
-        .rt-tab[data-type="flow"].active { border-color: var(--c-skill-flow); }
-        .rt-tab[data-type="flow"] .rt-tab-badge { background: var(--c-skill-flow); }
-
-        /* Split panel */
-        .rt-split {
-            display: grid; grid-template-columns: 1fr 44px 1fr; gap: 0;
-            align-items: stretch; min-height: 520px;
-        }
-        .rt-col {
-            display: flex; flex-direction: column; gap: 12px;
-        }
-        .rt-col-label {
-            font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
-            color: var(--c-text-3); text-align: center; margin-bottom: 4px;
-        }
-        .rt-divider {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 16px; padding: 0 2px;
-        }
-        .rt-arrow {
-            width: 32px; height: 32px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 14px; font-weight: 700; color: #fff;
-            transition: transform 300ms var(--ease);
-        }
-        .rt-arrow.forward { background: linear-gradient(135deg, #2DA44E, #4ADE80); }
-        .rt-arrow.back { background: linear-gradient(135deg, #EA580C, #FB923C); transform: scaleX(-1); }
-        .rt-divider-text {
-            writing-mode: vertical-rl; text-orientation: mixed;
-            font-size: 10px; font-weight: 700; color: var(--c-text-3);
-            letter-spacing: 2px; opacity: 0.6;
-        }
-
-        /* Layer cards (static side) */
-        .rt-layer {
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg); padding: 14px 16px;
-            box-shadow: var(--shadow-card); transition: all 300ms var(--ease);
-            border-left: 3px solid var(--c-border);
-        }
-        .rt-layer.product { border-left-color: var(--c-product); }
-        .rt-layer.agent { border-left-color: var(--c-agent); }
-        .rt-layer.os { border-left-color: var(--c-os); }
-        .rt-layer.active { box-shadow: var(--shadow-hover); }
-        .rt-layer-title {
-            font-size: 11px; font-weight: 800; margin-bottom: 6px;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .rt-layer-title .tag {
-            padding: 1px 6px; border-radius: var(--r-full);
-            font-size: 9px; font-weight: 700; color: #fff; opacity: 0.9;
-        }
-        .rt-layer .pills {
-            display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;
-        }
-        .rt-layer .pill {
-            padding: 3px 8px; border-radius: var(--r-full);
-            font-size: 10px; font-weight: 500; background: var(--c-bg);
-            color: var(--c-text-2); border: 1px solid var(--c-border-light);
-            transition: all 200ms var(--ease);
-        }
-        .rt-layer .pill.hl {
-            font-weight: 700; border-color: currentColor;
-        }
-
-        /* Dynamic side cards */
-        .rt-task-input {
-            background: var(--c-card); border: 1.5px solid var(--c-border-light);
-            border-radius: var(--r-lg); padding: 16px;
-            box-shadow: var(--shadow-card); position: relative;
-        }
-        .rt-task-input::before {
-            content: '📋'; position: absolute; top: -10px; left: 16px;
-            background: var(--c-card); padding: 0 4px; font-size: 14px;
-        }
-        .rt-task-q { font-size: 15px; font-weight: 700; color: var(--c-text); margin-bottom: 6px; }
-        .rt-task-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-        .rt-task-tag {
-            padding: 2px 8px; border-radius: var(--r-full);
-            font-size: 10px; font-weight: 600; background: var(--c-bg);
-            color: var(--c-text-2);
-        }
-
-        /* Instance cards */
-        .rt-instances { display: flex; flex-direction: column; gap: 10px; }
-        .rt-instance {
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg); padding: 14px 16px;
-            box-shadow: var(--shadow-card); border-top: 3px solid var(--c-border);
-            animation: rtSlideIn 400ms var(--ease) both;
-        }
-        .rt-instance:nth-child(2) { animation-delay: 80ms; }
-        .rt-instance:nth-child(3) { animation-delay: 160ms; }
-        @keyframes rtSlideIn {
-            from { opacity: 0; transform: translateX(12px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .rt-inst-header {
-            display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-        }
-        .rt-inst-num {
-            width: 24px; height: 24px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0;
-        }
-        .rt-inst-name { font-size: 13px; font-weight: 700; color: var(--c-text); }
-        .rt-inst-sub { font-size: 11px; color: var(--c-text-3); }
-        .rt-inst-bindings {
-            display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0;
-        }
-        .rt-inst-binding {
-            padding: 3px 8px; border-radius: var(--r-full);
-            font-size: 10px; font-weight: 600;
-        }
-        .rt-inst-binding.skill { background: #E6F7ED; color: #1A7F37; }
-        .rt-inst-binding.tool { background: #F5F3FF; color: #7C3AED; }
-        .rt-inst-binding.memory { background: #FFF7ED; color: #9A6700; }
-        .rt-inst-desc {
-            font-size: 11px; color: var(--c-text-2); line-height: 1.5;
-            padding: 8px 0; border-top: 1px solid var(--c-border-light);
-            margin-top: 4px;
-        }
-        .rt-inst-status {
-            display: flex; align-items: center; gap: 6px;
-            font-size: 11px; font-weight: 600; margin-top: 4px;
-        }
-        .rt-inst-status .dot {
-            width: 7px; height: 7px; border-radius: 50%;
-            animation: rtPulse 1.5s ease-in-out infinite;
-        }
-        @keyframes rtPulse {
-            0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
-        }
-
-        /* Flow stages (s4 only) */
-        .rt-flow-timeline {
-            display: flex; flex-direction: column; gap: 0;
-        }
-        .rt-flow-stage {
-            display: grid; grid-template-columns: 28px 1fr; gap: 10px;
-            padding: 10px 0; position: relative;
-        }
-        .rt-flow-stage:not(:last-child)::after {
-            content: ''; position: absolute; left: 13px; top: 38px; bottom: -2px;
-            width: 2px; background: var(--c-border-light);
-        }
-        .rt-flow-num {
-            width: 28px; height: 28px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0;
-            position: relative; z-index: 1;
-        }
-        .rt-flow-body {
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-md); padding: 10px 12px;
-            box-shadow: var(--shadow-sm);
-        }
-        .rt-flow-name { font-size: 12px; font-weight: 700; color: var(--c-text); }
-        .rt-flow-type { font-size: 10px; font-weight: 600; margin-left: 6px; }
-        .rt-flow-detail { font-size: 11px; color: var(--c-text-3); margin-top: 3px; }
-
-        /* OS status bar */
-        .rt-os-status {
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg); padding: 12px 16px;
-            box-shadow: var(--shadow-card); border-left: 3px solid var(--c-os);
-        }
-        .rt-os-metrics {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px;
-        }
-        .rt-os-metric {
-            text-align: center; padding: 6px; border-radius: var(--r-sm);
-            background: var(--c-bg);
-        }
-        .rt-os-metric .val { font-size: 16px; font-weight: 800; color: var(--c-text); }
-        .rt-os-metric .label { font-size: 9px; color: var(--c-text-3); font-weight: 600; }
-
-        /* Experience feedback */
-        .rt-feedback {
-            background: linear-gradient(135deg, #E6F7ED 0%, #EFF6FF 100%);
-            border: 1px solid rgba(45,164,78,0.2);
-            border-radius: var(--r-lg); padding: 12px 16px;
-            font-size: 12px; color: var(--c-text-2);
-        }
-        .rt-feedback strong { color: #1A7F37; }
-
-        @media (max-width: 900px) {
-            .rt-split { grid-template-columns: 1fr; }
-            .rt-divider {
-                flex-direction: row; padding: 8px 0;
-                writing-mode: horizontal-tb;
-            }
-            .rt-divider-text { writing-mode: horizontal-tb; }
-            .rt-tabs { flex-direction: column; }
-            .rt-tab { min-width: unset; }
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-            .scenario-panel {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .scenario-label {
-                grid-column: 1 / -1;
-            }
-            .skill-detail-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 600px) {
-            .header h1 { font-size: 22px; }
-            .scenario-panel { grid-template-columns: 1fr; }
-            .tab-btn span:not(.tab-btn-num) { display: none; }
-            .flow-steps { flex-wrap: wrap; justify-content: center; }
-        }
-
-        /* === TOOLTIP (Hover Bubble) === */
-        .tip-target { cursor: help; }
-        .tip-target.tip-clickable { cursor: pointer; }
-
+        /* === TOOLTIP === */
         #cf-tooltip {
-            position: fixed;
-            z-index: 9999;
-            max-width: min(380px, calc(100vw - 24px));
+            position: fixed; z-index: 9999;
+            max-width: min(360px, calc(100vw - 24px));
             padding: 10px 12px;
-            background: rgba(255,255,255,0.96);
+            background: rgba(255,255,255,0.97);
             border: 1px solid rgba(208,215,222,0.9);
-            border-radius: 10px;
+            border-radius: var(--r-md);
             box-shadow: 0 12px 28px rgba(31,35,40,0.14);
-            color: var(--c-text-2);
-            font-size: 12px;
-            line-height: 1.5;
-            pointer-events: none;
-            opacity: 0;
+            font-size: 12px; line-height: 1.5;
+            pointer-events: none; opacity: 0;
             transform: translateY(6px);
             transition: opacity 120ms var(--ease), transform 120ms var(--ease);
         }
-        #cf-tooltip.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        #cf-tooltip.visible { opacity: 1; transform: translateY(0); }
         #cf-tooltip .tt-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 800;
-            color: var(--c-text);
-            margin-bottom: 6px;
-        }
-        #cf-tooltip .tt-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--c-border);
-            flex: none;
-        }
-        #cf-tooltip .tt-body {
-            color: var(--c-text-2);
-        }
-        #cf-tooltip .tt-row {
-            display: flex;
-            gap: 8px;
-            margin: 4px 0;
-        }
-        #cf-tooltip .tt-k {
-            flex: none;
-            width: 66px;
-            color: var(--c-text-3);
-            font-weight: 700;
-        }
-        #cf-tooltip .tt-v {
-            flex: 1;
-            color: var(--c-text-2);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            #cf-tooltip { transition: none; }
-        }
-
-        /* === ANALOGY VIEW === */
-        #analogy-view { display: none; }
-        #analogy-view.visible { display: block; }
-        .analogy-intro {
-            text-align: center; margin-bottom: 24px; padding: 16px 20px;
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg); box-shadow: var(--shadow-card);
-        }
-        .analogy-intro h2 { font-size: 18px; font-weight: 800; color: var(--c-text); margin-bottom: 4px; }
-        .analogy-intro p { font-size: 13px; color: var(--c-text-3); }
-        .analogy-row {
-            display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0;
-            align-items: stretch; margin-bottom: 16px;
-        }
-        .analogy-card {
-            background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-card);
-        }
-        .analogy-card h3 {
-            font-size: 13px; font-weight: 800; margin-bottom: 8px;
             display: flex; align-items: center; gap: 6px;
+            font-weight: 800; color: var(--c-text); margin-bottom: 4px;
         }
-        .analogy-card .tag {
-            display: inline-block; padding: 2px 8px; border-radius: var(--r-full);
-            font-size: 10px; font-weight: 700; color: #fff;
-        }
-        .analogy-card p, .analogy-card li {
-            font-size: 12px; color: var(--c-text-2); margin: 3px 0; line-height: 1.5;
-        }
-        .analogy-card ul { padding-left: 16px; margin: 4px 0; }
-        .analogy-card .sub-items {
-            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px;
-        }
-        .analogy-card .sub-item {
-            padding: 8px; border-radius: var(--r-sm);
-            border: 1px solid var(--c-border-light); font-size: 11px;
-        }
-        .analogy-card .sub-item strong { display: block; font-size: 12px; margin-bottom: 2px; }
-        .analogy-card.game {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-color: rgba(255,215,0,0.2);
-        }
-        .analogy-card.game h3 { color: #FFD700; }
-        .analogy-card.game p, .analogy-card.game li { color: rgba(255,255,255,0.75); }
-        .analogy-card.game .sub-item {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,215,0,0.15); color: rgba(255,255,255,0.7);
-        }
-        .analogy-card.game .sub-item strong { color: #FFD700; }
-        .analogy-arrow {
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px; color: var(--c-border); font-weight: 300;
-        }
-        .analogy-session {
-            margin-top: 20px; background: var(--c-card); border: 1px solid var(--c-border-light);
-            border-radius: var(--r-lg); padding: 20px; box-shadow: var(--shadow-card);
-        }
-        .analogy-session h3 { font-size: 14px; font-weight: 800; color: var(--c-text); margin-bottom: 12px; }
-        .session-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-        .session-card {
-            border: 1px solid var(--c-border-light); border-radius: var(--r-md);
-            padding: 12px; border-top: 3px solid var(--c-border);
-        }
-        .session-card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
-        .session-card p { font-size: 11px; color: var(--c-text-2); margin: 2px 0; }
-        .session-card .lifecycle {
-            margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--c-border-light);
-            font-size: 10px; color: var(--c-text-3); font-family: monospace;
-        }
+        #cf-tooltip .tt-dot { width: 8px; height: 8px; border-radius: 50%; }
+        #cf-tooltip .tt-row { display: flex; gap: 6px; margin: 3px 0; }
+        #cf-tooltip .tt-k { flex: none; width: 56px; font-weight: 700; color: var(--c-text-3); }
+        #cf-tooltip .tt-v { flex: 1; color: var(--c-text-2); }
+
+        /* Responsive */
         @media (max-width: 900px) {
-            .analogy-row { grid-template-columns: 1fr; }
-            .analogy-arrow { transform: rotate(90deg); padding: 4px 0; }
-            .analogy-card .sub-items { grid-template-columns: 1fr; }
-            .session-grid { grid-template-columns: 1fr 1fr; }
+            .scenario-bar { grid-template-columns: 1fr 1fr; }
+            .skill-grid { grid-template-columns: 1fr 1fr; }
+            .os-grid { grid-template-columns: 1fr; }
+            .flow-stages { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 600px) {
-            .session-grid { grid-template-columns: 1fr; }
+            .scenario-bar { grid-template-columns: 1fr; }
+            .skill-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 20px; }
+            .flow-stages { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -680,1631 +479,575 @@
 <div class="page">
     <!-- Tab Navigation -->
     <nav class="tab-nav">
-        <a href="index.html" class="tab-btn"><span class="tab-btn-num">🏠</span><span>首页</span></a>
-        <a href="deep-dive.html" class="tab-btn"><span class="tab-btn-num">📖</span><span>详细论证</span></a>
-        <a href="evidence.html" class="tab-btn"><span class="tab-btn-num">🧬</span><span>AI分身实证</span></a>
-        <a href="implementation.html" class="tab-btn"><span class="tab-btn-num">🔧</span><span>技术实施</span></a>
-        <a href="architecture.html" class="tab-btn active"><span class="tab-btn-num">🗺️</span><span>架构全景</span></a>
+        <a href="index.html" class="tab-btn"><span>🏠</span><span>首页</span></a>
+        <a href="deep-dive.html" class="tab-btn"><span>📖</span><span>详细论证</span></a>
+        <a href="evidence.html" class="tab-btn"><span>🧬</span><span>AI分身实证</span></a>
+        <a href="implementation.html" class="tab-btn"><span>🔧</span><span>技术实施</span></a>
+        <a href="architecture.html" class="tab-btn active"><span>🗺️</span><span>架构全景</span></a>
     </nav>
 
     <!-- Header -->
     <header class="header">
-        <div class="header-badge">🗺️ Architecture Panorama</div>
+        <div class="header-badge">🗺️ Unified Architecture Panorama</div>
         <h1>统一AI产品架构全景图</h1>
-        <p>一张图看清：三层架构 · 四类技能 · 实例模型 · 游戏类比</p>
+        <p>一张图看清：三层架构 · 四类技能 · 运行时实例 · 成长闭环<br>
+        <span style="font-size:11px;opacity:0.7">点击下方场景，查看完整运行流程 ↓</span></p>
     </header>
 
-    <!-- View Tabs -->
-    <div class="view-tabs">
-        <button class="view-tab active" data-view="structure" onclick="switchView('structure')">结构视图</button>
-        <button class="view-tab" data-view="runtime" onclick="switchView('runtime')">运行视图</button>
-        <button class="view-tab" data-view="analogy" onclick="switchView('analogy')">🎮 游戏类比</button>
-    </div>
-
-    <!-- Main Layout -->
-    <div class="main-layout">
-        <!-- Left: Scenario Panel -->
-        <div class="scenario-panel">
-            <div class="scenario-label">💡 点击场景查看运行流程</div>
-            <div class="scenario-card" data-skill="native" data-id="s1" onclick="activateScenario('s1')">
-                <div class="scenario-quote">"帮我写个调研报告"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type native">Ⅰ 原生</span>
-                    <span class="scenario-time">⏱ 分钟级</span>
-                </div>
-            </div>
-            <div class="scenario-card" data-skill="tool" data-id="s2" onclick="activateScenario('s2')">
-                <div class="scenario-quote">"帮我生成一张配图"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type tool">Ⅱ 工具</span>
-                    <span class="scenario-time">⏱ 秒级</span>
-                </div>
-            </div>
-            <div class="scenario-card" data-skill="task" data-id="s3" onclick="activateScenario('s3')">
-                <div class="scenario-quote">"帮我Review这个PR"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type task">Ⅲ 任务</span>
-                    <span class="scenario-time">⏱ 分钟级</span>
-                </div>
-            </div>
-            <div class="scenario-card" data-skill="flow" data-id="s4" onclick="activateScenario('s4')">
-                <div class="scenario-quote">"帮我把需求做到上线"</div>
-                <div class="scenario-meta">
-                    <span class="scenario-type flow">Ⅳ 流程</span>
-                    <span class="scenario-time">⏱ 小时级</span>
-                </div>
+    <!-- Scenario Bar -->
+    <div class="scenario-bar">
+        <div class="sc-btn" data-type="native" data-id="s1" onclick="activate('s1')">
+            <div class="sc-q">"帮我写个调研报告"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅰ 原生</span>
+                <span>⏱ 分钟级</span>
             </div>
         </div>
-
-        <!-- Right: Architecture Diagram -->
-        <div class="arch-container">
-            <svg class="arch-svg" viewBox="0 0 760 760" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="gProduct" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#0969DA"/>
-                        <stop offset="100%" stop-color="#54AEFF"/>
-                    </linearGradient>
-                    <linearGradient id="gAgent" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#1A7F37"/>
-                        <stop offset="100%" stop-color="#2DA44E"/>
-                    </linearGradient>
-                    <linearGradient id="gOS" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#24292F"/>
-                        <stop offset="100%" stop-color="#3D444D"/>
-                    </linearGradient>
-                    <linearGradient id="gNative" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#2DA44E"/><stop offset="100%" stop-color="#4ADE80"/>
-                    </linearGradient>
-                    <linearGradient id="gTool" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#A78BFA"/>
-                    </linearGradient>
-                    <linearGradient id="gTask" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#EA580C"/><stop offset="100%" stop-color="#FB923C"/>
-                    </linearGradient>
-                    <linearGradient id="gFlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#0969DA"/><stop offset="100%" stop-color="#60A5FA"/>
-                    </linearGradient>
-                    <filter id="dropShadow">
-                        <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/>
-                    </filter>
-                    <filter id="glowNative"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2DA44E" flood-opacity="0.4"/></filter>
-                    <filter id="glowTool"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#7C3AED" flood-opacity="0.4"/></filter>
-                    <filter id="glowTask"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#EA580C" flood-opacity="0.4"/></filter>
-                    <filter id="glowFlow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#0969DA" flood-opacity="0.4"/></filter>
-                    <marker id="arrowGray" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-                        <path d="M0 0 L10 3 L0 6 Z" fill="#D0D7DE"/>
-                    </marker>
-                </defs>
-
-                <!-- ======== LAYER: USER ======== -->
-                <g id="layer-user" transform="translate(20, 10)">
-                    <circle cx="22" cy="22" r="18" fill="#F3F4F6" stroke="#D0D7DE" stroke-width="1.5"/>
-                    <text x="22" y="19" text-anchor="middle" font-size="14">👤</text>
-                    <text x="22" y="31" text-anchor="middle" font-size="7" fill="#656D76" font-weight="600">用户</text>
-                </g>
-
-                <!-- User -> Product arrow -->
-                <path id="path-user-product" d="M60 30 L100 30" stroke="#D0D7DE" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowGray)"/>
-
-                <!-- ======== LAYER 1: PRODUCT ======== -->
-                <g id="layer-product">
-                    <!-- Layer background -->
-                    <rect x="110" y="6" width="620" height="74" rx="12" fill="url(#gProduct)" opacity="0.06"/>
-                    <rect x="110" y="6" width="620" height="74" rx="12" fill="none" stroke="#0969DA" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-                    <text x="125" y="24" font-size="10" font-weight="700" fill="#0969DA" opacity="0.6">PRODUCT LAYER</text>
-
-                    <!-- Products -->
-                    <g id="prod-cf" class="product-node" filter="url(#dropShadow)">
-                        <rect x="130" y="32" width="120" height="40" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="190" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#0969DA">CodeFlicker</text>
-                        <text x="190" y="61" text-anchor="middle" font-size="8" fill="#656D76">AI × Coding</text>
-                    </g>
-                    <g id="prod-kate" class="product-node" filter="url(#dropShadow)">
-                        <rect x="265" y="32" width="120" height="40" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="325" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#0969DA">KATE-Studio</text>
-                        <text x="325" y="61" text-anchor="middle" font-size="8" fill="#656D76">企业数字员工</text>
-                    </g>
-                    <g id="prod-pa" class="product-node" filter="url(#dropShadow)">
-                        <rect x="400" y="32" width="120" height="40" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="460" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#0969DA">AI个人助理</text>
-                        <text x="460" y="61" text-anchor="middle" font-size="8" fill="#656D76">通用AI助手</text>
-                    </g>
-                    <g id="prod-more" filter="url(#dropShadow)">
-                        <rect x="535" y="32" width="80" height="40" rx="8" fill="white" stroke="#D0D7DE" stroke-width="1" stroke-dasharray="4,3"/>
-                        <text x="575" y="56" text-anchor="middle" font-size="14" fill="#9CA3AF">···</text>
-                    </g>
-
-                    <!-- Adapt Layer -->
-                    <g id="adapt-layer">
-                        <rect x="625" y="32" width="95" height="40" rx="8" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.8" opacity="0.7"/>
-                        <text x="672" y="47" text-anchor="middle" font-size="8" font-weight="600" fill="#0969DA">产品适配层</text>
-                        <text x="672" y="58" text-anchor="middle" font-size="7" fill="#4D5561">UI·Skill集·权限</text>
-                    </g>
-                </g>
-
-                <!-- Product -> Agent connectors (多对一) -->
-                <g id="connector-prod-agent">
-                    <line x1="190" y1="72" x2="190" y2="88" stroke="#D0D7DE" stroke-width="1" opacity="0.5"/>
-                    <line x1="325" y1="72" x2="325" y2="88" stroke="#D0D7DE" stroke-width="1" opacity="0.5"/>
-                    <line x1="460" y1="72" x2="460" y2="88" stroke="#D0D7DE" stroke-width="1" opacity="0.5"/>
-                    <path d="M190 88 Q190 96 370 100 Q460 96 460 88" stroke="#D0D7DE" stroke-width="1" fill="none" opacity="0.4"/>
-                    <line x1="370" y1="96" x2="370" y2="106" stroke="#D0D7DE" stroke-width="1.5"/>
-                    <polygon points="365,104 370,112 375,104" fill="#D0D7DE"/>
-                </g>
-
-                <!-- ======== LAYER 2: AGENT ======== -->
-                <g id="layer-agent">
-                    <!-- Layer background -->
-                    <rect x="110" y="108" width="620" height="280" rx="12" fill="url(#gAgent)" opacity="0.04"/>
-                    <rect x="110" y="108" width="620" height="280" rx="12" fill="none" stroke="#1A7F37" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-                    <text x="125" y="126" font-size="10" font-weight="700" fill="#1A7F37" opacity="0.6">AGENT LAYER</text>
-
-                    <!-- Main Agent -->
-                    <g id="main-agent" filter="url(#dropShadow)">
-                        <rect x="200" y="134" width="440" height="52" rx="10" fill="white" stroke="#1A7F37" stroke-width="1.5"/>
-                        <rect x="200" y="134" width="440" height="52" rx="10" fill="url(#gAgent)" opacity="0.08"/>
-                        <text x="215" y="155" font-size="14">🧠</text>
-                        <text x="236" y="157" font-size="13" font-weight="700" fill="#1A7F37">主 Agent</text>
-                        <text x="310" y="157" font-size="10" fill="#4D5561">— 决策指挥中枢，永不下场执行</text>
-                        <text x="236" y="175" font-size="9" fill="#656D76">理解意图 · 查记忆 · 选Skill · 派实例 · 收经验</text>
-                    </g>
-
-                    <!-- Main Agent -> Skills connector -->
-                    <line x1="420" y1="186" x2="420" y2="204" stroke="#D0D7DE" stroke-width="1"/>
-
-                    <!-- 4 Skill Types -->
-                    <g id="skill-group">
-                        <!-- Skill I: Native -->
-                        <g id="skill-native" class="skill-node" data-skill="native" style="cursor:pointer">
-                            <rect x="130" y="206" width="138" height="64" rx="8" fill="white" stroke="#2DA44E" stroke-width="1.2"/>
-                            <rect x="130" y="206" width="138" height="18" rx="8" fill="url(#gNative)"/>
-                            <rect x="130" y="216" width="138" height="8" fill="url(#gNative)"/>
-                            <text x="199" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅰ 原生 Skill</text>
-                            <text x="199" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立实例</text>
-                            <text x="199" y="256" text-anchor="middle" font-size="9" fill="#4D5561">带Skill独立完成</text>
-                            <text x="199" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">调研·文档·PPT·分析</text>
-                        </g>
-                        <!-- Skill II: Tool -->
-                        <g id="skill-tool" class="skill-node" data-skill="tool" style="cursor:pointer">
-                            <rect x="280" y="206" width="138" height="64" rx="8" fill="white" stroke="#7C3AED" stroke-width="1.2"/>
-                            <rect x="280" y="206" width="138" height="18" rx="8" fill="url(#gTool)"/>
-                            <rect x="280" y="216" width="138" height="8" fill="url(#gTool)"/>
-                            <text x="349" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅱ 工具 Skill</text>
-                            <text x="349" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立实例</text>
-                            <text x="349" y="256" text-anchor="middle" font-size="9" fill="#4D5561">调MCP外部能力</text>
-                            <text x="349" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">图片·视频·CI/CD·数据</text>
-                        </g>
-                        <!-- Skill III: Task -->
-                        <g id="skill-task" class="skill-node" data-skill="task" style="cursor:pointer">
-                            <rect x="430" y="206" width="138" height="64" rx="8" fill="white" stroke="#EA580C" stroke-width="1.2"/>
-                            <rect x="430" y="206" width="138" height="18" rx="8" fill="url(#gTask)"/>
-                            <rect x="430" y="216" width="138" height="8" fill="url(#gTask)"/>
-                            <text x="499" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅲ 任务 Skill</text>
-                            <text x="499" y="242" text-anchor="middle" font-size="9" fill="#4D5561">N个并行实例</text>
-                            <text x="499" y="256" text-anchor="middle" font-size="9" fill="#4D5561">各带不同Skill协作</text>
-                            <text x="499" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">CR审查·重构评审·多维分析</text>
-                        </g>
-                        <!-- Skill IV: Flow -->
-                        <g id="skill-flow" class="skill-node" data-skill="flow" style="cursor:pointer">
-                            <rect x="580" y="206" width="138" height="64" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                            <rect x="580" y="206" width="138" height="18" rx="8" fill="url(#gFlow)"/>
-                            <rect x="580" y="216" width="138" height="8" fill="url(#gFlow)"/>
-                            <text x="649" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅳ 流程 Skill</text>
-                            <text x="649" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1总控 + N执行实例</text>
-                            <text x="649" y="256" text-anchor="middle" font-size="9" fill="#4D5561">阶段编排·终极连招</text>
-                            <text x="649" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">需求→发布·项目初始化</text>
-                        </g>
-                    </g>
-
-                    <!-- Cross-cutting -->
-                    <g id="cross-cutting">
-                        <rect x="130" y="286" width="588" height="36" rx="8" fill="#F3F5F7" stroke="#D0D7DE" stroke-width="0.8"/>
-                        <text x="145" y="308" font-size="9" font-weight="600" fill="#656D76">横切能力</text>
-                        <g id="pill-eval" class="tip-target" transform="translate(210, 296)">
-                            <rect x="0" y="0" width="56" height="18" rx="9" fill="#E6F7ED" stroke="#2DA44E" stroke-width="0.6"/>
-                            <text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#1A7F37">🔍 Eval</text>
-                        </g>
-                        <g id="pill-security" class="tip-target" transform="translate(278, 296)">
-                            <rect x="0" y="0" width="56" height="18" rx="9" fill="#FEF2F2" stroke="#CF222E" stroke-width="0.6"/>
-                            <text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#CF222E">🛡 安全</text>
-                        </g>
-                        <g id="pill-observability" class="tip-target" transform="translate(346, 296)">
-                            <rect x="0" y="0" width="68" height="18" rx="9" fill="#FFF7ED" stroke="#BF8700" stroke-width="0.6"/>
-                            <text x="34" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#9A6700">📊 可观测</text>
-                        </g>
-                        <g id="pill-memory" class="tip-target" transform="translate(426, 296)">
-                            <rect x="0" y="0" width="80" height="18" rx="9" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.6"/>
-                            <text x="40" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#0969DA">🧠 Memory服务</text>
-                        </g>
-
-                        <!-- Skill Registry (moved inside cross-cutting area, right side) -->
-                        <g id="pill-skill-registry" class="tip-target" transform="translate(520, 296)">
-                            <rect x="0" y="0" width="86" height="18" rx="9" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.6"/>
-                            <text x="43" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#7C3AED">📋 Skill注册中心</text>
-                        </g>
-                    </g>
-                </g>
-
-                <!-- Skills -> Cross-cutting connectors -->
-                <g opacity="0.3">
-                    <line x1="199" y1="270" x2="199" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                    <line x1="349" y1="270" x2="349" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                    <line x1="499" y1="270" x2="499" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                    <line x1="649" y1="270" x2="649" y2="286" stroke="#D0D7DE" stroke-width="0.8"/>
-                </g>
-
-                <!-- Agent -> OS connector -->
-                <g id="connector-agent-os">
-                    <line x1="370" y1="388" x2="370" y2="404" stroke="#D0D7DE" stroke-width="1.5"/>
-                    <polygon points="365,402 370,410 375,402" fill="#D0D7DE"/>
-                </g>
-
-                <!-- ======== LAYER 3: AGENT OS ======== -->
-                <g id="layer-os">
-                    <!-- Layer background -->
-                    <rect x="110" y="410" width="620" height="200" rx="12" fill="url(#gOS)" opacity="0.04"/>
-                    <rect x="110" y="410" width="620" height="200" rx="12" fill="none" stroke="#24292F" stroke-width="1" stroke-dasharray="4,3" opacity="0.2"/>
-                    <text x="125" y="428" font-size="10" font-weight="700" fill="#24292F" opacity="0.5">AGENT OS</text>
-
-                    <!-- AgentCore 6 modules -->
-                    <g id="agentcore" filter="url(#dropShadow)">
-                        <rect x="130" y="436" width="468" height="52" rx="10" fill="white" stroke="#24292F" stroke-width="1"/>
-                        <text x="145" y="455" font-size="10" font-weight="700" fill="#24292F">AgentCore 六大能力</text>
-                        <g id="ac-memory" class="tip-target" transform="translate(145, 462)">
-                            <rect x="0" y="0" width="60" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="30" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Memory</text>
-                        </g>
-                        <g id="ac-reasoning" class="tip-target" transform="translate(215, 462)">
-                            <rect x="0" y="0" width="68" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="34" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Reasoning</text>
-                        </g>
-                        <g id="ac-planning" class="tip-target" transform="translate(293, 462)">
-                            <rect x="0" y="0" width="62" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="31" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Planning</text>
-                        </g>
-                        <g id="ac-orchestration" class="tip-target" transform="translate(365, 462)">
-                            <rect x="0" y="0" width="86" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="43" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Orchestration</text>
-                        </g>
-                        <g id="ac-reflection" class="tip-target" transform="translate(461, 462)">
-                            <rect x="0" y="0" width="66" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="33" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Reflection</text>
-                        </g>
-                        <g id="ac-integration" class="tip-target" transform="translate(537, 462)">
-                            <rect x="0" y="0" width="52" height="18" rx="4" fill="#F3F5F7"/>
-                            <text x="26" y="13" text-anchor="middle" font-size="8" fill="#4D5561" font-weight="500">Integration</text>
-                        </g>
-                    </g>
-
-                    <!-- Infrastructure -->
-                    <g id="infra">
-                        <!-- Clone Engine -->
-                        <g id="clone-engine" filter="url(#dropShadow)">
-                            <rect x="612" y="436" width="126" height="52" rx="10" fill="white" stroke="#EA580C" stroke-width="1"/>
-                            <text x="675" y="456" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">⚡ 实例管理器</text>
-                            <text x="675" y="470" text-anchor="middle" font-size="8" fill="#656D76">Instance Manager</text>
-                            <text x="675" y="482" text-anchor="middle" font-size="7" fill="#9CA3AF">创建·监控·回收·汇总</text>
-                        </g>
-
-                        <!-- MCP Gateway -->
-                        <g id="mcp-gateway" filter="url(#dropShadow)">
-                            <rect x="130" y="500" width="180" height="42" rx="8" fill="white" stroke="#7C3AED" stroke-width="1"/>
-                            <text x="220" y="518" text-anchor="middle" font-size="9" font-weight="700" fill="#7C3AED">🔌 MCP 网关</text>
-                            <text x="220" y="532" text-anchor="middle" font-size="8" fill="#656D76">统一工具调用 · 外部服务集成</text>
-                        </g>
-                    </g>
-
-                    <!-- Runtime: Local vs Cloud -->
-                    <g id="runtime">
-                        <rect x="324" y="500" width="414" height="42" rx="8" fill="white" stroke="#24292F" stroke-width="0.8"/>
-                        <text x="337" y="516" font-size="9" font-weight="700" fill="#24292F">运行时</text>
-
-                        <!-- Local -->
-                        <g id="rt-local">
-                            <rect x="394" y="506" width="150" height="30" rx="6" fill="#F3F5F7" stroke="#D0D7DE" stroke-width="0.6"/>
-                            <text x="400" y="521" font-size="12">🖥️</text>
-                            <text x="418" y="522" font-size="9" font-weight="600" fill="#24292F">本地模式</text>
-                            <text x="418" y="532" font-size="7" fill="#656D76">IDE嵌入 · 低延迟</text>
-                        </g>
-                        <!-- Cloud -->
-                        <g id="rt-cloud">
-                            <rect x="556" y="506" width="170" height="30" rx="6" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.6"/>
-                            <text x="562" y="521" font-size="12">☁️</text>
-                            <text x="580" y="522" font-size="9" font-weight="600" fill="#0969DA">云端模式</text>
-                            <text x="580" y="532" font-size="7" fill="#656D76">AgentOS as a Service</text>
-                        </g>
-                    </g>
-
-                    <!-- External Service -->
-                    <g id="external" transform="translate(130, 555)">
-                        <rect x="0" y="0" width="608" height="32" rx="6" fill="none" stroke="#D0D7DE" stroke-width="0.8" stroke-dasharray="4,3"/>
-                        <text x="304" y="20" text-anchor="middle" font-size="9" fill="#9CA3AF">外部服务: LLM (Claude/GPT) · 图片生成 · 视频生成 · CI/CD · 搜索引擎 · 数据库 ···</text>
-                    </g>
-                </g>
-
-                <!-- ======== FLOW PATHS (initially hidden) ======== -->
-                <g id="flow-paths" opacity="0">
-                    <!-- Scenario 1: Native Skill flow -->
-                    <g id="flow-s1" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L190 56 L190 72 L190 80 L420 80 L420 106 L420 134" stroke="#2DA44E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L199 186 L199 206" stroke="#2DA44E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                    </g>
-                    <!-- Scenario 2: Tool Skill flow -->
-                    <g id="flow-s2" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L325 56 L325 72 L420 80 L420 106 L420 134" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L349 186 L349 206" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M349 270 L349 322 L220 322 L220 500" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                        <path d="M220 542 L220 555" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                    </g>
-                    <!-- Scenario 3: Task Skill flow -->
-                    <g id="flow-s3" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L190 56 L190 72 L420 80 L420 106 L420 134" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L499 186 L499 206" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M499 270 L499 322 L675 322 L675 436" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                        <!-- Clone instances visual -->
-                        <g transform="translate(640, 395)">
-                            <circle cx="0" cy="0" r="6" fill="#EA580C" opacity="0.3">
-                                <animate attributeName="r" values="4;8;4" dur="1.5s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="20" cy="0" r="6" fill="#EA580C" opacity="0.3">
-                                <animate attributeName="r" values="4;8;4" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="40" cy="0" r="6" fill="#EA580C" opacity="0.3">
-                                <animate attributeName="r" values="4;8;4" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
-                            </circle>
-                            <text x="20" y="18" text-anchor="middle" font-size="7" fill="#EA580C" font-weight="600">3个分身并行</text>
-                        </g>
-                    </g>
-                    <!-- Scenario 4: Flow Skill flow -->
-                    <g id="flow-s4" opacity="0">
-                        <path d="M42 44 L42 52 Q42 56 46 56 L460 56 L460 72 L420 80 L420 106 L420 134" stroke="#0969DA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M420 160 L420 186 L649 186 L649 206" stroke="#0969DA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <!-- Flow stages -->
-                        <g transform="translate(130, 340)">
-                            <rect x="0" y="0" width="588" height="38" rx="6" fill="white" stroke="#0969DA" stroke-width="1" stroke-dasharray="4,3"/>
-                            <text x="10" y="15" font-size="8" font-weight="700" fill="#0969DA">Flow 编排:</text>
-                            <g>
-                                <rect x="80" y="6" width="64" height="24" rx="5" fill="#EFF6FF" stroke="#0969DA" stroke-width="0.8"/>
-                                <text x="112" y="22" text-anchor="middle" font-size="7" fill="#0969DA" font-weight="600">需求分析</text>
-                                <text x="112" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Task]</text>
-                            </g>
-                            <text x="152" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="162" y="6" width="64" height="24" rx="5" fill="#E6F7ED" stroke="#2DA44E" stroke-width="0.8"/>
-                                <text x="194" y="22" text-anchor="middle" font-size="7" fill="#1A7F37" font-weight="600">代码开发</text>
-                                <text x="194" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Native]</text>
-                            </g>
-                            <text x="234" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="244" y="6" width="64" height="24" rx="5" fill="#FFF7ED" stroke="#EA580C" stroke-width="0.8"/>
-                                <text x="276" y="22" text-anchor="middle" font-size="7" fill="#EA580C" font-weight="600">CR审查</text>
-                                <text x="276" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Task]</text>
-                            </g>
-                            <text x="316" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="326" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/>
-                                <text x="358" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">测试生成</text>
-                                <text x="358" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Tool]</text>
-                            </g>
-                            <text x="398" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="408" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/>
-                                <text x="440" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">CI/CD</text>
-                                <text x="440" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Tool]</text>
-                            </g>
-                            <text x="480" y="22" font-size="10" fill="#D0D7DE">→</text>
-                            <g>
-                                <rect x="490" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/>
-                                <text x="522" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">发布上线</text>
-                                <text x="522" y="27" text-anchor="middle" font-size="6" fill="#656D76">[Tool]</text>
-                            </g>
-                        </g>
-                        <!-- Animated dash -->
-                        <path d="M649 270 L649 340" stroke="#0969DA" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3">
-                            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
-                        </path>
-                    </g>
-                </g>
-
-                <!-- OS -> Growth Loop connector -->
-                <g id="connector-os-loop">
-                    <line x1="420" y1="588" x2="420" y2="610" stroke="#059669" stroke-width="1.5" opacity="0.5"/>
-                    <polygon points="416,608 420,616 424,608" fill="#059669" opacity="0.5"/>
-                    <text x="432" y="604" font-size="7" fill="#059669" opacity="0.5">经验回流</text>
-                </g>
-
-                <!-- ======== GROWTH LOOP (always visible) ======== -->
-                <g id="growth-loop" class="tip-target">
-                    <!-- Section label -->
-                    <text x="125" y="628" font-size="10" font-weight="700" fill="#059669" opacity="0.6">GROWTH LOOP — 成长闭环</text>
-
-                    <!-- Background -->
-                    <rect x="110" y="636" width="540" height="110" rx="12" fill="#059669" opacity="0.04"/>
-                    <rect x="110" y="636" width="540" height="110" rx="12" fill="none" stroke="#059669" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-
-                    <!-- 4-step cycle -->
-                    <g filter="url(#dropShadow)">
-                        <rect x="130" y="656" width="100" height="44" rx="8" fill="white" stroke="#059669" stroke-width="1.2"/>
-                        <text x="180" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#059669">① 执行任务</text>
-                        <text x="180" y="688" text-anchor="middle" font-size="7" fill="#656D76">Skill调度+完成</text>
-                    </g>
-                    <g opacity="0.6"><line x1="230" y1="678" x2="250" y2="678" stroke="#059669" stroke-width="1.5"/><polygon points="248,674 256,678 248,682" fill="#059669"/></g>
-
-                    <g filter="url(#dropShadow)">
-                        <rect x="258" y="656" width="100" height="44" rx="8" fill="white" stroke="#EA580C" stroke-width="1.2"/>
-                        <text x="308" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">② Reflection</text>
-                        <text x="308" y="688" text-anchor="middle" font-size="7" fill="#656D76">自评+复盘</text>
-                    </g>
-                    <g opacity="0.6"><line x1="358" y1="678" x2="378" y2="678" stroke="#EA580C" stroke-width="1.5"/><polygon points="376,674 384,678 376,682" fill="#EA580C"/></g>
-
-                    <g filter="url(#dropShadow)">
-                        <rect x="386" y="656" width="110" height="44" rx="8" fill="white" stroke="#0969DA" stroke-width="1.2"/>
-                        <text x="441" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#0969DA">③ 经验→Memory</text>
-                        <text x="441" y="688" text-anchor="middle" font-size="7" fill="#656D76">沉淀+去重+索引</text>
-                    </g>
-                    <g opacity="0.6"><line x1="496" y1="678" x2="516" y2="678" stroke="#0969DA" stroke-width="1.5"/><polygon points="514,674 522,678 514,682" fill="#0969DA"/></g>
-
-                    <g filter="url(#dropShadow)">
-                        <rect x="524" y="656" width="110" height="44" rx="8" fill="white" stroke="#1A7F37" stroke-width="1.2"/>
-                        <text x="579" y="674" text-anchor="middle" font-size="9" font-weight="700" fill="#1A7F37">④ 下次更好</text>
-                        <text x="579" y="688" text-anchor="middle" font-size="7" fill="#656D76">经验驱动决策</text>
-                    </g>
-
-                    <!-- Loop-back arrow -->
-                    <path d="M579 700 L579 716 Q579 724 571 724 L188 724 Q180 724 180 716 L180 700" stroke="#059669" stroke-width="1.5" fill="none" stroke-dasharray="6,3" opacity="0.5">
-                        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2s" repeatCount="indefinite"/>
-                    </path>
-                    <polygon points="176,702 180,694 184,702" fill="#059669" opacity="0.5"/>
-                    <text x="380" y="736" text-anchor="middle" font-size="8" fill="#059669" font-weight="600" opacity="0.6">持续正反馈循环</text>
-
-                    <!-- 3 evolution levels on the right -->
-                    <g transform="translate(660, 643)">
-                        <rect x="0" y="0" width="86" height="100" rx="8" fill="white" stroke="#059669" stroke-width="0.8" filter="url(#dropShadow)"/>
-                        <text x="43" y="16" text-anchor="middle" font-size="8" font-weight="700" fill="#059669">进化三级</text>
-                        <line x1="8" y1="22" x2="78" y2="22" stroke="#E8ECF0" stroke-width="0.8"/>
-                        <text x="12" y="38" font-size="7" font-weight="700" fill="#1A7F37">L1 行为适应</text>
-                        <text x="12" y="48" font-size="6" fill="#656D76">记住偏好/习惯</text>
-                        <text x="12" y="62" font-size="7" font-weight="700" fill="#0969DA">L2 技能进化</text>
-                        <text x="12" y="72" font-size="6" fill="#656D76">提炼方法论</text>
-                        <text x="12" y="86" font-size="7" font-weight="700" fill="#7C3AED">L3 认知进化</text>
-                        <text x="12" y="96" font-size="6" fill="#656D76">跨域知识图谱</text>
-                    </g>
-                </g>
-
-            </svg>
+        <div class="sc-btn" data-type="tool" data-id="s2" onclick="activate('s2')">
+            <div class="sc-q">"帮我生成一张配图"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅱ 工具</span>
+                <span>⏱ 秒级</span>
+            </div>
+        </div>
+        <div class="sc-btn" data-type="task" data-id="s3" onclick="activate('s3')">
+            <div class="sc-q">"帮我Review这个PR"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅲ 任务</span>
+                <span>⏱ 分钟级</span>
+            </div>
+        </div>
+        <div class="sc-btn" data-type="flow" data-id="s4" onclick="activate('s4')">
+            <div class="sc-q">"帮我把需求做到上线"</div>
+            <div class="sc-meta">
+                <span class="sc-badge">Ⅳ 流程</span>
+                <span>⏱ 小时级</span>
+            </div>
         </div>
     </div>
 
-    <!-- Detail Panel -->
-    <div id="detail-panel" class="detail-panel hidden">
-        <div class="detail-header" id="detail-header">
-            <div class="icon" id="detail-icon" style="background:#1A7F37">🧠</div>
+    <!-- ==================== THE UNIFIED DIAGRAM ==================== -->
+
+    <!-- LAYER 1: PRODUCT -->
+    <div class="layer product" id="layer-product">
+        <div class="layer-header">
+            <span class="layer-tag">PRODUCT</span>
+            <h2>产品层</h2>
+            <span class="game-tag">🎮 = 不同游戏，共享同一引擎</span>
+        </div>
+        <div class="layer-body">
+            <div class="products-row" id="product-row">
+                <div class="product-chip" data-prod="cf">💻 CodeFlicker<br><span style="font-size:10px;font-weight:400;opacity:.7">AI × Coding</span></div>
+                <div class="product-chip" data-prod="kate">🏢 KATE-Studio<br><span style="font-size:10px;font-weight:400;opacity:.7">企业数字员工</span></div>
+                <div class="product-chip" data-prod="pa">🤖 AI个人助理<br><span style="font-size:10px;font-weight:400;opacity:.7">通用AI助手</span></div>
+                <div class="product-chip more">···</div>
+                <div class="adapt-chip">🔧 产品适配层<br><span style="font-weight:400">UI · 权限 · Skill集</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layer-connector" id="conn-1">▼</div>
+
+    <!-- LAYER 2: AGENT -->
+    <div class="layer agent" id="layer-agent">
+        <div class="layer-header">
+            <span class="layer-tag">AGENT</span>
+            <h2>Agent 层</h2>
+            <span class="game-tag">🎮 = 玩家 + 技能书 + 副本</span>
+        </div>
+        <div class="layer-body">
+            <!-- Main Agent -->
+            <div class="agent-core" id="main-agent">
+                <div class="emoji">🧠</div>
+                <div class="info">
+                    <div class="name">主 Agent — 决策指挥中枢</div>
+                    <div class="desc">理解意图 → 查 Memory → 选 Skill → 派实例 → 收经验&nbsp;&nbsp;|&nbsp;&nbsp;永不下场执行</div>
+                </div>
+                <div class="game-note">🎮 = 玩家本人</div>
+            </div>
+
+            <!-- 4 Skill Cards (three-in-one) -->
+            <div class="skill-grid" id="skill-grid">
+                <!-- Native -->
+                <div class="skill-card" data-type="native" data-id="s1" onclick="activate('s1')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅰ</div>
+                        <div class="sk-title">原生 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">🗡️</span>
+                        单人任务 — 独立完成
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot solid" style="background:var(--c-native)"></div>
+                            <span class="inst-label-text">1个实例（会话）· 纯Skill指令</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tool -->
+                <div class="skill-card" data-type="tool" data-id="s2" onclick="activate('s2')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅱ</div>
+                        <div class="sk-title">工具 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">🏪</span>
+                        NPC商店 — 调用外部
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot solid" style="background:var(--c-tool)"></div>
+                            <span class="inst-arrow">→</span>
+                            <span class="inst-label-text" style="color:var(--c-tool)">MCP</span>
+                            <span class="inst-label-text">1实例 + 外部API</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Task -->
+                <div class="skill-card" data-type="task" data-id="s3" onclick="activate('s3')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅲ</div>
+                        <div class="sk-title">任务 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">⚔️</span>
+                        组队副本 — N人并行
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot solid" style="background:var(--c-task)"></div>
+                            <div class="inst-dot solid" style="background:var(--c-task)"></div>
+                            <div class="inst-dot solid" style="background:var(--c-task)"></div>
+                            <span class="inst-label-text">N个并行实例 · 共享Memory</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Flow -->
+                <div class="skill-card" data-type="flow" data-id="s4" onclick="activate('s4')">
+                    <div class="sk-head">
+                        <div class="sk-num">Ⅳ</div>
+                        <div class="sk-title">流程 Skill</div>
+                    </div>
+                    <div class="sk-game">
+                        <span class="sk-game-icon">🏰</span>
+                        Raid Boss — 多阶段
+                    </div>
+                    <div class="sk-instance">
+                        <div class="inst-label">实例模型</div>
+                        <div class="inst-visual">
+                            <div class="inst-dot" style="border-color:var(--c-flow)"></div>
+                            <span class="inst-arrow">⇢</span>
+                            <div class="inst-dot solid" style="background:var(--c-flow);width:8px;height:8px"></div>
+                            <div class="inst-dot solid" style="background:var(--c-flow);width:8px;height:8px"></div>
+                            <div class="inst-dot solid" style="background:var(--c-flow);width:8px;height:8px"></div>
+                            <span class="inst-label-text">1总控 + N实例 · 分阶段编排</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross-cutting concerns -->
+            <div class="crosscut">
+                <span class="crosscut-pill">🔍 Eval 评估</span>
+                <span class="crosscut-pill">🔒 安全合规</span>
+                <span class="crosscut-pill">📊 可观测性</span>
+                <span class="crosscut-pill">🧠 Memory管理</span>
+                <span class="crosscut-pill">📋 Skill注册中心</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="layer-connector" id="conn-2">▼</div>
+
+    <!-- LAYER 3: AGENT OS -->
+    <div class="layer os" id="layer-os">
+        <div class="layer-header">
+            <span class="layer-tag">AGENT OS</span>
+            <h2>底层运行时</h2>
+            <span class="game-tag">🎮 = 游戏引擎</span>
+        </div>
+        <div class="layer-body">
+            <div class="os-grid" id="os-grid">
+                <div class="os-block" id="os-core">
+                    <div class="os-icon">🧬</div>
+                    <div class="os-name">AgentCore 六大能力</div>
+                    <div class="os-sub">通用推理 / 规划 / 反思引擎</div>
+                    <div class="os-game">🎮 = 物理引擎 + AI系统</div>
+                </div>
+                <div class="os-block" id="os-instance-mgr">
+                    <div class="os-icon">⚡</div>
+                    <div class="os-name">实例管理器</div>
+                    <div class="os-sub">创建 · 监控 · 回收 · 汇总</div>
+                    <div class="os-game">🎮 = 副本系统</div>
+                </div>
+                <div class="os-block" id="os-mcp">
+                    <div class="os-icon">🔌</div>
+                    <div class="os-name">MCP 网关</div>
+                    <div class="os-sub">统一工具调用 · 外部服务</div>
+                    <div class="os-game">🎮 = 插件 API</div>
+                </div>
+            </div>
+            <div class="os-caps">
+                <span class="os-cap">Memory</span>
+                <span class="os-cap">Reasoning</span>
+                <span class="os-cap">Planning</span>
+                <span class="os-cap">Orchestration</span>
+                <span class="os-cap">Reflection</span>
+                <span class="os-cap">Integration</span>
+                <span class="os-cap" style="margin-left:auto;background:#E6F7ED;color:#1A7F37">🖥️ 本地 / ☁️ 云端</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- GROWTH LOOP -->
+    <div class="growth" id="growth-loop">
+        <div class="growth-header">
+            <span style="font-size:18px">🔄</span>
+            <h3>成长闭环 — 实例用完即毁，Memory 持久成长</h3>
+            <span class="game-tag">🎮 = 经验值 + 升级</span>
+        </div>
+        <div class="growth-flow">
+            <span class="growth-step">执行任务</span>
+            <span class="growth-arrow">→</span>
+            <span class="growth-step">Reflection 自评</span>
+            <span class="growth-arrow">→</span>
+            <span class="growth-step">经验 → Memory</span>
+            <span class="growth-arrow">→</span>
+            <span class="growth-step">下次执行更好</span>
+            <span class="growth-arrow">↻</span>
+        </div>
+        <div class="growth-levels">
+            <span class="growth-level">L1 行为适应 = 🎮 熟练度</span>
+            <span class="growth-level">L2 技能进化 = 🎮 天赋树</span>
+            <span class="growth-level">L3 认知进化 = 🎮 觉醒</span>
+        </div>
+    </div>
+
+    <!-- DETAIL PANEL (dynamically rendered) -->
+    <div class="detail-panel hidden" id="detail-panel">
+        <div class="detail-top" id="detail-top">
+            <div class="dt-icon" id="dt-icon">📄</div>
             <div>
-                <h3 id="detail-title">详情</h3>
-                <div class="subtitle" id="detail-subtitle"></div>
+                <h3 id="dt-title">运行时序</h3>
+                <div class="dt-sub" id="dt-sub"></div>
             </div>
         </div>
         <div class="detail-body" id="detail-body"></div>
     </div>
 
-    <!-- Default: Skill Types Overview (shown when no scenario is selected) -->
-    <div id="skill-overview" style="margin-top:20px;">
-        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#656D76; margin-bottom:12px;">⚡ 四类技能体系详解（hover 看细节）</div>
-        <div class="skill-detail-grid">
-            <div class="skill-detail-box native">
-                <h4>Ⅰ 原生 Skill (Native)</h4>
-                <p><strong>实例模式：</strong>派 1 个独立工作实例（会话），带 Skill 指令独立完成；不依赖外部 API</p>
-                <p><strong>游戏类比：</strong>🎮 派一个角色去做单人支线任务，做完回来交经验</p>
-                <p><strong>生命周期：</strong>创建 → 注入Skill → 独立执行 → 经验回流 → 实例销毁</p>
-                <div class="examples">
-                    <span class="example-tag">📊 行业调研</span>
-                    <span class="example-tag">📝 文档撰写</span>
-                    <span class="example-tag">📑 PPT制作</span>
-                    <span class="example-tag">🔍 深度分析</span>
-                </div>
-            </div>
-            <div class="skill-detail-box tool">
-                <h4>Ⅱ 工具 Skill (Tool/MCP)</h4>
-                <p><strong>实例模式：</strong>派 1 个独立工作实例（会话），通过 MCP 网关调用外部 API；网关统一鉴权/限流</p>
-                <p><strong>游戏类比：</strong>🎮 派一个角色去 NPC 商店买装备/找铁匠打造</p>
-                <p><strong>生命周期：</strong>创建 → 注入Skill → 调API → 经验回流 → 实例销毁</p>
-                <div class="examples">
-                    <span class="example-tag">🖼️ 图片生成</span>
-                    <span class="example-tag">🎬 视频生成</span>
-                    <span class="example-tag">🔄 CI/CD</span>
-                    <span class="example-tag">📈 数据查询</span>
-                </div>
-            </div>
-            <div class="skill-detail-box task">
-                <h4>Ⅲ 任务 Skill (Task)</h4>
-                <p><strong>实例模式：</strong>派 N 个并行工作实例（Task），各带不同 Skill；各自独立上下文，结果汇总后经验回流</p>
-                <p><strong>游戏类比：</strong>🎮 组队打副本：多角色同时出战，各有分工</p>
-                <p><strong>生命周期：</strong>创建N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁</p>
-                <div class="examples">
-                    <span class="example-tag">🔎 CR代码审查</span>
-                    <span class="example-tag">♻️ 重构评审</span>
-                    <span class="example-tag">📐 多维需求分析</span>
-                </div>
-            </div>
-            <div class="skill-detail-box flow">
-                <h4>Ⅳ 流程 Skill (Flow)</h4>
-                <p><strong>实例模式：</strong>1 个总控实例（Flow）编排多阶段，每阶段派执行实例（可是Native/Tool/Task任意组合）</p>
-                <p><strong>游戏类比：</strong>🎮 多阶段 Raid Boss 战：指挥官调度多小队，各司其职</p>
-                <p><strong>能力：</strong>跳过/重试/断点续跑/人工确认门禁；总控实例最后销毁</p>
-                <div class="examples">
-                    <span class="example-tag">🚀 需求→发布全链路</span>
-                    <span class="example-tag">🏗️ 项目初始化</span>
-                    <span class="example-tag">📦 批量迁移</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 补齐：P0/P1/P2 关键信息（不挤主图，用下方卡片承载） -->
-        <div style="margin-top:16px; display:grid; grid-template-columns: 1.05fr 0.95fr; gap:16px;">
-            <div style="background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
-                <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧭 Skill 类型决策指南（P1）</div>
-                <div style="font-size:12px;color:var(--c-text-2);">
-                    <div style="padding:10px 12px;border:1px solid var(--c-border-light);border-radius:10px;background:#F6F8FA;">
-                        <div style="font-weight:800;color:var(--c-text);margin-bottom:6px;">快速判断（按实例复杂度）</div>
-                        <div style="display:grid;grid-template-columns: 100px 1fr;gap:6px 10px;">
-                            <div style="color:var(--c-text-3);font-weight:700;">1个实例够？</div><div>→ 用 <strong>Native</strong>（不调外部）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">要调外部API？</div><div>→ 用 <strong>Tool</strong>（1个实例+MCP网关）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">可并行拆？</div><div>→ 用 <strong>Task</strong>（N个并行实例协作）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">有阶段依赖？</div><div>→ 用 <strong>Flow</strong>（1总控+N实例编排）</div>
-                        </div>
-                    </div>
-                    <div style="margin-top:10px; color:var(--c-text-3);font-size:11px;">建议产品侧在PRD里写清：触发词、输入约束、输出形态、失败兜底；技术侧写清：依赖、权限、SLA、回滚。</div>
-                </div>
-            </div>
-
-            <div style="background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
-                <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧬 Skill 生命周期与治理（P1/P2）</div>
-                <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
-                    <span style="padding:6px 10px;border-radius:999px;background:#F3F5F7;border:1px solid var(--c-border-light);font-size:11px;">开发</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#F5F3FF;border:1px solid rgba(124,58,237,.25);font-size:11px;">注册(元数据/版本)</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#FFF7ED;border:1px solid rgba(234,88,12,.25);font-size:11px;">灰度/AB</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#E6F7ED;border:1px solid rgba(45,164,78,.25);font-size:11px;">评估(Eval)</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#EFF6FF;border:1px solid rgba(9,105,218,.25);font-size:11px;">发布</span>
-                    <span style="color:var(--c-border);">→</span>
-                    <span style="padding:6px 10px;border-radius:999px;background:#FEF2F2;border:1px solid rgba(207,34,46,.25);font-size:11px;">回滚/下线</span>
-                </div>
-                <div style="margin-top:10px; font-size:11px; color:var(--c-text-3);">
-                    关键治理项：Schema校验、权限审计、成本预算(Token/调用)、SLA、观测面板、风险开关。
-                </div>
-            </div>
-        </div>
-
-        <div style="margin-top:16px; background:var(--c-card); border:1px solid var(--c-border-light); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding:16px;">
-            <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧠 Memory 分层与隔离策略（P0）</div>
-            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;">
-                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
-                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L1 工作记忆</div>
-                    <div style="font-size:11px;color:var(--c-text-3);">会话上下文/临时变量</div>
-                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：低延迟；自动过期；不做长期沉淀</div>
-                </div>
-                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
-                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L2 情景记忆</div>
-                    <div style="font-size:11px;color:var(--c-text-3);">偏好/历史/任务记录</div>
-                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：可审计；可删除；支持时间衰减</div>
-                </div>
-                <div style="border:1px solid var(--c-border-light);border-radius:12px;padding:12px;background:#F6F8FA;">
-                    <div style="font-weight:800;color:var(--c-text);margin-bottom:4px;">L3 语义记忆</div>
-                    <div style="font-size:11px;color:var(--c-text-3);">知识/文档/经验索引</div>
-                    <div style="margin-top:6px;font-size:11px;color:var(--c-text-2);">特点：语义检索；去重聚合；引用溯源</div>
-                </div>
-            </div>
-            <div style="margin-top:10px;font-size:11px;color:var(--c-text-3);">
-                隔离：<strong>租户</strong>（企业/个人）→ <strong>产品</strong>（IDE/Web/助手）→ <strong>用户</strong>；共享仅限“通用偏好/匿名经验”，敏感信息必须可删除、可审计。
-            </div>
-        </div>
-    </div>
-
-    <!-- Tooltip Container (hover bubbles) -->
-    <div id="cf-tooltip" aria-hidden="true"></div>
-
-    <!-- ======== ANALOGY VIEW (hidden by default) ======== -->
-    <div id="analogy-view">
-        <div class="analogy-intro">
-            <h2>🎮 如果 Agent 架构是一个游戏世界</h2>
-            <p>左侧是产品 &amp; 技术架构，右侧是网络游戏类比 — 逐层映射，秒懂每一个抽象概念</p>
-        </div>
-
-        <!-- Row 1: Product Layer ↔ Game Types -->
-        <div class="analogy-row">
-            <div class="analogy-card">
-                <h3 style="color:var(--c-product)">📦 产品层 — 不同产品形态</h3>
-                <p>同一套 Agent 内核，通过<strong>产品适配层</strong>（UI · Skill集 · 权限）打造出完全不同的产品：</p>
-                <div class="sub-items">
-                    <div class="sub-item" style="border-top:2px solid #0969DA">
-                        <strong>CodeFlicker</strong>
-                        本地IDE插件，需下载安装<br>联网调用LLM，低延迟优先
-                    </div>
-                    <div class="sub-item" style="border-top:2px solid #2DA44E">
-                        <strong>KATE-Studio</strong>
-                        纯Web应用，零安装<br>企业统一管控，批量任务
-                    </div>
-                    <div class="sub-item" style="border-top:2px solid #7C3AED">
-                        <strong>AI个人助理</strong>
-                        多端：本地+Web+移动<br>云端为主，全量能力开放
-                    </div>
-                </div>
-            </div>
-            <div class="analogy-arrow">⟺</div>
-            <div class="analogy-card game">
-                <h3>🎮 不同游戏 — 同一引擎开发</h3>
-                <p>同一套游戏引擎，开发出<strong>完全不同类型的游戏</strong>（不是同一游戏的不同职业）：</p>
-                <div class="sub-items">
-                    <div class="sub-item">
-                        <strong>🖥️ 本地客户端游戏</strong>
-                        需要下载安装客户端<br>联网但本地运算优先
-                    </div>
-                    <div class="sub-item">
-                        <strong>🌐 网页游戏</strong>
-                        打开浏览器即玩<br>轻量、即开即用
-                    </div>
-                    <div class="sub-item">
-                        <strong>🌍 大型MMO网游</strong>
-                        客户端+网页+手机多端<br>云端服务器为核心
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Row 2: Agent Layer ↔ Player/Mechanics -->
-        <div class="analogy-row">
-            <div class="analogy-card">
-                <h3 style="color:var(--c-agent)">🧠 Agent层 — 决策 + 实例派遣</h3>
-                <p><strong>主 Agent 永不下场执行</strong>。它理解意图、查记忆、选Skill，然后<strong>派出独立工作实例（分身）</strong>去执行。</p>
-                <p style="margin-top:6px">分身 = 独立工作实例，具体形式可以是会话、Task、Flow，执行完毕后经验回流、实例销毁。</p>
-                <div class="sub-items" style="grid-template-columns:1fr 1fr">
-                    <div class="sub-item" style="border-top:2px solid #2DA44E">
-                        <strong>Ⅰ Native / Ⅱ Tool</strong>
-                        1个独立实例，带Skill完成<br>Tool多一步调外部API
-                    </div>
-                    <div class="sub-item" style="border-top:2px solid #EA580C">
-                        <strong>Ⅲ Task / Ⅳ Flow</strong>
-                        Task: N个并行实例协作<br>Flow: 1总控 + N执行实例
-                    </div>
-                </div>
-            </div>
-            <div class="analogy-arrow">⟺</div>
-            <div class="analogy-card game">
-                <h3>🎯 玩家 + 技能系统</h3>
-                <p><strong>玩家自己不进入游戏世界</strong>，通过召唤角色/分身去执行任务。任务完成后角色消失，经验归属玩家。</p>
-                <p style="margin-top:6px">每次召唤 = 一个独立游戏实例。</p>
-                <div class="sub-items" style="grid-template-columns:1fr 1fr">
-                    <div class="sub-item">
-                        <strong>🗡️ 单人任务 / NPC交互</strong>
-                        派一个角色独立完成<br>NPC交互=调用外部服务
-                    </div>
-                    <div class="sub-item">
-                        <strong>⚔️ 组队副本 / Raid</strong>
-                        多角色同时出战协作<br>Raid=指挥官+多小队编排
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Row 3: Agent OS ↔ Game Engine -->
-        <div class="analogy-row">
-            <div class="analogy-card">
-                <h3 style="color:var(--c-os)">⚙️ Agent OS — 底层运行时</h3>
-                <p>提供所有实例共用的基础能力，<strong>与Agent层在同一进程内</strong>（函数调用，非远程通信）。</p>
-                <ul>
-                    <li><strong>AgentCore 六能力：</strong>Memory · Reasoning · Planning · Orchestration · Reflection · Integration</li>
-                    <li><strong>Instance Manager：</strong>创建/监控/回收/汇总独立工作实例</li>
-                    <li><strong>MCP网关：</strong>统一外部API调用入口</li>
-                </ul>
-            </div>
-            <div class="analogy-arrow">⟺</div>
-            <div class="analogy-card game">
-                <h3>🏗️ 游戏引擎</h3>
-                <p>所有游戏共用的底层引擎（如Unreal/Unity），<strong>与游戏逻辑在同一进程内</strong>运行。</p>
-                <ul>
-                    <li><strong>引擎核心：</strong>存档系统 · AI行为树 · 任务系统 · 调度器 · 回放/复盘 · 网络层</li>
-                    <li><strong>副本系统：</strong>创建/管理/回收独立游戏实例</li>
-                    <li><strong>插件API：</strong>统一外部Mod和服务接入</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Row 4: Growth Loop ↔ XP System -->
-        <div class="analogy-row">
-            <div class="analogy-card">
-                <h3 style="color:#059669">🔄 成长闭环 — 越用越强</h3>
-                <p>执行任务 → Reflection自评 → 经验写入Memory → 下次执行起点更高。</p>
-                <p style="margin-top:6px"><strong>实例用完即毁，Memory持久存活。</strong>这是Agent区别于传统软件的本质。</p>
-                <div class="sub-items">
-                    <div class="sub-item" style="border-top:2px solid #1A7F37"><strong>L1 行为适应</strong>记住偏好和习惯</div>
-                    <div class="sub-item" style="border-top:2px solid #0969DA"><strong>L2 技能进化</strong>从执行中提炼方法论</div>
-                    <div class="sub-item" style="border-top:2px solid #7C3AED"><strong>L3 认知进化</strong>跨领域知识图谱</div>
-                </div>
-            </div>
-            <div class="analogy-arrow">⟺</div>
-            <div class="analogy-card game">
-                <h3>⭐ 经验值 + 升级系统</h3>
-                <p>打怪获得经验 → 升级解锁新技能 → 更强角色打更难副本。</p>
-                <p style="margin-top:6px"><strong>角色消失但经验永存。</strong>这是游戏让人上瘾的核心机制。</p>
-                <div class="sub-items">
-                    <div class="sub-item"><strong>L1 熟练度</strong>操作越来越熟练</div>
-                    <div class="sub-item"><strong>L2 天赋树</strong>解锁新技能和流派</div>
-                    <div class="sub-item"><strong>L3 跨服成就</strong>跨游戏的通用认知</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instance Model Detail -->
-        <div class="analogy-session">
-            <h3>💡 核心洞察：分身 = 独立工作实例（Instance）</h3>
-            <p style="font-size:13px;color:var(--c-text-2);margin-bottom:12px">主Agent派出的每个“分身”本质上是一个<strong>独立工作实例</strong>。具体形式根据任务类型不同：可以是一个<strong>会话</strong>、一个并行<strong>Task</strong>、或一个多阶段<strong>Flow</strong>。<br>实例有独立上下文、按Skill指令执行、完成后经验回流然后销毁。任务复杂度的差异，本质是<strong>实例的数量、形式和协调方式</strong>不同。</p>
-            <div class="session-grid">
-                <div class="session-card" style="border-top-color:#2DA44E">
-                    <h4 style="color:#2DA44E">Ⅰ Native Skill</h4>
-                    <p>1个实例（会话） · 带Skill独立完成</p>
-                    <p>🎮 = 单人支线任务</p>
-                    <div class="lifecycle">创建→注入Skill→执行→回流→销毁</div>
-                </div>
-                <div class="session-card" style="border-top-color:#7C3AED">
-                    <h4 style="color:#7C3AED">Ⅱ Tool Skill</h4>
-                    <p>1个实例（会话） · 调MCP外部API</p>
-                    <p>🎮 = 去NPC商店买装备</p>
-                    <div class="lifecycle">创建→注入Skill→调API→回流→销毁</div>
-                </div>
-                <div class="session-card" style="border-top-color:#EA580C">
-                    <h4 style="color:#EA580C">Ⅲ Task Skill</h4>
-                    <p>N个并行实例 · 各带不同Skill</p>
-                    <p>🎮 = 组队打副本</p>
-                    <div class="lifecycle">创建N个→并行执行→汇总→回流→全部销毁</div>
-                </div>
-                <div class="session-card" style="border-top-color:#0969DA">
-                    <h4 style="color:#0969DA">Ⅳ Flow Skill</h4>
-                    <p>1总控 + N执行实例 · 分阶段</p>
-                    <p>🎮 = 多阶段Raid Boss战</p>
-                    <div class="lifecycle">总控创建→逐阶段派遣→验证→下阶段→全部销毁</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ====== RUNTIME SPLIT VIEW ====== -->
-    <div id="runtime-view">
-        <div class="rt-tabs" id="rt-tabs"></div>
-        <div class="rt-split">
-            <!-- Left: Static Architecture -->
-            <div class="rt-col" id="rt-static">
-                <div class="rt-col-label">📐 静态架构（你是什么）</div>
-                <!-- Product Layer -->
-                <div class="rt-layer product" id="rt-product">
-                    <div class="rt-layer-title">
-                        <span class="tag" style="background:var(--c-product)">PRODUCT</span>
-                        产品层
-                    </div>
-                    <div style="font-size:11px;color:var(--c-text-3);margin-bottom:4px;">多产品共享同一Agent内核</div>
-                    <div class="pills" id="rt-product-pills">
-                        <span class="pill" data-prod="cf">CodeFlicker</span>
-                        <span class="pill" data-prod="kate">KATE-Studio</span>
-                        <span class="pill" data-prod="pa">AI个人助理</span>
-                        <span class="pill" data-prod="adapt">产品适配层</span>
-                    </div>
-                </div>
-                <!-- Agent Layer -->
-                <div class="rt-layer agent" id="rt-agent">
-                    <div class="rt-layer-title">
-                        <span class="tag" style="background:var(--c-agent)">AGENT</span>
-                        Agent层
-                    </div>
-                    <div style="font-size:11px;color:var(--c-text-3);margin-bottom:4px;">🧠 主Agent — 决策指挥中枢，永不下场执行</div>
-                    <div style="font-size:10px;color:var(--c-text-3);margin-bottom:6px;">理解意图 · 查记忆 · 选Skill · 派实例 · 收经验</div>
-                    <div style="font-size:10px;font-weight:700;color:var(--c-text-3);margin-bottom:4px;">四类Skill：</div>
-                    <div class="pills" id="rt-skill-pills">
-                        <span class="pill" data-skill="native" style="border-left:3px solid var(--c-skill-native)">Ⅰ 原生</span>
-                        <span class="pill" data-skill="tool" style="border-left:3px solid var(--c-skill-tool)">Ⅱ 工具</span>
-                        <span class="pill" data-skill="task" style="border-left:3px solid var(--c-skill-task)">Ⅲ 任务</span>
-                        <span class="pill" data-skill="flow" style="border-left:3px solid var(--c-skill-flow)">Ⅳ 流程</span>
-                    </div>
-                </div>
-                <!-- OS Layer -->
-                <div class="rt-layer os" id="rt-os">
-                    <div class="rt-layer-title">
-                        <span class="tag" style="background:var(--c-os)">AGENT OS</span>
-                        底层运行时
-                    </div>
-                    <div class="pills">
-                        <span class="pill">AgentCore 六能力</span>
-                        <span class="pill" id="rt-os-im">实例管理器</span>
-                        <span class="pill" id="rt-os-mcp">MCP网关</span>
-                        <span class="pill">运行时</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Divider -->
-            <div class="rt-divider">
-                <div class="rt-arrow forward">→</div>
-                <div class="rt-divider-text" id="rt-divider-label">触发</div>
-                <div class="rt-arrow back">→</div>
-            </div>
-
-            <!-- Right: Dynamic Runtime -->
-            <div class="rt-col" id="rt-dynamic">
-                <div class="rt-col-label">⚡ 动态运行（正在做什么）</div>
-                <div id="rt-dynamic-content">
-                    <!-- JS dynamically fills this -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
     <footer class="footer">
-        架构全景 · AI产品终极形态 · v5.2 · 2026-03
+        架构全景 · AI产品终极形态 · v6.0 · 三合一统一视图 · 2026-03
     </footer>
 </div>
 
+<!-- Tooltip container -->
+<div id="cf-tooltip" aria-hidden="true"></div>
+
 <script>
 // ============ STATE ============
-let currentView = 'structure';
-let currentScenario = null;
+let activeScenario = null;
 
-// ============ RUNTIME SCENARIO DATA ============
-const rtScenarios = {
+// ============ SCENARIO DATA ============
+const DATA = {
     s1: {
-        title: '"帮我写个调研报告"',
-        type: 'native', typeName: 'Ⅰ 原生', time: '分钟级',
-        color: '#2DA44E',
-        product: 'cf', skill: 'native',
-        taskTags: ['意图=调研', '偏好: 清爽报告风格', 'Skill: industry-research'],
-        osMcp: false, osInstances: 1,
+        type: 'native', title: '"帮我写个调研报告"',
+        subtitle: '原生Skill · 1个独立实例（会话形式）完成全过程',
+        color: '#2DA44E', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别意图=调研', color: '#2DA44E' },
+            { label: '查Memory', desc: '偏好:清爽报告', color: '#2DA44E' },
+            { label: '匹配Skill', desc: 'industry-research', color: '#2DA44E' },
+            { label: '派实例', desc: '1个独立工作实例', color: '#2DA44E' },
+            { label: '搜索+撰写', desc: '自主执行全流程', color: '#2DA44E' },
+            { label: '经验回流', desc: '实例销毁→Memory', color: '#2DA44E' },
+        ],
         instances: [{
-            name: '调研实例',
-            sub: 'Research Instance',
-            bindings: [
-                { type: 'skill', label: '✨ industry-research' },
-            ],
-            desc: '自主检索行业数据、抓取公众号资讯、整理竞品信息、撰写分析章节',
+            name: '调研实例', sub: '独立工作会话',
+            binds: [{ type: 'skill', label: 'industry-research' }],
             status: '执行中', statusColor: '#2DA44E'
         }],
-        osMetrics: { active: '1 / 8', api: '2 进行中', memory: '3 条待写入' },
-        feedback: '实例销毁 → 报告风格偏好、常用信息源沉淀到 Memory → 下次调研更精准'
+        insight: '最轻量的Skill类型：无需外部服务、无需并行。用户可通过自然语言"教"Agent新技能，直接变成原生Skill。',
+        osHighlight: ['os-core', 'os-instance-mgr'],
     },
     s2: {
-        title: '"帮我生成一张配图"',
-        type: 'tool', typeName: 'Ⅱ 工具', time: '秒级',
-        color: '#7C3AED',
-        product: 'cf', skill: 'tool',
-        taskTags: ['意图=生图', '偏好: 简洁风格', 'Skill: image-gen'],
-        osMcp: true, osInstances: 1,
+        type: 'tool', title: '"帮我生成一张配图"',
+        subtitle: '工具Skill · 1个实例（会话形式）+ MCP调外部API',
+        color: '#7C3AED', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别意图=生图', color: '#7C3AED' },
+            { label: '查Memory', desc: '偏好:简洁风格', color: '#7C3AED' },
+            { label: '匹配Skill', desc: 'image-gen Tool', color: '#7C3AED' },
+            { label: '派实例+MCP', desc: '1实例→调API', color: '#7C3AED' },
+            { label: '外部生成', desc: '图片服务返回', color: '#7C3AED' },
+            { label: '经验回流', desc: 'prompt模板→Memory', color: '#7C3AED' },
+        ],
         instances: [{
-            name: '生图实例',
-            sub: 'Image Instance',
-            bindings: [
-                { type: 'skill', label: '✨ image-gen' },
-                { type: 'tool', label: '🔌 image-api MCP' },
-            ],
-            desc: '解析用户需求 → 构造 prompt → 调用图片生成 API → 返回适配尺寸的配图',
+            name: '生图实例', sub: '会话 + MCP 调用',
+            binds: [{ type: 'skill', label: 'image-gen' }, { type: 'tool', label: 'image-api MCP' }],
             status: '执行中', statusColor: '#7C3AED'
         }],
-        osMetrics: { active: '1 / 8', api: '1 进行中', memory: '1 条待写入' },
-        feedback: '实例销毁 → 风格偏好、prompt 模板沉淀到 Memory → 下次生图更贴合'
+        insight: '现有的图片Agent、视频Agent等可直接封装为工具Skill——不需要并行实例，只需API包装。这是从多Agent迁移到统一架构的<strong>最低成本路径</strong>。',
+        osHighlight: ['os-core', 'os-instance-mgr', 'os-mcp'],
     },
     s3: {
-        title: '"帮我Review这个PR"',
-        type: 'task', typeName: 'Ⅲ 任务', time: '分钟级',
-        color: '#EA580C',
-        product: 'cf', skill: 'task',
-        taskTags: ['意图=CR', '偏好: 严格模式', 'Skill: code-review Task'],
-        osMcp: false, osInstances: 3,
-        instances: [
-            {
-                name: '代码阅读实例',
-                sub: 'Code Reader',
-                bindings: [
-                    { type: 'skill', label: '✨ code-analyzer' },
-                ],
-                desc: '遍历文件变更、解析依赖关系、标注复杂度热点',
-                status: '执行中', statusColor: '#EA580C'
-            },
-            {
-                name: '审查检查实例',
-                sub: 'Review Checker',
-                bindings: [
-                    { type: 'skill', label: '✨ review-rules' },
-                    { type: 'memory', label: '🧠 团队代码规范' },
-                ],
-                desc: '按安全/性能/可维护性三维度逐项检查，对照团队规范',
-                status: '执行中', statusColor: '#EA580C'
-            },
-            {
-                name: '总结实例',
-                sub: 'Summary Writer',
-                bindings: [
-                    { type: 'skill', label: '✨ report-writer' },
-                ],
-                desc: '汇总所有审查结果，生成结构化 Review 报告',
-                status: '等待中', statusColor: '#9CA3AF'
-            }
+        type: 'task', title: '"帮我Review这个PR"',
+        subtitle: '任务Skill · 派N个并行实例（Task形式）各自独立执行',
+        color: '#EA580C', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别意图=CR', color: '#EA580C' },
+            { label: '查Memory', desc: '代码规范偏好', color: '#EA580C' },
+            { label: '匹配Skill', desc: 'code-review Task', color: '#EA580C' },
+            { label: '派多实例', desc: '3个并行工作实例', color: '#EA580C' },
+            { label: '并行执行', desc: '读码/审查/总结', color: '#EA580C' },
+            { label: '汇总回流', desc: '合并→Memory', color: '#EA580C' },
         ],
-        osMetrics: { active: '3 / 8', api: '0', memory: '5 条待写入' },
-        feedback: '全部实例销毁 → 代码规范模式、常见问题模式沉淀到 Memory → 团队 CR 越来越准'
+        instances: [
+            { name: '代码阅读', sub: 'Code Reader', binds: [{ type: 'skill', label: 'code-analyzer' }], status: '执行中', statusColor: '#EA580C' },
+            { name: '审查检查', sub: 'Review Checker', binds: [{ type: 'skill', label: 'review-rules' }, { type: 'memory', label: '团队规范' }], status: '执行中', statusColor: '#EA580C' },
+            { name: '汇总撰写', sub: 'Summary Writer', binds: [{ type: 'skill', label: 'report-writer' }], status: '等待中', statusColor: '#9CA3AF' },
+        ],
+        insight: '对外呈现为单一Agent——用户不感知底层有多个实例。共享Memory但各自独立上下文，执行完毕后经验回流，实例全部销毁。',
+        osHighlight: ['os-core', 'os-instance-mgr'],
     },
     s4: {
-        title: '"帮我把需求做到上线"',
-        type: 'flow', typeName: 'Ⅳ 流程', time: '小时级',
-        color: '#0969DA',
-        product: 'cf', skill: 'flow',
-        taskTags: ['意图=全链路', '项目上下文已加载', 'Skill: dev-pipeline Flow'],
-        osMcp: true, osInstances: 'N',
-        flowStages: [
-            { name: '需求分析', type: 'Task', typeColor: '#EA580C', detail: '多实例并行拆解需求、评估影响面' },
-            { name: '代码开发', type: 'Native', typeColor: '#2DA44E', detail: '1个实例编写代码、创建分支' },
-            { name: 'CR 审查', type: 'Task', typeColor: '#EA580C', detail: '3个并行实例（同s3场景）' },
-            { name: '测试生成', type: 'Tool', typeColor: '#7C3AED', detail: '调用测试生成 API + 执行测试' },
-            { name: 'CI/CD', type: 'Tool', typeColor: '#7C3AED', detail: '调用构建/部署 MCP 工具' },
-            { name: '发布上线', type: 'Tool', typeColor: '#7C3AED', detail: '灰度发布 + 监控验证' },
+        type: 'flow', title: '"帮我把需求做到上线"',
+        subtitle: '流程Skill · 1总控实例（Flow形式）编排6个阶段',
+        color: '#0969DA', product: 'cf',
+        steps: [
+            { label: '语义理解', desc: '识别=全链路', color: '#0969DA' },
+            { label: '查Memory', desc: '项目上下文', color: '#0969DA' },
+            { label: '匹配Skill', desc: 'dev-pipeline Flow', color: '#0969DA' },
+            { label: '总控编排', desc: '分解6阶段', color: '#0969DA' },
+            { label: '逐阶段派遣', desc: '每阶段不同实例', color: '#0969DA' },
+            { label: '经验回流', desc: '项目经验→Memory', color: '#0969DA' },
         ],
-        osMetrics: { active: 'N / 8', api: '多轮调用', memory: '全程记录' },
-        feedback: '总控实例最后销毁 → 项目上下文、最佳实践沉淀到 Memory → 下个项目更高效'
+        flowStages: [
+            { name: '需求分析', type: 'Task', typeColor: '#EA580C' },
+            { name: '代码开发', type: 'Native', typeColor: '#2DA44E' },
+            { name: 'CR 审查', type: 'Task', typeColor: '#EA580C' },
+            { name: '测试生成', type: 'Tool', typeColor: '#7C3AED' },
+            { name: 'CI/CD', type: 'Tool', typeColor: '#7C3AED' },
+            { name: '发布上线', type: 'Tool', typeColor: '#7C3AED' },
+        ],
+        insight: '最复杂也最强大的Skill类型——可组合其他所有类型。支持<strong>跳过、重试、断点续跑</strong>。每个阶段都可以派出 Native / Task / Tool 任意类型的执行实例。',
+        osHighlight: ['os-core', 'os-instance-mgr', 'os-mcp'],
     }
 };
 
-// ============ RUNTIME VIEW RENDERING ============
-function initRuntimeTabs() {
-    const container = document.getElementById('rt-tabs');
-    let html = '';
-    for (const [id, s] of Object.entries(rtScenarios)) {
-        html += `<div class="rt-tab" data-type="${s.type}" data-id="${id}" onclick="switchRtScenario('${id}')">
-            <div class="rt-tab-q">${s.title}</div>
-            <div class="rt-tab-meta">
-                <span class="rt-tab-badge">${s.typeName}</span>
-                <span>⏱ ${s.time}</span>
-            </div>
-        </div>`;
+// ============ ACTIVATION ============
+function activate(id) {
+    if (activeScenario === id) {
+        deactivate();
+        return;
     }
-    container.innerHTML = html;
-}
+    activeScenario = id;
+    const d = DATA[id];
 
-function switchRtScenario(id) {
-    currentScenario = id;
-    // Update tabs
-    document.querySelectorAll('.rt-tab').forEach(t => t.classList.remove('active'));
-    const tab = document.querySelector(`.rt-tab[data-id="${id}"]`);
-    if (tab) tab.classList.add('active');
-    // Also sync sidebar scenario cards (if visible)
-    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-    const card = document.querySelector(`.scenario-card[data-id="${id}"]`);
-    if (card) card.classList.add('active');
-    // Render
-    renderRtDynamic(id);
-    highlightRtStatic(id);
-}
+    // Scenario bar
+    document.querySelectorAll('.sc-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
 
-function highlightRtStatic(id) {
-    const s = rtScenarios[id];
-    // Highlight product
-    document.querySelectorAll('#rt-product-pills .pill').forEach(p => {
-        p.classList.toggle('hl', p.dataset.prod === s.product || p.dataset.prod === 'adapt');
-        if (p.dataset.prod === s.product) p.style.color = 'var(--c-product)';
-        else if (p.dataset.prod === 'adapt') p.style.color = 'var(--c-product)';
-        else p.style.color = '';
-    });
-    // Highlight skill
-    document.querySelectorAll('#rt-skill-pills .pill').forEach(p => {
-        const isActive = p.dataset.skill === s.skill;
-        p.classList.toggle('hl', isActive);
-        if (isActive) {
-            const colorMap = { native: 'var(--c-skill-native)', tool: 'var(--c-skill-tool)', task: 'var(--c-skill-task)', flow: 'var(--c-skill-flow)' };
-            p.style.color = colorMap[s.skill] || '';
-            p.style.fontWeight = '800';
-            p.style.background = '#fff';
-        } else {
-            p.style.color = ''; p.style.fontWeight = ''; p.style.background = '';
+    // Product chips
+    document.querySelectorAll('.product-chip').forEach(c => {
+        if (c.dataset.prod) {
+            c.classList.toggle('active', c.dataset.prod === d.product);
+            c.classList.toggle('dimmed', c.dataset.prod !== d.product && !c.classList.contains('more'));
         }
     });
-    // Highlight OS pills
-    const imPill = document.getElementById('rt-os-im');
-    const mcpPill = document.getElementById('rt-os-mcp');
-    if (imPill) {
-        imPill.classList.toggle('hl', true);
-        imPill.style.color = 'var(--c-skill-task)';
-    }
-    if (mcpPill) {
-        mcpPill.classList.toggle('hl', s.osMcp);
-        mcpPill.style.color = s.osMcp ? 'var(--c-skill-tool)' : '';
-    }
-    // Update divider text
-    const divLabel = document.getElementById('rt-divider-label');
-    if (divLabel) {
-        const labels = { native: '派实例', tool: '派实例', task: '派多实例', flow: '编排调度' };
-        divLabel.textContent = labels[s.type] || '触发';
-    }
+
+    // Skill cards
+    document.querySelectorAll('.skill-card').forEach(c => {
+        c.classList.toggle('active', c.dataset.id === id);
+        c.classList.toggle('dimmed', c.dataset.id !== id);
+    });
+
+    // Connectors
+    document.getElementById('conn-1').classList.add('active');
+    document.getElementById('conn-1').style.color = d.color;
+    document.getElementById('conn-2').classList.add('active');
+    document.getElementById('conn-2').style.color = d.color;
+
+    // OS blocks
+    document.querySelectorAll('.os-block').forEach(b => {
+        b.classList.toggle('active', d.osHighlight.includes(b.id));
+    });
+
+    // Render detail panel
+    renderDetail(id);
+
+    // Scroll to detail
+    setTimeout(() => {
+        document.getElementById('detail-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
 }
 
-function renderRtDynamic(id) {
-    const s = rtScenarios[id];
-    const container = document.getElementById('rt-dynamic-content');
+function deactivate() {
+    activeScenario = null;
+    document.querySelectorAll('.sc-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.product-chip').forEach(c => { c.classList.remove('active', 'dimmed'); });
+    document.querySelectorAll('.skill-card').forEach(c => { c.classList.remove('active', 'dimmed'); });
+    document.querySelectorAll('.os-block').forEach(b => b.classList.remove('active'));
+    document.getElementById('conn-1').classList.remove('active');
+    document.getElementById('conn-1').style.color = '';
+    document.getElementById('conn-2').classList.remove('active');
+    document.getElementById('conn-2').style.color = '';
+    document.getElementById('detail-panel').classList.add('hidden');
+}
+
+// ============ RENDER DETAIL ============
+function renderDetail(id) {
+    const d = DATA[id];
+    const panel = document.getElementById('detail-panel');
+    const icon = document.getElementById('dt-icon');
+    const title = document.getElementById('dt-title');
+    const sub = document.getElementById('dt-sub');
+    const body = document.getElementById('detail-body');
+
+    panel.classList.remove('hidden');
+    icon.style.background = d.color;
+    icon.textContent = d.type === 'native' ? '📄' : d.type === 'tool' ? '🔧' : d.type === 'task' ? '⚡' : '🔄';
+    title.textContent = '运行时序: ' + d.title;
+    sub.textContent = d.subtitle;
+
     let html = '';
 
-    // Task input card
-    html += `<div class="rt-task-input" style="border-color:${s.color}40">
-        <div class="rt-task-q">${s.title}</div>
-        <div class="rt-task-tags">
-            ${s.taskTags.map(t => `<span class="rt-task-tag">${t}</span>`).join('')}
-        </div>
-    </div>`;
+    // Flow steps
+    html += '<div class="rt-flow">';
+    d.steps.forEach((s, i) => {
+        if (i > 0) html += '<span class="rt-arrow">→</span>';
+        html += `<div class="rt-step">
+            <div class="rt-step-num" style="background:${s.color}">${i+1}</div>
+            <div class="rt-step-label">${s.label}</div>
+            <div class="rt-step-desc">${s.desc}</div>
+        </div>`;
+    });
+    html += '</div>';
 
-    // Instances or Flow stages
-    if (s.type === 'flow') {
-        // Flow: timeline
-        html += `<div class="rt-flow-timeline">`;
-        s.flowStages.forEach((stage, i) => {
-            html += `<div class="rt-flow-stage">
-                <div class="rt-flow-num" style="background:${stage.typeColor}">${i+1}</div>
-                <div class="rt-flow-body">
-                    <span class="rt-flow-name">${stage.name}</span>
-                    <span class="rt-flow-type" style="color:${stage.typeColor}">[${stage.type}]</span>
-                    <div class="rt-flow-detail">${stage.detail}</div>
-                </div>
+    // Instance cards or Flow stages
+    if (d.flowStages) {
+        html += '<div style="font-size:11px;font-weight:700;color:var(--c-text);margin:4px 0 6px">📋 6阶段编排 — 每阶段可使用不同Skill类型：</div>';
+        html += '<div class="flow-stages">';
+        d.flowStages.forEach((s, i) => {
+            html += `<div class="flow-stage">
+                <div class="fs-num" style="background:${s.typeColor}">${i+1}</div>
+                <div class="fs-name">${s.name}</div>
+                <div class="fs-type" style="color:${s.typeColor}">[${s.type}]</div>
             </div>`;
         });
-        html += `</div>`;
+        html += '</div>';
     } else {
-        // Normal: instance cards
-        html += `<div class="rt-instances">`;
-        s.instances.forEach((inst, i) => {
-            const nums = ['①','②','③','④','⑤'];
-            html += `<div class="rt-instance" style="border-top-color:${s.color}">
-                <div class="rt-inst-header">
-                    <div class="rt-inst-num" style="background:${s.color}">${nums[i] || (i+1)}</div>
-                    <div>
-                        <div class="rt-inst-name">${inst.name}</div>
-                        <div class="rt-inst-sub">${inst.sub}</div>
-                    </div>
+        html += '<div style="font-size:11px;font-weight:700;color:var(--c-text);margin:4px 0 6px">🔸 运行中的实例：</div>';
+        html += '<div class="inst-detail-grid">';
+        d.instances.forEach(inst => {
+            html += `<div class="inst-detail-card" style="border-left-color:${d.color}">
+                <div class="idc-name">${inst.name}</div>
+                <div class="idc-sub">${inst.sub}</div>
+                <div class="idc-binds">
+                    ${inst.binds.map(b => `<span class="idc-bind ${b.type}">${b.label}</span>`).join('')}
                 </div>
-                <div class="rt-inst-bindings">
-                    ${inst.bindings.map(b => `<span class="rt-inst-binding ${b.type}">${b.label}</span>`).join('')}
-                </div>
-                <div class="rt-inst-desc">${inst.desc}</div>
-                <div class="rt-inst-status">
+                <div class="idc-status">
                     <span class="dot" style="background:${inst.statusColor}"></span>
                     <span style="color:${inst.statusColor}">${inst.status}</span>
                 </div>
             </div>`;
         });
-        html += `</div>`;
+        html += '</div>';
     }
 
-    // OS status
-    html += `<div class="rt-os-status">
-        <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:2px;">⚙️ Agent OS 运行状态</div>
-        <div class="rt-os-metrics">
-            <div class="rt-os-metric"><div class="val">${s.osMetrics.active}</div><div class="label">活跃实例</div></div>
-            <div class="rt-os-metric"><div class="val">${s.osMetrics.api}</div><div class="label">API 调用</div></div>
-            <div class="rt-os-metric"><div class="val">${s.osMetrics.memory}</div><div class="label">Memory 队列</div></div>
-        </div>
+    // Insight
+    html += `<div class="insight-box" style="border-left-color:${d.color}">
+        <strong>💡 关键洞察：</strong>${d.insight}
     </div>`;
 
-    // Feedback loop
-    html += `<div class="rt-feedback">
-        <strong>🔄 经验回流：</strong>${s.feedback}
-    </div>`;
-
-    container.innerHTML = html;
-}
-
-// ============ SCENARIO DATA ============
-const scenarios = {
-    s1: {
-        title: '"帮我写个调研报告"',
-        subtitle: '原生Skill · 1个独立实例（会话）执行',
-        color: '#2DA44E',
-        skillType: 'native',
-        steps: [
-            { label: '语义理解', desc: '识别意图=调研', color: '#2DA44E' },
-            { label: '查Memory', desc: '偏好:清爽报告', color: '#2DA44E' },
-            { label: '匹配Skill', desc: 'industry-research', color: '#2DA44E' },
-            { label: '派实例', desc: '创建1个独立工作实例', color: '#2DA44E' },
-            { label: '搜索资料', desc: 'search_web调用', color: '#2DA44E' },
-            { label: '生成报告', desc: '整理分析输出', color: '#2DA44E' },
-            { label: '经验回流', desc: '实例销毁、Memory记录', color: '#2DA44E' }
-        ],
-        highlight: ['main-agent', 'skill-native', 'agentcore']
-    },
-    s2: {
-        title: '"帮我生成一张配图"',
-        subtitle: '工具Skill · 1个实例（会话）+ MCP调外部API',
-        color: '#7C3AED',
-        skillType: 'tool',
-        steps: [
-            { label: '语义理解', desc: '识别意图=生图', color: '#7C3AED' },
-            { label: '查Memory', desc: '偏好:风格/尺寸', color: '#7C3AED' },
-            { label: '匹配Skill', desc: 'image-gen Tool', color: '#7C3AED' },
-            { label: '派实例', desc: '创建1个实例 + MCP调用', color: '#7C3AED' },
-            { label: '外部API', desc: '图片生成服务', color: '#7C3AED' },
-            { label: '经验回流', desc: '实例销毁、结果返回', color: '#7C3AED' }
-        ],
-        highlight: ['main-agent', 'skill-tool', 'mcp-gateway']
-    },
-    s3: {
-        title: '"帮我Review这个PR"',
-        subtitle: '任务Skill · 派N个并行实例（Task）协作',
-        color: '#EA580C',
-        skillType: 'task',
-        steps: [
-            { label: '语义理解', desc: '识别意图=CR', color: '#EA580C' },
-            { label: '查Memory', desc: '代码规范偏好', color: '#EA580C' },
-            { label: '匹配Skill', desc: 'code-review Task', color: '#EA580C' },
-            { label: '派多实例', desc: '创建3个独立工作实例', color: '#EA580C' },
-            { label: '并行执行', desc: '读码/审查/总结', color: '#EA580C' },
-            { label: '汇总结果', desc: '合并审查建议', color: '#EA580C' },
-            { label: '经验回流', desc: '实例全部销毁、经验写入Memory', color: '#EA580C' }
-        ],
-        highlight: ['main-agent', 'skill-task', 'clone-engine', 'agentcore']
-    },
-    s4: {
-        title: '"帮我把需求做到上线"',
-        subtitle: '流程Skill · 1总控实例（Flow）编排6阶段',
-        color: '#0969DA',
-        skillType: 'flow',
-        steps: [
-            { label: '语义理解', desc: '识别=全链路', color: '#0969DA' },
-            { label: '查Memory', desc: '项目上下文', color: '#0969DA' },
-            { label: '匹配Skill', desc: 'dev-pipeline Flow', color: '#0969DA' },
-            { label: '总控编排', desc: '创建总控实例，分解6阶段', color: '#0969DA' },
-            { label: '逐阶段派遣', desc: '每阶段派执行实例', color: '#0969DA' },
-            { label: '阶段验证', desc: '检查点确认', color: '#0969DA' },
-            { label: '完成发布', desc: '全部实例销毁、经验回流', color: '#0969DA' }
-        ],
-        highlight: ['main-agent', 'skill-flow', 'agentcore', 'clone-engine', 'mcp-gateway']
-    }
-};
-
-// ============ VIEW SWITCHING ============
-function switchView(view) {
-    currentView = view;
-    // Update tabs
-    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-    document.querySelector(`.view-tab[data-view="${view}"]`).classList.add('active');
-
-    const flowPaths = document.getElementById('flow-paths');
-    const runtimeView = document.getElementById('runtime-view');
-
-    if (view === 'structure') {
-        flowPaths.setAttribute('opacity', '0');
-        resetScenario();
-        document.getElementById('skill-overview').style.display = 'block';
-        document.querySelector('.main-layout').style.display = 'grid';
-        document.getElementById('analogy-view').classList.remove('visible');
-        runtimeView.classList.remove('visible');
-    } else if (view === 'runtime') {
-        flowPaths.setAttribute('opacity', '0');
-        document.getElementById('skill-overview').style.display = 'none';
-        document.querySelector('.main-layout').style.display = 'none';
-        document.getElementById('detail-panel').classList.add('hidden');
-        document.getElementById('analogy-view').classList.remove('visible');
-        runtimeView.classList.add('visible');
-        if (!currentScenario) {
-            switchRtScenario('s1');
-        } else {
-            switchRtScenario(currentScenario);
-        }
-    } else if (view === 'analogy') {
-        flowPaths.setAttribute('opacity', '0');
-        resetScenario();
-        document.getElementById('skill-overview').style.display = 'none';
-        document.querySelector('.main-layout').style.display = 'none';
-        document.getElementById('detail-panel').classList.add('hidden');
-        document.getElementById('analogy-view').classList.add('visible');
-        runtimeView.classList.remove('visible');
-    }
-}
-
-// ============ SCENARIO ACTIVATION ============
-function activateScenario(id) {
-    // If in structure view, switch to runtime view
-    if (currentView !== 'runtime') {
-        switchView('runtime');
-    }
-    switchRtScenario(id);
-}
-
-function resetScenario() {
-    currentScenario = null;
-    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-    ['s1','s2','s3','s4'].forEach(s => {
-        const el = document.getElementById('flow-' + s);
-        if (el) el.setAttribute('opacity', '0');
-    });
-    resetHighlight();
-    document.getElementById('detail-panel').classList.add('hidden');
-}
-
-function highlightComponents(ids) {
-    // Dim everything first
-    const allNodes = document.querySelectorAll('.skill-node, #main-agent, #agentcore, #clone-engine, #mcp-gateway');
-    allNodes.forEach(n => n.style.opacity = '0.35');
-    // Highlight active
-    ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.opacity = '1';
-    });
-}
-
-function resetHighlight() {
-    const allNodes = document.querySelectorAll('.skill-node, #main-agent, #agentcore, #clone-engine, #mcp-gateway');
-    allNodes.forEach(n => n.style.opacity = '1');
-}
-
-// ============ DETAIL PANELS ============
-function showFlowDetail(id) {
-    const data = scenarios[id];
-    const panel = document.getElementById('detail-panel');
-    const header = document.getElementById('detail-header');
-    const icon = document.getElementById('detail-icon');
-    const title = document.getElementById('detail-title');
-    const subtitle = document.getElementById('detail-subtitle');
-    const body = document.getElementById('detail-body');
-
-    panel.classList.remove('hidden');
-    icon.style.background = data.color;
-    icon.textContent = data.skillType === 'native' ? '📄' : data.skillType === 'tool' ? '🔧' : data.skillType === 'task' ? '⚡' : '🔄';
-    title.textContent = '运行时序: ' + data.title;
-    subtitle.textContent = data.subtitle;
-
-    // Build flow steps
-    let html = '<div class="flow-steps">';
-    data.steps.forEach((step, i) => {
-        if (i > 0) html += '<span class="flow-arrow">→</span>';
-        html += `<div class="flow-step">
-            <div class="flow-step-num" style="background:${step.color}">${i+1}</div>
-            <div class="flow-step-label">${step.label}</div>
-            <div class="flow-step-desc">${step.desc}</div>
-        </div>`;
-    });
-    html += '</div>';
-
-    // Add explanation
-    const explanations = {
-        s1: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #2DA44E"><strong>特点：</strong>主Agent派出1个独立工作实例（会话形式），带Skill指令独立完成全过程。无需外部服务或并行——这是最轻量、最灵活的Skill类型。用户可以通过自然语言"教"Agent新的原生Skill。</p>',
-        s2: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #7C3AED"><strong>特点：</strong>1个工作实例（会话形式）通过MCP网关调用外部API。现有的图片Agent、视频Agent等可以直接封装为工具Skill——不需要并行实例，只需API包装。这是从多Agent迁移到统一架构的<strong>最低成本路径</strong>。</p>',
-        s3: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #EA580C"><strong>特点：</strong>实例管理器派生N个并行工作实例（Task形式），共享Memory但各自独立上下文。<strong>对外呈现为单一Agent</strong>——用户不感知底层有多个实例在工作。执行完毕后经验回流到主Memory，实例全部销毁。</p>',
-        s4: '<p style="font-size:13px;color:#4D5561;margin-top:12px;padding:12px 16px;background:#F6F8FA;border-radius:8px;border-left:3px solid #0969DA"><strong>特点：</strong>1个总控实例（Flow形式）编排多阶段，每个阶段可以派出不同类型的执行实例（Native/Task/Tool）。支持<strong>跳过、重试、断点续跑</strong>。这是最复杂但也最强大的Skill类型，可以组合其他所有Skill类型。</p>'
-    };
-    html += explanations[id] || '';
     body.innerHTML = html;
 }
 
-// ============ TOOLTIP SYSTEM ============
-const TOOLTIPS = {
-    // Product layer
-    'prod-cf': {
-        color: '#0969DA',
-        title: 'CodeFlicker（研发向）',
+// ============ TOOLTIPS ============
+const TIPS = {
+    'layer-product': {
+        color: '#0969DA', title: '产品层（Product Layer）',
         rows: [
-            ['定位', 'IDE 内的 AI × Coding 助手（低延迟 + 工程上下文）'],
-            ['典型用户', '研发工程师'],
-            ['核心差异', '代码上下文/工程工具链/本地优先'],
-            ['能力边界', '以编码相关为主；非编码能力可通过 Tool/Flow 按需开启'],
-        ],
+            ['核心思想', '多产品共享同一Agent内核 + 产品适配层做差异化'],
+            ['类比', '不同游戏（FPS/RPG/策略）共用同一游戏引擎'],
+            ['适配层', 'UI组件适配 · Skill集筛选 · 权限模型 · 治理接口'],
+        ]
     },
-    'prod-kate': {
-        color: '#0969DA',
-        title: 'KATE-Studio（企业数字员工）',
+    'layer-agent': {
+        color: '#1A7F37', title: 'Agent 层',
         rows: [
-            ['定位', '面向企业场景的数字员工/工作流承载'],
-            ['典型用户', '运营/产品/分析/HR 等'],
-            ['核心差异', 'Web 场景 + 批量任务 + 权限/审计'],
-            ['能力边界', '默认只开放经过治理的 Skill 集（稳定/可控）'],
-        ],
+            ['主Agent', '决策指挥中枢，永不下场执行——只做"教练"'],
+            ['四类Skill', 'Native / Tool / Task / Flow 覆盖全复杂度'],
+            ['横切关注', 'Eval · 安全 · 可观测 · Memory · Skill注册'],
+        ]
     },
-    'prod-pa': {
-        color: '#0969DA',
-        title: 'AI个人助理（通用）',
-        rows: [
-            ['定位', '对话 + 多模态的通用 Agent（能力覆盖最全）'],
-            ['典型用户', '所有人'],
-            ['核心差异', '个性化最强：偏好/记忆/长期陪伴'],
-            ['能力边界', '强调隐私与可控：敏感记忆可审计/可删除'],
-        ],
-    },
-    'adapt-layer': {
-        color: '#0969DA',
-        title: '产品适配层（差异化关键）',
-        rows: [
-            ['UI适配', '同一能力在 IDE / Web / 移动端呈现不同组件'],
-            ['Skill筛选', '按产品定位过滤可用 Skill（防“全量能力暴露”）'],
-            ['权限模型', '租户/产品/用户三级隔离；企业可控开关'],
-            ['治理接口', '对接 Skill Registry / 安全策略 / 灰度发布'],
-        ],
-    },
-
-    // Agent layer
     'main-agent': {
-        color: '#1A7F37',
-        title: '主 Agent（决策指挥中枢）',
+        color: '#1A7F37', title: '主 Agent（决策指挥中枢）',
         rows: [
-            ['核心原则', '永不下场执行，只做决策和指挥'],
-            ['主链路', '理解 → 查记忆 → 选Skill → 派实例执行 → 收经验'],
-            ['类比', '游戏中的玩家，不进入游戏世界，通过召唤角色执行任务'],
-        ],
+            ['角色', '理解用户意图、选择合适的Skill、派遣工作实例'],
+            ['关键', '永不下场执行——只决策、不干活'],
+            ['类比', '🎮 玩家本人——操控角色但自己不进入战场'],
+        ]
     },
-    'skill-native': {
-        color: '#2DA44E',
-        title: 'Ⅰ 原生 Skill（1个实例）',
+    'layer-os': {
+        color: '#24292F', title: 'Agent OS（底层运行时）',
         rows: [
-            ['模式', '派1个独立工作实例（会话），带Skill指令独立完成'],
-            ['类比', '🎮 单人支线任务：派一个角色去做'],
-            ['生命周期', '创建 → 注入Skill → 执行 → 经验回流 → 销毁'],
-        ],
-    },
-    'skill-tool': {
-        color: '#7C3AED',
-        title: 'Ⅱ 工具 Skill（1个实例+MCP）',
-        rows: [
-            ['模式', '派1个独立工作实例（会话），通过MCP网关调用外部API'],
-            ['类比', '🎮 去 NPC商店买装备/找铁匠打造'],
-            ['生命周期', '创建 → 注入Skill → 调API → 经验回流 → 销毁'],
-        ],
-    },
-    'skill-task': {
-        color: '#EA580C',
-        title: 'Ⅲ 任务 Skill（N个并行实例）',
-        rows: [
-            ['模式', '派N个并行工作实例（Task），各带不同Skill协作'],
-            ['类比', '🎮 组队打副本：多角色同时出战'],
-            ['生命周期', '创建N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁'],
-        ],
-    },
-    'skill-flow': {
-        color: '#0969DA',
-        title: 'Ⅳ 流程 Skill（1总控+N实例）',
-        rows: [
-            ['模式', '1个总控实例（Flow）编排多阶段，每阶段派执行实例'],
-            ['类比', '🎮 多阶段 Raid Boss战：指挥官+多小队'],
-            ['能力', '跳过/重试/断点续跑/人工确认门禁'],
-        ],
-    },
-
-    // Cross-cutting
-    'pill-eval': {
-        color: '#2DA44E',
-        title: 'Eval（质量评估）',
-        rows: [
-            ['评估维度', '任务完成度/响应质量/用户满意度'],
-            ['用途', 'A/B、灰度门禁、回归测试'],
-            ['产出', '分数+原因+改进建议，回流到Reflection/Memory'],
-        ],
-    },
-    'pill-security': {
-        color: '#CF222E',
-        title: '安全（多层防护）',
-        rows: [
-            ['输入', '注入检测/越权意图拦截'],
-            ['输出', '脱敏/合规过滤/幻觉风险提示'],
-            ['执行', '工具沙箱/权限最小化/审计日志'],
-        ],
-    },
-    'pill-observability': {
-        color: '#BF8700',
-        title: '可观测（工程化必备）',
-        rows: [
-            ['链路', '请求→计划→工具→结果 全链路追踪'],
-            ['指标', '延迟/成功率/Token成本/并发'],
-            ['告警', '错误率、超时、成本异常、权限拒绝'],
-        ],
-    },
-    'pill-memory': {
-        color: '#0969DA',
-        title: 'Memory 服务（护城河）',
-        rows: [
-            ['分层', 'L1工作记忆 / L2情景记忆 / L3语义记忆'],
-            ['检索', '关键词+语义+时间衰减 混合召回'],
-            ['隔离', '租户→产品→用户；敏感可删除可审计'],
-        ],
-    },
-    'pill-skill-registry': {
-        color: '#7C3AED',
-        title: 'Skill 注册中心（治理）',
-        rows: [
-            ['管理', '元数据/版本/依赖/权限/SLA'],
-            ['发布', '灰度/AB/回滚/下线'],
-            ['发现', '触发词精确匹配 + 语义匹配 + 上下文加权'],
-        ],
-    },
-
-    // AgentCore
-    'ac-memory': {
-        color: '#24292F',
-        title: 'AgentCore: Memory',
-        rows: [
-            ['职责', '读写记忆；去重/提炼；可审计可删除'],
-            ['输入', '对话/任务日志/用户显式指令'],
-            ['输出', '检索结果 + 结构化画像（供Reasoning/Planning使用）'],
-        ],
-    },
-    'ac-reasoning': {
-        color: '#24292F',
-        title: 'AgentCore: Reasoning',
-        rows: [
-            ['职责', '意图识别/消歧/隐含需求推断'],
-            ['输入', '用户输入 + Memory上下文'],
-            ['输出', '结构化意图（Intent）与约束（Constraints）'],
-        ],
-    },
-    'ac-planning': {
-        color: '#24292F',
-        title: 'AgentCore: Planning',
-        rows: [
-            ['职责', '把Intent分解为可执行的Stage DAG'],
-            ['输入', 'Intent + 工具/Skill能力清单'],
-            ['输出', '计划（步骤/依赖/校验点/回滚点）'],
-        ],
-    },
-    'ac-orchestration': {
-        color: '#24292F',
-        title: 'AgentCore: Orchestration',
-        rows: [
-            ['职责', '调度执行（并发/超时/重试/资源控制）'],
-            ['输入', 'Planning产出的DAG + Runtime约束'],
-            ['输出', '执行轨迹与中间态（供观测/回放）'],
-        ],
-    },
-    'ac-reflection': {
-        color: '#24292F',
-        title: 'AgentCore: Reflection',
-        rows: [
-            ['职责', '自评/复盘；把经验写回Memory（可控）'],
-            ['输入', '结果 + Eval分数/错误原因'],
-            ['输出', '改进建议/经验条目/策略调整'],
-        ],
-    },
-    'ac-integration': {
-        color: '#24292F',
-        title: 'AgentCore: Integration',
-        rows: [
-            ['职责', '外部服务接入与路由（LLM/搜索/CI/CD）'],
-            ['输入', '调用请求 + 鉴权/配额'],
-            ['输出', '统一结果/错误码/重试语义'],
-        ],
-    },
-
-    // Infra & runtime
-    'clone-engine': {
-        color: '#EA580C',
-        title: 'Instance Manager（实例管理器）',
-        rows: [
-            ['本质', '每个"分身"= 一个独立工作实例（形式可以是会话、Task、Flow）'],
-            ['生命周期', '创建 → 监控 → 回收 → 经验汇总'],
-            ['并发', '默认 8；可按租户/任务类型限额'],
-            ['类比', '🎮 游戏副本系统：创建/管理/回收独立实例'],
-        ],
-    },
-    'mcp-gateway': {
-        color: '#7C3AED',
-        title: 'MCP 网关（工具统一调用层）',
-        rows: [
-            ['注册', 'Tool schema/权限/版本 注册与发现'],
-            ['治理', '鉴权/限流/熔断/重试/成本控制'],
-            ['兼容', '同步/异步工具统一封装为一致调用语义'],
-        ],
-    },
-    'rt-local': {
-        color: '#24292F',
-        title: '本地模式（IDE嵌入）',
-        rows: [
-            ['优势', '低延迟；直接访问代码与文件系统'],
-            ['限制', '并发受本机资源限制；长任务可能降级到云端'],
-            ['记忆', '本地缓存 + 可选云端同步（冲突策略）'],
-        ],
-    },
-    'rt-cloud': {
-        color: '#0969DA',
-        title: '云端模式（AgentOS as a Service）',
-        rows: [
-            ['优势', '弹性扩缩；适合长任务/批量Flow/多分身'],
-            ['限制', '需要更强权限与审计；网络依赖'],
-            ['记忆', '云端统一存储；支持跨设备一致体验'],
-        ],
+            ['AgentCore', '六大通用能力：Memory · Reasoning · Planning · Orchestration · Reflection · Integration'],
+            ['实例管理器', '创建/监控/回收独立工作实例（类比：副本系统）'],
+            ['MCP网关', '统一工具调用接口（类比：插件API）'],
+            ['运行时', '本地模式（IDE嵌入）/ 云端模式（Web/API）'],
+        ]
     },
     'growth-loop': {
-        color: '#059669',
-        title: '成长闭环（Agent进化引擎）',
+        color: '#059669', title: '成长闭环（Growth Loop）',
         rows: [
-            ['核心', '执行 → Reflection自评 → 经验写入Memory → 下次执行更好'],
-            ['L1 行为适应', '记住偏好、习惯、上下文 → 减少重复沟通'],
-            ['L2 技能进化', '从执行中提炼方法论 → Agent写Skill给自己'],
-            ['L3 认知进化', '建立跨领域知识图谱 → 举一反三、触类旁通'],
-            ['与传统区别', '传统软件交付后静态；Agent越用越强、持续成长'],
-        ],
+            ['核心', '执行→Reflection自评→经验写入Memory→下次更好'],
+            ['关键区别', '传统软件交付后静态；Agent越用越强、持续成长'],
+            ['三级进化', 'L1行为适应(偏好) → L2技能进化(方法论) → L3认知进化(知识图谱)'],
+        ]
     },
 };
 
-function renderTooltipContent(tip) {
-    const dot = `<span class="tt-dot" style="background:${tip.color || '#D0D7DE'}"></span>`;
-    const rows = (tip.rows || []).map(([k, v]) => (
+function renderTip(tip) {
+    const rows = (tip.rows || []).map(([k, v]) =>
         `<div class="tt-row"><div class="tt-k">${k}</div><div class="tt-v">${v}</div></div>`
-    )).join('');
-    return `<div class="tt-title">${dot}<span>${tip.title || ''}</span></div><div class="tt-body">${rows}</div>`;
+    ).join('');
+    return `<div class="tt-title"><span class="tt-dot" style="background:${tip.color}"></span><span>${tip.title}</span></div>${rows}`;
 }
 
-function bindTooltip(targetEl) {
-    const id = targetEl.id;
-    if (!id) return;
-    const tip = TOOLTIPS[id];
+function bindTip(el) {
+    const tip = TIPS[el.id];
     if (!tip) return;
+    const tt = document.getElementById('cf-tooltip');
 
-    const tooltip = document.getElementById('cf-tooltip');
-    if (!tooltip) return;
-
-    const show = (evt) => {
-        tooltip.innerHTML = renderTooltipContent(tip);
-        tooltip.classList.add('visible');
-        tooltip.setAttribute('aria-hidden', 'false');
-        move(evt);
-    };
-
-    const hide = () => {
-        tooltip.classList.remove('visible');
-        tooltip.setAttribute('aria-hidden', 'true');
-    };
-
-    const move = (evt) => {
-        const pad = 12;
-        const offset = 14;
-        const x = (evt.clientX ?? 0) + offset;
-        const y = (evt.clientY ?? 0) + offset;
-
-        tooltip.style.left = '0px';
-        tooltip.style.top = '0px';
-        const rect = tooltip.getBoundingClientRect();
-
-        let left = x;
-        let top = y;
-        if (left + rect.width + pad > window.innerWidth) left = Math.max(pad, window.innerWidth - rect.width - pad);
-        if (top + rect.height + pad > window.innerHeight) top = Math.max(pad, (evt.clientY ?? 0) - rect.height - offset);
-
-        tooltip.style.left = left + 'px';
-        tooltip.style.top = top + 'px';
-    };
-
-    targetEl.addEventListener('mouseenter', show);
-    targetEl.addEventListener('mousemove', move);
-    targetEl.addEventListener('mouseleave', hide);
+    el.addEventListener('mouseenter', (e) => {
+        tt.innerHTML = renderTip(tip);
+        tt.classList.add('visible');
+        moveTip(e);
+    });
+    el.addEventListener('mousemove', moveTip);
+    el.addEventListener('mouseleave', () => tt.classList.remove('visible'));
 }
 
-// ============ CLICK HANDLERS FOR SVG COMPONENTS + TOOLTIP BINDING ============
+function moveTip(e) {
+    const tt = document.getElementById('cf-tooltip');
+    const pad = 12, off = 14;
+    tt.style.left = '0px'; tt.style.top = '0px';
+    const r = tt.getBoundingClientRect();
+    let x = e.clientX + off, y = e.clientY + off;
+    if (x + r.width + pad > window.innerWidth) x = Math.max(pad, window.innerWidth - r.width - pad);
+    if (y + r.height + pad > window.innerHeight) y = Math.max(pad, e.clientY - r.height - off);
+    tt.style.left = x + 'px'; tt.style.top = y + 'px';
+}
+
+// ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {
-    // Init runtime view tabs
-    initRuntimeTabs();
-
-    // Make SVG nodes hoverable
-    const hoverIds = Object.keys(TOOLTIPS);
-    hoverIds.forEach(id => {
+    // Bind tooltips
+    Object.keys(TIPS).forEach(id => {
         const el = document.getElementById(id);
-        if (!el) return;
-        el.classList.add('tip-target');
-        bindTooltip(el);
-    });
-
-    // Skill nodes click
-    document.querySelectorAll('.skill-node').forEach(node => {
-        node.classList.add('tip-target', 'tip-clickable');
-        node.addEventListener('click', () => {
-            const skill = node.getAttribute('data-skill');
-            const map = { native: 's1', tool: 's2', task: 's3', flow: 's4' };
-            if (map[skill]) activateScenario(map[skill]);
-        });
+        if (el) { el.style.cursor = 'help'; bindTip(el); }
     });
 });
 </script>

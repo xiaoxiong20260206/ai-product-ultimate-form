@@ -3,964 +3,525 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI产品终极形态思考 - 完整推演</title>
+    <title>AI产品终极形态思考</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23059669'/><path d='M16 6c-4.4 0-8 3.6-8 8 0 2.5 1.2 4.8 3 6.2V24l5-3 5 3v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/><line x1='16' y1='10' x2='16' y2='15' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='16' cy='18' r='1' fill='white'/></svg>">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
-/* ============================================================
-   清爽调研报告风格 v3.0 - AI产品终极形态思考
-   ============================================================ */
-:root {
-    --color-success: #059669;
-    --color-success-light: #10B981;
-    --color-success-dark: #047857;
-    --color-success-50: #ECFDF5;
-    --color-danger: #E11D48;
-    --color-danger-light: #F43F5E;
-    --color-warning: #D97706;
-    --color-warning-light: #F59E0B;
-    --color-info: #2563EB;
-    --color-info-light: #3B82F6;
-    --color-info-50: #EFF6FF;
-    --color-purple: #7C3AED;
-    --color-purple-light: #8B5CF6;
-    --color-purple-50: #F5F3FF;
-    --color-text-primary: #1C1917;
-    --color-text-secondary: #57534E;
-    --color-text-muted: #78716C;
-    --color-border: #E7E5E4;
-    --color-border-light: #F5F5F4;
-    --color-bg: #F8FAFB;
-    --color-bg-card: #FFFFFF;
-    --color-bg-table-header: #FAFAF9;
-    --gradient-success: linear-gradient(135deg, #059669 0%, #10B981 100%);
-    --gradient-hero: linear-gradient(135deg, #059669 0%, #2563EB 50%, #7C3AED 100%);
-    --gradient-badge: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
-    --gradient-mesh: radial-gradient(at 20% 20%, rgba(5,150,105,0.08) 0%, transparent 50%), radial-gradient(at 80% 80%, rgba(37,99,235,0.06) 0%, transparent 50%), radial-gradient(at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 50%);
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
-    --shadow-glow-success: 0 4px 14px rgba(5,150,105,0.15);
-    --shadow-glow-info: 0 4px 14px rgba(37,99,235,0.15);
-    --shadow-hover: 0 6px 16px rgba(5,150,105,0.15), 0 2px 6px rgba(5,150,105,0.1);
-    --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px; --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 40px; --spacing-3xl: 48px;
-    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-2xl: 24px; --radius-full: 9999px;
-    --font-family: -apple-system, "SF Pro Display", "system-ui", "Segoe UI", "Noto Sans SC", Helvetica, Arial, sans-serif;
-    --heading-1: 30px; --heading-2: 20px; --heading-3: 16px; --heading-4: 14px; --body-text: 15px; --body-small: 14px; --caption: 12px;
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1); --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    --content-max-width: 980px;
-    --c-skill-native: #2DA44E; --c-skill-tool: #7C3AED; --c-skill-task: #EA580C; --c-skill-flow: #0969DA;
+/* === Index-specific styles === */
+.site-nav { display:flex; gap:4px; justify-content:center; background:rgba(255,255,255,0.9); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.7); border-radius:var(--radius-lg); padding:5px; margin-bottom:var(--spacing-2xl); position:sticky; top:12px; z-index:100; box-shadow:var(--shadow-lg); max-width:var(--content-max-width); margin-left:auto; margin-right:auto; }
+.site-nav a { flex:1; text-align:center; padding:10px 12px; border-radius:var(--radius-md); font-size:13px; font-weight:500; color:var(--color-text-muted); text-decoration:none; transition:all var(--transition-fast); white-space:nowrap; }
+.site-nav a:hover { background:var(--color-bg-table-header); color:var(--color-text-secondary); }
+.site-nav a.active { background:var(--gradient-success); color:#fff; font-weight:600; box-shadow:var(--shadow-glow-success); }
+
+.hero { text-align:center; padding:var(--spacing-3xl) 0 var(--spacing-2xl); }
+.hero-badge { display:inline-flex; align-items:center; padding:var(--spacing-xs) 14px; background:var(--gradient-badge); color:var(--color-info); border-radius:var(--radius-full); font-size:var(--caption); font-weight:500; margin-bottom:20px; border:1px solid rgba(37,99,235,0.12); }
+.hero h1 { font-size:34px; font-weight:800; line-height:1.3; margin-bottom:16px; letter-spacing:-0.02em; background:var(--gradient-hero); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-thesis { font-size:18px; color:var(--color-text-primary); font-weight:600; max-width:640px; margin:0 auto 12px; line-height:1.6; }
+.hero-sub { font-size:var(--body-text); color:var(--color-text-secondary); max-width:580px; margin:0 auto; }
+
+.narrative-section { margin-bottom:var(--spacing-3xl); }
+.section-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--gradient-success); color:#fff; border-radius:50%; font-size:13px; font-weight:700; margin-right:10px; }
+.section-header { display:flex; align-items:center; margin-bottom:var(--spacing-lg); }
+.section-header h2 { font-size:var(--heading-2); font-weight:700; color:var(--color-text-primary); }
+
+/* Problem grid */
+.limitation-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.limitation-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); text-align:center; transition:all var(--transition-fast); }
+.limitation-card:hover { border-color:var(--color-danger-light); box-shadow:var(--shadow-card); }
+.limitation-icon { font-size:28px; margin-bottom:8px; }
+.limitation-title { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.limitation-desc { font-size:var(--caption); color:var(--color-text-muted); }
+
+/* Comparison */
+.compare-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:var(--spacing-md); align-items:stretch; margin-bottom:var(--spacing-lg); }
+.compare-card { background:var(--color-bg-card); border-radius:var(--radius-lg); padding:var(--spacing-lg); position:relative; overflow:hidden; }
+.compare-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+.compare-card.old { border:1px solid rgba(156,163,175,0.3); }
+.compare-card.old::before { background:#9CA3AF; }
+.compare-card.new { border:1px solid rgba(5,150,105,0.3); }
+.compare-card.new::before { background:var(--gradient-success); }
+.compare-icon { font-size:28px; margin-bottom:12px; }
+.compare-title { font-size:var(--heading-3); font-weight:700; margin-bottom:4px; }
+.compare-card.old .compare-title { color:#6B7280; }
+.compare-card.new .compare-title { color:var(--color-success); }
+.compare-subtitle { font-size:var(--caption); color:var(--color-text-muted); margin-bottom:var(--spacing-md); }
+.compare-list { list-style:none; }
+.compare-list li { padding:7px 0 7px 20px; position:relative; font-size:13px; color:var(--color-text-secondary); border-bottom:1px solid var(--color-border-light); }
+.compare-list li:last-child { border-bottom:none; }
+.compare-list li::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:6px; height:6px; border-radius:50%; }
+.compare-card.old .compare-list li::before { background:#9CA3AF; }
+.compare-card.new .compare-list li::before { background:var(--color-success); }
+.compare-vs { display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:var(--color-text-muted); }
+
+/* AgentCore brief */
+.agentcore-brief { background:linear-gradient(135deg,rgba(5,150,105,0.06),rgba(37,99,235,0.04)); border:1px solid rgba(5,150,105,0.2); border-radius:var(--radius-lg); padding:var(--spacing-lg); text-align:center; }
+.agentcore-modules { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:var(--spacing-md) 0; }
+.agentcore-module { display:inline-flex; align-items:center; gap:6px; padding:8px 14px; background:var(--color-bg-card); border:1px solid rgba(5,150,105,0.2); border-radius:var(--radius-full); font-size:13px; font-weight:500; color:var(--color-success); }
+.agentcore-module .check { color:var(--color-success); font-weight:700; }
+
+/* Analogy */
+.analogy-compact { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.analogy-item { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); display:flex; gap:var(--spacing-md); transition:all var(--transition-fast); }
+.analogy-item:hover { border-color:#F97316; box-shadow:0 4px 12px rgba(249,115,22,0.1); }
+.analogy-left { flex:1; padding-right:var(--spacing-md); border-right:2px dashed var(--color-border-light); }
+.analogy-right { flex:1; }
+.analogy-label { font-size:10px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; }
+.analogy-left .analogy-label { color:#F97316; }
+.analogy-right .analogy-label { color:var(--color-success); }
+.analogy-name { font-size:13px; font-weight:600; color:var(--color-text-primary); }
+
+/* Quote */
+.quote-box { background:var(--color-bg-card); border-radius:var(--radius-lg); padding:var(--spacing-xl); border-left:4px solid var(--color-purple); margin-bottom:var(--spacing-lg); }
+.quote-text { font-size:var(--body-text); color:var(--color-text-primary); line-height:1.8; font-style:italic; margin-bottom:var(--spacing-md); }
+.quote-text strong { color:var(--color-purple); font-style:normal; }
+.quote-author { font-size:var(--body-small); color:var(--color-text-muted); }
+
+/* Validation table */
+.validation-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden; margin-bottom:var(--spacing-lg); }
+.validation-table th { background:var(--color-bg-table-header); padding:12px 16px; font-size:13px; font-weight:700; color:var(--color-text-primary); text-align:left; border-bottom:1px solid var(--color-border); }
+.validation-table td { padding:10px 16px; font-size:13px; color:var(--color-text-secondary); border-bottom:1px solid var(--color-border-light); }
+.validation-table tr:last-child td { border-bottom:none; }
+
+/* Evidence metrics */
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.metric-card { background:var(--color-bg-card); border-radius:var(--radius-lg); padding:var(--spacing-lg); text-align:center; border:1px solid var(--color-border-light); transition:all var(--transition-fast); }
+.metric-card:hover { box-shadow:var(--shadow-card); transform:translateY(-2px); }
+.metric-icon { font-size:28px; margin-bottom:8px; }
+.metric-value { font-size:24px; font-weight:800; margin-bottom:4px; }
+.metric-label { font-size:var(--caption); color:var(--color-text-muted); }
+
+/* Competitor strip */
+.competitor-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.competitor-card { border-radius:var(--radius-md); padding:var(--spacing-md); text-align:center; }
+.competitor-card.muted { background:#F9FAFB; border:1px solid #E5E7EB; }
+.competitor-card.highlight { background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(37,99,235,0.06)); border:2px solid var(--color-success); }
+.competitor-name { font-size:var(--heading-4); font-weight:700; margin-bottom:4px; }
+.competitor-card.muted .competitor-name { color:#6B7280; }
+.competitor-card.highlight .competitor-name { color:var(--color-success); }
+.competitor-desc { font-size:var(--caption); color:var(--color-text-muted); }
+.competitor-level { display:inline-block; margin-top:8px; padding:2px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; }
+.competitor-card.muted .competitor-level { background:#F3F4F6; color:#9CA3AF; }
+.competitor-card.highlight .competitor-level { background:#ECFDF5; color:var(--color-success); }
+
+/* Roadmap */
+.roadmap { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-lg); }
+.roadmap-step { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); position:relative; }
+.roadmap-step::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:var(--radius-md) var(--radius-md) 0 0; }
+.roadmap-step:nth-child(1)::before { background:#2563EB; }
+.roadmap-step:nth-child(2)::before { background:#059669; }
+.roadmap-step:nth-child(3)::before { background:#7C3AED; }
+.roadmap-step:nth-child(4)::before { background:#EA580C; }
+.roadmap-phase { font-size:11px; font-weight:700; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+.roadmap-title { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.roadmap-time { font-size:var(--caption); color:var(--color-success); font-weight:600; margin-bottom:8px; }
+.roadmap-items { font-size:var(--caption); color:var(--color-text-secondary); line-height:1.8; }
+
+/* Deep dive cards */
+.dive-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--spacing-md); margin-bottom:var(--spacing-2xl); }
+.dive-card { background:var(--color-bg-card); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg); text-decoration:none; transition:all var(--transition-normal); position:relative; overflow:hidden; }
+.dive-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:var(--transition-normal); }
+.dive-card:nth-child(1)::before { background:#2563EB; }
+.dive-card:nth-child(2)::before { background:#EA580C; }
+.dive-card:nth-child(3)::before { background:#059669; }
+.dive-card:nth-child(4)::before { background:#7C3AED; }
+.dive-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-hover); }
+.dive-card:hover::before { opacity:1; }
+.dive-badge { display:inline-block; padding:4px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:600; color:#fff; margin-bottom:12px; }
+.dive-card:nth-child(1) .dive-badge { background:#2563EB; }
+.dive-card:nth-child(2) .dive-badge { background:#EA580C; }
+.dive-card:nth-child(3) .dive-badge { background:#059669; }
+.dive-card:nth-child(4) .dive-badge { background:#7C3AED; }
+.dive-title { font-size:var(--heading-3); font-weight:700; color:var(--color-text-primary); margin-bottom:8px; }
+.dive-desc { font-size:var(--body-small); color:var(--color-text-secondary); line-height:1.6; }
+
+/* Insight callout */
+.insight-box { background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(14,165,233,0.06)); border:1px solid rgba(5,150,105,0.3); border-radius:var(--radius-md); padding:var(--spacing-lg); text-align:center; margin-top:var(--spacing-lg); }
+.insight-text { font-size:var(--body-text); color:var(--color-text-primary); line-height:1.7; font-weight:500; }
+.insight-text em { color:var(--color-success); font-style:normal; font-weight:700; }
+
+/* Conclusion */
+.conclusion-box { background:var(--gradient-success); color:white; border-radius:var(--radius-lg); padding:var(--spacing-xl); text-align:center; margin-bottom:var(--spacing-2xl); }
+.conclusion-title { font-size:var(--heading-2); font-weight:700; margin-bottom:var(--spacing-md); }
+.conclusion-text { font-size:var(--body-text); line-height:1.8; opacity:0.95; max-width:600px; margin:0 auto var(--spacing-md); }
+.conclusion-highlight { display:inline-block; background:rgba(255,255,255,0.2); padding:10px 20px; border-radius:var(--radius-sm); font-weight:600; font-size:var(--body-text); }
+
+.footer { text-align:center; padding:var(--spacing-lg) 0; color:var(--color-text-muted); font-size:var(--caption); border-top:1px solid var(--color-border-light); }
+
+/* Responsive */
+@media (max-width:768px) {
+    .hero h1 { font-size:24px; }
+    .limitation-grid { grid-template-columns:repeat(2,1fr); }
+    .compare-grid { grid-template-columns:1fr; }
+    .compare-vs { transform:rotate(90deg); margin:var(--spacing-sm) auto; }
+    .analogy-compact { grid-template-columns:1fr; }
+    .metrics-row { grid-template-columns:repeat(2,1fr); }
+    .competitor-strip { grid-template-columns:1fr; }
+    .roadmap { grid-template-columns:repeat(2,1fr); }
+    .dive-grid { grid-template-columns:1fr; }
+    .site-nav { flex-wrap:wrap; }
+    .site-nav a { font-size:12px; padding:8px 8px; }
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: var(--font-family); font-size: var(--body-text); line-height: 1.65; color: var(--color-text-secondary); background: var(--color-bg); background-image: var(--gradient-mesh); background-attachment: fixed; -webkit-font-smoothing: antialiased; }
-::selection { background: rgba(5, 150, 105, 0.2); }
-.container { max-width: var(--content-max-width); margin: 0 auto; padding: var(--spacing-lg) var(--spacing-md) 48px; }
-.header { text-align: center; padding: var(--spacing-2xl) 0; margin-bottom: var(--spacing-2xl); position: relative; overflow: hidden; }
-.header::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-hero); }
-.header-badge { display: inline-flex; align-items: center; padding: var(--spacing-xs) 14px; background: var(--gradient-badge); color: var(--color-info); border-radius: var(--radius-full); font-size: var(--caption); font-weight: 500; letter-spacing: 0.02em; margin-bottom: 20px; border: 1px solid rgba(37, 99, 235, 0.12); }
-.header-title { font-size: 34px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.02em; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.header-subtitle { font-size: var(--body-text); color: var(--color-text-secondary); max-width: 580px; margin: 0 auto; line-height: 1.6; }
-.summary-box { background: var(--color-bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--spacing-lg); margin-bottom: var(--spacing-2xl); position: relative; overflow: hidden; border-left: 4px solid var(--color-success); }
-.summary-label { display: inline-flex; align-items: center; gap: var(--spacing-sm); font-size: var(--caption); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-success); margin-bottom: 12px; }
-.summary-label::before { content: ''; width: 8px; height: 8px; background: var(--color-success); border-radius: 50%; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); }
-.summary-title { font-size: var(--heading-2); font-weight: 700; line-height: 1.4; margin-bottom: 12px; color: var(--color-text-primary); }
-.summary-title em { color: var(--color-success); font-style: normal; font-weight: 700; }
-.summary-text { color: var(--color-text-secondary); font-size: var(--body-text); line-height: 1.7; }
-.tab-nav { display: flex; flex-wrap: nowrap; gap: 4px; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px) saturate(1.8); -webkit-backdrop-filter: blur(20px) saturate(1.8); border: 1px solid rgba(255,255,255,0.7); border-radius: var(--radius-lg); padding: 5px; margin-bottom: var(--spacing-lg); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.03); position: sticky; top: 12px; z-index: 100; overflow-x: auto; }
-.tab-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; background: transparent; border: none; border-radius: var(--radius-md); cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--color-text-muted); transition: all var(--transition-fast); white-space: nowrap; text-decoration: none; }
-.tab-btn:hover { background: var(--color-bg-table-header); color: var(--color-text-secondary); }
-.tab-btn.active { background: var(--gradient-success); color: #fff; box-shadow: var(--shadow-glow-success); font-weight: 600; }
-.tab-btn-num { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.06); border-radius: var(--radius-sm); font-size: 11px; font-weight: 600; }
-.tab-btn.active .tab-btn-num { background: rgba(255,255,255,0.2); }
-.tab-panel { display: none; animation: fadeIn 0.3s ease-out; }
-.tab-panel.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.section-overview { background: linear-gradient(135deg, #F8FAF9 0%, #F3F7F5 100%); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); position: relative; overflow: hidden; }
-.section-overview-label { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(5, 150, 105, 0.1); color: var(--color-success); border-radius: var(--radius-full); font-size: 11px; font-weight: 600; }
-.section-overview-label::before { content: '📊'; font-size: 12px; }
-.section-overview-content { padding-top: 32px; text-align: center; overflow-x: auto; }
-.section-overview-caption { text-align: center; font-size: 12px; color: var(--color-text-muted); margin-top: var(--spacing-md); font-style: italic; }
-.paradigm-section { background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(139, 92, 246, 0.04) 100%); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: var(--radius-lg); padding: var(--spacing-xl); margin-bottom: var(--spacing-2xl); position: relative; overflow: hidden; }
-.paradigm-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #7C3AED, #8B5CF6, #A855F7); }
-.paradigm-header { display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-lg); }
-.paradigm-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #7C3AED, #8B5CF6); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3); }
-.paradigm-badge { display: inline-block; padding: 3px 10px; background: linear-gradient(135deg, #7C3AED, #8B5CF6); color: white; border-radius: var(--radius-full); font-size: 10px; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 4px; }
-.paradigm-title { font-size: var(--heading-2); font-weight: 700; color: var(--color-text-primary); }
-.paradigm-intro { font-size: var(--body-text); color: var(--color-text-secondary); line-height: 1.8; margin-bottom: var(--spacing-lg); padding: var(--spacing-md); background: var(--color-bg-card); border-radius: var(--radius-md); border-left: 3px solid #7C3AED; }
-.paradigm-intro strong { color: #7C3AED; }
-.species-comparison { display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); align-items: stretch; }
-.species-card { background: var(--color-bg-card); border-radius: var(--radius-lg); padding: var(--spacing-lg); position: relative; overflow: hidden; }
-.species-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
-.species-card.saas { border: 1px solid rgba(156, 163, 175, 0.3); }
-.species-card.saas::before { background: #9CA3AF; }
-.species-card.agent { border: 1px solid rgba(5, 150, 105, 0.3); }
-.species-card.agent::before { background: var(--gradient-success); }
-.species-icon { width: 48px; height: 48px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: var(--spacing-md); }
-.species-card.saas .species-icon { background: rgba(156, 163, 175, 0.15); }
-.species-card.agent .species-icon { background: rgba(5, 150, 105, 0.15); }
-.species-title { font-size: var(--heading-3); font-weight: 700; margin-bottom: var(--spacing-sm); }
-.species-card.saas .species-title { color: #6B7280; }
-.species-card.agent .species-title { color: var(--color-success); }
-.species-subtitle { font-size: var(--caption); color: var(--color-text-muted); margin-bottom: var(--spacing-md); }
-.species-list { list-style: none; }
-.species-list li { padding: 8px 0 8px 24px; position: relative; font-size: 13px; color: var(--color-text-secondary); border-bottom: 1px solid var(--color-border-light); }
-.species-list li:last-child { border-bottom: none; }
-.species-list li::before { content: '→'; position: absolute; left: 0; font-weight: bold; }
-.species-card.saas .species-list li::before { color: #9CA3AF; }
-.species-card.agent .species-list li::before { color: var(--color-success); }
-.species-vs { display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: var(--color-text-muted); }
-.paradigm-insight { background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(139, 92, 246, 0.06)); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
-.paradigm-insight-icon { font-size: 32px; margin-bottom: var(--spacing-sm); }
-.paradigm-insight-title { font-size: var(--heading-4); font-weight: 600; color: #7C3AED; margin-bottom: var(--spacing-sm); }
-.paradigm-insight-text { font-size: var(--body-text); color: var(--color-text-primary); line-height: 1.7; font-weight: 500; }
-.paradigm-insight-text em { color: #7C3AED; font-style: normal; font-weight: 700; }
-.story-section { background: linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(234, 179, 8, 0.04) 100%); border: 1px solid rgba(249, 115, 22, 0.2); border-radius: var(--radius-lg); padding: var(--spacing-xl); margin-bottom: var(--spacing-2xl); position: relative; overflow: hidden; }
-.story-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #F97316, #EAB308, #059669); }
-.story-header { display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-lg); }
-.story-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #F97316, #EAB308); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3); }
-.story-badge { display: inline-block; padding: 3px 10px; background: linear-gradient(135deg, #F97316, #EAB308); color: white; border-radius: var(--radius-full); font-size: 10px; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 4px; }
-.story-title { font-size: var(--heading-2); font-weight: 700; color: var(--color-text-primary); }
-.story-intro { font-size: var(--body-text); color: var(--color-text-secondary); line-height: 1.8; margin-bottom: var(--spacing-lg); padding: var(--spacing-md); background: var(--color-bg-card); border-radius: var(--radius-md); border-left: 3px solid #F97316; }
-.story-intro strong { color: #EA580C; }
-.analogy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); margin-bottom: var(--spacing-lg); }
-.analogy-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); padding: var(--spacing-md); display: flex; gap: var(--spacing-md); transition: all var(--transition-fast); }
-.analogy-card:hover { border-color: #F97316; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.1); }
-.analogy-human { flex: 1; padding-right: var(--spacing-md); border-right: 2px dashed var(--color-border-light); }
-.analogy-ai { flex: 1; }
-.analogy-label { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; }
-.analogy-human .analogy-label { color: #F97316; }
-.analogy-ai .analogy-label { color: var(--color-success); }
-.analogy-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
-.analogy-human .analogy-label::before { background: #F97316; }
-.analogy-ai .analogy-label::before { background: var(--color-success); }
-.analogy-content { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
-.analogy-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
-.story-insight { background: linear-gradient(135deg, rgba(5, 150, 105, 0.08), rgba(14, 165, 233, 0.06)); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: var(--radius-md); padding: var(--spacing-lg); text-align: center; }
-.story-insight-icon { font-size: 32px; margin-bottom: var(--spacing-sm); }
-.story-insight-title { font-size: var(--heading-4); font-weight: 600; color: var(--color-success); margin-bottom: var(--spacing-sm); }
-.story-insight-text { font-size: var(--body-text); color: var(--color-text-primary); line-height: 1.7; font-weight: 500; }
-.story-insight-text em { color: var(--color-success); font-style: normal; font-weight: 700; }
-.arch-section { margin-bottom: var(--spacing-2xl); }
-.arch-intro { text-align: center; margin-bottom: var(--spacing-lg); }
-.arch-intro-title { font-size: var(--heading-2); font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--spacing-sm); }
-.arch-intro-desc { font-size: var(--body-text); color: var(--color-text-secondary); }
-.view-tabs { display: flex; gap: 4px; justify-content: center; margin-bottom: var(--spacing-lg); background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-full); padding: 4px; width: fit-content; margin-left: auto; margin-right: auto; }
-.view-tab { padding: 8px 20px; border: none; background: transparent; border-radius: var(--radius-full); cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--color-text-muted); transition: all var(--transition-normal); }
-.view-tab:hover { color: var(--color-text-primary); background: var(--color-bg); }
-.view-tab.active { background: var(--color-text-primary); color: #fff; font-weight: 600; }
-.scenario-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-sm); margin-bottom: var(--spacing-md); }
-.scenario-strip-label { grid-column: 1 / -1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-muted); margin-bottom: 2px; }
-.scenario-card { background: var(--color-bg-card); border: 1.5px solid var(--color-border-light); border-radius: var(--radius-md); padding: 12px 14px; cursor: pointer; transition: all 250ms cubic-bezier(0.25, 1, 0.5, 1); position: relative; overflow: hidden; }
-.scenario-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 0 3px 3px 0; transition: all 250ms; }
-.scenario-card[data-skill="native"]::before { background: var(--c-skill-native); }
-.scenario-card[data-skill="tool"]::before { background: var(--c-skill-tool); }
-.scenario-card[data-skill="task"]::before { background: var(--c-skill-task); }
-.scenario-card[data-skill="flow"]::before { background: var(--c-skill-flow); }
-.scenario-card:hover { border-color: var(--color-border); box-shadow: var(--shadow-card); transform: translateY(-2px); }
-.scenario-card.active { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.scenario-card.active[data-skill="native"] { border-color: var(--c-skill-native); }
-.scenario-card.active[data-skill="tool"] { border-color: var(--c-skill-tool); }
-.scenario-card.active[data-skill="task"] { border-color: var(--c-skill-task); }
-.scenario-card.active[data-skill="flow"] { border-color: var(--c-skill-flow); }
-.scenario-card.active::before { width: 4px; }
-.scenario-quote { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; line-height: 1.4; }
-.scenario-meta { display: flex; align-items: center; gap: 6px; }
-.scenario-type { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: var(--radius-full); color: #fff; }
-.scenario-type.native { background: var(--c-skill-native); }
-.scenario-type.tool { background: var(--c-skill-tool); }
-.scenario-type.task { background: var(--c-skill-task); }
-.scenario-type.flow { background: var(--c-skill-flow); }
-.scenario-time { font-size: 11px; color: var(--color-text-muted); }
-.arch-container { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); overflow: hidden; margin-bottom: var(--spacing-md); }
-.arch-svg { width: 100%; height: auto; display: block; }
-@keyframes flowDash { to { stroke-dashoffset: -20; } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-.detail-panel { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); overflow: hidden; transition: all 300ms; margin-bottom: var(--spacing-md); }
-.detail-panel.hidden { display: none; }
-.detail-header { display: flex; align-items: center; gap: 10px; padding: 16px 20px; border-bottom: 1px solid var(--color-border-light); background: var(--color-bg-table-header); }
-.detail-header .icon { width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; }
-.detail-header h3 { font-size: 15px; font-weight: 700; color: var(--color-text-primary); }
-.detail-header .subtitle { font-size: 12px; color: var(--color-text-muted); }
-.detail-body { padding: 20px; }
-.flow-steps { display: flex; align-items: center; gap: 0; overflow-x: auto; padding: 8px 0 16px; }
-.flow-step { display: flex; flex-direction: column; align-items: center; min-width: 100px; text-align: center; }
-.flow-step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-.flow-step-label { font-size: 12px; font-weight: 600; color: var(--color-text-primary); }
-.flow-step-desc { font-size: 10px; color: var(--color-text-muted); margin-top: 2px; max-width: 90px; }
-.flow-arrow { color: var(--color-border); font-size: 18px; margin: 0 -4px; padding-bottom: 20px; }
-.skill-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.skill-detail-box { border: 1px solid var(--color-border-light); border-radius: var(--radius-md); padding: 14px; border-top: 3px solid var(--color-border); }
-.skill-detail-box.native { border-top-color: var(--c-skill-native); }
-.skill-detail-box.tool { border-top-color: var(--c-skill-tool); }
-.skill-detail-box.task { border-top-color: var(--c-skill-task); }
-.skill-detail-box.flow { border-top-color: var(--c-skill-flow); }
-.skill-detail-box h4 { font-size: 13px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 6px; }
-.skill-detail-box p { font-size: 12px; color: var(--color-text-secondary); margin: 4px 0; }
-.skill-detail-box .examples { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--color-border-light); }
-.example-tag { display: inline-block; padding: 2px 8px; margin: 2px; border-radius: var(--radius-full); font-size: 11px; background: var(--color-bg); color: var(--color-text-secondary); }
-.mapping-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--color-border-light); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); overflow: hidden; }
-.mapping-cell { background: var(--color-bg-card); padding: 10px 12px; font-size: 12px; text-align: center; }
-.mapping-cell.head { background: var(--color-bg-table-header); font-weight: 700; color: var(--color-text-primary); }
-.mapping-cell .check { color: var(--color-success); font-weight: 700; }
-.mapping-cell .optional { color: var(--color-purple); }
-.mapping-cell .no { color: var(--color-border); }
-.deploy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.deploy-card { border: 1px solid var(--color-border-light); border-radius: var(--radius-md); padding: 16px; text-align: center; }
-.deploy-card h4 { font-size: 14px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; }
-.deploy-card .items { text-align: left; }
-.deploy-card .item { font-size: 12px; color: var(--color-text-secondary); padding: 3px 0; border-bottom: 1px solid var(--color-border-light); }
-.deploy-card .item:last-child { border-bottom: none; }
-.parts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); margin-bottom: var(--spacing-2xl); }
-.part-card { background: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--spacing-lg); text-decoration: none; transition: all var(--transition-normal); position: relative; overflow: hidden; }
-.part-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-success); opacity: 0; transition: var(--transition-normal); }
-.part-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--color-success); }
-.part-card:hover::before { opacity: 1; }
-.part-badge { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--gradient-success); color: #fff; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; margin-bottom: 12px; }
-.part-title { font-size: var(--heading-3); font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; }
-.part-desc { font-size: var(--body-small); color: var(--color-text-secondary); line-height: 1.6; }
-.part-chapters { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border-light); }
-.part-chapter { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: var(--caption); color: var(--color-text-muted); }
-.part-chapter-num { width: 18px; height: 18px; background: var(--color-bg-table-header); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--color-text-secondary); }
-.conclusion-box { background: var(--gradient-success); color: white; border-radius: var(--radius-lg); padding: var(--spacing-xl); text-align: center; margin-bottom: var(--spacing-2xl); }
-.conclusion-title { font-size: var(--heading-2); font-weight: 700; margin-bottom: var(--spacing-md); }
-.conclusion-text { font-size: var(--body-text); line-height: 1.8; opacity: 0.95; max-width: 600px; margin: 0 auto var(--spacing-md); }
-.conclusion-highlight { display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 10px 20px; border-radius: var(--radius-sm); font-weight: 600; }
-.footer { text-align: center; padding: var(--spacing-lg) 0; color: var(--color-text-muted); font-size: var(--caption); border-top: 1px solid var(--color-border-light); }
-@media (max-width: 768px) { .header-title { font-size: 24px; } .species-comparison { grid-template-columns: 1fr; } .species-vs { transform: rotate(90deg); margin: var(--spacing-sm) auto; } .analogy-grid { grid-template-columns: 1fr; } .scenario-strip { grid-template-columns: 1fr 1fr; } .parts-grid { grid-template-columns: 1fr; } .skill-detail-grid { grid-template-columns: 1fr; } .deploy-grid { grid-template-columns: 1fr; } .tab-btn span:not(.tab-btn-num) { display: none; } .mapping-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .scenario-strip { grid-template-columns: 1fr; } .flow-steps { flex-wrap: wrap; justify-content: center; } }
+@media (max-width:480px) {
+    .limitation-grid { grid-template-columns:1fr; }
+    .roadmap { grid-template-columns:1fr; }
+}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- Hero Header -->
-    <header class="header">
-        <div class="header-badge">完整推演 v4.7 · 含架构全景</div>
-        <h1 class="header-title">AI产品终极形态思考</h1>
-        <p class="header-subtitle">从问题定义到架构设计，完整推演AI产品的演进路径与终极形态</p>
-    </header>
-
-    <!-- Core Insight -->
-    <section class="summary-box">
-        <div class="summary-label">核心洞察</div>
-        <h2 class="summary-title">AI产品的终极形态是「<em>一个能成长的Agent</em>」</h2>
-        <p class="summary-text">拥有通用能力内核（AgentCore）、可扩展的专业技能（Skills）、持久记忆（Memory）、并行执行能力（分身机制），以Code Agent为起点向通用能力演进，产品形态类似"养成类游戏"。</p>
-    </section>
-
-    <!-- Main Tab Navigation -->
-    <nav class="tab-nav" role="navigation" aria-label="章节导航">
-        <button class="tab-btn active" data-tab="tab-core" aria-selected="true">
-            <span class="tab-btn-num">1</span>
-            <span>核心论点</span>
-        </button>
-        <button class="tab-btn" data-tab="tab-overview" aria-selected="false">
-            <span class="tab-btn-num">2</span>
-            <span>推演导图</span>
-        </button>
-        <button class="tab-btn" data-tab="tab-arch" aria-selected="false">
-            <span class="tab-btn-num">3</span>
-            <span>架构全景</span>
-        </button>
-        <button class="tab-btn" data-tab="tab-reading" aria-selected="false">
-            <span class="tab-btn-num">4</span>
-            <span>详细章节</span>
-        </button>
+    <!-- Unified Navigation -->
+    <nav class="site-nav">
+        <a href="index.html" class="active">首页</a>
+        <a href="deep-dive.html">详细论证</a>
+        <a href="evidence.html">AI分身实证</a>
+        <a href="implementation.html">技术实施</a>
+        <a href="architecture.html">架构全景</a>
     </nav>
 
-    <!-- ==================== TAB 1: 核心论点 ==================== -->
-    <article id="tab-core" class="tab-panel active">
+    <!-- ==================== HERO ==================== -->
+    <header class="hero">
+        <div class="hero-badge">v5.1 · 2026-03</div>
+        <h1>AI产品终极形态思考</h1>
+        <p class="hero-thesis">AI产品的终极形态是 AgentCore + Skills<br>一个能成长的Agent，而非一堆各自为政的Agent</p>
+        <p class="hero-sub">从问题定义到架构设计，完整推演AI产品的演进路径与终极形态</p>
+    </header>
 
-        <!-- Paradigm Shift: Two Species -->
-        <section class="paradigm-section">
-            <div class="paradigm-header">
-                <div class="paradigm-icon">🧬</div>
-                <div>
-                    <span class="paradigm-badge">隐藏前提</span>
-                    <h2 class="paradigm-title">传统SaaS与AI产品是两个"物种"</h2>
-                </div>
-            </div>
-            <p class="paradigm-intro">在讨论"AI产品终极形态"之前，必须先认清一个<strong>隐藏的前提</strong>：传统SaaS产品和AI Agent产品，<strong>根本不是同一个物种</strong>。它们的底层逻辑完全不同，不能用做SaaS的思路去做AI产品。</p>
-            <div class="species-comparison">
-                <div class="species-card saas">
-                    <div class="species-icon">🧰</div>
-                    <h3 class="species-title">传统SaaS产品</h3>
-                    <p class="species-subtitle">本质：功能的集合 / 类比：工具箱</p>
-                    <ul class="species-list">
-                        <li>研究用户场景 → 抽象成功能 → 固化为代码</li>
-                        <li>每个垂直场景需要单独的产品/模块</li>
-                        <li>产品经理的工作是"翻译"需求为功能</li>
-                        <li>扩展方式：加功能（需要产品+开发）</li>
-                        <li>Notion管知识、Figma管设计、Jira管项目...</li>
-                    </ul>
-                </div>
-                <div class="species-vs">VS</div>
-                <div class="species-card agent">
-                    <div class="species-icon">🤖</div>
-                    <h3 class="species-title">AI Agent产品</h3>
-                    <p class="species-subtitle">本质：能力的载体 / 类比：人</p>
-                    <ul class="species-list">
-                        <li>理解用户意图 → 规划步骤 → 调用工具执行</li>
-                        <li>一个Agent可以覆盖无数场景</li>
-                        <li>Agent自己理解需求，自己执行任务</li>
-                        <li>扩展方式：学技能（Agent自己学或被教会）</li>
-                        <li>一个Agent = Notion + Figma + Jira + ...</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="paradigm-insight">
-                <div class="paradigm-insight-icon">💡</div>
-                <div class="paradigm-insight-title">这解释了为什么是"一个能成长的Agent"</div>
-                <p class="paradigm-insight-text">传统SaaS的逻辑是<em>"翻译"</em>：把用户需求翻译成固定功能。<br>AI Agent的逻辑是<em>"委托"</em>：用户告诉Agent做什么，Agent像人一样完成。<br><br>既然AI Agent像人，那就应该<em>像培养人一样培养它</em>——这就是我们的核心结论。</p>
-            </div>
-        </section>
-
-        <!-- Analogy Story -->
-        <section class="story-section">
-            <div class="story-header">
-                <div class="story-icon">👶</div>
-                <div>
-                    <span class="story-badge">一个故事</span>
-                    <h2 class="story-title">像养育孩子一样理解AI产品</h2>
-                </div>
-            </div>
-            <p class="story-intro">如果这套理论是正确的，它一定和我们身边熟悉的事物非常相似。想想看：<strong>养育一个孩子的过程</strong>，和打造一个能成长的AI Agent，几乎完全对应。这不是巧合——好的产品设计，往往是对自然规律的模仿。</p>
-            <div class="analogy-grid">
-                <div class="analogy-card">
-                    <div class="analogy-human">
-                        <div class="analogy-label">👶 人的成长</div>
-                        <div class="analogy-content">大脑神经系统</div>
-                        <div class="analogy-desc">思考、记忆、规划的生理基础</div>
-                    </div>
-                    <div class="analogy-ai">
-                        <div class="analogy-label">🤖 AI Agent</div>
-                        <div class="analogy-content">AgentCore</div>
-                        <div class="analogy-desc">推理、记忆、规划的能力内核</div>
-                    </div>
-                </div>
-                <div class="analogy-card">
-                    <div class="analogy-human">
-                        <div class="analogy-label">👶 人的成长</div>
-                        <div class="analogy-content">后天学会的技能</div>
-                        <div class="analogy-desc">走路、说话、骑车、编程...</div>
-                    </div>
-                    <div class="analogy-ai">
-                        <div class="analogy-label">🤖 AI Agent</div>
-                        <div class="analogy-content">Skills 系统</div>
-                        <div class="analogy-desc">调研、写作、发布...</div>
-                    </div>
-                </div>
-                <div class="analogy-card">
-                    <div class="analogy-human">
-                        <div class="analogy-label">👶 人的成长</div>
-                        <div class="analogy-content">人生经历和记忆</div>
-                        <div class="analogy-desc">知道你喜欢什么、不喜欢什么</div>
-                    </div>
-                    <div class="analogy-ai">
-                        <div class="analogy-label">🤖 AI Agent</div>
-                        <div class="analogy-content">Memory 系统</div>
-                        <div class="analogy-desc">记住用户偏好、项目历史</div>
-                    </div>
-                </div>
-                <div class="analogy-card">
-                    <div class="analogy-human">
-                        <div class="analogy-label">👶 人的成长</div>
-                        <div class="analogy-content">先学会"学习方法"</div>
-                        <div class="analogy-desc">掌握学习的方法才能自主获取新知识</div>
-                    </div>
-                    <div class="analogy-ai">
-                        <div class="analogy-label">🤖 AI Agent</div>
-                        <div class="analogy-content">Code Agent 起点</div>
-                        <div class="analogy-desc">代码是"元技能"，能造其他能力</div>
-                    </div>
-                </div>
-                <div class="analogy-card">
-                    <div class="analogy-human">
-                        <div class="analogy-label">👶 人的成长</div>
-                        <div class="analogy-content">父母的养育过程</div>
-                        <div class="analogy-desc">投入越多，孩子越懂你，你也越舍不得</div>
-                    </div>
-                    <div class="analogy-ai">
-                        <div class="analogy-label">🤖 AI Agent</div>
-                        <div class="analogy-content">养成类游戏形态</div>
-                        <div class="analogy-desc">用户"培养"AI，形成情感连接</div>
-                    </div>
-                </div>
-                <div class="analogy-card">
-                    <div class="analogy-human">
-                        <div class="analogy-label">👶 人的成长</div>
-                        <div class="analogy-content">成年后能一心多用</div>
-                        <div class="analogy-desc">成熟的人可以同时处理多任务</div>
-                    </div>
-                    <div class="analogy-ai">
-                        <div class="analogy-label">🤖 AI Agent</div>
-                        <div class="analogy-content">分身机制</div>
-                        <div class="analogy-desc">派生分身并行执行，经验回流</div>
-                    </div>
-                </div>
-            </div>
-            <div class="story-insight">
-                <div class="story-insight-icon">💡</div>
-                <div class="story-insight-title">这个类比揭示的核心洞察</div>
-                <p class="story-insight-text">与其做<em>十个各有专长的孩子</em>（多个专用Agent），<br>不如专注培养<em>一个全能的孩子</em>（一个能成长的AgentCore + Skills）。<br><br>你不会抛弃自己养大的孩子——这就是<em>Memory护城河</em>的本质。</p>
-            </div>
-        </section>
-    </article>
-
-    <!-- ==================== TAB 2: 推演导图 ==================== -->
-    <article id="tab-overview" class="tab-panel">
-        <div class="section-overview">
-            <span class="section-overview-label">全文逻辑导图 · 一图看懂</span>
-            <div class="section-overview-content" style="overflow-x: auto;">
-                <svg viewBox="0 0 960 680" style="max-width: 960px; width: 100%; min-width: 700px;">
-                    <defs>
-                        <linearGradient id="ov-blueGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
-                        <linearGradient id="ov-greenGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
-                        <linearGradient id="ov-purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#A855F7"/></linearGradient>
-                        <linearGradient id="ov-orangeGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#EA580C"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
-                        <filter id="ov-cardShadow" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/></filter>
-                    </defs>
-                    <!-- 第一层：核心问题 -->
-                    <g transform="translate(30, 15)">
-                        <rect width="900" height="50" rx="8" fill="#FEF2F2" stroke="#FCA5A5" stroke-dasharray="4,2"/>
-                        <text x="450" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#DC2626">❓ 核心问题</text>
-                        <text x="450" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#1C1917">AI产品的终极形态是什么？应该做多个垂直Agent，还是一个通用Agent？</text>
-                    </g>
-                    <!-- Part 1 -->
-                    <g transform="translate(30, 80)">
-                        <rect width="210" height="200" rx="10" fill="#EFF6FF" stroke="#2563EB" filter="url(#ov-cardShadow)"/>
-                        <rect width="210" height="5" rx="2.5" fill="url(#ov-blueGrad)"/>
-                        <text x="105" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#2563EB">Part 1 问题与诊断</text>
-                        <rect x="10" y="35" width="190" height="35" rx="6" fill="white"/>
-                        <text x="105" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#2563EB">💡 核心洞察</text>
-                        <text x="105" y="63" text-anchor="middle" font-size="9" fill="#57534E">做多个Agent = 重复造轮子</text>
-                        <text x="15" y="85" font-size="9" fill="#1C1917" font-weight="500">1. 为什么"多个Agent"不行</text>
-                        <text x="20" y="98" font-size="8" fill="#78716C">→ 能力重复建设、经验无法复用</text>
-                        <text x="15" y="115" font-size="9" fill="#1C1917" font-weight="500">2-3. 产品形态的两个矛盾</text>
-                        <text x="20" y="128" font-size="8" fill="#78716C">→ 专用vs通用、深度vs广度</text>
-                        <text x="15" y="145" font-size="9" fill="#1C1917" font-weight="500">4. AgentCore概念提出</text>
-                        <text x="20" y="158" font-size="8" fill="#78716C">→ 通用能力内核 + 可插拔Skills</text>
-                        <rect x="10" y="170" width="90" height="20" rx="10" fill="#DBEAFE"/>
-                        <text x="55" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#2563EB">AgentCore</text>
-                        <rect x="110" y="170" width="90" height="20" rx="10" fill="#DBEAFE"/>
-                        <text x="155" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#2563EB">能力复用</text>
-                    </g>
-                    <!-- Arrow 1 -->
-                    <g transform="translate(245, 165)"><path d="M0 15 L20 15" stroke="#E7E5E4" stroke-width="2.5" fill="none"/><polygon points="20,8 35,15 20,22" fill="#059669"/></g>
-                    <!-- Part 2 -->
-                    <g transform="translate(265, 80)">
-                        <rect width="210" height="200" rx="10" fill="#ECFDF5" stroke="#059669" filter="url(#ov-cardShadow)"/>
-                        <rect width="210" height="5" rx="2.5" fill="url(#ov-greenGrad)"/>
-                        <text x="105" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">Part 2 关键抉择</text>
-                        <rect x="10" y="35" width="190" height="35" rx="6" fill="white"/>
-                        <text x="105" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">💡 核心洞察</text>
-                        <text x="105" y="63" text-anchor="middle" font-size="9" fill="#57534E">Code Agent是起点，养成是形态</text>
-                        <text x="15" y="85" font-size="9" fill="#1C1917" font-weight="500">5. 起点选择：Code Agent</text>
-                        <text x="20" y="98" font-size="8" fill="#78716C">→ 代码是"元技能"，能造其他能力</text>
-                        <text x="15" y="115" font-size="9" fill="#1C1917" font-weight="500">6. 产品形态：养成类游戏</text>
-                        <text x="20" y="128" font-size="8" fill="#78716C">→ 用户培养AI，形成情感连接</text>
-                        <text x="15" y="145" font-size="9" fill="#1C1917" font-weight="500">7. 架构：Agent模板 + 分身</text>
-                        <text x="20" y="158" font-size="8" fill="#78716C">→ 共享能力，并行执行，经验回流</text>
-                        <rect x="10" y="170" width="60" height="20" rx="10" fill="#D1FAE5"/>
-                        <text x="40" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">Skills</text>
-                        <rect x="75" y="170" width="60" height="20" rx="10" fill="#D1FAE5"/>
-                        <text x="105" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">养成</text>
-                        <rect x="140" y="170" width="60" height="20" rx="10" fill="#D1FAE5"/>
-                        <text x="170" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">分身</text>
-                    </g>
-                    <!-- Arrow 2 -->
-                    <g transform="translate(480, 165)"><path d="M0 15 L20 15" stroke="#E7E5E4" stroke-width="2.5" fill="none"/><polygon points="20,8 35,15 20,22" fill="#7C3AED"/></g>
-                    <!-- Part 3 -->
-                    <g transform="translate(500, 80)">
-                        <rect width="210" height="200" rx="10" fill="#F5F3FF" stroke="#7C3AED" filter="url(#ov-cardShadow)"/>
-                        <rect width="210" height="5" rx="2.5" fill="url(#ov-purpleGrad)"/>
-                        <text x="105" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#7C3AED">Part 3 验证分析</text>
-                        <rect x="10" y="35" width="190" height="35" rx="6" fill="white"/>
-                        <text x="105" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#7C3AED">💡 核心洞察</text>
-                        <text x="105" y="63" text-anchor="middle" font-size="9" fill="#57534E">Memory是护城河，行业已验证</text>
-                        <text x="15" y="85" font-size="9" fill="#1C1917" font-weight="500">8-9. 行业验证</text>
-                        <text x="20" y="98" font-size="8" fill="#78716C">→ Anthropic Skills、McKinsey实践</text>
-                        <text x="15" y="115" font-size="9" fill="#1C1917" font-weight="500">10. 护城河分析</text>
-                        <text x="20" y="128" font-size="8" fill="#78716C">→ Memory数据 ⭐⭐⭐⭐⭐ 最高</text>
-                        <text x="15" y="145" font-size="9" fill="#1C1917" font-weight="500">技术成熟度评估</text>
-                        <text x="20" y="158" font-size="8" fill="#78716C">→ 核心能力已就绪，可以落地</text>
-                        <rect x="10" y="170" width="90" height="20" rx="10" fill="#EDE9FE"/>
-                        <text x="55" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#7C3AED">Memory护城河</text>
-                        <rect x="110" y="170" width="90" height="20" rx="10" fill="#EDE9FE"/>
-                        <text x="155" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#7C3AED">技术可行</text>
-                    </g>
-                    <!-- Arrow 3 -->
-                    <g transform="translate(715, 165)"><path d="M0 15 L20 15" stroke="#E7E5E4" stroke-width="2.5" fill="none"/><polygon points="20,8 35,15 20,22" fill="#EA580C"/></g>
-                    <!-- Part 4 -->
-                    <g transform="translate(735, 80)">
-                        <rect width="195" height="200" rx="10" fill="#FFF7ED" stroke="#EA580C" filter="url(#ov-cardShadow)"/>
-                        <rect width="195" height="5" rx="2.5" fill="url(#ov-orangeGrad)"/>
-                        <text x="97" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#EA580C">Part 4 AI分身实证</text>
-                        <rect x="10" y="35" width="175" height="35" rx="6" fill="white"/>
-                        <text x="97" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#EA580C">💡 核心洞察</text>
-                        <text x="97" y="63" text-anchor="middle" font-size="9" fill="#57534E">我就是这套理论的活证明</text>
-                        <text x="15" y="85" font-size="9" fill="#1C1917" font-weight="500">11. 以我自己为例印证</text>
-                        <text x="20" y="98" font-size="8" fill="#78716C">→ 6/6能力模块已实现</text>
-                        <text x="15" y="115" font-size="9" fill="#1C1917" font-weight="500">12. 结论与行动建议</text>
-                        <text x="20" y="128" font-size="8" fill="#78716C">→ 演进路径清晰可执行</text>
-                        <text x="15" y="145" font-size="9" fill="#1C1917" font-weight="500">新增自动化能力</text>
-                        <text x="20" y="158" font-size="8" fill="#78716C">→ 每日反思、日报、自动备份</text>
-                        <rect x="10" y="170" width="85" height="20" rx="10" fill="#FFEDD5"/>
-                        <text x="52" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#EA580C">6/6能力</text>
-                        <rect x="100" y="170" width="85" height="20" rx="10" fill="#FFEDD5"/>
-                        <text x="142" y="184" text-anchor="middle" font-size="9" font-weight="600" fill="#EA580C">自动反思</text>
-                    </g>
-                    <!-- AgentCore 架构图 -->
-                    <g transform="translate(30, 300)">
-                        <rect width="440" height="160" rx="10" fill="white" stroke="#E7E5E4" filter="url(#ov-cardShadow)"/>
-                        <rect width="440" height="4" rx="2" fill="url(#ov-greenGrad)"/>
-                        <text x="220" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#059669">🧠 AgentCore 架构（终极形态）</text>
-                        <g transform="translate(15, 35)"><rect width="130" height="50" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="65" y="20" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Memory 记忆</text><text x="65" y="35" text-anchor="middle" font-size="8" fill="#78716C">长期偏好学习</text><text x="65" y="46" text-anchor="middle" font-size="8" fill="#059669">✓ 已实现</text></g>
-                        <g transform="translate(155, 35)"><rect width="130" height="50" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="65" y="20" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Reasoning 推理</text><text x="65" y="35" text-anchor="middle" font-size="8" fill="#78716C">意图理解决策</text><text x="65" y="46" text-anchor="middle" font-size="8" fill="#059669">✓ 已实现</text></g>
-                        <g transform="translate(295, 35)"><rect width="130" height="50" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="65" y="20" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Planning 规划</text><text x="65" y="35" text-anchor="middle" font-size="8" fill="#78716C">任务分解安排</text><text x="65" y="46" text-anchor="middle" font-size="8" fill="#059669">✓ 已实现</text></g>
-                        <g transform="translate(15, 95)"><rect width="130" height="50" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="65" y="20" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Orchestration 编排</text><text x="65" y="35" text-anchor="middle" font-size="8" fill="#78716C">能力组合调度</text><text x="65" y="46" text-anchor="middle" font-size="8" fill="#059669">✓ 已实现</text></g>
-                        <g transform="translate(155, 95)"><rect width="130" height="50" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="65" y="20" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Reflection 反思</text><text x="65" y="35" text-anchor="middle" font-size="8" fill="#78716C">自我优化改进</text><text x="65" y="46" text-anchor="middle" font-size="8" fill="#059669">✓ 已实现</text></g>
-                        <g transform="translate(295, 95)"><rect width="130" height="50" rx="6" fill="#ECFDF5" stroke="#059669"/><text x="65" y="20" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Integration 集成</text><text x="65" y="35" text-anchor="middle" font-size="8" fill="#78716C">MCP/API连接</text><text x="65" y="46" text-anchor="middle" font-size="8" fill="#059669">✓ 已实现</text></g>
-                    </g>
-                    <!-- + -->
-                    <g transform="translate(480, 365)"><circle cx="15" cy="15" r="15" fill="#E7E5E4"/><text x="15" y="21" text-anchor="middle" font-size="20" font-weight="700" fill="#78716C">+</text></g>
-                    <!-- Skills -->
-                    <g transform="translate(520, 300)">
-                        <rect width="200" height="160" rx="10" fill="white" stroke="#E7E5E4" filter="url(#ov-cardShadow)"/>
-                        <rect width="200" height="4" rx="2" fill="url(#ov-purpleGrad)"/>
-                        <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#7C3AED">⚡ Skills 可插拔技能</text>
-                        <text x="15" y="45" font-size="10" font-weight="500" fill="#1C1917">按需加载，随时扩展</text>
-                        <g transform="translate(10, 55)"><rect width="85" height="28" rx="4" fill="#F5F3FF" stroke="#7C3AED"/><text x="42" y="18" text-anchor="middle" font-size="9" fill="#7C3AED">调研报告</text></g>
-                        <g transform="translate(105, 55)"><rect width="85" height="28" rx="4" fill="#F5F3FF" stroke="#7C3AED"/><text x="42" y="18" text-anchor="middle" font-size="9" fill="#7C3AED">代码开发</text></g>
-                        <g transform="translate(10, 90)"><rect width="85" height="28" rx="4" fill="#F5F3FF" stroke="#7C3AED"/><text x="42" y="18" text-anchor="middle" font-size="9" fill="#7C3AED">GitHub部署</text></g>
-                        <g transform="translate(105, 90)"><rect width="85" height="28" rx="4" fill="#F5F3FF" stroke="#7C3AED"/><text x="42" y="18" text-anchor="middle" font-size="9" fill="#7C3AED">语雀发布</text></g>
-                        <text x="100" y="140" text-anchor="middle" font-size="10" font-weight="600" fill="#7C3AED">30+ Skills 持续扩展中</text>
-                    </g>
-                    <!-- = -->
-                    <g transform="translate(730, 365)"><circle cx="15" cy="15" r="15" fill="#E7E5E4"/><text x="15" y="21" text-anchor="middle" font-size="20" font-weight="700" fill="#78716C">=</text></g>
-                    <!-- 数字分身 -->
-                    <g transform="translate(765, 300)">
-                        <rect width="160" height="160" rx="10" fill="url(#ov-orangeGrad)" filter="url(#ov-cardShadow)"/>
-                        <text x="80" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="white">🧑‍💻 数字分身</text>
-                        <text x="80" y="55" text-anchor="middle" font-size="10" fill="white" opacity="0.9">我的AI分身</text>
-                        <rect x="15" y="70" width="130" height="75" rx="6" fill="white" opacity="0.95"/>
-                        <text x="80" y="90" text-anchor="middle" font-size="9" font-weight="500" fill="#EA580C">✓ 懂用户的思维方式</text>
-                        <text x="80" y="105" text-anchor="middle" font-size="9" font-weight="500" fill="#EA580C">✓ 记住所有偏好历史</text>
-                        <text x="80" y="120" text-anchor="middle" font-size="9" font-weight="500" fill="#EA580C">✓ 每天自动反思成长</text>
-                        <text x="80" y="135" text-anchor="middle" font-size="9" font-weight="500" fill="#EA580C">✓ 不会被换掉的AI</text>
-                    </g>
-                    <!-- 核心结论 -->
-                    <g transform="translate(30, 480)">
-                        <rect width="900" height="90" rx="12" fill="url(#ov-greenGrad)" filter="url(#ov-cardShadow)"/>
-                        <text x="450" y="28" text-anchor="middle" font-size="14" font-weight="800" fill="white">🎯 核心结论</text>
-                        <text x="450" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="white" opacity="0.95">不要做一个个Agent，要做AgentCore + Skills</text>
-                        <text x="450" y="72" text-anchor="middle" font-size="12" fill="white" opacity="0.9">从Code Agent出发 → 养成类产品形态 → Memory是核心护城河 → Cursor/Windsurf路线 &gt; Manus路线</text>
-                    </g>
-                    <!-- 路线对比 -->
-                    <g transform="translate(30, 590)">
-                        <rect width="440" height="75" rx="10" fill="#ECFDF5" stroke="#059669"/>
-                        <rect width="440" height="4" rx="2" fill="url(#ov-greenGrad)"/>
-                        <text x="20" y="25" font-size="11" font-weight="700" fill="#059669">✓ 正确路线：Cursor / Windsurf / CodeFlicker</text>
-                        <text x="20" y="45" font-size="10" fill="#57534E">• 一个能成长的Agent，从代码能力出发</text>
-                        <text x="20" y="60" font-size="10" fill="#57534E">• 用户培养AI，形成长期依赖关系</text>
-                    </g>
-                    <g transform="translate(480, 610)"><circle cx="20" cy="20" r="18" fill="#FAFAF9" stroke="#E7E5E4"/><text x="20" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#78716C">VS</text></g>
-                    <g transform="translate(530, 590)">
-                        <rect width="400" height="75" rx="10" fill="#FEF2F2" stroke="#FCA5A5"/>
-                        <rect width="400" height="4" rx="2" fill="#EF4444"/>
-                        <text x="20" y="25" font-size="11" font-weight="700" fill="#DC2626">✗ 错误路线：Manus / 小龙虾</text>
-                        <text x="20" y="45" font-size="10" fill="#57534E">• 多个垂直Agent，能力重复建设</text>
-                        <text x="20" y="60" font-size="10" fill="#57534E">• 用户切换成本低，缺乏粘性</text>
-                    </g>
-                </svg>
-            </div>
-            <p class="section-overview-caption">问题定义 → 关键抉择 → 验证分析 → 实证演进 的完整推演链 · 一图理解AI产品终极形态</p>
+    <!-- ==================== 1. 问题 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <h2>问题：大模型很强，但用户只是在"玩"</h2>
         </div>
-    </article>
-
-    <!-- ==================== TAB 3: 架构全景 ==================== -->
-    <article id="tab-arch" class="tab-panel">
-        <div class="arch-section">
-            <div class="arch-intro">
-                <h2 class="arch-intro-title">🗺️ 统一AI产品架构全景图</h2>
-                <p class="arch-intro-desc">一张图看清：三层架构 · 四类技能 · 运行流程 · 产品映射</p>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            ChatGPT月活2亿，但多数用户仍在"聊天"而非"使用"。核心原因：LLM本身有四个根本局限，导致它无法成为用户的长期工具。
+        </p>
+        <div class="limitation-grid">
+            <div class="limitation-card">
+                <div class="limitation-icon">🧠</div>
+                <div class="limitation-title">无记忆</div>
+                <div class="limitation-desc">每次对话从零开始<br>不记得你是谁</div>
             </div>
-
-            <!-- View Tabs -->
-            <div class="view-tabs">
-                <button class="view-tab active" data-view="structure" onclick="switchView('structure')">结构视图</button>
-                <button class="view-tab" data-view="runtime" onclick="switchView('runtime')">运行视图</button>
-                <button class="view-tab" data-view="mapping" onclick="switchView('mapping')">映射视图</button>
+            <div class="limitation-card">
+                <div class="limitation-icon">💤</div>
+                <div class="limitation-title">无主动</div>
+                <div class="limitation-desc">只能被动响应<br>不会主动做事</div>
             </div>
+            <div class="limitation-card">
+                <div class="limitation-icon">🔗</div>
+                <div class="limitation-title">无行动</div>
+                <div class="limitation-desc">只能生成文本<br>无法操作外部系统</div>
+            </div>
+            <div class="limitation-card">
+                <div class="limitation-icon">📈</div>
+                <div class="limitation-title">无成长</div>
+                <div class="limitation-desc">用100次和用1次<br>没有任何区别</div>
+            </div>
+        </div>
+        <div class="insight-box">
+            <p class="insight-text">这四个局限的本质：LLM是一个<em>没有记忆、不会行动、不能成长</em>的大脑。<br>用户需要的不是"更聪明的聊天"，而是一个<em>懂自己、能做事、会成长的伙伴</em>。</p>
+        </div>
+    </section>
 
-            <!-- Scenario Strip -->
-            <div class="scenario-strip">
-                <div class="scenario-strip-label">💡 点击场景查看运行流程</div>
-                <div class="scenario-card" data-skill="native" data-id="s1" onclick="activateScenario('s1')">
-                    <div class="scenario-quote">"帮我写个调研报告"</div>
-                    <div class="scenario-meta"><span class="scenario-type native">Ⅰ 原生</span><span class="scenario-time">⏱ 分钟级</span></div>
+    <!-- ==================== 2. 答案 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <h2>答案：AgentCore + Skills 架构</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            传统SaaS产品和AI Agent产品，<strong style="color:var(--color-text-primary)">根本不是同一个物种</strong>。理解这个隐藏前提，才能设计正确的AI产品架构。
+        </p>
+
+        <!-- SaaS vs Agent -->
+        <div class="compare-grid">
+            <div class="compare-card old">
+                <div class="compare-icon">🧰</div>
+                <h3 class="compare-title">传统SaaS产品</h3>
+                <p class="compare-subtitle">本质：功能的集合 / 类比：工具箱</p>
+                <ul class="compare-list">
+                    <li>需求 → 抽象成功能 → 固化为代码</li>
+                    <li>每个垂直场景需要独立产品</li>
+                    <li>扩展方式：加功能（需要开发）</li>
+                    <li>Notion + Figma + Jira + ...</li>
+                </ul>
+            </div>
+            <div class="compare-vs">VS</div>
+            <div class="compare-card new">
+                <div class="compare-icon">🤖</div>
+                <h3 class="compare-title">AI Agent产品</h3>
+                <p class="compare-subtitle">本质：能力的载体 / 类比：人</p>
+                <ul class="compare-list">
+                    <li>理解意图 → 规划步骤 → 调用工具执行</li>
+                    <li>一个Agent可覆盖无数场景</li>
+                    <li>扩展方式：学技能（自主学习）</li>
+                    <li>一个Agent = 全部工具</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AgentCore brief -->
+        <div class="agentcore-brief">
+            <p style="font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px;">🧠 AgentCore — 统一认知内核</p>
+            <p style="font-size:var(--body-small); color:var(--color-text-secondary); margin-bottom:var(--spacing-md);">六大能力模块，作为所有AI产品共享的"大脑"</p>
+            <div class="agentcore-modules">
+                <span class="agentcore-module"><span class="check">✓</span> Memory 记忆</span>
+                <span class="agentcore-module"><span class="check">✓</span> Reasoning 推理</span>
+                <span class="agentcore-module"><span class="check">✓</span> Planning 规划</span>
+                <span class="agentcore-module"><span class="check">✓</span> Orchestration 编排</span>
+                <span class="agentcore-module"><span class="check">✓</span> Reflection 反思</span>
+                <span class="agentcore-module"><span class="check">✓</span> Integration 集成</span>
+            </div>
+            <p style="font-size:var(--body-small); color:var(--color-text-muted);">AgentCore 提供通用认知能力，Skills 提供专业技能 → 一个内核，无限扩展</p>
+        </div>
+    </section>
+
+    <!-- ==================== 3. 为什么 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <h2>为什么：像养育孩子一样理解AI产品</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            好的产品设计是对自然规律的模仿。人的成长过程，和打造一个能成长的AI Agent，几乎完全对应。
+        </p>
+
+        <div class="analogy-compact">
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">大脑神经系统</div>
                 </div>
-                <div class="scenario-card" data-skill="tool" data-id="s2" onclick="activateScenario('s2')">
-                    <div class="scenario-quote">"帮我生成一张配图"</div>
-                    <div class="scenario-meta"><span class="scenario-type tool">Ⅱ 工具</span><span class="scenario-time">⏱ 秒级</span></div>
-                </div>
-                <div class="scenario-card" data-skill="task" data-id="s3" onclick="activateScenario('s3')">
-                    <div class="scenario-quote">"帮我Review这个PR"</div>
-                    <div class="scenario-meta"><span class="scenario-type task">Ⅲ 任务</span><span class="scenario-time">⏱ 分钟级</span></div>
-                </div>
-                <div class="scenario-card" data-skill="flow" data-id="s4" onclick="activateScenario('s4')">
-                    <div class="scenario-quote">"帮我把需求做到上线"</div>
-                    <div class="scenario-meta"><span class="scenario-type flow">Ⅳ 流程</span><span class="scenario-time">⏱ 小时级</span></div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">AgentCore 认知内核</div>
                 </div>
             </div>
-
-            <!-- Architecture SVG -->
-            <div class="arch-container">
-                <svg class="arch-svg" viewBox="0 0 740 620" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="gProduct" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
-                        <linearGradient id="gAgent" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
-                        <linearGradient id="gOS" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1C1917"/><stop offset="100%" stop-color="#44403C"/></linearGradient>
-                        <linearGradient id="gNative" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2DA44E"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient>
-                        <linearGradient id="gTool" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#A78BFA"/></linearGradient>
-                        <linearGradient id="gTask" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#EA580C"/><stop offset="100%" stop-color="#FB923C"/></linearGradient>
-                        <linearGradient id="gFlow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#60A5FA"/></linearGradient>
-                        <filter id="dropShadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
-                        <filter id="glowNative"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2DA44E" flood-opacity="0.4"/></filter>
-                        <filter id="glowTool"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#7C3AED" flood-opacity="0.4"/></filter>
-                        <filter id="glowTask"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#EA580C" flood-opacity="0.4"/></filter>
-                        <filter id="glowFlow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#2563EB" flood-opacity="0.4"/></filter>
-                        <marker id="arrowGray" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="8" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 3 L0 6 Z" fill="#E7E5E4"/></marker>
-                    </defs>
-                    <!-- User -->
-                    <g id="layer-user" transform="translate(20, 10)"><circle cx="22" cy="22" r="18" fill="#F5F5F4" stroke="#E7E5E4" stroke-width="1.5"/><text x="22" y="19" text-anchor="middle" font-size="14">👤</text><text x="22" y="31" text-anchor="middle" font-size="7" fill="#78716C" font-weight="600">用户</text></g>
-                    <path d="M60 30 L100 30" stroke="#E7E5E4" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowGray)"/>
-                    <!-- PRODUCT LAYER -->
-                    <g id="layer-product">
-                        <rect x="110" y="6" width="620" height="74" rx="12" fill="url(#gProduct)" opacity="0.06"/>
-                        <rect x="110" y="6" width="620" height="74" rx="12" fill="none" stroke="#2563EB" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-                        <text x="125" y="24" font-size="10" font-weight="700" fill="#2563EB" opacity="0.6">PRODUCT LAYER</text>
-                        <g id="prod-cf" filter="url(#dropShadow)"><rect x="130" y="32" width="120" height="40" rx="8" fill="white" stroke="#2563EB" stroke-width="1.2"/><text x="190" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#2563EB">CodeFlicker</text><text x="190" y="61" text-anchor="middle" font-size="8" fill="#78716C">AI × Coding</text></g>
-                        <g id="prod-kate" filter="url(#dropShadow)"><rect x="265" y="32" width="120" height="40" rx="8" fill="white" stroke="#2563EB" stroke-width="1.2"/><text x="325" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#2563EB">KATE-Studio</text><text x="325" y="61" text-anchor="middle" font-size="8" fill="#78716C">企业数字员工</text></g>
-                        <g id="prod-pa" filter="url(#dropShadow)"><rect x="400" y="32" width="120" height="40" rx="8" fill="white" stroke="#2563EB" stroke-width="1.2"/><text x="460" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#2563EB">AI个人助理</text><text x="460" y="61" text-anchor="middle" font-size="8" fill="#78716C">通用AI助手</text></g>
-                        <g filter="url(#dropShadow)"><rect x="535" y="32" width="80" height="40" rx="8" fill="white" stroke="#E7E5E4" stroke-width="1" stroke-dasharray="4,3"/><text x="575" y="56" text-anchor="middle" font-size="14" fill="#A8A29E">···</text></g>
-                        <g><rect x="625" y="32" width="95" height="40" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8" opacity="0.7"/><text x="672" y="47" text-anchor="middle" font-size="8" font-weight="600" fill="#2563EB">产品适配层</text><text x="672" y="58" text-anchor="middle" font-size="7" fill="#57534E">UI·Skill集·权限</text></g>
-                    </g>
-                    <g><line x1="370" y1="80" x2="370" y2="100" stroke="#E7E5E4" stroke-width="1.5"/><polygon points="365,98 370,106 375,98" fill="#E7E5E4"/></g>
-                    <!-- AGENT LAYER -->
-                    <g id="layer-agent">
-                        <rect x="110" y="108" width="620" height="280" rx="12" fill="url(#gAgent)" opacity="0.04"/>
-                        <rect x="110" y="108" width="620" height="280" rx="12" fill="none" stroke="#059669" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
-                        <text x="125" y="126" font-size="10" font-weight="700" fill="#059669" opacity="0.6">AGENT LAYER</text>
-                        <g id="main-agent" filter="url(#dropShadow)"><rect x="200" y="134" width="440" height="52" rx="10" fill="white" stroke="#059669" stroke-width="1.5"/><rect x="200" y="134" width="440" height="52" rx="10" fill="url(#gAgent)" opacity="0.08"/><text x="215" y="155" font-size="14">🧠</text><text x="236" y="157" font-size="13" font-weight="700" fill="#059669">主 Agent</text><text x="310" y="157" font-size="10" fill="#57534E">— 统一入口，从 Code Agent 进化</text><text x="236" y="175" font-size="9" fill="#78716C">语义理解 · 意图识别 · 主动推理 · 人格统一</text></g>
-                        <line x1="420" y1="186" x2="420" y2="204" stroke="#E7E5E4" stroke-width="1"/>
-                        <!-- 4 Skill Types -->
-                        <g id="skill-native" class="skill-node" data-skill="native" style="cursor:pointer"><rect x="130" y="206" width="138" height="64" rx="8" fill="white" stroke="#2DA44E" stroke-width="1.2"/><rect x="130" y="206" width="138" height="18" rx="8" fill="url(#gNative)"/><rect x="130" y="216" width="138" height="8" fill="url(#gNative)"/><text x="199" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅰ 原生 Skill</text><text x="199" y="242" text-anchor="middle" font-size="9" fill="#57534E">主Agent读SKILL.md</text><text x="199" y="256" text-anchor="middle" font-size="9" fill="#57534E">直接执行</text><text x="199" y="265" text-anchor="middle" font-size="7" fill="#A8A29E">调研·文档·PPT·分析</text></g>
-                        <g id="skill-tool" class="skill-node" data-skill="tool" style="cursor:pointer"><rect x="280" y="206" width="138" height="64" rx="8" fill="white" stroke="#7C3AED" stroke-width="1.2"/><rect x="280" y="206" width="138" height="18" rx="8" fill="url(#gTool)"/><rect x="280" y="216" width="138" height="8" fill="url(#gTool)"/><text x="349" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅱ 工具 Skill</text><text x="349" y="242" text-anchor="middle" font-size="9" fill="#57534E">MCP网关调用</text><text x="349" y="256" text-anchor="middle" font-size="9" fill="#57534E">外部API服务</text><text x="349" y="265" text-anchor="middle" font-size="7" fill="#A8A29E">图片·视频·CI/CD·数据</text></g>
-                        <g id="skill-task" class="skill-node" data-skill="task" style="cursor:pointer"><rect x="430" y="206" width="138" height="64" rx="8" fill="white" stroke="#EA580C" stroke-width="1.2"/><rect x="430" y="206" width="138" height="18" rx="8" fill="url(#gTask)"/><rect x="430" y="216" width="138" height="8" fill="url(#gTask)"/><text x="499" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅲ 任务 Skill</text><text x="499" y="242" text-anchor="middle" font-size="9" fill="#57534E">分身引擎派生</text><text x="499" y="256" text-anchor="middle" font-size="9" fill="#57534E">多实例协作</text><text x="499" y="265" text-anchor="middle" font-size="7" fill="#A8A29E">CR审查·重构评审·多维分析</text></g>
-                        <g id="skill-flow" class="skill-node" data-skill="flow" style="cursor:pointer"><rect x="580" y="206" width="138" height="64" rx="8" fill="white" stroke="#2563EB" stroke-width="1.2"/><rect x="580" y="206" width="138" height="18" rx="8" fill="url(#gFlow)"/><rect x="580" y="216" width="138" height="8" fill="url(#gFlow)"/><text x="649" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅳ 流程 Skill</text><text x="649" y="242" text-anchor="middle" font-size="9" fill="#57534E">Planning编排</text><text x="649" y="256" text-anchor="middle" font-size="9" fill="#57534E">多Task组合执行</text><text x="649" y="265" text-anchor="middle" font-size="7" fill="#A8A29E">需求→发布·项目初始化</text></g>
-                        <!-- Cross-cutting -->
-                        <g id="cross-cutting"><rect x="130" y="286" width="588" height="36" rx="8" fill="#FAFAF9" stroke="#E7E5E4" stroke-width="0.8"/><text x="145" y="308" font-size="9" font-weight="600" fill="#78716C">横切能力</text>
-                            <g transform="translate(210, 296)"><rect x="0" y="0" width="56" height="18" rx="9" fill="#ECFDF5" stroke="#059669" stroke-width="0.6"/><text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#059669">🔍 Eval</text></g>
-                            <g transform="translate(278, 296)"><rect x="0" y="0" width="56" height="18" rx="9" fill="#FEF2F2" stroke="#E11D48" stroke-width="0.6"/><text x="28" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#E11D48">🛡 安全</text></g>
-                            <g transform="translate(346, 296)"><rect x="0" y="0" width="68" height="18" rx="9" fill="#FFF7ED" stroke="#D97706" stroke-width="0.6"/><text x="34" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#D97706">📊 可观测</text></g>
-                            <g transform="translate(426, 296)"><rect x="0" y="0" width="80" height="18" rx="9" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.6"/><text x="40" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#2563EB">🧠 Memory服务</text></g>
-                            <g transform="translate(520, 296)"><rect x="0" y="0" width="86" height="18" rx="9" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.6"/><text x="43" y="13" text-anchor="middle" font-size="8" font-weight="600" fill="#7C3AED">📋 Skill注册中心</text></g>
-                        </g>
-                    </g>
-                    <g opacity="0.3"><line x1="199" y1="270" x2="199" y2="286" stroke="#E7E5E4" stroke-width="0.8"/><line x1="349" y1="270" x2="349" y2="286" stroke="#E7E5E4" stroke-width="0.8"/><line x1="499" y1="270" x2="499" y2="286" stroke="#E7E5E4" stroke-width="0.8"/><line x1="649" y1="270" x2="649" y2="286" stroke="#E7E5E4" stroke-width="0.8"/></g>
-                    <g><line x1="370" y1="388" x2="370" y2="404" stroke="#E7E5E4" stroke-width="1.5"/><polygon points="365,402 370,410 375,402" fill="#E7E5E4"/></g>
-                    <!-- AGENT OS -->
-                    <g id="layer-os">
-                        <rect x="110" y="410" width="620" height="200" rx="12" fill="url(#gOS)" opacity="0.04"/>
-                        <rect x="110" y="410" width="620" height="200" rx="12" fill="none" stroke="#1C1917" stroke-width="1" stroke-dasharray="4,3" opacity="0.2"/>
-                        <text x="125" y="428" font-size="10" font-weight="700" fill="#1C1917" opacity="0.5">AGENT OS</text>
-                        <g id="agentcore" filter="url(#dropShadow)"><rect x="130" y="436" width="468" height="52" rx="10" fill="white" stroke="#1C1917" stroke-width="1"/><text x="145" y="455" font-size="10" font-weight="700" fill="#1C1917">AgentCore 六大能力</text>
-                            <g transform="translate(145, 462)"><rect x="0" y="0" width="60" height="18" rx="4" fill="#FAFAF9"/><text x="30" y="13" text-anchor="middle" font-size="8" fill="#57534E" font-weight="500">Memory</text></g>
-                            <g transform="translate(215, 462)"><rect x="0" y="0" width="68" height="18" rx="4" fill="#FAFAF9"/><text x="34" y="13" text-anchor="middle" font-size="8" fill="#57534E" font-weight="500">Reasoning</text></g>
-                            <g transform="translate(293, 462)"><rect x="0" y="0" width="62" height="18" rx="4" fill="#FAFAF9"/><text x="31" y="13" text-anchor="middle" font-size="8" fill="#57534E" font-weight="500">Planning</text></g>
-                            <g transform="translate(365, 462)"><rect x="0" y="0" width="86" height="18" rx="4" fill="#FAFAF9"/><text x="43" y="13" text-anchor="middle" font-size="8" fill="#57534E" font-weight="500">Orchestration</text></g>
-                            <g transform="translate(461, 462)"><rect x="0" y="0" width="66" height="18" rx="4" fill="#FAFAF9"/><text x="33" y="13" text-anchor="middle" font-size="8" fill="#57534E" font-weight="500">Reflection</text></g>
-                            <g transform="translate(537, 462)"><rect x="0" y="0" width="52" height="18" rx="4" fill="#FAFAF9"/><text x="26" y="13" text-anchor="middle" font-size="8" fill="#57534E" font-weight="500">Integration</text></g>
-                        </g>
-                        <g id="clone-engine" filter="url(#dropShadow)"><rect x="612" y="436" width="126" height="52" rx="10" fill="white" stroke="#EA580C" stroke-width="1"/><text x="675" y="456" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">⚡ 分身引擎</text><text x="675" y="470" text-anchor="middle" font-size="8" fill="#78716C">Clone Engine</text><text x="675" y="482" text-anchor="middle" font-size="7" fill="#A8A29E">派生·执行·回收</text></g>
-                        <g id="mcp-gateway" filter="url(#dropShadow)"><rect x="130" y="500" width="180" height="42" rx="8" fill="white" stroke="#7C3AED" stroke-width="1"/><text x="220" y="518" text-anchor="middle" font-size="9" font-weight="700" fill="#7C3AED">🔌 MCP 网关</text><text x="220" y="532" text-anchor="middle" font-size="8" fill="#78716C">统一工具调用 · 外部服务集成</text></g>
-                        <g><rect x="324" y="500" width="414" height="42" rx="8" fill="white" stroke="#1C1917" stroke-width="0.8"/><text x="337" y="516" font-size="9" font-weight="700" fill="#1C1917">运行时</text>
-                            <g><rect x="394" y="506" width="150" height="30" rx="6" fill="#FAFAF9" stroke="#E7E5E4" stroke-width="0.6"/><text x="400" y="521" font-size="12">🖥️</text><text x="418" y="522" font-size="9" font-weight="600" fill="#1C1917">本地模式</text><text x="418" y="532" font-size="7" fill="#78716C">IDE嵌入 · 低延迟</text></g>
-                            <g><rect x="556" y="506" width="170" height="30" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.6"/><text x="562" y="521" font-size="12">☁️</text><text x="580" y="522" font-size="9" font-weight="600" fill="#2563EB">云端模式</text><text x="580" y="532" font-size="7" fill="#78716C">AgentOS as a Service</text></g>
-                        </g>
-                        <g transform="translate(130, 555)"><rect x="0" y="0" width="608" height="32" rx="6" fill="none" stroke="#E7E5E4" stroke-width="0.8" stroke-dasharray="4,3"/><text x="304" y="20" text-anchor="middle" font-size="9" fill="#A8A29E">外部服务: LLM (Claude/GPT) · 图片生成 · 视频生成 · CI/CD · 搜索引擎 · 数据库 ···</text></g>
-                    </g>
-                    <!-- FLOW PATHS -->
-                    <g id="flow-paths" opacity="0">
-                        <g id="flow-s1" opacity="0"><path d="M42 44 L42 52 Q42 56 46 56 L190 56 L190 72 L190 80 L420 80 L420 106 L420 134" stroke="#2DA44E" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M420 160 L420 186 L199 186 L199 206" stroke="#2DA44E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/></path></g>
-                        <g id="flow-s2" opacity="0"><path d="M42 44 L42 52 Q42 56 46 56 L325 56 L325 72 L420 80 L420 106 L420 134" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M420 160 L420 186 L349 186 L349 206" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M349 270 L349 322 L220 322 L220 500" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/></path><path d="M220 542 L220 555" stroke="#7C3AED" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/></path></g>
-                        <g id="flow-s3" opacity="0"><path d="M42 44 L42 52 Q42 56 46 56 L190 56 L190 72 L420 80 L420 106 L420 134" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M420 160 L420 186 L499 186 L499 206" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M499 270 L499 322 L675 322 L675 436" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/></path><g transform="translate(640, 395)"><circle cx="0" cy="0" r="6" fill="#EA580C" opacity="0.3"><animate attributeName="r" values="4;8;4" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="20" cy="0" r="6" fill="#EA580C" opacity="0.3"><animate attributeName="r" values="4;8;4" dur="1.5s" begin="0.3s" repeatCount="indefinite"/></circle><circle cx="40" cy="0" r="6" fill="#EA580C" opacity="0.3"><animate attributeName="r" values="4;8;4" dur="1.5s" begin="0.6s" repeatCount="indefinite"/></circle><text x="20" y="18" text-anchor="middle" font-size="7" fill="#EA580C" font-weight="600">3个分身并行</text></g></g>
-                        <g id="flow-s4" opacity="0"><path d="M42 44 L42 52 Q42 56 46 56 L460 56 L460 72 L420 80 L420 106 L420 134" stroke="#2563EB" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M420 160 L420 186 L649 186 L649 206" stroke="#2563EB" stroke-width="2.5" fill="none" stroke-linecap="round"/><g transform="translate(130, 340)"><rect x="0" y="0" width="588" height="38" rx="6" fill="white" stroke="#2563EB" stroke-width="1" stroke-dasharray="4,3"/><text x="10" y="15" font-size="8" font-weight="700" fill="#2563EB">Flow 编排:</text><g><rect x="80" y="6" width="64" height="24" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/><text x="112" y="22" text-anchor="middle" font-size="7" fill="#2563EB" font-weight="600">需求分析</text></g><text x="152" y="22" font-size="10" fill="#E7E5E4">→</text><g><rect x="162" y="6" width="64" height="24" rx="5" fill="#ECFDF5" stroke="#059669" stroke-width="0.8"/><text x="194" y="22" text-anchor="middle" font-size="7" fill="#059669" font-weight="600">代码开发</text></g><text x="234" y="22" font-size="10" fill="#E7E5E4">→</text><g><rect x="244" y="6" width="64" height="24" rx="5" fill="#FFF7ED" stroke="#EA580C" stroke-width="0.8"/><text x="276" y="22" text-anchor="middle" font-size="7" fill="#EA580C" font-weight="600">CR审查</text></g><text x="316" y="22" font-size="10" fill="#E7E5E4">→</text><g><rect x="326" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/><text x="358" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">测试生成</text></g><text x="398" y="22" font-size="10" fill="#E7E5E4">→</text><g><rect x="408" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/><text x="440" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">CI/CD</text></g><text x="480" y="22" font-size="10" fill="#E7E5E4">→</text><g><rect x="490" y="6" width="64" height="24" rx="5" fill="#F5F3FF" stroke="#7C3AED" stroke-width="0.8"/><text x="522" y="22" text-anchor="middle" font-size="7" fill="#7C3AED" font-weight="600">发布上线</text></g></g><path d="M649 270 L649 340" stroke="#2563EB" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="6,3"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/></path></g>
-                    </g>
-                    <!-- MAPPING OVERLAY -->
-                    <g id="mapping-overlay" opacity="0">
-                        <rect x="128" y="30" width="124" height="44" rx="10" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="4,3"><animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/></rect>
-                        <line x1="190" y1="74" x2="199" y2="206" stroke="#2563EB" stroke-width="1" opacity="0.5"/>
-                        <line x1="190" y1="74" x2="499" y2="206" stroke="#EA580C" stroke-width="1" opacity="0.5"/>
-                        <line x1="190" y1="74" x2="649" y2="206" stroke="#2563EB" stroke-width="1" opacity="0.5"/>
-                        <rect x="263" y="30" width="124" height="44" rx="10" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="4,3"><animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/></rect>
-                        <line x1="325" y1="74" x2="199" y2="206" stroke="#059669" stroke-width="1" opacity="0.5"/>
-                        <line x1="325" y1="74" x2="349" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.5"/>
-                        <rect x="398" y="30" width="124" height="44" rx="10" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-dasharray="4,3"><animate attributeName="stroke-dashoffset" from="0" to="-16" dur="2s" repeatCount="indefinite"/></rect>
-                        <line x1="460" y1="74" x2="199" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                        <line x1="460" y1="74" x2="349" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                        <line x1="460" y1="74" x2="499" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                        <line x1="460" y1="74" x2="649" y2="206" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
-                        <g transform="translate(130, 590)"><text x="0" y="12" font-size="8" font-weight="600" fill="#78716C">映射关系: </text><line x1="65" y1="8" x2="85" y2="8" stroke="#2563EB" stroke-width="2"/><text x="90" y="12" font-size="8" fill="#2563EB">CodeFlicker</text><line x1="190" y1="8" x2="210" y2="8" stroke="#059669" stroke-width="2"/><text x="215" y="12" font-size="8" fill="#059669">KATE-Studio</text><line x1="320" y1="8" x2="340" y2="8" stroke="#7C3AED" stroke-width="2"/><text x="345" y="12" font-size="8" fill="#7C3AED">AI个人助理</text></g>
-                    </g>
-                </svg>
-            </div>
-
-            <!-- Detail Panel -->
-            <div id="detail-panel" class="detail-panel hidden">
-                <div class="detail-header" id="detail-header">
-                    <div class="icon" id="detail-icon" style="background:#059669">🧠</div>
-                    <div><h3 id="detail-title">详情</h3><div class="subtitle" id="detail-subtitle"></div></div>
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">后天学会的技能</div>
                 </div>
-                <div class="detail-body" id="detail-body"></div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">Skills 可插拔技能</div>
+                </div>
             </div>
-
-            <!-- Skill Overview -->
-            <div id="skill-overview">
-                <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--color-text-muted); margin-bottom:12px;">⚡ 四类技能体系详解</div>
-                <div class="skill-detail-grid">
-                    <div class="skill-detail-box native">
-                        <h4>Ⅰ 原生 Skill (Native)</h4>
-                        <p><strong>本质：</strong>纯指令型知识包，主Agent读取SKILL.md后直接执行</p>
-                        <p><strong>执行方式：</strong>主Agent独立完成，无外部依赖</p>
-                        <p><strong>响应时间：</strong>分钟级</p>
-                        <div class="examples"><span class="example-tag">📊 行业调研</span><span class="example-tag">📝 文档撰写</span><span class="example-tag">📑 PPT制作</span><span class="example-tag">🔍 深度分析</span></div>
-                    </div>
-                    <div class="skill-detail-box tool">
-                        <h4>Ⅱ 工具 Skill (Tool/MCP)</h4>
-                        <p><strong>本质：</strong>MCP工具封装，包装现有API服务为统一调用</p>
-                        <p><strong>执行方式：</strong>主Agent通过MCP网关调用外部服务</p>
-                        <p><strong>响应时间：</strong>秒级</p>
-                        <div class="examples"><span class="example-tag">🖼️ 图片生成</span><span class="example-tag">🎬 视频生成</span><span class="example-tag">🔄 CI/CD</span><span class="example-tag">📈 数据查询</span></div>
-                    </div>
-                    <div class="skill-detail-box task">
-                        <h4>Ⅲ 任务 Skill (Task)</h4>
-                        <p><strong>本质：</strong>分身协作型，AgentCore分身引擎派生多个执行实例并行工作</p>
-                        <p><strong>执行方式：</strong>多分身共享Memory、独立上下文、结果汇总+经验回流</p>
-                        <p><strong>响应时间：</strong>分钟级，有进度反馈</p>
-                        <div class="examples"><span class="example-tag">🔎 CR代码审查</span><span class="example-tag">♻️ 重构评审</span><span class="example-tag">📐 多维需求分析</span></div>
-                    </div>
-                    <div class="skill-detail-box flow">
-                        <h4>Ⅳ 流程 Skill (Flow)</h4>
-                        <p><strong>本质：</strong>多Task编排型，主Agent通过Planning引擎分阶段执行</p>
-                        <p><strong>执行方式：</strong>两层编排 — Flow层(阶段编排) + Task层(单阶段执行)</p>
-                        <p><strong>响应时间：</strong>小时级，阶段进度反馈，可中断/调整</p>
-                        <div class="examples"><span class="example-tag">🚀 需求→发布全链路</span><span class="example-tag">🏗️ 项目初始化</span><span class="example-tag">📦 批量迁移</span></div>
-                    </div>
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">人生经历和记忆</div>
+                </div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">Memory 个性化记忆</div>
+                </div>
+            </div>
+            <div class="analogy-item">
+                <div class="analogy-left">
+                    <div class="analogy-label">👶 人的成长</div>
+                    <div class="analogy-name">先学会"学习方法"</div>
+                </div>
+                <div class="analogy-right">
+                    <div class="analogy-label">🤖 AI Agent</div>
+                    <div class="analogy-name">Code Agent 元技能起点</div>
                 </div>
             </div>
         </div>
-    </article>
 
-    <!-- ==================== TAB 4: 详细章节 ==================== -->
-    <article id="tab-reading" class="tab-panel">
-        <div class="parts-grid">
-            <a href="part1.html" class="part-card">
-                <div class="part-badge">Part 1</div>
-                <h3 class="part-title">问题与诊断</h3>
-                <p class="part-desc">从问题定义出发，诊断当前AI产品的根本问题，明确终态判断标准。</p>
-                <div class="part-chapters">
-                    <div class="part-chapter"><span class="part-chapter-num">1</span>问题定义：我们在回答什么问题</div>
-                    <div class="part-chapter"><span class="part-chapter-num">2</span>现状诊断：GenAI悖论与LLM局限</div>
-                    <div class="part-chapter"><span class="part-chapter-num">3</span>终态判断：什么是"终极形态"</div>
-                    <div class="part-chapter"><span class="part-chapter-num">4</span>核心思考：AgentCore + Skills</div>
+        <div class="insight-box">
+            <p class="insight-text">
+                与其做<em>十个各有专长的孩子</em>（多个专用Agent），<br>
+                不如专注培养<em>一个全能的孩子</em>（一个能成长的AgentCore + Skills）。<br><br>
+                你不会抛弃自己养大的孩子 — 这就是 <em>Memory 护城河</em>的本质。
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== 4. 行业验证 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <h2>验证：Anthropic 的实践完全一致</h2>
+        </div>
+
+        <div class="quote-box">
+            <p class="quote-text">
+                "We used to think agents in different domains will look very different. The agent underneath is actually <strong>more universal</strong> than we thought."<br><br>
+                "The industry doesn't need a flurry of agent-building. Instead, <strong>'skills' can equip a general agent</strong> with domain expertise."
+            </p>
+            <p class="quote-author">— Barry Zhang, Head of Applied AI, Anthropic</p>
+        </div>
+
+        <table class="validation-table">
+            <thead>
+                <tr><th style="width:50%">我们的架构设计</th><th style="width:50%">Anthropic 的实践</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>AgentCore + Skills</strong></td><td>Claude Code + Skills</td></tr>
+                <tr><td><strong>Code Agent 为核心</strong></td><td>"Claude Code is a general-purpose agent"</td></tr>
+                <tr><td><strong>Skill 可插拔/可组合</strong></td><td>Skills 按需加载、Token 高效</td></tr>
+                <tr><td><strong>Agent 自主进化</strong></td><td>Agent 为 Agent 写 Skills</td></tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <p class="insight-text">我们的思路与全球顶尖AI实验室的方向<em>完全一致</em>。</p>
+        </div>
+    </section>
+
+    <!-- ==================== 5. 实证 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">5</span>
+            <h2>实证：基于 CodeFlicker 的 AI 分身已验证全部架构</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            我们基于 CodeFlicker 打造了一个完整的 AI 分身实例，验证了 AgentCore + Skills 架构的可行性。
+        </p>
+
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-icon">🧠</div>
+                <div class="metric-value" style="color:var(--color-success);">6/6</div>
+                <div class="metric-label">AgentCore 能力模块<br>全部已实现</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">⚡</div>
+                <div class="metric-value" style="color:var(--color-info);">42+</div>
+                <div class="metric-label">Skills 可插拔技能<br>持续扩展中</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">💗</div>
+                <div class="metric-value" style="color:var(--color-danger);">79</div>
+                <div class="metric-label">Memory 记忆条数<br>持续积累中</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">📚</div>
+                <div class="metric-value" style="color:var(--color-purple);">150+</div>
+                <div class="metric-label">知识库文档<br>结构化沉淀</div>
+            </div>
+        </div>
+
+        <!-- Competitor comparison -->
+        <div class="competitor-strip">
+            <div class="competitor-card muted">
+                <div style="font-size:24px; margin-bottom:4px;">🤖</div>
+                <div class="competitor-name">Manus</div>
+                <div class="competitor-desc">强执行，弱理解<br>不记得用户偏好</div>
+                <div class="competitor-level">自进化 0/3 层</div>
+            </div>
+            <div class="competitor-card muted">
+                <div style="font-size:24px; margin-bottom:4px;">🦞</div>
+                <div class="competitor-name">OpenClaw</div>
+                <div class="competitor-desc">有存储，无理解<br>安全风险高 (CVE 9.6)</div>
+                <div class="competitor-level">自进化 1/3 层</div>
+            </div>
+            <div class="competitor-card highlight">
+                <div style="font-size:24px; margin-bottom:4px;">🧠</div>
+                <div class="competitor-name">我们的AI分身</div>
+                <div class="competitor-desc">认知+技能+自主进化<br>越用越懂你</div>
+                <div class="competitor-level">自进化 3/3 层 ✓</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. 行动路径 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <span class="section-num">6</span>
+            <h2>行动：四阶段落地路线</h2>
+        </div>
+        <p style="margin-bottom:var(--spacing-lg); color:var(--color-text-secondary); line-height:1.7;">
+            核心原则：不是"推倒重来"，而是"渐进收敛"。以 CodeFlicker 为 AgentCore 基座，现有 Agent 通过 MCP 工具化接入。
+        </p>
+
+        <div class="roadmap">
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 1</div>
+                <div class="roadmap-title">基座确立</div>
+                <div class="roadmap-time">2周</div>
+                <div class="roadmap-items">
+                    确认 AgentCore 载体<br>
+                    统一 Memory 架构<br>
+                    建立 Skill 规范
                 </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 2</div>
+                <div class="roadmap-title">核心接入</div>
+                <div class="roadmap-time">4周</div>
+                <div class="roadmap-items">
+                    CR Agent → MCP工具化<br>
+                    测试Agent → MCP工具化<br>
+                    端到端验证
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 3</div>
+                <div class="roadmap-title">能力扩展</div>
+                <div class="roadmap-time">4周</div>
+                <div class="roadmap-items">
+                    图片/视频Agent接入<br>
+                    创建复合Skill<br>
+                    打通需求→发布链路
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="roadmap-phase">Phase 4</div>
+                <div class="roadmap-title">体验优化</div>
+                <div class="roadmap-time">持续</div>
+                <div class="roadmap-items">
+                    Memory经验沉淀<br>
+                    成长可视化<br>
+                    分身机制建设
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 深入阅读 ==================== -->
+    <section class="narrative-section">
+        <div class="section-header">
+            <h2 style="font-size:var(--heading-3);">深入阅读</h2>
+        </div>
+        <div class="dive-grid">
+            <a href="deep-dive.html" class="dive-card">
+                <div class="dive-badge">详细论证</div>
+                <h3 class="dive-title">问题诊断 → 关键抉择 → 验证分析</h3>
+                <p class="dive-desc">完整的12章论证过程：GenAI悖论、LLM局限、为什么不是Multi-Agent/Workflow、Code Agent起点论证、养成类游戏形态、技术可行性与风险。</p>
             </a>
-            <a href="part2.html" class="part-card">
-                <div class="part-badge">Part 2</div>
-                <h3 class="part-title">关键抉择与产品形态</h3>
-                <p class="part-desc">为什么从Code Agent出发，为什么是养成类游戏形态，分身机制设计。</p>
-                <div class="part-chapters">
-                    <div class="part-chapter"><span class="part-chapter-num">5</span>关键抉择：Code Agent为起点</div>
-                    <div class="part-chapter"><span class="part-chapter-num">6</span>产品形态：养成类游戏</div>
-                    <div class="part-chapter"><span class="part-chapter-num">7</span>架构设计：分身机制</div>
-                </div>
+            <a href="evidence.html" class="dive-card">
+                <div class="dive-badge">AI分身实证</div>
+                <h3 class="dive-title">我就是这套理论的活证明</h3>
+                <p class="dive-desc">以基于 CodeFlicker 打造的 AI 分身为例，展示 AgentCore 6大模块的实现状态、三大系统协作方式、与竞品的核心差异。</p>
             </a>
-            <a href="part3.html" class="part-card">
-                <div class="part-badge">Part 3</div>
-                <h3 class="part-title">验证分析</h3>
-                <p class="part-desc">反面思考排除其他方案，技术商业风险可行性分析，行业头部验证。</p>
-                <div class="part-chapters">
-                    <div class="part-chapter"><span class="part-chapter-num">8</span>反面思考：排除其他方案</div>
-                    <div class="part-chapter"><span class="part-chapter-num">9</span>可行性分析：技术/商业/风险</div>
-                    <div class="part-chapter"><span class="part-chapter-num">10</span>行业验证：Anthropic Skills</div>
-                </div>
+            <a href="implementation.html" class="dive-card">
+                <div class="dive-badge">技术实施</div>
+                <h3 class="dive-title">从多Agent到One Agent：团队落地指南</h3>
+                <p class="dive-desc">针对团队现状的落地方案：现有Agent转换策略（MCP工具化/Skill化/复合Skill）、资产盘点、分阶段实施路线图。</p>
             </a>
-            <a href="part4.html" class="part-card">
-                <div class="part-badge">Part 4</div>
-                <h3 class="part-title">演进路径与AI分身实证</h3>
-                <p class="part-desc">以基于CodeFlicker打造的AI分身为例印证整套思想。</p>
-                <div class="part-chapters">
-                    <div class="part-chapter"><span class="part-chapter-num">11</span>AI分身实证：以我自己为例</div>
-                    <div class="part-chapter"><span class="part-chapter-num">12</span>结论与行动建议</div>
-                </div>
-            </a>
-            <a href="part5.html" class="part-card">
-                <div class="part-badge">Part 5</div>
-                <h3 class="part-title">技术实施方案</h3>
-                <p class="part-desc">从多Agent到One Agent：团队落地指南。</p>
-                <div class="part-chapters">
-                    <div class="part-chapter"><span class="part-chapter-num">13</span>现状分析与目标架构</div>
-                    <div class="part-chapter"><span class="part-chapter-num">14</span>转换方案与实施路线图</div>
-                </div>
+            <a href="architecture.html" class="dive-card">
+                <div class="dive-badge">架构全景</div>
+                <h3 class="dive-title">三层架构 · 四类技能 · 运行流程</h3>
+                <p class="dive-desc">交互式架构全景图：Product Layer / Agent Layer / Agent OS 三层设计，四类Skill运行时序，产品能力映射矩阵。</p>
             </a>
         </div>
-    </article>
+    </section>
 
-    <!-- Conclusion -->
+    <!-- ==================== 结论 ==================== -->
     <div class="conclusion-box">
-        <div class="conclusion-title">一句话总结（修正版）</div>
-        <p class="conclusion-text">在当前技术范式下，AI产品的最优架构是AgentCore + Skills。<br>对于技术团队，Code Agent是最佳起点，而非唯一选择。<br>产品形态应是"渐进式学习"，而非强制"养成"。</p>
-        <span class="conclusion-highlight">Cursor/Windsurf路线适合技术团队 · Manus/通用Agent路线适合流量型公司</span>
+        <div class="conclusion-title">核心结论</div>
+        <p class="conclusion-text">
+            AI产品的最优架构是 <strong>AgentCore + Skills</strong>。<br>
+            Code Agent 是技术团队的最佳起点，产品形态应是渐进式学习。<br>
+            Memory 是核心护城河 — 用户不会抛弃一个"懂自己"的AI。
+        </p>
+        <span class="conclusion-highlight">一个入口 · 一套记忆 · 无限技能</span>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
-        <p>AI产品终极形态思考 v4.7 | 含架构全景图 | 2026-03 | AI分身</p>
+        <p>AI产品终极形态思考 v5.1 | 2026-03</p>
     </footer>
 </div>
-
-<script>
-// ============ MAIN TAB SWITCHING ============
-document.querySelectorAll('.tab-nav .tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-nav .tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-    });
-});
-
-// ============ ARCHITECTURE: STATE ============
-let currentView = 'structure';
-let currentScenario = null;
-
-const scenarios = {
-    s1: { title: '"帮我写个调研报告"', subtitle: '原生Skill · 主Agent独立执行', color: '#2DA44E', skillType: 'native',
-        steps: [{label:'语义理解',desc:'识别意图=调研',color:'#2DA44E'},{label:'查Memory',desc:'偏好:清爽报告',color:'#2DA44E'},{label:'匹配Skill',desc:'industry-research',color:'#2DA44E'},{label:'加载执行',desc:'读SKILL.md指令',color:'#2DA44E'},{label:'搜索资料',desc:'search_web调用',color:'#2DA44E'},{label:'生成报告',desc:'整理分析输出',color:'#2DA44E'},{label:'经验沉淀',desc:'Memory记录',color:'#2DA44E'}],
-        highlight: ['main-agent','skill-native','agentcore'] },
-    s2: { title: '"帮我生成一张配图"', subtitle: '工具Skill · MCP网关调用外部API', color: '#7C3AED', skillType: 'tool',
-        steps: [{label:'语义理解',desc:'识别意图=生图',color:'#7C3AED'},{label:'查Memory',desc:'偏好:风格/尺寸',color:'#7C3AED'},{label:'匹配Skill',desc:'image-gen Tool',color:'#7C3AED'},{label:'MCP调用',desc:'网关转发请求',color:'#7C3AED'},{label:'外部API',desc:'图片生成服务',color:'#7C3AED'},{label:'返回结果',desc:'展示生成图片',color:'#7C3AED'}],
-        highlight: ['main-agent','skill-tool','mcp-gateway'] },
-    s3: { title: '"帮我Review这个PR"', subtitle: '任务Skill · 分身引擎派生3个实例协作', color: '#EA580C', skillType: 'task',
-        steps: [{label:'语义理解',desc:'识别意图=CR',color:'#EA580C'},{label:'查Memory',desc:'代码规范偏好',color:'#EA580C'},{label:'匹配Skill',desc:'code-review Task',color:'#EA580C'},{label:'派生分身',desc:'3个独立实例',color:'#EA580C'},{label:'并行执行',desc:'读码/审查/总结',color:'#EA580C'},{label:'汇总结果',desc:'合并审查建议',color:'#EA580C'},{label:'经验回流',desc:'分身经验沉淀',color:'#EA580C'}],
-        highlight: ['main-agent','skill-task','clone-engine','agentcore'] },
-    s4: { title: '"帮我把需求做到上线"', subtitle: '流程Skill · Planning引擎编排6阶段', color: '#2563EB', skillType: 'flow',
-        steps: [{label:'语义理解',desc:'识别=全链路',color:'#2563EB'},{label:'查Memory',desc:'项目上下文',color:'#2563EB'},{label:'匹配Skill',desc:'dev-pipeline Flow',color:'#2563EB'},{label:'Planning',desc:'分解6个阶段',color:'#2563EB'},{label:'逐阶段执行',desc:'Task/Tool/Native',color:'#2563EB'},{label:'阶段验证',desc:'检查点确认',color:'#2563EB'},{label:'完成发布',desc:'全链路完毕',color:'#2563EB'}],
-        highlight: ['main-agent','skill-flow','agentcore','clone-engine','mcp-gateway'] }
-};
-
-// ============ VIEW SWITCHING ============
-function switchView(view) {
-    currentView = view;
-    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-    document.querySelector('.view-tab[data-view="'+view+'"]').classList.add('active');
-    const fp = document.getElementById('flow-paths');
-    const mo = document.getElementById('mapping-overlay');
-    if (view === 'structure') { fp.setAttribute('opacity','0'); mo.setAttribute('opacity','0'); resetScenario(); document.getElementById('skill-overview').style.display='block'; }
-    else if (view === 'runtime') { mo.setAttribute('opacity','0'); fp.setAttribute('opacity','1'); document.getElementById('skill-overview').style.display='none'; if(!currentScenario) activateScenario('s1'); }
-    else if (view === 'mapping') { fp.setAttribute('opacity','0'); mo.setAttribute('opacity','1'); resetScenario(); document.getElementById('skill-overview').style.display='none'; showMappingDetail(); }
-}
-
-// ============ SCENARIO ACTIVATION ============
-function activateScenario(id) {
-    if (currentView === 'mapping') switchView('runtime');
-    if (currentView === 'structure') {
-        currentView = 'runtime';
-        document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-        document.querySelector('.view-tab[data-view="runtime"]').classList.add('active');
-        document.getElementById('flow-paths').setAttribute('opacity','1');
-        document.getElementById('mapping-overlay').setAttribute('opacity','0');
-        document.getElementById('skill-overview').style.display='none';
-    }
-    currentScenario = id;
-    const data = scenarios[id];
-    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-    document.querySelector('.scenario-card[data-id="'+id+'"]').classList.add('active');
-    ['s1','s2','s3','s4'].forEach(s => { const el = document.getElementById('flow-'+s); if(el) el.setAttribute('opacity', s===id?'1':'0'); });
-    highlightComponents(data.highlight);
-    showFlowDetail(id);
-}
-
-function resetScenario() {
-    currentScenario = null;
-    document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
-    ['s1','s2','s3','s4'].forEach(s => { const el = document.getElementById('flow-'+s); if(el) el.setAttribute('opacity','0'); });
-    resetHighlight();
-    document.getElementById('detail-panel').classList.add('hidden');
-}
-
-function highlightComponents(ids) {
-    document.querySelectorAll('.skill-node, #main-agent, #agentcore, #clone-engine, #mcp-gateway').forEach(n => n.style.opacity = '0.35');
-    ids.forEach(id => { const el = document.getElementById(id); if(el) el.style.opacity = '1'; });
-}
-
-function resetHighlight() {
-    document.querySelectorAll('.skill-node, #main-agent, #agentcore, #clone-engine, #mcp-gateway').forEach(n => n.style.opacity = '1');
-}
-
-// ============ DETAIL PANELS ============
-function showFlowDetail(id) {
-    const data = scenarios[id];
-    const panel = document.getElementById('detail-panel');
-    const icon = document.getElementById('detail-icon');
-    const title = document.getElementById('detail-title');
-    const subtitle = document.getElementById('detail-subtitle');
-    const body = document.getElementById('detail-body');
-    panel.classList.remove('hidden');
-    icon.style.background = data.color;
-    icon.textContent = data.skillType==='native'?'📄':data.skillType==='tool'?'🔧':data.skillType==='task'?'⚡':'🔄';
-    title.textContent = '运行时序: ' + data.title;
-    subtitle.textContent = data.subtitle;
-    let html = '<div class="flow-steps">';
-    data.steps.forEach((step,i) => {
-        if(i>0) html += '<span class="flow-arrow">→</span>';
-        html += '<div class="flow-step"><div class="flow-step-num" style="background:'+step.color+'">'+(i+1)+'</div><div class="flow-step-label">'+step.label+'</div><div class="flow-step-desc">'+step.desc+'</div></div>';
-    });
-    html += '</div>';
-    const explanations = {
-        s1: '<p style="font-size:13px;color:var(--color-text-secondary);margin-top:12px;padding:12px 16px;background:var(--color-bg);border-radius:8px;border-left:3px solid #2DA44E"><strong>特点：</strong>主Agent读取 SKILL.md 后独立执行全过程。无需外部服务或分身——这是最轻量、最灵活的Skill类型。</p>',
-        s2: '<p style="font-size:13px;color:var(--color-text-secondary);margin-top:12px;padding:12px 16px;background:var(--color-bg);border-radius:8px;border-left:3px solid #7C3AED"><strong>特点：</strong>通过 MCP 网关统一调用外部 API。现有Agent可以直接封装为工具Skill，<strong>改动最小</strong>。</p>',
-        s3: '<p style="font-size:13px;color:var(--color-text-secondary);margin-top:12px;padding:12px 16px;background:var(--color-bg);border-radius:8px;border-left:3px solid #EA580C"><strong>特点：</strong>分身引擎派生多个AgentCore实例并行工作，共享Memory但拥有独立执行上下文。<strong>对外呈现为单一Agent</strong>。</p>',
-        s4: '<p style="font-size:13px;color:var(--color-text-secondary);margin-top:12px;padding:12px 16px;background:var(--color-bg);border-radius:8px;border-left:3px solid #2563EB"><strong>特点：</strong>两层编排架构——Flow层负责阶段编排，每个Stage内部调用不同类型的Skill。支持<strong>跳过、重试、断点续跑</strong>。</p>'
-    };
-    html += explanations[id] || '';
-    body.innerHTML = html;
-}
-
-function showMappingDetail() {
-    const panel = document.getElementById('detail-panel');
-    const icon = document.getElementById('detail-icon');
-    const title = document.getElementById('detail-title');
-    const subtitle = document.getElementById('detail-subtitle');
-    const body = document.getElementById('detail-body');
-    panel.classList.remove('hidden');
-    icon.style.background = '#2563EB'; icon.textContent = '🗺️';
-    title.textContent = '产品 × 能力 映射矩阵';
-    subtitle.textContent = '哪些能力是共享的，哪些是差异化的';
-    body.innerHTML = '<div class="mapping-grid"><div class="mapping-cell head">能力</div><div class="mapping-cell head" style="color:#2563EB">CodeFlicker</div><div class="mapping-cell head" style="color:#059669">KATE-Studio</div><div class="mapping-cell head" style="color:#7C3AED">AI个人助理</div><div class="mapping-cell head">主Agent</div><div class="mapping-cell"><span class="check">✅ 核心</span></div><div class="mapping-cell"><span class="check">✅ 核心</span></div><div class="mapping-cell"><span class="check">✅ 核心</span></div><div class="mapping-cell head">Memory服务</div><div class="mapping-cell"><span class="check">✅ 核心</span></div><div class="mapping-cell"><span class="check">✅ 核心</span></div><div class="mapping-cell"><span class="check">✅ 核心</span></div><div class="mapping-cell head">Ⅰ 原生Skill</div><div class="mapping-cell"><span class="check">✅ 调研/文档</span></div><div class="mapping-cell"><span class="check">✅ 报告/分析</span></div><div class="mapping-cell"><span class="check">✅ 全量</span></div><div class="mapping-cell head">Ⅱ 工具Skill</div><div class="mapping-cell"><span class="optional">○ 可选</span></div><div class="mapping-cell"><span class="check">✅ 图片/视频</span></div><div class="mapping-cell"><span class="check">✅ 全量</span></div><div class="mapping-cell head">Ⅲ 任务Skill</div><div class="mapping-cell"><span class="check">✅ CR/重构</span></div><div class="mapping-cell"><span class="optional">○ 可选</span></div><div class="mapping-cell"><span class="optional">○ 可选</span></div><div class="mapping-cell head">Ⅳ 流程Skill</div><div class="mapping-cell"><span class="check">✅ 需求→发布</span></div><div class="mapping-cell"><span class="optional">○ 可选</span></div><div class="mapping-cell"><span class="optional">○ 可选</span></div><div class="mapping-cell head">交互形态</div><div class="mapping-cell">IDE嵌入</div><div class="mapping-cell">Web应用</div><div class="mapping-cell">对话+多模态</div><div class="mapping-cell head">典型用户</div><div class="mapping-cell">研发</div><div class="mapping-cell">运营/产品</div><div class="mapping-cell">所有人</div></div><div style="margin-top:16px"><div class="deploy-grid"><div class="deploy-card" style="border-top:3px solid #1C1917"><h4>🖥️ 本地模式</h4><div class="items"><div class="item"><strong>载体：</strong>CodeFlicker IDE</div><div class="item"><strong>场景：</strong>研发写代码、个人助理</div><div class="item"><strong>Memory：</strong>本地存储 + 云端同步</div><div class="item"><strong>优势：</strong>低延迟、数据安全、深度IDE集成</div></div></div><div class="deploy-card" style="border-top:3px solid #2563EB"><h4>☁️ 云端模式</h4><div class="items"><div class="item"><strong>载体：</strong>AgentOS as a Service</div><div class="item"><strong>场景：</strong>KATE数字员工、批量任务</div><div class="item"><strong>Memory：</strong>云端统一存储</div><div class="item"><strong>优势：</strong>随时随地、无限并行、弹性扩缩</div></div></div></div></div>';
-}
-
-// ============ SVG CLICK HANDLERS ============
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.skill-node').forEach(node => {
-        node.addEventListener('click', () => {
-            const skill = node.getAttribute('data-skill');
-            const map = {native:'s1', tool:'s2', task:'s3', flow:'s4'};
-            if(map[skill]) activateScenario(map[skill]);
-        });
-    });
-});
-</script>
 </body>
 </html>

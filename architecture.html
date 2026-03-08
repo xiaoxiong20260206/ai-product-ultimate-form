@@ -163,10 +163,17 @@
         /* Layer connector */
         .layer-connector {
             display: flex; align-items: center; justify-content: center;
-            padding: 4px 0; color: var(--c-border); font-size: 14px;
+            gap: 8px; padding: 6px 0; color: var(--c-border); font-size: 14px;
             transition: color 300ms var(--ease);
         }
         .layer-connector.active { color: var(--c-native); }
+        .layer-connector .conn-label {
+            font-size: 10px; font-weight: 600; color: var(--c-text-3);
+            padding: 2px 10px; border-radius: var(--r-full);
+            background: var(--c-bg); border: 1px solid var(--c-border-light);
+            white-space: nowrap;
+        }
+        .layer-connector.active .conn-label { border-color: currentColor; color: inherit; background: rgba(45,164,78,0.06); }
 
         /* Agent layer */
         .layer.agent .layer-header { background: linear-gradient(135deg, rgba(26,127,55,0.04) 0%, rgba(45,164,78,0.04) 100%); }
@@ -262,10 +269,14 @@
             border-top: 1px dashed var(--c-border-light);
         }
         .crosscut-pill {
-            padding: 3px 8px; border-radius: var(--r-full);
-            font-size: 10px; font-weight: 500; background: var(--c-bg);
-            color: var(--c-text-3); border: 1px solid var(--c-border-light);
+            padding: 4px 10px; border-radius: var(--r-full);
+            font-size: 10px; font-weight: 600; border: 1px solid;
         }
+        .crosscut-pill.cc-eval { background: #FFF7ED; color: #9A6700; border-color: rgba(154,103,0,0.2); }
+        .crosscut-pill.cc-security { background: #FFF1F0; color: #CF222E; border-color: rgba(207,34,46,0.2); }
+        .crosscut-pill.cc-observe { background: #F5F3FF; color: #7C3AED; border-color: rgba(124,58,237,0.2); }
+        .crosscut-pill.cc-memory { background: #E6F7ED; color: #1A7F37; border-color: rgba(26,127,55,0.2); }
+        .crosscut-pill.cc-skill { background: #E1F0F8; color: #0969DA; border-color: rgba(9,105,218,0.2); }
 
         /* OS layer */
         .layer.os .layer-header { background: linear-gradient(135deg, rgba(36,41,47,0.04) 0%, rgba(61,68,77,0.04) 100%); }
@@ -469,12 +480,122 @@
         #cf-tooltip .tt-k { flex: none; width: 56px; font-weight: 700; color: var(--c-text-3); }
         #cf-tooltip .tt-v { flex: 1; color: var(--c-text-2); }
 
+        /* Architecture stack + deploy sidebar */
+        .arch-stack {
+            display: flex; gap: 16px; align-items: stretch;
+        }
+        .arch-main { flex: 1; min-width: 0; }
+        .deploy-sidebar {
+            flex: none; width: 110px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 14px 8px; border-radius: var(--r-lg);
+            border: 1.5px dashed var(--c-border);
+            background: linear-gradient(180deg, rgba(9,105,218,0.03) 0%, rgba(36,41,47,0.03) 100%);
+            position: relative;
+        }
+        .deploy-sidebar .ds-title {
+            font-size: 10px; font-weight: 800; color: var(--c-text-3);
+            letter-spacing: 0.5px; text-transform: uppercase;
+            writing-mode: vertical-rl; text-orientation: mixed;
+            margin-bottom: 12px;
+        }
+        .deploy-sidebar .ds-modes {
+            display: flex; flex-direction: column; gap: 10px; align-items: center;
+        }
+        .deploy-sidebar .ds-mode {
+            padding: 6px 10px; border-radius: var(--r-md);
+            border: 1px solid var(--c-border-light); background: var(--c-card);
+            text-align: center; font-size: 11px; font-weight: 700;
+            color: var(--c-text); line-height: 1.4;
+        }
+        .deploy-sidebar .ds-mode .ds-emoji { font-size: 18px; display: block; margin-bottom: 2px; }
+        .deploy-sidebar .ds-mode .ds-sub { font-size: 9px; font-weight: 400; color: var(--c-text-3); }
+        .deploy-sidebar .ds-or {
+            font-size: 10px; font-weight: 700; color: var(--c-text-3);
+            padding: 2px 8px; border-radius: var(--r-full);
+            background: var(--c-card); border: 1px solid var(--c-border-light);
+        }
+        .deploy-sidebar .ds-bracket {
+            position: absolute; right: -1px; top: 18px; bottom: 18px;
+            width: 6px; border: 2px solid var(--c-border);
+            border-left: none; border-radius: 0 4px 4px 0;
+        }
+
+        /* Complexity gradient bar */
+        .complexity-bar {
+            display: flex; align-items: center; gap: 0;
+            margin-bottom: 10px; padding: 0 2px;
+        }
+        .complexity-bar .cb-label {
+            font-size: 9px; font-weight: 700; color: var(--c-text-3);
+            text-transform: uppercase; letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .complexity-bar .cb-track {
+            flex: 1; height: 3px; margin: 0 8px;
+            background: linear-gradient(90deg, var(--c-native), var(--c-tool), var(--c-task), var(--c-flow));
+            border-radius: 2px;
+        }
+
+        /* View controls */
+        .view-controls {
+            display: flex; justify-content: center; margin-bottom: 18px;
+        }
+        .toggle-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 14px; border-radius: var(--r-full);
+            border: 1px solid var(--c-border-light); background: var(--c-card);
+            font-family: inherit; font-size: 11px; font-weight: 600;
+            color: var(--c-text-3); cursor: pointer;
+            transition: all 200ms var(--ease);
+        }
+        .toggle-btn:hover { border-color: var(--c-border); color: var(--c-text); }
+        .toggle-btn.active { background: #FFF7ED; border-color: rgba(154,103,0,0.3); color: #9A6700; }
+        .toggle-switch {
+            width: 28px; height: 16px; border-radius: 8px;
+            background: var(--c-border); position: relative;
+            transition: background 200ms var(--ease);
+        }
+        .toggle-switch::after {
+            content: ''; position: absolute; width: 12px; height: 12px;
+            border-radius: 50%; background: #fff; top: 2px; left: 2px;
+            transition: transform 200ms var(--ease);
+        }
+        .toggle-btn.active .toggle-switch { background: #9A6700; }
+        .toggle-btn.active .toggle-switch::after { transform: translateX(12px); }
+
+        /* Game elements visibility */
+        .game-hidden .game-tag,
+        .game-hidden .os-game,
+        .game-hidden .sk-game,
+        .game-hidden .game-note { display: none !important; }
+
+        /* Growth key diff badge */
+        .growth-key-diff {
+            margin-left: auto; font-size: 10px; font-weight: 700;
+            padding: 3px 10px; border-radius: var(--r-full);
+            background: rgba(5,150,105,0.12); color: #059669;
+            border: 1px solid rgba(5,150,105,0.2);
+        }
+        .growth-sub {
+            font-size: 11px; color: var(--c-text-3); margin-bottom: 10px;
+            padding-left: 26px;
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .scenario-bar { grid-template-columns: 1fr 1fr; }
             .skill-grid { grid-template-columns: 1fr 1fr; }
             .os-grid { grid-template-columns: 1fr; }
             .flow-stages { grid-template-columns: repeat(3, 1fr); }
+            .arch-stack { flex-direction: column; }
+            .deploy-sidebar {
+                width: 100%; flex-direction: row; writing-mode: horizontal-tb;
+                padding: 10px 16px;
+            }
+            .deploy-sidebar .ds-title { writing-mode: horizontal-tb; margin-bottom: 0; margin-right: 12px; }
+            .deploy-sidebar .ds-modes { flex-direction: row; }
+            .deploy-sidebar .ds-bracket { display: none; }
         }
         @media (max-width: 600px) {
             .scenario-bar { grid-template-columns: 1fr; }
@@ -502,6 +623,14 @@
         <p>一张图看清：三层架构 · 四类技能 · 运行时实例 · 成长闭环<br>
         <span style="font-size:11px;opacity:0.7">点击下方场景，查看完整运行流程 ↓</span></p>
     </header>
+
+    <!-- View Controls -->
+    <div class="view-controls">
+        <button class="toggle-btn active" id="game-toggle" onclick="toggleGame()">
+            <span>🎮 游戏类比</span>
+            <span class="toggle-switch"></span>
+        </button>
+    </div>
 
     <!-- Scenario Bar -->
     <div class="scenario-bar">
@@ -536,6 +665,8 @@
     </div>
 
     <!-- ==================== THE UNIFIED DIAGRAM ==================== -->
+    <div class="arch-stack">
+    <div class="arch-main">
 
     <!-- LAYER 1: PRODUCT -->
     <div class="layer product" id="layer-product">
@@ -555,7 +686,10 @@
         </div>
     </div>
 
-    <div class="layer-connector" id="conn-1">▼</div>
+    <div class="layer-connector" id="conn-1">
+        <span class="conn-label">用户意图 + 产品配置</span>
+        <span>▼</span>
+    </div>
 
     <!-- LAYER 2: AGENT -->
     <div class="layer agent" id="layer-agent">
@@ -570,9 +704,16 @@
                 <div class="emoji">🧠</div>
                 <div class="info">
                     <div class="name">主 Agent — 决策指挥中枢</div>
-                    <div class="desc">理解意图 → 查 Memory → 选 Skill → 派实例 → 收经验&nbsp;&nbsp;|&nbsp;&nbsp;永不下场执行</div>
+                    <div class="desc">理解意图 → 查 Memory → 选 Skill → 派实例 → 收经验&nbsp;&nbsp;|&nbsp;&nbsp;只做决策调度，不执行具体任务</div>
                 </div>
                 <div class="game-note">🎮 = 玩家本人</div>
+            </div>
+
+            <!-- Complexity gradient -->
+            <div class="complexity-bar">
+                <span class="cb-label">简单</span>
+                <div class="cb-track"></div>
+                <span class="cb-label">复杂</span>
             </div>
 
             <!-- 4 Skill Cards (three-in-one) -->
@@ -661,16 +802,19 @@
 
             <!-- Cross-cutting concerns -->
             <div class="crosscut">
-                <span class="crosscut-pill">🔍 Eval 评估</span>
-                <span class="crosscut-pill">🔒 安全合规</span>
-                <span class="crosscut-pill">📊 可观测性</span>
-                <span class="crosscut-pill">🧠 Memory管理</span>
-                <span class="crosscut-pill">📋 Skill注册中心</span>
+                <span class="crosscut-pill cc-eval">🔍 Eval 评估</span>
+                <span class="crosscut-pill cc-security">🔒 安全合规</span>
+                <span class="crosscut-pill cc-observe">📊 可观测性</span>
+                <span class="crosscut-pill cc-memory">🧠 Memory管理</span>
+                <span class="crosscut-pill cc-skill">📋 Skill注册中心</span>
             </div>
         </div>
     </div>
 
-    <div class="layer-connector" id="conn-2">▼</div>
+    <div class="layer-connector" id="conn-2">
+        <span class="conn-label">能力调用 + 实例生命周期</span>
+        <span>▼</span>
+    </div>
 
     <!-- LAYER 3: AGENT OS -->
     <div class="layer os" id="layer-os">
@@ -708,11 +852,31 @@
                     <div class="os-game">🎮 = 插件 API</div>
                 </div>
             </div>
-            <div class="os-caps">
-                <span class="os-cap" style="margin-left:auto;background:#E6F7ED;color:#1A7F37">🖥️ 本地 / ☁️ 云端</span>
-            </div>
         </div>
     </div>
+
+    </div><!-- /arch-main -->
+
+    <!-- DEPLOY SIDEBAR -->
+    <div class="deploy-sidebar">
+        <div class="ds-title">部署模式</div>
+        <div class="ds-modes">
+            <div class="ds-mode">
+                <span class="ds-emoji">🖥️</span>
+                <strong>本地</strong>
+                <span class="ds-sub">IDE嵌入 · 数据私有</span>
+            </div>
+            <span class="ds-or">或</span>
+            <div class="ds-mode">
+                <span class="ds-emoji">☁️</span>
+                <strong>云端</strong>
+                <span class="ds-sub">Web/API · 弹性扩展</span>
+            </div>
+        </div>
+        <div class="ds-bracket"></div>
+    </div>
+
+    </div><!-- /arch-stack -->
 
     <!-- GROWTH LOOP -->
     <div class="growth" id="growth-loop">
@@ -720,7 +884,9 @@
             <span style="font-size:18px">🔄</span>
             <h3>成长闭环 — 实例用完即毁，Memory 持久成长</h3>
             <span class="game-tag">🎮 = 经验值 + 升级</span>
+            <span class="growth-key-diff">⭐ 核心差异化</span>
         </div>
+        <div class="growth-sub">传统软件交付后静态不变；Agent 越用越强、持续进化</div>
         <div class="growth-flow">
             <span class="growth-step">执行任务</span>
             <span class="growth-arrow">→</span>
@@ -1005,7 +1171,7 @@ const TIPS = {
     'layer-os': {
         color: '#24292F', title: 'Agent OS（底层运行时）',
         rows: [
-            ['AgentCore', '六大通用能力：Memory · Reasoning · Planning · Orchestration · Reflection · Integration'],
+            ['AgentCore', '六大通用能力：记忆 · 推理 · 规划 · 编排 · 反思 · 集成'],
             ['实例管理器', '创建/监控/回收独立工作实例（类比：副本系统）'],
             ['MCP网关', '统一工具调用接口（类比：插件API）'],
             ['运行时', '本地模式（IDE嵌入）/ 云端模式（Web/API）'],
@@ -1051,6 +1217,14 @@ function moveTip(e) {
     if (x + r.width + pad > window.innerWidth) x = Math.max(pad, window.innerWidth - r.width - pad);
     if (y + r.height + pad > window.innerHeight) y = Math.max(pad, e.clientY - r.height - off);
     tt.style.left = x + 'px'; tt.style.top = y + 'px';
+}
+
+// ============ GAME TOGGLE ============
+let gameVisible = true;
+function toggleGame() {
+    gameVisible = !gameVisible;
+    document.querySelector('.page').classList.toggle('game-hidden', !gameVisible);
+    document.getElementById('game-toggle').classList.toggle('active', gameVisible);
 }
 
 // ============ INIT ============

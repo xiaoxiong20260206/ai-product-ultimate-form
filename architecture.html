@@ -496,7 +496,7 @@
     <header class="header">
         <div class="header-badge">🗺️ Architecture Panorama</div>
         <h1>统一AI产品架构全景图</h1>
-        <p>一张图看清：三层架构 · 四类技能 · 会话模型 · 产品映射 · 游戏类比</p>
+        <p>一张图看清：三层架构 · 四类技能 · 实例模型 · 产品映射 · 游戏类比</p>
     </header>
 
     <!-- View Tabs -->
@@ -652,7 +652,7 @@
                         <text x="215" y="155" font-size="14">🧠</text>
                         <text x="236" y="157" font-size="13" font-weight="700" fill="#1A7F37">主 Agent</text>
                         <text x="310" y="157" font-size="10" fill="#4D5561">— 决策指挥中枢，永不下场执行</text>
-                        <text x="236" y="175" font-size="9" fill="#656D76">理解意图 · 查记忆 · 选Skill · 派会话 · 收经验</text>
+                        <text x="236" y="175" font-size="9" fill="#656D76">理解意图 · 查记忆 · 选Skill · 派实例 · 收经验</text>
                     </g>
 
                     <!-- Main Agent -> Skills connector -->
@@ -666,7 +666,7 @@
                             <rect x="130" y="206" width="138" height="18" rx="8" fill="url(#gNative)"/>
                             <rect x="130" y="216" width="138" height="8" fill="url(#gNative)"/>
                             <text x="199" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅰ 原生 Skill</text>
-                            <text x="199" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立会话</text>
+                            <text x="199" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立实例</text>
                             <text x="199" y="256" text-anchor="middle" font-size="9" fill="#4D5561">带Skill独立完成</text>
                             <text x="199" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">调研·文档·PPT·分析</text>
                         </g>
@@ -676,7 +676,7 @@
                             <rect x="280" y="206" width="138" height="18" rx="8" fill="url(#gTool)"/>
                             <rect x="280" y="216" width="138" height="8" fill="url(#gTool)"/>
                             <text x="349" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅱ 工具 Skill</text>
-                            <text x="349" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立会话</text>
+                            <text x="349" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1个独立实例</text>
                             <text x="349" y="256" text-anchor="middle" font-size="9" fill="#4D5561">调MCP外部能力</text>
                             <text x="349" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">图片·视频·CI/CD·数据</text>
                         </g>
@@ -686,7 +686,7 @@
                             <rect x="430" y="206" width="138" height="18" rx="8" fill="url(#gTask)"/>
                             <rect x="430" y="216" width="138" height="8" fill="url(#gTask)"/>
                             <text x="499" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅲ 任务 Skill</text>
-                            <text x="499" y="242" text-anchor="middle" font-size="9" fill="#4D5561">N个并行会话</text>
+                            <text x="499" y="242" text-anchor="middle" font-size="9" fill="#4D5561">N个并行实例</text>
                             <text x="499" y="256" text-anchor="middle" font-size="9" fill="#4D5561">各带不同Skill协作</text>
                             <text x="499" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">CR审查·重构评审·多维分析</text>
                         </g>
@@ -696,7 +696,7 @@
                             <rect x="580" y="206" width="138" height="18" rx="8" fill="url(#gFlow)"/>
                             <rect x="580" y="216" width="138" height="8" fill="url(#gFlow)"/>
                             <text x="649" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="white">Ⅳ 流程 Skill</text>
-                            <text x="649" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1总控 + N执行会话</text>
+                            <text x="649" y="242" text-anchor="middle" font-size="9" fill="#4D5561">1总控 + N执行实例</text>
                             <text x="649" y="256" text-anchor="middle" font-size="9" fill="#4D5561">阶段编排·终极连招</text>
                             <text x="649" y="265" text-anchor="middle" font-size="7" fill="#9CA3AF">需求→发布·项目初始化</text>
                         </g>
@@ -787,8 +787,8 @@
                         <!-- Clone Engine -->
                         <g id="clone-engine" filter="url(#dropShadow)">
                             <rect x="612" y="436" width="126" height="52" rx="10" fill="white" stroke="#EA580C" stroke-width="1"/>
-                            <text x="675" y="456" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">⚡ 会话管理器</text>
-                            <text x="675" y="470" text-anchor="middle" font-size="8" fill="#656D76">Session Manager</text>
+                            <text x="675" y="456" text-anchor="middle" font-size="9" font-weight="700" fill="#EA580C">⚡ 实例管理器</text>
+                            <text x="675" y="470" text-anchor="middle" font-size="8" fill="#656D76">Instance Manager</text>
                             <text x="675" y="482" text-anchor="middle" font-size="7" fill="#9CA3AF">创建·监控·回收·汇总</text>
                         </g>
 
@@ -1042,7 +1042,7 @@
         <div class="skill-detail-grid">
             <div class="skill-detail-box native">
                 <h4>Ⅰ 原生 Skill (Native)</h4>
-                <p><strong>会话模式：</strong>派 1 个独立会话，带 Skill 指令独立完成；不依赖外部 API</p>
+                <p><strong>实例模式：</strong>派 1 个独立工作实例（会话），带 Skill 指令独立完成；不依赖外部 API</p>
                 <p><strong>游戏类比：</strong>🎮 派一个角色去做单人支线任务，做完回来交经验</p>
                 <p><strong>生命周期：</strong>创建 → 注入Skill → 独立执行 → 经验回流 → 会话销毁</p>
                 <div class="examples">
@@ -1054,7 +1054,7 @@
             </div>
             <div class="skill-detail-box tool">
                 <h4>Ⅱ 工具 Skill (Tool/MCP)</h4>
-                <p><strong>会话模式：</strong>派 1 个独立会话，通过 MCP 网关调用外部 API；网关统一鉴权/限流</p>
+                <p><strong>实例模式：</strong>派 1 个独立工作实例（会话），通过 MCP 网关调用外部 API；网关统一鉴权/限流</p>
                 <p><strong>游戏类比：</strong>🎮 派一个角色去 NPC 商店买装备/找铁匠打造</p>
                 <p><strong>生命周期：</strong>创建 → 注入Skill → 调API → 经验回流 → 会话销毁</p>
                 <div class="examples">
@@ -1066,7 +1066,7 @@
             </div>
             <div class="skill-detail-box task">
                 <h4>Ⅲ 任务 Skill (Task)</h4>
-                <p><strong>会话模式：</strong>派 N 个并行会话，各带不同 Skill；各自独立上下文，结果汇总后经验回流</p>
+                <p><strong>实例模式：</strong>派 N 个并行工作实例（Task），各带不同 Skill；各自独立上下文，结果汇总后经验回流</p>
                 <p><strong>游戏类比：</strong>🎮 组队打副本：多角色同时出战，各有分工</p>
                 <p><strong>生命周期：</strong>创廾N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁</p>
                 <div class="examples">
@@ -1077,7 +1077,7 @@
             </div>
             <div class="skill-detail-box flow">
                 <h4>Ⅳ 流程 Skill (Flow)</h4>
-                <p><strong>会话模式：</strong>1 个总控会话编排多阶段，每阶段派执行会话（可是Native/Tool/Task任意组合）</p>
+                <p><strong>实例模式：</strong>1 个总控实例（Flow）编排多阶段，每阶段派执行实例（可是Native/Tool/Task任意组合）</p>
                 <p><strong>游戏类比：</strong>🎮 多阶段 Raid Boss 战：指挥官喜户多小队，各司其职</p>
                 <p><strong>能力：</strong>跳过/重试/断点续跑/人工确认门禁；总控会话最后销毁</p>
                 <div class="examples">
@@ -1094,12 +1094,12 @@
                 <div style="font-size:11px;font-weight:800;color:var(--c-text);margin-bottom:10px;">🧭 Skill 类型决策指南（P1）</div>
                 <div style="font-size:12px;color:var(--c-text-2);">
                     <div style="padding:10px 12px;border:1px solid var(--c-border-light);border-radius:10px;background:#F6F8FA;">
-                        <div style="font-weight:800;color:var(--c-text);margin-bottom:6px;">快速判断（按会话复杂度）</div>
+                        <div style="font-weight:800;color:var(--c-text);margin-bottom:6px;">快速判断（按实例复杂度）</div>
                         <div style="display:grid;grid-template-columns: 100px 1fr;gap:6px 10px;">
-                            <div style="color:var(--c-text-3);font-weight:700;">1个会话够？</div><div>→ 用 <strong>Native</strong>（不调外部）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">要调外部API？</div><div>→ 用 <strong>Tool</strong>（1个会话+MCP网关）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">可并行拆？</div><div>→ 用 <strong>Task</strong>（N个并行会话协作）</div>
-                            <div style="color:var(--c-text-3);font-weight:700;">有阶段依赖？</div><div>→ 用 <strong>Flow</strong>（1总控+N会话编排）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">1个实例够？</div><div>→ 用 <strong>Native</strong>（不调外部）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">要调外部API？</div><div>→ 用 <strong>Tool</strong>（1个实例+MCP网关）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">可并行拆？</div><div>→ 用 <strong>Task</strong>（N个并行实例协作）</div>
+                            <div style="color:var(--c-text-3);font-weight:700;">有阶段依赖？</div><div>→ 用 <strong>Flow</strong>（1总控+N实例编排）</div>
                         </div>
                     </div>
                     <div style="margin-top:10px; color:var(--c-text-3);font-size:11px;">建议产品侧在PRD里写清：触发词、输入约束、输出形态、失败兜底；技术侧写清：依赖、权限、SLA、回滚。</div>
@@ -1206,17 +1206,17 @@
         <!-- Row 2: Agent Layer ↔ Player/Mechanics -->
         <div class="analogy-row">
             <div class="analogy-card">
-                <h3 style="color:var(--c-agent)">🧠 Agent层 — 决策 + 会话派遣</h3>
-                <p><strong>主 Agent 永不下场执行</strong>。它理解意图、查记忆、选Skill，然后<strong>派出独立会话（分身）</strong>去执行。</p>
-                <p style="margin-top:6px">会话 = 独立上下文，执行完毕后经验回流、会话销毁。</p>
+                <h3 style="color:var(--c-agent)">🧠 Agent层 — 决策 + 实例派遣</h3>
+                <p><strong>主 Agent 永不下场执行</strong>。它理解意图、查记忆、选Skill，然后<strong>派出独立工作实例（分身）</strong>去执行。</p>
+                <p style="margin-top:6px">分身 = 独立工作实例，具体形式可以是会话、Task、Flow，执行完毕后经验回流、实例销毁。</p>
                 <div class="sub-items" style="grid-template-columns:1fr 1fr">
                     <div class="sub-item" style="border-top:2px solid #2DA44E">
                         <strong>Ⅰ Native / Ⅱ Tool</strong>
-                        1个独立会话，带Skill完成<br>Tool多一步调外部API
+                        1个独立实例，带Skill完成<br>Tool多一步调外部API
                     </div>
                     <div class="sub-item" style="border-top:2px solid #EA580C">
                         <strong>Ⅲ Task / Ⅳ Flow</strong>
-                        Task: N个并行会话协作<br>Flow: 1总控 + N执行会话
+                        Task: N个并行实例协作<br>Flow: 1总控 + N执行实例
                     </div>
                 </div>
             </div>
@@ -1245,7 +1245,7 @@
                 <p>提供所有会话共用的基础能力，<strong>与Agent层在同一进程内</strong>（函数调用，非远程通信）。</p>
                 <ul>
                     <li><strong>AgentCore 六能力：</strong>Memory · Reasoning · Planning · Orchestration · Reflection · Integration</li>
-                    <li><strong>Session Manager：</strong>创建/监控/回收/汇总独立会话</li>
+                    <li><strong>Instance Manager：</strong>创建/监控/回收/汇总独立工作实例</li>
                     <li><strong>MCP网关：</strong>统一外部API调用入口</li>
                 </ul>
             </div>
@@ -1266,7 +1266,7 @@
             <div class="analogy-card">
                 <h3 style="color:#059669">🔄 成长闭环 — 越用越强</h3>
                 <p>执行任务 → Reflection自评 → 经验写入Memory → 下次执行起点更高。</p>
-                <p style="margin-top:6px"><strong>会话用完即毁，Memory持久存活。</strong>这是Agent区别于传统软件的本质。</p>
+                <p style="margin-top:6px"><strong>实例用完即毁，Memory持久存活。</strong>这是Agent区别于传统软件的本质。</p>
                 <div class="sub-items">
                     <div class="sub-item" style="border-top:2px solid #1A7F37"><strong>L1 行为适应</strong>记住偏好和习惯</div>
                     <div class="sub-item" style="border-top:2px solid #0969DA"><strong>L2 技能进化</strong>从执行中提炼方法论</div>
@@ -1286,32 +1286,32 @@
             </div>
         </div>
 
-        <!-- Session Model Detail -->
+        <!-- Instance Model Detail -->
         <div class="analogy-session">
-            <h3>💡 核心洞察：分身 = 独立会话（Session）</h3>
-            <p style="font-size:13px;color:var(--c-text-2);margin-bottom:12px">主Agent派出的每个"分身"本质上是一个<strong>独立的会话实例</strong>。会话有自己的上下文、按Skill指令执行、完成后将经验反馈回主Agent然后销毁。<br>任务的复杂度差异，本质只是<strong>需要多少个会话、如何协调</strong>的区别。</p>
+            <h3>💡 核心洞察：分身 = 独立工作实例（Instance）</h3>
+            <p style="font-size:13px;color:var(--c-text-2);margin-bottom:12px">主Agent派出的每个“分身”本质上是一个<strong>独立工作实例</strong>。具体形式根据任务类型不同：可以是一个<strong>会话</strong>、一个并行<strong>Task</strong>、或一个多阶段<strong>Flow</strong>。<br>实例有独立上下文、按Skill指令执行、完成后经验回流然后销毁。任务复杂度的差异，本质是<strong>实例的数量、形式和协调方式</strong>不同。</p>
             <div class="session-grid">
                 <div class="session-card" style="border-top-color:#2DA44E">
                     <h4 style="color:#2DA44E">Ⅰ Native Skill</h4>
-                    <p>1个会话 · 带Skill独立完成</p>
+                    <p>1个实例（会话） · 带Skill独立完成</p>
                     <p>🎮 = 单人支线任务</p>
                     <div class="lifecycle">创建→注入Skill→执行→回流→销毁</div>
                 </div>
                 <div class="session-card" style="border-top-color:#7C3AED">
                     <h4 style="color:#7C3AED">Ⅱ Tool Skill</h4>
-                    <p>1个会话 · 调MCP外部API</p>
+                    <p>1个实例（会话） · 调MCP外部API</p>
                     <p>🎮 = 去NPC商店买装备</p>
                     <div class="lifecycle">创建→注入Skill→调API→回流→销毁</div>
                 </div>
                 <div class="session-card" style="border-top-color:#EA580C">
                     <h4 style="color:#EA580C">Ⅲ Task Skill</h4>
-                    <p>N个并行会话 · 各带不同Skill</p>
+                    <p>N个并行实例 · 各带不同Skill</p>
                     <p>🎮 = 组队打副本</p>
                     <div class="lifecycle">创建N个→并行执行→汇总→回流→全部销毁</div>
                 </div>
                 <div class="session-card" style="border-top-color:#0969DA">
                     <h4 style="color:#0969DA">Ⅳ Flow Skill</h4>
-                    <p>1总控 + N执行会话 · 分阶段</p>
+                    <p>1总控 + N执行实例 · 分阶段</p>
                     <p>🎮 = 多阶段Raid Boss战</p>
                     <div class="lifecycle">总控创建→逐阶段派遣→验证→下阶段→全部销毁</div>
                 </div>
@@ -1334,7 +1334,7 @@ let currentScenario = null;
 const scenarios = {
     s1: {
         title: '"帮我写个调研报告"',
-        subtitle: '原生Skill · 派1个独立会话执行',
+        subtitle: '原生Skill · 派1个独立实例执行',
         color: '#2DA44E',
         skillType: 'native',
         steps: [
@@ -1350,7 +1350,7 @@ const scenarios = {
     },
     s2: {
         title: '"帮我生成一张配图"',
-        subtitle: '工具Skill · 派1个会话调MCP外部API',
+        subtitle: '工具Skill · 派1个实例调MCP外部API',
         color: '#7C3AED',
         skillType: 'tool',
         steps: [
@@ -1365,7 +1365,7 @@ const scenarios = {
     },
     s3: {
         title: '"帮我Review这个PR"',
-        subtitle: '任务Skill · 派3个并行会话协作',
+        subtitle: '任务Skill · 派3个并行实例协作',
         color: '#EA580C',
         skillType: 'task',
         steps: [
@@ -1381,7 +1381,7 @@ const scenarios = {
     },
     s4: {
         title: '"帮我把需求做到上线"',
-        subtitle: '流程Skill · 1总控会话编排6阶段',
+        subtitle: '流程Skill · 1总控实例编排6阶段',
         color: '#0969DA',
         skillType: 'flow',
         steps: [
@@ -1675,42 +1675,42 @@ const TOOLTIPS = {
         title: '主 Agent（决策指挥中枢）',
         rows: [
             ['核心原则', '永不下场执行，只做决策和指挥'],
-            ['主链路', '理解 → 查记忆 → 选Skill → 派会话执行 → 收经验'],
+            ['主链路', '理解 → 查记忆 → 选Skill → 派实例执行 → 收经验'],
             ['类比', '游戏中的玩家，不进入游戏世界，通过召唤角色执行任务'],
         ],
     },
     'skill-native': {
         color: '#2DA44E',
-        title: 'Ⅰ 原生 Skill（1个会话）',
+        title: 'Ⅰ 原生 Skill（1个实例）',
         rows: [
-            ['模式', '派1个独立会话，带Skill指令独立完成'],
+            ['模式', '派1个独立工作实例（会话），带Skill指令独立完成'],
             ['类比', '🎮 单人支线任务：派一个角色去做'],
             ['生命周期', '创建 → 注入Skill → 执行 → 经验回流 → 销毁'],
         ],
     },
     'skill-tool': {
         color: '#7C3AED',
-        title: 'Ⅱ 工具 Skill（1个会话+MCP）',
+        title: 'Ⅱ 工具 Skill（1个实例+MCP）',
         rows: [
-            ['模式', '派1个独立会话，通过MCP网关调用外部API'],
+            ['模式', '派1个独立工作实例（会话），通过MCP网关调用外部API'],
             ['类比', '🎮 去 NPC商店买装备/找铁匠打造'],
             ['生命周期', '创建 → 注入Skill → 调API → 经验回流 → 销毁'],
         ],
     },
     'skill-task': {
         color: '#EA580C',
-        title: 'Ⅲ 任务 Skill（N个并行会话）',
+        title: 'Ⅲ 任务 Skill（N个并行实例）',
         rows: [
-            ['模式', '派N个并行会话，各带不同Skill协作'],
+            ['模式', '派N个并行工作实例（Task），各带不同Skill协作'],
             ['类比', '🎮 组队打副本：多角色同时出战'],
             ['生命周期', '创廾N个 → 并行执行 → 汇总 → 经验回流 → 全部销毁'],
         ],
     },
     'skill-flow': {
         color: '#0969DA',
-        title: 'Ⅳ 流程 Skill（1总控+N会话）',
+        title: 'Ⅳ 流程 Skill（1总控+N实例）',
         rows: [
-            ['模式', '1个总控会话编排多阶段，每阶段派执行会话'],
+            ['模式', '1个总控实例（Flow）编排多阶段，每阶段派执行实例'],
             ['类比', '🎮 多阶段 Raid Boss战：指挥官+多小队'],
             ['能力', '跳过/重试/断点续跑/人工确认门禁'],
         ],
@@ -1822,9 +1822,9 @@ const TOOLTIPS = {
     // Infra & runtime
     'clone-engine': {
         color: '#EA580C',
-        title: 'Session Manager（会话管理器）',
+        title: 'Instance Manager（实例管理器）',
         rows: [
-            ['本质', '每个“分身”= 一个独立会话（独立上下文）'],
+            ['本质', '每个"分身"= 一个独立工作实例（形式可以是会话、Task、Flow）'],
             ['生命周期', '创建 → 监控 → 回收 → 经验汇总'],
             ['并发', '默认 8；可按租户/任务类型限额'],
             ['类比', '🎮 游戏副本系统：创建/管理/回收独立实例'],

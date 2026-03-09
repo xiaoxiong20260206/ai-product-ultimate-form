@@ -283,8 +283,34 @@
         .layer.os .layer-tag { background: linear-gradient(135deg, #24292F, #3D444D); }
 
         .os-grid {
-            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+            display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 10px;
         }
+        .os-block.os-block-wide { grid-column: auto; }
+
+        /* Runtime Adapters inside Instance Manager */
+        .rt-adapters {
+            display: flex; gap: 6px; margin-top: 10px;
+            padding-top: 8px; border-top: 1px dashed var(--c-border-light);
+        }
+        .rt-adapter {
+            flex: 1; display: flex; align-items: center; gap: 6px;
+            padding: 6px 8px; border-radius: var(--r-sm);
+            border: 1px solid var(--c-border-light); background: #fff;
+            transition: all 200ms var(--ease); position: relative;
+        }
+        .rt-adapter.active { box-shadow: 0 0 0 2px rgba(9,105,218,0.2); border-color: var(--c-product); }
+        .rt-adapter-icon { font-size: 16px; flex: none; }
+        .rt-adapter-info { flex: 1; min-width: 0; }
+        .rt-adapter-name { font-size: 10px; font-weight: 700; color: var(--c-text); white-space: nowrap; }
+        .rt-adapter-desc { font-size: 9px; color: var(--c-text-3); white-space: nowrap; }
+        .rt-adapter-tag {
+            font-size: 8px; font-weight: 700; color: #fff;
+            padding: 1px 5px; border-radius: var(--r-full);
+            white-space: nowrap;
+        }
+        .rt-local .rt-adapter-tag { background: #2DA44E; }
+        .rt-sandbox .rt-adapter-tag { background: #EA580C; }
+        .rt-service .rt-adapter-tag { background: #0969DA; }
         .os-block {
             padding: 10px 12px; border-radius: var(--r-sm);
             border: 1px solid var(--c-border-light); background: var(--c-bg);
@@ -480,6 +506,15 @@
         #cf-tooltip .tt-k { flex: none; width: 56px; font-weight: 700; color: var(--c-text-3); }
         #cf-tooltip .tt-v { flex: 1; color: var(--c-text-2); }
 
+        /* Unified badge */
+        .unified-badge {
+            font-size: 10px; font-weight: 700;
+            padding: 2px 10px; border-radius: var(--r-full);
+            background: linear-gradient(135deg, #FFF7ED, #FEF3C7);
+            color: #92400E; border: 1px solid rgba(146,64,14,0.15);
+            white-space: nowrap;
+        }
+
         /* Architecture stack + deploy sidebar */
         .arch-stack {
             display: flex; gap: 16px; align-items: stretch;
@@ -510,6 +545,16 @@
         }
         .deploy-sidebar .ds-mode .ds-emoji { font-size: 18px; display: block; margin-bottom: 2px; }
         .deploy-sidebar .ds-mode .ds-sub { font-size: 9px; font-weight: 400; color: var(--c-text-3); }
+        .ds-cloud-split {
+            display: flex; flex-direction: column; gap: 3px; margin-top: 4px;
+            padding-top: 4px; border-top: 1px dashed var(--c-border-light);
+        }
+        .ds-cloud-item {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 9px; font-weight: 600; color: var(--c-text-2);
+        }
+        .ds-cloud-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+        .ds-cloud-note { font-weight: 400; color: var(--c-text-3); }
         .deploy-sidebar .ds-or {
             font-size: 10px; font-weight: 700; color: var(--c-text-3);
             padding: 2px 8px; border-radius: var(--r-full);
@@ -587,6 +632,7 @@
             .scenario-bar { grid-template-columns: 1fr 1fr; }
             .skill-grid { grid-template-columns: 1fr 1fr; }
             .os-grid { grid-template-columns: 1fr; }
+            .rt-adapters { flex-direction: column; }
             .flow-stages { grid-template-columns: repeat(3, 1fr); }
             .arch-stack { flex-direction: column; }
             .deploy-sidebar {
@@ -696,6 +742,7 @@
         <div class="layer-header">
             <span class="layer-tag">AGENT</span>
             <h2>Agent 层</h2>
+            <span class="unified-badge" id="badge-unified">🧠 统一大脑</span>
             <span class="game-tag">🎮 = 玩家 + 技能书 + 副本</span>
         </div>
         <div class="layer-body">
@@ -821,6 +868,7 @@
         <div class="layer-header">
             <span class="layer-tag">AGENT OS</span>
             <h2>底层运行时</h2>
+            <span class="unified-badge">🧠 统一大脑 + 🦵 多种四肢</span>
             <span class="game-tag">🎮 = 游戏引擎</span>
         </div>
         <div class="layer-body">
@@ -839,11 +887,37 @@
                         <span class="os-cap">集成</span>
                     </div>
                 </div>
-                <div class="os-block" id="os-instance-mgr">
+                <div class="os-block os-block-wide" id="os-instance-mgr">
                     <div class="os-icon">⚡</div>
-                    <div class="os-name">实例管理器</div>
+                    <div class="os-name">实例管理器 <span style="font-size:9px;font-weight:400;color:var(--c-text-3)">— 统一调度，多 Runtime 适配</span></div>
                     <div class="os-sub">创建 · 监控 · 回收 · 汇总</div>
                     <div class="os-game">🎮 = 副本系统</div>
+                    <div class="rt-adapters">
+                        <div class="rt-adapter rt-local" id="adapter-local">
+                            <div class="rt-adapter-icon">🖥️</div>
+                            <div class="rt-adapter-info">
+                                <div class="rt-adapter-name">LocalAdapter</div>
+                                <div class="rt-adapter-desc">IDE 内进程</div>
+                            </div>
+                            <div class="rt-adapter-tag">CodeFlicker</div>
+                        </div>
+                        <div class="rt-adapter rt-sandbox" id="adapter-sandbox">
+                            <div class="rt-adapter-icon">📦</div>
+                            <div class="rt-adapter-info">
+                                <div class="rt-adapter-name">SandboxAdapter</div>
+                                <div class="rt-adapter-desc">隔离容器 / MicroVM</div>
+                            </div>
+                            <div class="rt-adapter-tag">Code Agent</div>
+                        </div>
+                        <div class="rt-adapter rt-service" id="adapter-service">
+                            <div class="rt-adapter-icon">☁️</div>
+                            <div class="rt-adapter-info">
+                                <div class="rt-adapter-name">ServiceAdapter</div>
+                                <div class="rt-adapter-desc">微服务 / Serverless</div>
+                            </div>
+                            <div class="rt-adapter-tag">KATE-Studio</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="os-block" id="os-mcp">
                     <div class="os-icon">🔌</div>
@@ -858,7 +932,7 @@
     </div><!-- /arch-main -->
 
     <!-- DEPLOY SIDEBAR -->
-    <div class="deploy-sidebar">
+    <div class="deploy-sidebar" id="deploy-sidebar">
         <div class="ds-title">部署模式</div>
         <div class="ds-modes">
             <div class="ds-mode">
@@ -867,10 +941,14 @@
                 <span class="ds-sub">IDE嵌入 · 数据私有</span>
             </div>
             <span class="ds-or">或</span>
-            <div class="ds-mode">
+            <div class="ds-mode ds-mode-cloud">
                 <span class="ds-emoji">☁️</span>
                 <strong>云端</strong>
-                <span class="ds-sub">Web/API · 弹性扩展</span>
+                <span class="ds-sub">统一大脑</span>
+                <div class="ds-cloud-split">
+                    <div class="ds-cloud-item"><span class="ds-cloud-dot" style="background:#EA580C"></span>沙箱 <span class="ds-cloud-note">Code</span></div>
+                    <div class="ds-cloud-item"><span class="ds-cloud-dot" style="background:#0969DA"></span>服务 <span class="ds-cloud-note">Biz</span></div>
+                </div>
             </div>
         </div>
         <div class="ds-bracket"></div>
@@ -917,7 +995,7 @@
     </div>
 
     <footer class="footer">
-        架构全景 · AI产品终极形态 · v6.0 · 三合一统一视图 · 2026-03
+        架构全景 · AI产品终极形态 · v7.0 · 统一大脑+多Runtime · 2026-03
     </footer>
 </div>
 
@@ -1153,10 +1231,11 @@ const TIPS = {
         ]
     },
     'layer-agent': {
-        color: '#1A7F37', title: 'Agent 层',
+        color: '#1A7F37', title: 'Agent 层（统一大脑）',
         rows: [
-            ['主Agent', '决策指挥中枢，永不下场执行——只做"教练"'],
-            ['四类Skill', 'Native / Tool / Task / Flow 覆盖全复杂度'],
+            ['主Agent', '决策指挥中枢，只做调度不执行——跨产品共享同一套决策逻辑'],
+            ['四类Skill', 'Native / Tool / Task / Flow 覆盖全复杂度，跨产品复用'],
+            ['统一意义', '不同产品共享同一套Memory、Skill、经验，用得越多越聪明'],
             ['横切关注', 'Eval · 安全 · 可观测 · Memory · Skill注册'],
         ]
     },
@@ -1164,7 +1243,7 @@ const TIPS = {
         color: '#1A7F37', title: '主 Agent（决策指挥中枢）',
         rows: [
             ['角色', '理解用户意图、选择合适的Skill、派遣工作实例'],
-            ['关键', '永不下场执行——只决策、不干活'],
+            ['关键', '只做决策调度，不执行具体任务——这保证了架构的统一性'],
             ['类比', '🎮 玩家本人——操控角色但自己不进入战场'],
         ]
     },
@@ -1172,9 +1251,65 @@ const TIPS = {
         color: '#24292F', title: 'Agent OS（底层运行时）',
         rows: [
             ['AgentCore', '六大通用能力：记忆 · 推理 · 规划 · 编排 · 反思 · 集成'],
-            ['实例管理器', '创建/监控/回收独立工作实例（类比：副本系统）'],
-            ['MCP网关', '统一工具调用接口（类比：插件API）'],
-            ['运行时', '本地模式（IDE嵌入）/ 云端模式（Web/API）'],
+            ['实例管理器', '统一调度器，通过Adapter模式适配三种Runtime（本地/沙箱/服务）'],
+            ['MCP网关', '统一工具调用接口，抽象外部服务差异'],
+            ['核心思想', '统一大脑 + 多种四肢——思考方式一样，只是“手”不一样'],
+        ]
+    },
+    'os-instance-mgr': {
+        color: '#EA580C', title: '实例管理器（多 Runtime 调度器）',
+        rows: [
+            ['核心职责', '统一创建、监控、回收工作实例，对上层透明'],
+            ['Adapter模式', '主Agent只说“我要一个实例”，管理器自动选择合适的Runtime'],
+            ['关键价值', '让N个产品共享同一套实例管理能力，避免重复建设'],
+        ]
+    },
+    'adapter-local': {
+        color: '#2DA44E', title: 'LocalAdapter（本地运行时）',
+        rows: [
+            ['场景', 'IDE内嵌入的Agent，如CodeFlicker本地模式'],
+            ['运行方式', '本地进程，直接访问文件系统、终端、IDE接口'],
+            ['优势', '零延迟、数据完全私有、无网络依赖'],
+            ['典型实例', '会话级，轻量，随用随建'],
+        ]
+    },
+    'adapter-sandbox': {
+        color: '#EA580C', title: 'SandboxAdapter（沙箱运行时）',
+        rows: [
+            ['场景', '远端Code Agent，如后台编程、自动修复、CI集成'],
+            ['运行方式', '隔离容器/MicroVM，完整OS + 开发工具链'],
+            ['安全模型', '网络隔离 + syscall过滤，防沙箱逃逸'],
+            ['成本特征', 'GB级内存、分钟级时长、用完即毁'],
+            ['典型产品', 'Devin、Codex、CodeFlicker Background Agent'],
+        ]
+    },
+    'adapter-service': {
+        color: '#0969DA', title: 'ServiceAdapter（服务端运行时）',
+        rows: [
+            ['场景', '服务端Agent，如企业数字员工、数据分析、客服'],
+            ['运行方式', '微服务或Serverless函数，轻量级、IO密集'],
+            ['安全模型', 'API认证 + RBAC权限 + 数据脱敏审计'],
+            ['成本特征', 'MB级内存、秒级响应、弹性扩容'],
+            ['典型产品', 'KATE-Studio、Salesforce AgentForce'],
+        ]
+    },
+    'deploy-sidebar': {
+        color: '#4D5561', title: '部署模式（跨层架构决策）',
+        rows: [
+            ['核心思想', '部署模式是整个技术栈的选择，不是某一层的属性'],
+            ['本地模式', 'IDE嵌入，数据私有，零网络依赖，单机版'],
+            ['云端-沙箱', '远端隔离容器，达到Code场景安全与算力需求'],
+            ['云端-服务', '微服务/Serverless，达到业务场景低延迟与弹性扩展'],
+            ['统一大脑', '无论哪种部署，AgentCore + Memory + Skill保持一致'],
+        ]
+    },
+    'badge-unified': {
+        color: '#92400E', title: '统一大脑 — 架构核心原则',
+        rows: [
+            ['含义', '所有产品共享同一套决策逻辑、Memory、Skill体系'],
+            ['为什么', 'N个产品的经验互通，Agent越用越聪明，避免各自造轮子'],
+            ['对比', '传统多产品线各自维护一套AI→经验不互通、重复建设'],
+            ['边界', '大脑统一，但“四肢”（Runtime）可以不同——这才是关键'],
         ]
     },
     'growth-loop': {

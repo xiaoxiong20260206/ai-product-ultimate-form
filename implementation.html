@@ -27,7 +27,11 @@
 .section-title { font-size:var(--heading-2); font-weight:700; color:var(--color-text-primary); }
 
 .insight-box { border-left:3px solid var(--color-success); background:rgba(5,150,105,0.06); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:var(--spacing-md) 20px; margin:var(--spacing-lg) 0; }
+.insight-box.blue { border-left-color:var(--color-info); background:rgba(37,99,235,0.06); }
+.insight-box.purple { border-left-color:var(--color-purple); background:rgba(124,58,237,0.06); }
 .insight-label { font-size:var(--caption); font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-success); margin-bottom:var(--spacing-sm); }
+.insight-box.blue .insight-label { color:var(--color-info); }
+.insight-box.purple .insight-label { color:var(--color-purple); }
 .insight-text { font-size:var(--body-text); font-weight:600; line-height:1.6; color:var(--color-text-primary); }
 
 .table-wrap { overflow-x:auto; margin:var(--spacing-md) 0; }
@@ -39,21 +43,52 @@ tbody tr:hover td { background:rgba(0,0,0,0.02); }
 .tag { display:inline-flex; align-items:center; padding:2px 8px; border-radius:var(--radius-full); font-size:var(--caption); font-weight:500; white-space:nowrap; }
 .tag-green { background:rgba(5,150,105,0.12); color:var(--color-success); }
 .tag-blue { background:rgba(37,99,235,0.12); color:var(--color-info); }
+.tag-purple { background:rgba(124,58,237,0.12); color:var(--color-purple); }
 .tag-orange { background:rgba(234,88,12,0.12); color:#EA580C; }
 
-.svg-wrap { text-align:center; overflow-x:auto; padding:12px 0; }
+/* Layer cards */
+.layer-card { border-radius:var(--radius-md); padding:var(--spacing-md); margin:var(--spacing-md) 0; position:relative; overflow:hidden; }
+.layer-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.layer-card.product { background:rgba(9,105,218,0.04); border:1px solid rgba(9,105,218,0.15); }
+.layer-card.product::before { background:#0969DA; }
+.layer-card.agent { background:rgba(5,150,105,0.04); border:1px solid rgba(5,150,105,0.15); }
+.layer-card.agent::before { background:var(--color-success); }
+.layer-card.os { background:rgba(36,41,47,0.04); border:1px solid rgba(36,41,47,0.15); }
+.layer-card.os::before { background:#24292F; }
+.layer-name { font-size:var(--heading-4); font-weight:700; margin-bottom:4px; }
+.layer-desc { font-size:12px; color:var(--color-text-secondary); }
 
-/* Timeline */
-.timeline { display:flex; justify-content:space-between; gap:var(--spacing-md); margin:var(--spacing-lg) 0; }
-.timeline-item { flex:1; text-align:center; position:relative; }
-.timeline-item::after { content:''; position:absolute; top:18px; right:-50%; width:100%; height:2px; background:var(--color-border-light); z-index:0; }
-.timeline-item:last-child::after { display:none; }
-.timeline-dot { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto var(--spacing-sm); font-size:14px; font-weight:600; position:relative; z-index:1; }
-.timeline-dot.done { background:#D1FAE5; color:#059669; border:2px solid #059669; }
-.timeline-dot.progress { background:#FEF3C7; color:#D97706; border:2px solid #D97706; }
-.timeline-dot.pending { background:#EFF6FF; color:#2563EB; border:2px solid #2563EB; }
-.timeline-title { font-size:var(--heading-4); font-weight:600; color:var(--color-text-primary); margin-bottom:4px; }
-.timeline-desc { font-size:var(--caption); color:var(--color-text-muted); line-height:1.5; }
+/* Skill type cards */
+.skill-type-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin:var(--spacing-md) 0; }
+.st-card { border-radius:var(--radius-md); padding:var(--spacing-md); text-align:center; border:1px solid var(--color-border-light); position:relative; overflow:hidden; }
+.st-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.st-card:nth-child(1)::before { background:#2DA44E; }
+.st-card:nth-child(2)::before { background:#7C3AED; }
+.st-card:nth-child(3)::before { background:#EA580C; }
+.st-card:nth-child(4)::before { background:#0969DA; }
+.st-num { font-size:20px; font-weight:800; margin-bottom:4px; }
+.st-name { font-size:13px; font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.st-desc { font-size:11px; color:var(--color-text-muted); }
+.st-example { font-size:10px; color:var(--color-text-secondary); margin-top:8px; padding:6px 10px; background:rgba(0,0,0,0.03); border-radius:var(--radius-sm); }
+
+/* Phase cards */
+.phase-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--spacing-md); margin:var(--spacing-md) 0; }
+.phase-card { border:1px solid var(--color-border-light); border-radius:var(--radius-md); padding:var(--spacing-md); position:relative; overflow:hidden; }
+.phase-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:var(--radius-md) var(--radius-md) 0 0; }
+.phase-card:nth-child(1)::before { background:#2563EB; }
+.phase-card:nth-child(2)::before { background:#059669; }
+.phase-card:nth-child(3)::before { background:#7C3AED; }
+.phase-card:nth-child(4)::before { background:#EA580C; }
+.phase-num { font-size:10px; font-weight:700; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+.phase-title { font-size:var(--heading-4); font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
+.phase-time { font-size:var(--caption); color:var(--color-success); font-weight:600; margin-bottom:8px; }
+.phase-items { font-size:var(--caption); color:var(--color-text-secondary); line-height:1.8; }
+
+/* Benefits */
+.benefit-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:12px; }
+.benefit-card { background:white; padding:12px; border-radius:8px; text-align:center; }
+.benefit-value { font-size:24px; font-weight:700; color:var(--color-success); }
+.benefit-label { font-size:12px; color:var(--color-text-secondary); }
 
 .conclusion-box { background:var(--gradient-success); color:white; border-radius:var(--radius-lg); padding:var(--spacing-xl); text-align:center; margin-top:var(--spacing-2xl); }
 .conclusion-title { font-size:var(--heading-3); font-weight:700; margin-bottom:12px; }
@@ -67,10 +102,14 @@ strong { color:var(--color-text-primary); }
 
 @media (max-width:768px) {
     .page-title { font-size:24px; }
-    .timeline { flex-direction:column; gap:var(--spacing-sm); }
-    .timeline-item::after { display:none; }
+    .skill-type-grid { grid-template-columns:repeat(2,1fr); }
+    .phase-grid { grid-template-columns:repeat(2,1fr); }
     .site-nav { flex-wrap:wrap; }
     .site-nav a { font-size:12px; padding:8px; }
+}
+@media (max-width:480px) {
+    .skill-type-grid { grid-template-columns:1fr; }
+    .phase-grid { grid-template-columns:1fr; }
 }
     </style>
 </head>
@@ -80,14 +119,14 @@ strong { color:var(--color-text-primary); }
         <a href="index.html">首页</a>
         <a href="deep-dive.html">详细论证</a>
         <a href="evidence.html">AI分身实证</a>
-        <a href="implementation.html" class="active">技术实施</a>
         <a href="architecture.html">架构全景</a>
+        <a href="implementation.html" class="active">技术实施</a>
     </nav>
 
     <header class="page-header">
-        <div class="page-badge">技术实施</div>
+        <div class="page-badge">🔧 技术实施</div>
         <h1 class="page-title">从多Agent到One Agent：团队落地指南</h1>
-        <p class="page-subtitle">基于AgentCore + Skills架构的渐进式实施方案</p>
+        <p class="page-subtitle">基于三层架构 · 四类技能 · 三种Runtime的渐进式实施方案</p>
     </header>
 
     <!-- 方案概述 -->
@@ -97,168 +136,174 @@ strong { color:var(--color-text-primary); }
             <h2 class="section-title">方案概述</h2>
         </div>
         <p style="font-size:14px; padding:12px 16px; background:linear-gradient(135deg,rgba(5,150,105,0.06) 0%,rgba(37,99,235,0.04) 100%); border-radius:var(--radius-md); border-left:3px solid var(--color-success);">
-            前面论证了<strong>AgentCore + Skills</strong>是AI产品的最优架构，AI分身实证验证了架构可行性。本章给出<strong>团队落地的具体方案</strong>——如何将现有分散的多Agent收敛到统一架构。
+            前面论证了 <strong>AgentCore + Skills</strong> 是AI产品的最优架构，<a href="evidence.html" style="color:var(--color-success)">AI分身实证</a>验证了可行性，<a href="architecture.html" style="color:var(--color-info)">架构全景</a>定义了完整蓝图。本章给出<strong>团队落地的具体方案</strong>——如何将现有分散的多Agent收敛到三层统一架构。
         </p>
         <div class="insight-box">
             <div class="insight-label">场景背景</div>
             <p class="insight-text">
-                团队现状：已有<strong>Code Agent</strong>（代码开发）+ 多个垂直Agent（CR Agent、测试用例Agent、图片生成Agent、视频生成Agent等）。<br>
-                目标：将分散能力<strong>统一收敛</strong>到"一个Agent"模式，形成<strong>AgentCore + Skills</strong>架构。
+                团队现状：已有 <strong>Code Agent</strong>（代码开发）+ 多个垂直Agent（CR Agent、测试Agent、图片/视频Agent等），能力分散。<br>
+                目标：统一收敛到 <strong>Product Layer → Agent Layer → Agent OS</strong> 三层架构，实现"一个入口，无限技能"。
             </p>
-        </div>
-    </section>
-
-    <!-- 现状分析 -->
-    <section class="section">
-        <div class="section-hdr">
-            <span class="section-num">1</span>
-            <h2 class="section-title">现状分析：能力分散的问题</h2>
-        </div>
-        <div class="svg-wrap" style="background:linear-gradient(135deg,#FAFAF9 0%,#F5F5F4 100%); border:1px solid var(--color-border-light); border-radius:var(--radius-lg); padding:var(--spacing-lg);">
-            <svg viewBox="0 0 900 320" style="max-width:900px; width:100%; min-width:600px;">
-                <defs>
-                    <filter id="sh4" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/></filter>
-                </defs>
-                <!-- User -->
-                <g transform="translate(50,130)"><circle cx="40" cy="40" r="35" fill="#F5F5F4" stroke="#D6D3D1" stroke-width="2"/><text x="40" y="35" text-anchor="middle" font-size="24">👨‍💻</text><text x="40" y="55" text-anchor="middle" font-size="10" fill="#57534E">研发人员</text></g>
-                <!-- Scattered agents -->
-                <g transform="translate(200,20)"><rect width="120" height="58" rx="8" fill="#EFF6FF" stroke="#3B82F6" filter="url(#sh4)"/><text x="60" y="24" text-anchor="middle" font-size="10" font-weight="600" fill="#1D4ED8">Code Agent</text><text x="60" y="40" text-anchor="middle" font-size="9" fill="#57534E">代码开发</text><text x="60" y="52" text-anchor="middle" font-size="7" fill="#A8A29E">独立Memory</text></g>
-                <g transform="translate(350,20)"><rect width="120" height="58" rx="8" fill="#FEF3C7" stroke="#F59E0B" filter="url(#sh4)"/><text x="60" y="24" text-anchor="middle" font-size="10" font-weight="600" fill="#B45309">CR Agent</text><text x="60" y="40" text-anchor="middle" font-size="9" fill="#57534E">代码Review</text><text x="60" y="52" text-anchor="middle" font-size="7" fill="#A8A29E">独立Memory</text></g>
-                <g transform="translate(500,20)"><rect width="120" height="58" rx="8" fill="#DCFCE7" stroke="#22C55E" filter="url(#sh4)"/><text x="60" y="24" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">测试Agent</text><text x="60" y="40" text-anchor="middle" font-size="9" fill="#57534E">生成测试</text><text x="60" y="52" text-anchor="middle" font-size="7" fill="#A8A29E">独立Memory</text></g>
-                <g transform="translate(650,20)"><rect width="120" height="58" rx="8" fill="#FCE7F3" stroke="#EC4899" filter="url(#sh4)"/><text x="60" y="24" text-anchor="middle" font-size="10" font-weight="600" fill="#BE185D">图片Agent</text><text x="60" y="40" text-anchor="middle" font-size="9" fill="#57534E">生成图片</text><text x="60" y="52" text-anchor="middle" font-size="7" fill="#A8A29E">独立Memory</text></g>
-                <g transform="translate(800,20)"><rect width="80" height="58" rx="8" fill="#F5F5F4" stroke="#A8A29E" filter="url(#sh4)"/><text x="40" y="33" text-anchor="middle" font-size="18" fill="#78716C">...</text><text x="40" y="50" text-anchor="middle" font-size="8" fill="#A8A29E">更多Agent</text></g>
-                <!-- Lines -->
-                <path d="M125 170 L200 50" stroke="#D6D3D1" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-                <path d="M125 170 L350 50" stroke="#D6D3D1" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-                <path d="M125 170 L500 50" stroke="#D6D3D1" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-                <path d="M125 170 L650 50" stroke="#D6D3D1" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-                <path d="M125 170 L800 50" stroke="#D6D3D1" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
-                <!-- Problems -->
-                <g transform="translate(180,110)"><rect width="700" height="88" rx="10" fill="#FEF2F2" stroke="#FECACA"/><text x="350" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#E11D48">⚠️ 当前架构的六大问题</text>
-                <text x="50" y="46" font-size="9" fill="#57534E">1. 能力重复：每个Agent独立推理/规划/记忆，重复建设</text>
-                <text x="50" y="62" font-size="9" fill="#57534E">2. 经验孤岛：CR Agent学到的规范，测试Agent不知道</text>
-                <text x="50" y="78" font-size="9" fill="#57534E">3. 切换成本：用户在不同Agent间切换，上下文丢失</text>
-                <text x="400" y="46" font-size="9" fill="#57534E">4. 维护负担：N个Agent = N套代码、N倍成本</text>
-                <text x="400" y="62" font-size="9" fill="#57534E">5. 协作困难：跨Agent协作需要额外编排层</text>
-                <text x="400" y="78" font-size="9" fill="#57534E">6. 无护城河：用户可随时切换到其他产品</text></g>
-                <!-- Flow -->
-                <g transform="translate(180,218)"><rect width="700" height="75" rx="10" fill="#FFF7ED" stroke="#FDBA74"/><text x="350" y="20" text-anchor="middle" font-size="10" font-weight="600" fill="#EA580C">现有的长Flow（需求→发布）</text>
-                <g transform="translate(30,30)"><rect width="80" height="28" rx="5" fill="white" stroke="#F97316"/><text x="40" y="18" text-anchor="middle" font-size="8" fill="#EA580C">需求分析</text></g>
-                <text x="125" y="50" font-size="13" fill="#D6D3D1">→</text>
-                <g transform="translate(140,30)"><rect width="80" height="28" rx="5" fill="white" stroke="#F97316"/><text x="40" y="18" text-anchor="middle" font-size="8" fill="#EA580C">代码开发</text></g>
-                <text x="235" y="50" font-size="13" fill="#D6D3D1">→</text>
-                <g transform="translate(250,30)"><rect width="80" height="28" rx="5" fill="white" stroke="#F97316"/><text x="40" y="18" text-anchor="middle" font-size="8" fill="#EA580C">CR审查</text></g>
-                <text x="345" y="50" font-size="13" fill="#D6D3D1">→</text>
-                <g transform="translate(360,30)"><rect width="80" height="28" rx="5" fill="white" stroke="#F97316"/><text x="40" y="18" text-anchor="middle" font-size="8" fill="#EA580C">测试用例</text></g>
-                <text x="455" y="50" font-size="13" fill="#D6D3D1">→</text>
-                <g transform="translate(470,30)"><rect width="80" height="28" rx="5" fill="white" stroke="#F97316"/><text x="40" y="18" text-anchor="middle" font-size="8" fill="#EA580C">CI/CD</text></g>
-                <text x="565" y="50" font-size="13" fill="#D6D3D1">→</text>
-                <g transform="translate(580,30)"><rect width="80" height="28" rx="5" fill="white" stroke="#F97316"/><text x="40" y="18" text-anchor="middle" font-size="8" fill="#EA580C">发布上线</text></g></g>
-            </svg>
         </div>
     </section>
 
     <!-- 目标架构 -->
     <section class="section">
         <div class="section-hdr">
-            <span class="section-num">2</span>
-            <h2 class="section-title">目标架构：One Agent + Skills</h2>
+            <span class="section-num">1</span>
+            <h2 class="section-title">目标架构：三层统一设计</h2>
         </div>
-        <div class="svg-wrap" style="background:linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%); border:1px solid rgba(5,150,105,0.2); border-radius:var(--radius-lg); padding:var(--spacing-lg);">
-            <svg viewBox="0 0 900 400" style="max-width:900px; width:100%; min-width:600px;">
-                <defs>
-                    <linearGradient id="coreG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
-                    <filter id="sh5" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/></filter>
-                </defs>
-                <!-- User -->
-                <g transform="translate(50,160)"><circle cx="40" cy="40" r="35" fill="#ECFDF5" stroke="#059669" stroke-width="2"/><text x="40" y="35" text-anchor="middle" font-size="24">👨‍💻</text><text x="40" y="55" text-anchor="middle" font-size="10" fill="#059669">研发人员</text></g>
-                <path d="M125 200 L200 200" stroke="#059669" stroke-width="3" fill="none"/>
-                <polygon points="200,195 215,200 200,205" fill="#059669"/>
-                <!-- AgentCore -->
-                <g transform="translate(220,100)"><rect width="200" height="200" rx="20" fill="url(#coreG)" filter="url(#sh5)"/><text x="100" y="32" text-anchor="middle" font-size="13" font-weight="800" fill="white">🧠 AgentCore</text><text x="100" y="50" text-anchor="middle" font-size="9" fill="white" opacity="0.9">统一认知内核</text>
-                <g transform="translate(15,65)"><rect width="78" height="22" rx="4" fill="white" opacity="0.95"/><text x="39" y="15" text-anchor="middle" font-size="8" fill="#059669">Memory 统一</text></g>
-                <g transform="translate(105,65)"><rect width="78" height="22" rx="4" fill="white" opacity="0.95"/><text x="39" y="15" text-anchor="middle" font-size="8" fill="#059669">Reasoning</text></g>
-                <g transform="translate(15,93)"><rect width="78" height="22" rx="4" fill="white" opacity="0.95"/><text x="39" y="15" text-anchor="middle" font-size="8" fill="#059669">Planning</text></g>
-                <g transform="translate(105,93)"><rect width="78" height="22" rx="4" fill="white" opacity="0.95"/><text x="39" y="15" text-anchor="middle" font-size="8" fill="#059669">Orchestration</text></g>
-                <g transform="translate(15,121)"><rect width="78" height="22" rx="4" fill="white" opacity="0.95"/><text x="39" y="15" text-anchor="middle" font-size="8" fill="#059669">Reflection</text></g>
-                <g transform="translate(105,121)"><rect width="78" height="22" rx="4" fill="white" opacity="0.95"/><text x="39" y="15" text-anchor="middle" font-size="8" fill="#059669">Integration</text></g>
-                <text x="100" y="170" text-anchor="middle" font-size="9" font-weight="600" fill="white">一套能力，服务所有场景</text></g>
-                <!-- Lines -->
-                <path d="M420 200 L450 200" stroke="#059669" stroke-width="2" fill="none"/>
-                <path d="M420 200 L450 100" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2" fill="none"/>
-                <path d="M420 200 L450 300" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2" fill="none"/>
-                <!-- Skills -->
-                <g transform="translate(450,30)"><rect width="420" height="340" rx="15" fill="#EFF6FF" stroke="#3B82F6" stroke-dasharray="4,2"/><text x="210" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#2563EB">⚡ Skills 可插拔能力层</text>
-                <text x="20" y="50" font-size="10" font-weight="600" fill="#57534E">研发编码场景</text>
-                <g transform="translate(20,60)"><rect width="88" height="36" rx="6" fill="white" stroke="#3B82F6"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#2563EB">代码开发</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">Skill化</text></g>
-                <g transform="translate(118,60)"><rect width="88" height="36" rx="6" fill="white" stroke="#F59E0B"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#B45309">CR审查</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">MCP工具</text></g>
-                <g transform="translate(216,60)"><rect width="88" height="36" rx="6" fill="white" stroke="#22C55E"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#166534">测试用例</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">MCP工具</text></g>
-                <g transform="translate(314,60)"><rect width="88" height="36" rx="6" fill="white" stroke="#8B5CF6"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#7C3AED">数据分析</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">MCP工具</text></g>
-                <text x="20" y="125" font-size="10" font-weight="600" fill="#57534E">内容生成场景</text>
-                <g transform="translate(20,135)"><rect width="88" height="36" rx="6" fill="white" stroke="#EC4899"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#BE185D">图片生成</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">MCP工具</text></g>
-                <g transform="translate(118,135)"><rect width="88" height="36" rx="6" fill="white" stroke="#F43F5E"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#E11D48">视频生成</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">MCP工具</text></g>
-                <g transform="translate(216,135)"><rect width="88" height="36" rx="6" fill="white" stroke="#06B6D4"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#0891B2">PPT制作</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">Skill化</text></g>
-                <g transform="translate(314,135)"><rect width="88" height="36" rx="6" fill="white" stroke="#84CC16"/><text x="44" y="16" text-anchor="middle" font-size="8" font-weight="500" fill="#65A30D">调研报告</text><text x="44" y="28" text-anchor="middle" font-size="7" fill="#78716C">Skill化</text></g>
-                <text x="20" y="200" font-size="10" font-weight="600" fill="#57534E">流程编排场景</text>
-                <g transform="translate(20,210)"><rect width="384" height="46" rx="6" fill="white" stroke="#EA580C" stroke-width="1.5"/><text x="192" y="16" text-anchor="middle" font-size="9" font-weight="600" fill="#EA580C">需求→发布 复合Skill</text><text x="192" y="32" text-anchor="middle" font-size="8" fill="#78716C">按阶段调用：需求分析 → 代码开发 → CR审查 → 测试 → CI/CD → 发布</text><text x="192" y="43" text-anchor="middle" font-size="7" fill="#A8A29E">（内部编排多个原子Skill，对外统一入口）</text></g>
-                <text x="20" y="285" font-size="10" font-weight="600" fill="#57534E">持续扩展...</text>
-                <g transform="translate(20,295)"><rect width="55" height="18" rx="4" fill="#F5F5F4" stroke="#D6D3D1" stroke-dasharray="2,2"/><text x="27" y="12" text-anchor="middle" font-size="7" fill="#A8A29E">新Skill</text></g>
-                <g transform="translate(85,295)"><rect width="55" height="18" rx="4" fill="#F5F5F4" stroke="#D6D3D1" stroke-dasharray="2,2"/><text x="27" y="12" text-anchor="middle" font-size="7" fill="#A8A29E">新Skill</text></g>
-                <g transform="translate(150,295)"><rect width="55" height="18" rx="4" fill="#F5F5F4" stroke="#D6D3D1" stroke-dasharray="2,2"/><text x="27" y="12" text-anchor="middle" font-size="7" fill="#A8A29E">新Skill</text></g>
-                <text x="225" y="308" font-size="9" fill="#A8A29E">无限扩展，不增加Agent数量</text></g>
-            </svg>
+        <p>整体架构分为三层，对应<a href="architecture.html" style="color:var(--color-info)">架构全景</a>的完整设计：</p>
+
+        <div class="layer-card product">
+            <div class="layer-name" style="color:#0969DA;">📦 Product Layer — 产品层</div>
+            <div class="layer-desc">不同产品（CodeFlicker、企业数字员工、AI个人助理...）共享同一Agent内核。每个产品通过<strong>产品适配层</strong>定义自己的UI、权限和Skill集。</div>
+        </div>
+
+        <div class="layer-card agent">
+            <div class="layer-name" style="color:var(--color-success);">🧠 Agent Layer — Agent 层</div>
+            <div class="layer-desc">统一的<strong>主Agent（决策指挥中枢）</strong>+ 四类Skill。主Agent只做决策调度，不执行具体任务。所有能力通过Skill接入，共享Memory和知识库。</div>
+        </div>
+
+        <div class="layer-card os">
+            <div class="layer-name" style="color:#24292F;">⚙️ Agent OS — 底层运行时</div>
+            <div class="layer-desc"><strong>AgentCore六大能力</strong>（记忆/推理/规划/编排/反思/集成）+ <strong>实例管理器</strong>（创建/监控/回收实例）+ <strong>三种Runtime适配器</strong>（Local/Sandbox/Service）。</div>
+        </div>
+
+        <div class="insight-box blue">
+            <div class="insight-label">核心原则</div>
+            <p class="insight-text">不是"推倒重来"，而是"渐进收敛"。以现有 Code Agent 为 AgentCore 基座，其他 Agent 按四种类型<strong>逐步接入为 Skill</strong>。</p>
         </div>
     </section>
 
-    <!-- 转换方案 -->
+    <!-- 四类 Skill 转换方案 -->
     <section class="section">
         <div class="section-hdr">
-            <span class="section-num">3</span>
-            <h2 class="section-title">转换方案：三种集成路径</h2>
+            <span class="section-num">2</span>
+            <h2 class="section-title">四类 Skill：现有 Agent 的转换路径</h2>
         </div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th style="width:15%">方案</th><th style="width:25%">适用场景</th><th style="width:35%">实施方式</th><th style="width:25%">优缺点</th></tr></thead>
-                <tbody>
-                    <tr>
-                        <td><strong>MCP工具化</strong><br><span class="tag tag-green">推荐</span></td>
-                        <td>已有API接口的Agent<br>能力相对独立<br>CR Agent、测试Agent、图片/视频Agent</td>
-                        <td>1. Agent暴露HTTP/gRPC接口<br>2. 用MCP协议包装成Tool<br>3. AgentCore通过MCP调用<br>4. 创建Skill描述文件定义调用时机</td>
-                        <td>✅ 改动最小，复用现有代码<br>✅ 渐进式迁移，风险低<br>❌ 依赖网络调用，有延迟</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Skill化</strong><br><span class="tag tag-blue">原生</span></td>
-                        <td>逻辑不复杂的能力<br>需要灵活调整的场景<br>代码开发、PPT、调研报告</td>
-                        <td>1. 提取Agent的执行流程<br>2. 写成SKILL.md指令文档<br>3. AgentCore直接按指令执行<br>4. 不需要额外服务</td>
-                        <td>✅ 无外部依赖，响应快<br>✅ 灵活度最高<br>❌ 需要重构，工作量较大</td>
-                    </tr>
-                    <tr>
-                        <td><strong>复合Skill</strong><br><span class="tag tag-orange">编排</span></td>
-                        <td>多环节长流程<br>需求→发布的完整链路<br>跨多个能力的协作</td>
-                        <td>1. 拆解Flow为原子Skill<br>2. 每个环节独立实现<br>3. 创建编排Skill统一入口<br>4. AgentCore按阶段调度</td>
-                        <td>✅ 有整体入口，又灵活组合<br>✅ 支持部分执行<br>❌ 设计复杂度较高</td>
-                    </tr>
-                </tbody>
-            </table>
+        <p>架构全景定义了四类 Skill，每类对应不同的复杂度和实例模型。现有 Agent 按能力特征<strong>归入对应类型</strong>：</p>
+
+        <div class="skill-type-grid">
+            <div class="st-card">
+                <div class="st-num" style="color:#2DA44E;">Ⅰ</div>
+                <div class="st-name">原生 Skill</div>
+                <div class="st-desc">纯指令驱动<br>无外部依赖<br>1个实例完成</div>
+                <div class="st-example"><strong>适用</strong>：调研报告、PPT制作、代码开发（原生能力）</div>
+            </div>
+            <div class="st-card">
+                <div class="st-num" style="color:#7C3AED;">Ⅱ</div>
+                <div class="st-name">工具 Skill</div>
+                <div class="st-desc">调用外部API<br>MCP协议包装<br>1实例+外部服务</div>
+                <div class="st-example"><strong>适用</strong>：图片生成、视频生成、数据分析</div>
+            </div>
+            <div class="st-card">
+                <div class="st-num" style="color:#EA580C;">Ⅲ</div>
+                <div class="st-name">任务 Skill</div>
+                <div class="st-desc">多实例并行<br>共享Memory<br>N个实例协作</div>
+                <div class="st-example"><strong>适用</strong>：CR Agent、测试Agent（可并行Review多文件）</div>
+            </div>
+            <div class="st-card">
+                <div class="st-num" style="color:#0969DA;">Ⅳ</div>
+                <div class="st-name">流程 Skill</div>
+                <div class="st-desc">多阶段编排<br>1总控+N实例<br>分阶段调度</div>
+                <div class="st-example"><strong>适用</strong>：需求→发布全链路（6阶段编排）</div>
+            </div>
         </div>
     </section>
 
     <!-- 团队资产转换 -->
     <section class="section">
         <div class="section-hdr">
-            <span class="section-num">4</span>
-            <h2 class="section-title">团队资产转换建议</h2>
+            <span class="section-num">3</span>
+            <h2 class="section-title">团队资产转换：逐项对照</h2>
         </div>
         <div class="table-wrap">
             <table>
-                <thead><tr><th>现有资产</th><th>推荐方案</th><th>转换要点</th><th>优先级</th></tr></thead>
+                <thead><tr><th>现有资产</th><th>目标Skill类型</th><th>转换方式</th><th>Runtime</th><th>优先级</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>Code Agent</strong></td><td>作为<strong>AgentCore载体</strong></td><td>已有完整AgentCore能力，作为统一入口，其他能力向它集成</td><td><span class="tag tag-green">P0 基座</span></td></tr>
-                    <tr><td><strong>CR Agent</strong></td><td><strong>MCP工具化</strong></td><td>暴露review接口 → 包装MCP Tool → 创建code-review Skill描述</td><td><span class="tag tag-green">P1</span></td></tr>
-                    <tr><td><strong>测试用例Agent</strong></td><td><strong>MCP工具化</strong></td><td>暴露generate_test接口 → 包装MCP Tool → Skill描述</td><td><span class="tag tag-green">P1</span></td></tr>
-                    <tr><td><strong>图片生成Agent</strong></td><td><strong>MCP工具化</strong></td><td>暴露image_gen接口 → 包装MCP Tool → Skill描述</td><td><span class="tag tag-blue">P2</span></td></tr>
-                    <tr><td><strong>视频生成Agent</strong></td><td><strong>MCP工具化</strong></td><td>暴露video_gen接口 → 包装MCP Tool → Skill描述</td><td><span class="tag tag-blue">P2</span></td></tr>
-                    <tr><td><strong>需求→发布Flow</strong></td><td><strong>复合Skill</strong></td><td>拆解为6个阶段Skill → 创建编排Skill → 支持跳过/重试</td><td><span class="tag tag-orange">P3</span></td></tr>
+                    <tr>
+                        <td><strong>Code Agent</strong></td>
+                        <td><span class="tag tag-green">AgentCore 基座</span></td>
+                        <td>作为主Agent载体，提供统一AgentCore六大能力，其他Skill向它集成</td>
+                        <td>Local</td>
+                        <td><span class="tag tag-green">P0 基座</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>CR Agent</strong></td>
+                        <td><span class="tag tag-orange">Ⅲ 任务Skill</span></td>
+                        <td>1. 暴露 review 接口 → MCP 包装<br>2. 支持多文件并行 Review（N实例）<br>3. 创建 code-review Skill 描述</td>
+                        <td>Sandbox</td>
+                        <td><span class="tag tag-green">P1</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>测试用例Agent</strong></td>
+                        <td><span class="tag tag-orange">Ⅲ 任务Skill</span></td>
+                        <td>1. 暴露 generate_test 接口 → MCP 包装<br>2. 支持多模块并行生成<br>3. 创建 test-gen Skill 描述</td>
+                        <td>Sandbox</td>
+                        <td><span class="tag tag-green">P1</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>图片生成Agent</strong></td>
+                        <td><span class="tag tag-purple">Ⅱ 工具Skill</span></td>
+                        <td>1. 暴露 image_gen 接口 → MCP 包装<br>2. 主Agent调用返回结果<br>3. 无需改造Agent本身</td>
+                        <td>Service</td>
+                        <td><span class="tag tag-blue">P2</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>视频生成Agent</strong></td>
+                        <td><span class="tag tag-purple">Ⅱ 工具Skill</span></td>
+                        <td>1. 暴露 video_gen 接口 → MCP 包装<br>2. 主Agent调用返回结果</td>
+                        <td>Service</td>
+                        <td><span class="tag tag-blue">P2</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>需求→发布 Flow</strong></td>
+                        <td><span class="tag tag-blue">Ⅳ 流程Skill</span></td>
+                        <td>1. 拆解为6个阶段的原子Skill<br>2. 创建编排Skill统一入口<br>3. 总控实例按阶段调度执行</td>
+                        <td>Local+Sandbox</td>
+                        <td><span class="tag tag-orange">P3</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="insight-box purple">
+            <div class="insight-label">关键洞察</div>
+            <p class="insight-text">注意 Runtime 列——不同 Skill 类型适合不同的运行时。<strong>Local</strong>（IDE内进程）适合原生Skill；<strong>Sandbox</strong>（隔离沙箱）适合需要安全隔离的任务Skill；<strong>Service</strong>（远程API）适合重量级工具Skill。</p>
+        </div>
+    </section>
+
+    <!-- 三种 Runtime 对照 -->
+    <section class="section">
+        <div class="section-hdr">
+            <span class="section-num">4</span>
+            <h2 class="section-title">三种 Runtime 适配器</h2>
+        </div>
+        <p>实例管理器通过 Runtime 适配器创建和管理 Skill 实例，不同 Runtime 适用于不同场景：</p>
+
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Runtime</th><th>运行位置</th><th>适用场景</th><th>特点</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🖥️ LocalAdapter</strong></td>
+                        <td>IDE 内进程</td>
+                        <td>原生Skill（代码开发、调研报告、PPT）<br>需要深度上下文的任务</td>
+                        <td>✅ 零延迟<br>✅ 直接访问本地文件<br>❌ 受限于本地资源</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📦 SandboxAdapter</strong></td>
+                        <td>隔离沙箱</td>
+                        <td>任务Skill（CR、测试）<br>需要安全隔离的并行任务</td>
+                        <td>✅ 安全隔离<br>✅ 支持并行<br>❌ 有启动开销</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☁️ ServiceAdapter</strong></td>
+                        <td>远程API调用</td>
+                        <td>工具Skill（图片/视频生成）<br>重量级计算、外部服务</td>
+                        <td>✅ 不占本地资源<br>✅ 弹性扩缩<br>❌ 网络延迟</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -270,20 +315,60 @@ strong { color:var(--color-text-primary); }
             <span class="section-num">5</span>
             <h2 class="section-title">实施路线图</h2>
         </div>
-        <div class="timeline">
-            <div class="timeline-item"><div class="timeline-dot done">1</div><div class="timeline-title">阶段一：基座确立</div><div class="timeline-desc"><strong>2周</strong><br>确认Code Agent为AgentCore载体<br>统一Memory架构<br>建立Skill规范</div></div>
-            <div class="timeline-item"><div class="timeline-dot progress">2</div><div class="timeline-title">阶段二：核心接入</div><div class="timeline-desc"><strong>4周</strong><br>CR Agent → MCP工具化<br>测试Agent → MCP工具化<br>验证端到端调用</div></div>
-            <div class="timeline-item"><div class="timeline-dot pending">3</div><div class="timeline-title">阶段三：能力扩展</div><div class="timeline-desc"><strong>4周</strong><br>图片/视频Agent接入<br>创建复合Skill<br>打通需求→发布链路</div></div>
-            <div class="timeline-item"><div class="timeline-dot pending">4</div><div class="timeline-title">阶段四：体验优化</div><div class="timeline-desc"><strong>持续</strong><br>Memory经验沉淀<br>成长可视化<br>分身机制建设</div></div>
+        <div class="phase-grid">
+            <div class="phase-card">
+                <div class="phase-num">Phase 1</div>
+                <div class="phase-title">基座确立</div>
+                <div class="phase-time">2周</div>
+                <div class="phase-items">
+                    确认 Code Agent 为 AgentCore 载体<br>
+                    建立统一 Memory 架构<br>
+                    定义 Skill 规范（四类型）<br>
+                    部署 Runtime 适配器
+                </div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-num">Phase 2</div>
+                <div class="phase-title">核心接入</div>
+                <div class="phase-time">4周</div>
+                <div class="phase-items">
+                    CR Agent → Ⅲ任务Skill化<br>
+                    测试Agent → Ⅲ任务Skill化<br>
+                    Sandbox Runtime 验证<br>
+                    端到端流程验证
+                </div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-num">Phase 3</div>
+                <div class="phase-title">能力扩展</div>
+                <div class="phase-time">4周</div>
+                <div class="phase-items">
+                    图片/视频 → Ⅱ工具Skill化<br>
+                    Service Runtime 打通<br>
+                    创建 Ⅳ流程Skill<br>
+                    打通需求→发布链路
+                </div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-num">Phase 4</div>
+                <div class="phase-title">体验优化</div>
+                <div class="phase-time">持续</div>
+                <div class="phase-items">
+                    Memory 经验自动沉淀<br>
+                    成长可视化体系<br>
+                    分身机制（并行执行）<br>
+                    Product Layer 多产品接入
+                </div>
+            </div>
         </div>
 
         <div class="insight-box">
             <div class="insight-label">预期收益</div>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:12px;">
-                <div style="background:white; padding:12px; border-radius:8px; text-align:center;"><div style="font-size:24px; font-weight:700; color:var(--color-success);">1</div><div style="font-size:12px; color:var(--color-text-secondary);">统一入口<br>不再切换Agent</div></div>
-                <div style="background:white; padding:12px; border-radius:8px; text-align:center;"><div style="font-size:24px; font-weight:700; color:var(--color-success);">N→1</div><div style="font-size:12px; color:var(--color-text-secondary);">维护成本<br>大幅降低</div></div>
-                <div style="background:white; padding:12px; border-radius:8px; text-align:center;"><div style="font-size:24px; font-weight:700; color:var(--color-success);">共享</div><div style="font-size:12px; color:var(--color-text-secondary);">经验跨场景<br>复用</div></div>
-                <div style="background:white; padding:12px; border-radius:8px; text-align:center;"><div style="font-size:24px; font-weight:700; color:var(--color-success);">护城河</div><div style="font-size:12px; color:var(--color-text-secondary);">Memory数据<br>不可替代</div></div>
+            <div class="benefit-grid">
+                <div class="benefit-card"><div class="benefit-value">1</div><div class="benefit-label">统一入口<br>不再切换Agent</div></div>
+                <div class="benefit-card"><div class="benefit-value">N→1</div><div class="benefit-label">维护成本<br>大幅降低</div></div>
+                <div class="benefit-card"><div class="benefit-value">共享</div><div class="benefit-label">经验跨场景<br>自动复用</div></div>
+                <div class="benefit-card"><div class="benefit-value">护城河</div><div class="benefit-label">Memory数据<br>不可替代</div></div>
             </div>
         </div>
     </section>
@@ -293,14 +378,14 @@ strong { color:var(--color-text-primary); }
         <div class="conclusion-title">实施核心原则</div>
         <p class="conclusion-text">
             不是"推倒重来"，而是"渐进收敛"。<br>
-            以Code Agent为AgentCore基座，现有Agent通过MCP工具化接入，<br>
-            保留执行能力，统一认知层，共享Memory积累护城河。
+            以 Code Agent 为 AgentCore 基座，现有 Agent 按四类 Skill 分类接入，<br>
+            三种 Runtime 适配器保障灵活部署，统一 Memory 积累护城河。
         </p>
-        <span class="conclusion-highlight">一个入口 · 一套记忆 · 无限技能</span>
+        <span class="conclusion-highlight">三层架构 · 四类技能 · 三种Runtime · 一套Memory</span>
     </div>
 
     <footer class="footer">
-        <p>AI产品终极形态思考 v5.1 · 技术实施 | 2026-03</p>
+        <p>AI产品终极形态思考 v6.0 · 技术实施 | 2026-03</p>
     </footer>
 </div>
 </body>

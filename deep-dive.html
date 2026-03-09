@@ -124,6 +124,161 @@ strong { color:var(--color-text-primary); }
         <p class="page-subtitle">完整12章论证过程：从问题定义到架构验证的完整推演链</p>
     </header>
 
+    <!-- 全景信息图 -->
+    <div style="margin-bottom:var(--spacing-2xl);">
+    <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:var(--radius-lg);background:linear-gradient(135deg,#FFF7ED 0%,#F8FAFC 40%,#F0FDF4 100%);border:1px solid #E2E8F0;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <defs>
+        <marker id="ah4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#94A3B8"/></marker>
+        <marker id="ah4g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#059669"/></marker>
+        <filter id="ds4"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+      </defs>
+      <text x="450" y="24" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" font-weight="700" fill="#64748B" letter-spacing="0.5">一张图看清 · 12章论证全景</text>
+
+      <!-- ===== PART I: 问题与诊断 (Ch 1-4) ===== -->
+      <rect x="15" y="40" width="280" height="310" rx="12" fill="white" stroke="#F87171" stroke-width="1" filter="url(#ds4)"/>
+      <rect x="15" y="40" width="280" height="4" rx="2" fill="#EF4444"/>
+      <text x="155" y="62" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#DC2626">Part I · 问题与诊断</text>
+      <text x="155" y="76" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">搞清楚问题是什么、为什么难</text>
+
+      <!-- Ch1 -->
+      <rect x="28" y="88" width="254" height="42" rx="6" fill="#FEF2F2" stroke="#FECACA"/>
+      <text x="38" y="104" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#DC2626">Ch1</text>
+      <text x="62" y="104" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">问题定义</text>
+      <text x="38" y="122" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">什么产品架构能成为AI产品主流形态？→ 架构问题</text>
+
+      <!-- Ch2 -->
+      <rect x="28" y="138" width="254" height="42" rx="6" fill="#FEF2F2" stroke="#FECACA"/>
+      <text x="38" y="154" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#DC2626">Ch2</text>
+      <text x="62" y="154" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">LLM四大局限</text>
+      <text x="38" y="172" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">无记忆 · 无主动 · 无行动 · 无成长 → 不是工具是伙伴</text>
+
+      <!-- Ch3 -->
+      <rect x="28" y="188" width="254" height="42" rx="6" fill="#FEF2F2" stroke="#FECACA"/>
+      <text x="38" y="204" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#DC2626">Ch3</text>
+      <text x="62" y="204" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">隐藏前提：SaaS vs Agent</text>
+      <text x="38" y="222" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">工具箱 vs 人 → 根本不是同一物种，需要新架构</text>
+
+      <!-- Ch4 -->
+      <rect x="28" y="238" width="254" height="42" rx="6" fill="#FEF2F2" stroke="#FECACA"/>
+      <text x="38" y="254" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#DC2626">Ch4</text>
+      <text x="62" y="254" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">AgentCore 六大模块</text>
+      <text x="38" y="272" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">记忆·推理·规划·编排·反思·集成 = 统一认知内核</text>
+
+      <!-- Part I conclusion -->
+      <rect x="28" y="292" width="254" height="24" rx="5" fill="#FFF1F2" stroke="#FDA4AF"/>
+      <text x="155" y="308" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#DC2626">结论：需要一个 AgentCore 统一大脑</text>
+
+      <!-- Arrow Part I → Part II -->
+      <line x1="300" y1="195" x2="313" y2="195" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah4)"/>
+
+      <!-- ===== PART II: 关键抉择 (Ch 5-7) ===== -->
+      <rect x="318" y="40" width="280" height="310" rx="12" fill="white" stroke="#F59E0B" stroke-width="1" filter="url(#ds4)"/>
+      <rect x="318" y="40" width="280" height="4" rx="2" fill="#D97706"/>
+      <text x="458" y="62" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#D97706">Part II · 关键抉择</text>
+      <text x="458" y="76" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">怎么做、为什么这么做</text>
+
+      <!-- Ch5 -->
+      <rect x="331" y="88" width="254" height="56" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="341" y="104" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#D97706">Ch5</text>
+      <text x="365" y="104" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">AgentCore + Skills 架构</text>
+      <text x="341" y="118" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">核心 = 统一大脑 + 可插拔技能体系</text>
+      <text x="341" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">一个内核，无限扩展 → 不同产品共享同一Agent</text>
+
+      <!-- Ch6 -->
+      <rect x="331" y="152" width="254" height="56" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="341" y="168" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#D97706">Ch6</text>
+      <text x="365" y="168" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">养孩子类比 + Memory护城河</text>
+      <text x="341" y="182" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">大脑=AgentCore 技能=Skills 经历=Memory</text>
+      <text x="341" y="200" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">元学习=Code Agent → 用户不会抛弃"养大的孩子"</text>
+
+      <!-- Ch7 -->
+      <rect x="331" y="216" width="254" height="56" rx="6" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="341" y="232" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#D97706">Ch7</text>
+      <text x="365" y="232" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">Agent模板 + 分身机制</text>
+      <text x="341" y="246" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">主Agent模板 → 派生分身（共享Memory，独立执行）</text>
+      <text x="341" y="264" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">分身并行干活 + 经验回流统一沉淀</text>
+
+      <!-- Part II conclusion -->
+      <rect x="331" y="292" width="254" height="24" rx="5" fill="#FEF3C7" stroke="#FCD34D"/>
+      <text x="458" y="308" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#D97706">结论：一个Agent + Skills + 分身并行</text>
+
+      <!-- Arrow Part II → Part III -->
+      <line x1="603" y1="195" x2="616" y2="195" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah4)"/>
+
+      <!-- ===== PART III: 验证分析 (Ch 8-10) ===== -->
+      <rect x="621" y="40" width="264" height="310" rx="12" fill="white" stroke="#059669" stroke-width="1" filter="url(#ds4)"/>
+      <rect x="621" y="40" width="264" height="4" rx="2" fill="#059669"/>
+      <text x="753" y="62" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#059669">Part III · 验证分析</text>
+      <text x="753" y="76" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">为什么不是其他方案、行业怎么验证</text>
+
+      <!-- Ch8 -->
+      <rect x="634" y="88" width="238" height="56" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="644" y="104" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#059669">Ch8</text>
+      <text x="668" y="104" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">反面思考</text>
+      <text x="644" y="118" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">× Multi-Agent → 协作成本高、人格不统一</text>
+      <text x="644" y="132" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">× 纯Workflow → 无学习能力、固定流程</text>
+      <text x="644" y="143" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#94A3B8">Skills vs Tools：学习后执行 vs 函数调用</text>
+
+      <!-- Ch9 -->
+      <rect x="634" y="152" width="238" height="56" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="644" y="168" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#059669">Ch9</text>
+      <text x="668" y="168" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">可行性分析</text>
+      <text x="644" y="182" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">技术：6模块3✓成熟 3⚠️可用</text>
+      <text x="644" y="196" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">护城河：Memory⭐5 + Skill生态⭐4</text>
+      <text x="644" y="207" font-family="-apple-system,system-ui,sans-serif" font-size="7" fill="#94A3B8">风险：模型瓶颈·大厂碾压·路线变化 → 模块化应对</text>
+
+      <!-- Ch10 -->
+      <rect x="634" y="216" width="238" height="56" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="644" y="232" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#059669">Ch10</text>
+      <text x="674" y="232" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="600" fill="#374151">Anthropic 行业验证</text>
+      <text x="644" y="246" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">Claude Code + Skills = 我们的架构</text>
+      <text x="644" y="260" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#94A3B8">5周创建数千Skills · Fortune100已采用</text>
+
+      <!-- Part III conclusion -->
+      <rect x="634" y="292" width="238" height="24" rx="5" fill="#D1FAE5" stroke="#6EE7B7"/>
+      <text x="753" y="308" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">结论：方向正确，全球验证一致</text>
+
+      <!-- ===== Bottom: Logic Flow ===== -->
+      <rect x="15" y="370" width="870" height="44" rx="10" fill="white" stroke="#E2E8F0" filter="url(#ds4)"/>
+      <text x="450" y="388" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="11" font-weight="800" fill="#374151">推演逻辑链</text>
+
+      <!-- Flow nodes -->
+      <rect x="30" y="398" width="108" height="24" rx="5" fill="#FEF2F2" stroke="#FECACA"/>
+      <text x="84" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#DC2626">LLM有四个缺陷</text>
+      <text x="143" y="410" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="152" y="398" width="108" height="24" rx="5" fill="#FEF2F2" stroke="#FECACA"/>
+      <text x="206" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#DC2626">需要伙伴非工具</text>
+      <text x="265" y="410" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="274" y="398" width="108" height="24" rx="5" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="328" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#D97706">AgentCore+Skills</text>
+      <text x="387" y="410" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="396" y="398" width="108" height="24" rx="5" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="450" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#D97706">像养孩子一样成长</text>
+      <text x="509" y="410" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="518" y="398" width="108" height="24" rx="5" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="572" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#059669">反面论证通过</text>
+      <text x="631" y="410" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="640" y="398" width="108" height="24" rx="5" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="694" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="600" fill="#059669">Anthropic验证</text>
+      <text x="753" y="410" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="762" y="398" width="108" height="24" rx="5" fill="#059669"/>
+      <text x="816" y="414" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" font-weight="700" fill="white">方向完全正确 ✓</text>
+
+      <!-- Bottom tagline -->
+      <rect x="180" y="440" width="540" height="50" rx="10" fill="none" stroke="#059669" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+      <rect x="180" y="440" width="540" height="50" rx="10" fill="#059669" opacity="0.04"/>
+      <text x="450" y="462" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="11" font-weight="700" fill="#059669">核心结论：AI产品的最优架构是 AgentCore + Skills</text>
+      <text x="450" y="480" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">一个能成长的 Agent（一个大脑 + 无限技能 + 持续进化）> 一堆各自为政的 Agent</text>
+      <!-- Chapter count labels -->
+      <text x="155" y="340" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#F87171">Ch 1-4 · 定义问题</text>
+      <text x="458" y="340" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#F59E0B">Ch 5-7 · 给出方案</text>
+      <text x="753" y="340" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#059669">Ch 8-10 · 全面验证</text>
+      <!-- Flow arrows between parts (bottom) -->
+      <path d="M230,348 L350,348" stroke="#94A3B8" stroke-width="1" marker-end="url(#ah4)" stroke-dasharray="4,2"/>
+      <path d="M560,348 L650,348" stroke="#94A3B8" stroke-width="1" marker-end="url(#ah4)" stroke-dasharray="4,2"/>
+    </svg>
+    </div>
+
     <!-- ============================================================
          PART I: 问题与诊断（Ch 1-4）
          ============================================================ -->

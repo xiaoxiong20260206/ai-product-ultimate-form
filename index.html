@@ -186,6 +186,113 @@
         <p class="hero-sub">从问题定义到架构设计，完整推演AI产品的演进路径与终极形态</p>
     </header>
 
+    <!-- 全景信息图 -->
+    <div style="margin-bottom:var(--spacing-2xl);">
+    <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:var(--radius-lg);background:linear-gradient(135deg,#F8FAFC 0%,#F0FDF4 50%,#EFF6FF 100%);border:1px solid #E2E8F0;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#94A3B8"/></marker>
+        <filter id="ds"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+      </defs>
+      <!-- Title -->
+      <text x="450" y="28" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="13" font-weight="700" fill="#64748B" letter-spacing="0.5">一张图看清 · 论述全景</text>
+      <!-- 6 Main Nodes -->
+      <!-- 1. 问题 -->
+      <rect x="20" y="50" width="130" height="130" rx="12" fill="white" stroke="#F87171" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="20" y="50" width="130" height="4" rx="2" fill="#EF4444"/>
+      <text x="85" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#DC2626">① 问题</text>
+      <text x="85" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">LLM 四大根本局限</text>
+      <text x="30" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🧠 无记忆 · 每次从零</text>
+      <text x="30" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💤 无主动 · 被动响应</text>
+      <text x="30" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🔗 无行动 · 纯文本</text>
+      <text x="30" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">📈 无成长 · 用100=用1</text>
+      <text x="85" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#DC2626">→ 需要一个"伙伴"</text>
+      <!-- Arrow 1→2 -->
+      <line x1="155" y1="115" x2="170" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 2. 答案 -->
+      <rect x="175" y="50" width="130" height="130" rx="12" fill="white" stroke="#34D399" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="175" y="50" width="130" height="4" rx="2" fill="#059669"/>
+      <text x="240" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#059669">② 答案</text>
+      <text x="240" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">AgentCore + Skills</text>
+      <text x="185" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🧠 AgentCore 六大模块</text>
+      <text x="185" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">⚡ Skills 可插拔技能</text>
+      <text x="185" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💗 Memory 个性化记忆</text>
+      <text x="185" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🔄 自主学习与进化</text>
+      <text x="240" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#059669">→ 一个内核无限扩展</text>
+      <!-- Arrow 2→3 -->
+      <line x1="310" y1="115" x2="325" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 3. 类比 -->
+      <rect x="330" y="50" width="130" height="130" rx="12" fill="white" stroke="#A78BFA" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="330" y="50" width="130" height="4" rx="2" fill="#7C3AED"/>
+      <text x="395" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#7C3AED">③ 为什么</text>
+      <text x="395" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">像养孩子一样理解</text>
+      <text x="340" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">👶 大脑 = AgentCore</text>
+      <text x="340" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">📚 技能 = Skills</text>
+      <text x="340" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💗 经历 = Memory</text>
+      <text x="340" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🎯 元学习 = Code Agent</text>
+      <text x="395" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#7C3AED">→ Memory是护城河</text>
+      <!-- Arrow 3→4 -->
+      <line x1="465" y1="115" x2="480" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 4. 验证 -->
+      <rect x="485" y="50" width="130" height="130" rx="12" fill="white" stroke="#60A5FA" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="485" y="50" width="130" height="4" rx="2" fill="#2563EB"/>
+      <text x="550" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#2563EB">④ 行业验证</text>
+      <text x="550" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">Anthropic 完全一致</text>
+      <text x="495" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ AgentCore+Skills</text>
+      <text x="495" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ Code Agent为核心</text>
+      <text x="495" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ Skill可插拔组合</text>
+      <text x="495" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">✓ Agent写Skills</text>
+      <text x="550" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#2563EB">→ 方向完全正确</text>
+      <!-- Arrow 4→5 -->
+      <line x1="620" y1="115" x2="635" y2="115" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <!-- 5. 实证 -->
+      <rect x="640" y="50" width="130" height="130" rx="12" fill="white" stroke="#F59E0B" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="640" y="50" width="130" height="4" rx="2" fill="#D97706"/>
+      <text x="705" y="75" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#D97706">⑤ AI分身实证</text>
+      <text x="705" y="93" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">已运行半年的真实系统</text>
+      <text x="650" y="112" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">🧠 AgentCore 6/6</text>
+      <text x="650" y="124" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">⚡ Skills 50+</text>
+      <text x="650" y="136" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">💗 Memory 59条</text>
+      <text x="650" y="148" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">📚 知识库 150+</text>
+      <text x="705" y="170" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="600" fill="#D97706">→ 自进化 3/3 层</text>
+      <!-- Arrow 5→6 (down) -->
+      <path d="M705,185 L705,200 L450,200 L450,215" stroke="#94A3B8" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+      <!-- 6. 行动 - Bottom center, wider -->
+      <rect x="170" y="220" width="560" height="90" rx="12" fill="white" stroke="#059669" stroke-width="1.5" filter="url(#ds)"/>
+      <rect x="170" y="220" width="560" height="4" rx="2" fill="#059669"/>
+      <text x="450" y="244" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="12" font-weight="800" fill="#059669">⑥ 四阶段落地路线</text>
+      <!-- 4 phases -->
+      <rect x="185" y="256" width="120" height="40" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="245" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#2563EB">Phase 1</text>
+      <text x="245" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">基座确立 · 2周</text>
+      <text x="310" y="276" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="320" y="256" width="120" height="40" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="380" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#059669">Phase 2</text>
+      <text x="380" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">核心接入 · 4周</text>
+      <text x="445" y="276" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="455" y="256" width="120" height="40" rx="6" fill="#F5F3FF" stroke="#DDD6FE"/>
+      <text x="515" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#7C3AED">Phase 3</text>
+      <text x="515" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">能力扩展 · 4周</text>
+      <text x="580" y="276" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#94A3B8">→</text>
+      <rect x="590" y="256" width="120" height="40" rx="6" fill="#FFF7ED" stroke="#FED7AA"/>
+      <text x="650" y="273" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="700" fill="#EA580C">Phase 4</text>
+      <text x="650" y="286" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#64748B">体验优化 · 持续</text>
+      <!-- Bottom conclusion -->
+      <rect x="170" y="330" width="560" height="50" rx="10" fill="linear-gradient(135deg,#059669,#2563EB)" opacity="0.06"/>
+      <rect x="170" y="330" width="560" height="50" rx="10" fill="none" stroke="#059669" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+      <text x="450" y="352" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="11" font-weight="700" fill="#059669">核心结论：一个能成长的 Agent（AgentCore + Skills）> 一堆各自为政的 Agent</text>
+      <text x="450" y="370" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" fill="#64748B">Memory 是护城河 — 用户不会抛弃自己养大的 AI</text>
+      <!-- Competitive banner -->
+      <rect x="790" y="60" width="90" height="110" rx="8" fill="#F0FDF4" stroke="#A7F3D0" filter="url(#ds)"/>
+      <text x="835" y="80" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" font-weight="700" fill="#059669">竞品对比</text>
+      <text x="835" y="96" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">Manus 0/3</text>
+      <text x="835" y="110" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="9" fill="#94A3B8">Claw 1/3</text>
+      <line x1="800" y1="118" x2="870" y2="118" stroke="#D1FAE5" stroke-width="1"/>
+      <text x="835" y="134" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="10" font-weight="800" fill="#059669">我们 3/3</text>
+      <text x="835" y="148" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="14">✓</text>
+      <text x="835" y="164" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif" font-size="8" fill="#059669">完整进化链</text>
+    </svg>
+    </div>
+
     <!-- ==================== 1. 问题 ==================== -->
     <section class="narrative-section">
         <div class="section-header">
